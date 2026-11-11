@@ -33,8 +33,10 @@ short of the throne room floor (player had to climb 2 blocks), a missing `door/r
 6. **Crafter compactors** need a rising edge; the pulse is 4 ticks on / 16 off. Check one with 9 iron ingots split across the 9 slots by the hopper.
 7. **Crop plots**: harvest runs every 10 s; crops start at age 0 — bonemeal them to test.
 8. **Rail ring**: powered rails with redstone blocks beneath; curved corners are plain rails (carts slow slightly).
-9. **Chicken chambers**: dispenser fires wind charges into the chamber; behaviour of the charge against chickens is unverified.
-10. Performance: ~55 always-on command blocks (+ per-slot checks when the sorter holds items). Fine for a small server; verify TPS.
+9. **Blimp** (new, highest risk): display-entity transformation NBT, `teleport_duration`, `ride … mount` on armor stands, seat bookkeeping via `data entity … Passengers/RootVehicle`. Test: `/function riftbrek:admin/blimp_on`, stand at dock A.
+10. **Chicken chambers**: dispenser fires wind charges into the chamber; behaviour of the charge against chickens is unverified.
+11. Also untested: `loot insert … loot minecraft:entities/*` (B11 synthesis), `forceload add` with macro origin, shulker loader/unloader hoppers.
+12. Performance: ~55 always-on command blocks (+ per-slot checks when the sorter holds items). Fine for a small server; verify TPS.
 
 ### Smoke test (≈15 min)
 1. `/reload` → no red errors in the log; `/scoreboard objectives list` shows `rb_*`.

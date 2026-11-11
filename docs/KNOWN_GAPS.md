@@ -3,17 +3,16 @@
 ## Not built
 | item | status | what is needed |
 |---|---|---|
-| **Flying / moving blimp** | NOT built. The terminal holds a *static* moored airship (decorative hull, gondola, fins, mast, gantry). | The exact world download / schematic of the "Airander 10" design from the reference video, plus a verified 1.21.11-compatible slime/honey flying machine. The video link could not be inspected here. Do not treat the static hull as functional. |
-| Shulker box loader / unloader | NOT built. | A verified design (and the sorter would need item-frame/comparator support). |
-| Iron farm, villager/trading hall, mob grinders, mega-farms | NOT built. | Only 4 command-assisted crop plots exist (wheat, carrots, potatoes, beetroot). |
+| **Blimp** | BUILT but EXPERIMENTAL/UNTESTED: a display-entity airship moved by `riftbrek:blimp/*` along a west lane with 3 docks and 6 seats. It is an original small ship (44 blocks), not the "Airander 10" from the video (link could not be inspected). | An in-game test; the exact Airander download if you want that model. |
+| Shulker box loader / unloader | BUILT (B7): hopper above/below a shulker box, plain vanilla mechanics; untested. | — |
+| Iron farm, mob grinders | NOT built as real farms. B11 has 8 **command-driven** generators (iron, gunpowder, bones, string, flesh, pearls, blaze, witch) that insert entity loot into chests; not survival-legit. Villager halls not built. 4 command-assisted crop plots exist. | A verified design source for real farms. |
 | Pure-redstone item sorter | NOT built. Sorting is **datapack-driven** (command blocks move stacks with `item replace`). | A tested vanilla design if command-block-free storage is required. |
 | Autocrafters beyond 6 block compactors | NOT built. | — |
 | Authenticated doors without command blocks | impossible — doors need `enable-command-block=true`. | — |
 | Real chunk banning | deliberately NOT built. The "Chunk Ban Square" is a safe simulation (slow + darkness + ejection). | — |
 
 ## Differences from the concept render (limits of Minecraft)
-* World height is 224 blocks. With 12 underground levels the surface is at world Y 32, leaving 128 blocks above ground:
-  citadel/towers top out at ~127 blocks above ground (concept: 170 / 144).
+* The schematic is 384 tall (world Y -64..319, the build limit). Surface at world Y 32: citadel great spire ~220 above ground (concept 170), wall towers ~140 (concept 144).
 * The concept shows terrain, river, cliffs and forest around the base. Terrain is not part of the schematic (flat grass plateau, 160 cherry/spruce trees).
 * Auto Storage "6 floors": delivered as 2 sorter levels (B5, B6) + the 4-floor Storage Nexus building. Capacity per hall: 17/12 categories × 4 columns × 2 chests = 136 / 96 chests; plus misc/overflow columns.
 * Wing interiors are procedurally generated room grids (corridors, arches, ladders, lights, bookshelves, arena seating), not hand-detailed art. Expect to decorate.
