@@ -1,0 +1,1 @@
+$give @s minecraft:written_book[minecraft:written_book_content={title:"Visitor Access ID",author:"RIFTBREK",pages:["RIFTBREK VANGUARD\nVISITOR\nMinecraft: $(mc)\nClearance: $(clear)\nPass: RB-VS-$(id)\n\nTemporary access expires automatically.\n\nThis book is NOT access. Doors check the server registry."]}]

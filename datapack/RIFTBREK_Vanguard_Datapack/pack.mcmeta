@@ -1,0 +1,13 @@
+{
+  "pack": {
+    "description": "RIFTBREK Vanguard - registry, credentials, Veil, kits, access doors, storage, industry (MC 1.21.11)",
+    "min_format": [
+      94,
+      1
+    ],
+    "max_format": [
+      94,
+      1
+    ]
+  }
+}

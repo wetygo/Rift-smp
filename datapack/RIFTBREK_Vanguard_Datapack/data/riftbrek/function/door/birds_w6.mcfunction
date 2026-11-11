@@ -1,0 +1,5 @@
+# door tier 'birds' width 6: runs AT the command block; the power slot is the cell directly BELOW it (door lintel). Open = redstone_block, closed = iron_bars
+execute positioned ~3 ~ ~ if entity @a[distance=..6,tag=!rb_revoked,tag=rb_birds,scores={rb_cred=1..,rb_clear=2..}] unless score #GLOBAL rb_lock matches 1 positioned ~-3 ~ ~ run fill ~ ~-1 ~ ~5 ~-1 ~ minecraft:redstone_block
+execute positioned ~3 ~ ~ if entity @a[distance=..6,tag=rb_royal,tag=!rb_revoked,scores={rb_cred=1..,rb_clear=5..}] positioned ~-3 ~ ~ run fill ~ ~-1 ~ ~5 ~-1 ~ minecraft:redstone_block
+execute positioned ~3 ~ ~ unless entity @a[distance=..6,tag=!rb_revoked,tag=rb_birds,scores={rb_cred=1..,rb_clear=2..}] unless entity @a[distance=..6,tag=rb_royal,tag=!rb_revoked,scores={rb_cred=1..,rb_clear=5..}] positioned ~-3 ~ ~ run fill ~ ~-1 ~ ~5 ~-1 ~ minecraft:iron_bars
+execute positioned ~3 ~ ~ if score #GLOBAL rb_lock matches 1 unless entity @a[distance=..6,tag=rb_royal,tag=!rb_revoked,scores={rb_cred=1..,rb_clear=5..}] positioned ~-3 ~ ~ run fill ~ ~-1 ~ ~5 ~-1 ~ minecraft:iron_bars

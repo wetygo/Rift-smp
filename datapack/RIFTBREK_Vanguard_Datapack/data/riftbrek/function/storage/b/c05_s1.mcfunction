@@ -1,0 +1,25 @@
+# hall b category 'ranged' slot 1
+execute if items block ~ ~ ~1 container.1 minecraft:bow unless items block ~12 ~0 ~2 container.1 * run function riftbrek:storage/move {dx:12,dy:0,dz:2,s:1}
+execute if items block ~ ~ ~1 container.1 minecraft:bow unless items block ~12 ~0 ~4 container.1 * run function riftbrek:storage/move {dx:12,dy:0,dz:4,s:1}
+execute if items block ~ ~ ~1 container.1 minecraft:bow unless items block ~12 ~0 ~6 container.1 * run function riftbrek:storage/move {dx:12,dy:0,dz:6,s:1}
+execute if items block ~ ~ ~1 container.1 minecraft:bow unless items block ~12 ~0 ~8 container.1 * run function riftbrek:storage/move {dx:12,dy:0,dz:8,s:1}
+execute if items block ~ ~ ~1 container.1 minecraft:crossbow unless items block ~12 ~0 ~2 container.1 * run function riftbrek:storage/move {dx:12,dy:0,dz:2,s:1}
+execute if items block ~ ~ ~1 container.1 minecraft:crossbow unless items block ~12 ~0 ~4 container.1 * run function riftbrek:storage/move {dx:12,dy:0,dz:4,s:1}
+execute if items block ~ ~ ~1 container.1 minecraft:crossbow unless items block ~12 ~0 ~6 container.1 * run function riftbrek:storage/move {dx:12,dy:0,dz:6,s:1}
+execute if items block ~ ~ ~1 container.1 minecraft:crossbow unless items block ~12 ~0 ~8 container.1 * run function riftbrek:storage/move {dx:12,dy:0,dz:8,s:1}
+execute if items block ~ ~ ~1 container.1 minecraft:trident unless items block ~12 ~0 ~2 container.1 * run function riftbrek:storage/move {dx:12,dy:0,dz:2,s:1}
+execute if items block ~ ~ ~1 container.1 minecraft:trident unless items block ~12 ~0 ~4 container.1 * run function riftbrek:storage/move {dx:12,dy:0,dz:4,s:1}
+execute if items block ~ ~ ~1 container.1 minecraft:trident unless items block ~12 ~0 ~6 container.1 * run function riftbrek:storage/move {dx:12,dy:0,dz:6,s:1}
+execute if items block ~ ~ ~1 container.1 minecraft:trident unless items block ~12 ~0 ~8 container.1 * run function riftbrek:storage/move {dx:12,dy:0,dz:8,s:1}
+execute if items block ~ ~ ~1 container.1 minecraft:mace unless items block ~12 ~0 ~2 container.1 * run function riftbrek:storage/move {dx:12,dy:0,dz:2,s:1}
+execute if items block ~ ~ ~1 container.1 minecraft:mace unless items block ~12 ~0 ~4 container.1 * run function riftbrek:storage/move {dx:12,dy:0,dz:4,s:1}
+execute if items block ~ ~ ~1 container.1 minecraft:mace unless items block ~12 ~0 ~6 container.1 * run function riftbrek:storage/move {dx:12,dy:0,dz:6,s:1}
+execute if items block ~ ~ ~1 container.1 minecraft:mace unless items block ~12 ~0 ~8 container.1 * run function riftbrek:storage/move {dx:12,dy:0,dz:8,s:1}
+execute if items block ~ ~ ~1 container.1 #minecraft:arrows unless items block ~12 ~0 ~2 container.1 * run function riftbrek:storage/move {dx:12,dy:0,dz:2,s:1}
+execute if items block ~ ~ ~1 container.1 #minecraft:arrows unless items block ~12 ~0 ~4 container.1 * run function riftbrek:storage/move {dx:12,dy:0,dz:4,s:1}
+execute if items block ~ ~ ~1 container.1 #minecraft:arrows unless items block ~12 ~0 ~6 container.1 * run function riftbrek:storage/move {dx:12,dy:0,dz:6,s:1}
+execute if items block ~ ~ ~1 container.1 #minecraft:arrows unless items block ~12 ~0 ~8 container.1 * run function riftbrek:storage/move {dx:12,dy:0,dz:8,s:1}
+execute if items block ~ ~ ~1 container.1 minecraft:wind_charge unless items block ~12 ~0 ~2 container.1 * run function riftbrek:storage/move {dx:12,dy:0,dz:2,s:1}
+execute if items block ~ ~ ~1 container.1 minecraft:wind_charge unless items block ~12 ~0 ~4 container.1 * run function riftbrek:storage/move {dx:12,dy:0,dz:4,s:1}
+execute if items block ~ ~ ~1 container.1 minecraft:wind_charge unless items block ~12 ~0 ~6 container.1 * run function riftbrek:storage/move {dx:12,dy:0,dz:6,s:1}
+execute if items block ~ ~ ~1 container.1 minecraft:wind_charge unless items block ~12 ~0 ~8 container.1 * run function riftbrek:storage/move {dx:12,dy:0,dz:8,s:1}

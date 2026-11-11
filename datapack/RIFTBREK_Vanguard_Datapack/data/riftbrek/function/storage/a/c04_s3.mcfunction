@@ -1,0 +1,21 @@
+# hall a category 'dirt' slot 3
+execute if items block ~ ~ ~1 container.3 minecraft:dirt unless items block ~10 ~0 ~2 container.3 * run function riftbrek:storage/move {dx:10,dy:0,dz:2,s:3}
+execute if items block ~ ~ ~1 container.3 minecraft:dirt unless items block ~10 ~0 ~4 container.3 * run function riftbrek:storage/move {dx:10,dy:0,dz:4,s:3}
+execute if items block ~ ~ ~1 container.3 minecraft:dirt unless items block ~10 ~0 ~6 container.3 * run function riftbrek:storage/move {dx:10,dy:0,dz:6,s:3}
+execute if items block ~ ~ ~1 container.3 minecraft:dirt unless items block ~10 ~0 ~8 container.3 * run function riftbrek:storage/move {dx:10,dy:0,dz:8,s:3}
+execute if items block ~ ~ ~1 container.3 minecraft:grass_block unless items block ~10 ~0 ~2 container.3 * run function riftbrek:storage/move {dx:10,dy:0,dz:2,s:3}
+execute if items block ~ ~ ~1 container.3 minecraft:grass_block unless items block ~10 ~0 ~4 container.3 * run function riftbrek:storage/move {dx:10,dy:0,dz:4,s:3}
+execute if items block ~ ~ ~1 container.3 minecraft:grass_block unless items block ~10 ~0 ~6 container.3 * run function riftbrek:storage/move {dx:10,dy:0,dz:6,s:3}
+execute if items block ~ ~ ~1 container.3 minecraft:grass_block unless items block ~10 ~0 ~8 container.3 * run function riftbrek:storage/move {dx:10,dy:0,dz:8,s:3}
+execute if items block ~ ~ ~1 container.3 minecraft:podzol unless items block ~10 ~0 ~2 container.3 * run function riftbrek:storage/move {dx:10,dy:0,dz:2,s:3}
+execute if items block ~ ~ ~1 container.3 minecraft:podzol unless items block ~10 ~0 ~4 container.3 * run function riftbrek:storage/move {dx:10,dy:0,dz:4,s:3}
+execute if items block ~ ~ ~1 container.3 minecraft:podzol unless items block ~10 ~0 ~6 container.3 * run function riftbrek:storage/move {dx:10,dy:0,dz:6,s:3}
+execute if items block ~ ~ ~1 container.3 minecraft:podzol unless items block ~10 ~0 ~8 container.3 * run function riftbrek:storage/move {dx:10,dy:0,dz:8,s:3}
+execute if items block ~ ~ ~1 container.3 minecraft:mycelium unless items block ~10 ~0 ~2 container.3 * run function riftbrek:storage/move {dx:10,dy:0,dz:2,s:3}
+execute if items block ~ ~ ~1 container.3 minecraft:mycelium unless items block ~10 ~0 ~4 container.3 * run function riftbrek:storage/move {dx:10,dy:0,dz:4,s:3}
+execute if items block ~ ~ ~1 container.3 minecraft:mycelium unless items block ~10 ~0 ~6 container.3 * run function riftbrek:storage/move {dx:10,dy:0,dz:6,s:3}
+execute if items block ~ ~ ~1 container.3 minecraft:mycelium unless items block ~10 ~0 ~8 container.3 * run function riftbrek:storage/move {dx:10,dy:0,dz:8,s:3}
+execute if items block ~ ~ ~1 container.3 minecraft:coarse_dirt unless items block ~10 ~0 ~2 container.3 * run function riftbrek:storage/move {dx:10,dy:0,dz:2,s:3}
+execute if items block ~ ~ ~1 container.3 minecraft:coarse_dirt unless items block ~10 ~0 ~4 container.3 * run function riftbrek:storage/move {dx:10,dy:0,dz:4,s:3}
+execute if items block ~ ~ ~1 container.3 minecraft:coarse_dirt unless items block ~10 ~0 ~6 container.3 * run function riftbrek:storage/move {dx:10,dy:0,dz:6,s:3}
+execute if items block ~ ~ ~1 container.3 minecraft:coarse_dirt unless items block ~10 ~0 ~8 container.3 * run function riftbrek:storage/move {dx:10,dy:0,dz:8,s:3}

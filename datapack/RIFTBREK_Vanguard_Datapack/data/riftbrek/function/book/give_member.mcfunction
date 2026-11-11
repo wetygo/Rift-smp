@@ -1,0 +1,1 @@
+$give @s minecraft:written_book[minecraft:written_book_content={title:"Vanguard $(rank) ID",author:"RIFTBREK",pages:["RIFTBREK VANGUARD\nMinecraft: $(mc)\nDiscord: $(discord)\nFaction: $(faction)\nRank: $(rank)\nClearance: $(clear)\nCredential: RB-$(fcode)-$(id)\n\nThis book is NOT access. Doors check the server registry."]}]
