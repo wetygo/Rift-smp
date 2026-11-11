@@ -85,20 +85,20 @@ def wall_towers(W):
     S = W.sx
     # corner towers 40x40 (spire tip must stay <= local y 223)
     for (x0, z0) in ((0, 0), (S - 40, 0), (0, S - 40), (S - 40, S - 40)):
-        tower(W, x0, z0, x0 + 39, z0 + 39, floors=8, fh=14, spire_r=14, spire_h=12)
+        tower(W, x0, z0, x0 + 39, z0 + 39, floors=10, fh=14, spire_r=14, spire_h=16)
     # mid-wall towers 24x24
     for c in (192, S - 193):
-        tower(W, c - 12, 0, c + 11, 23, floors=7, fh=14, spire_r=10, spire_h=12)
-        tower(W, c - 12, S - 24, c + 11, S - 1, floors=7, fh=14, spire_r=10, spire_h=12)
-        tower(W, 0, c - 12, 23, c + 11, floors=7, fh=14, spire_r=10, spire_h=12)
-        tower(W, S - 24, c - 12, S - 1, c + 11, floors=7, fh=14, spire_r=10, spire_h=12)
+        tower(W, c - 12, 0, c + 11, 23, floors=8, fh=14, spire_r=10, spire_h=14)
+        tower(W, c - 12, S - 24, c + 11, S - 1, floors=8, fh=14, spire_r=10, spire_h=14)
+        tower(W, 0, c - 12, 23, c + 11, floors=8, fh=14, spire_r=10, spire_h=14)
+        tower(W, S - 24, c - 12, S - 1, c + 11, floors=8, fh=14, spire_r=10, spire_h=14)
 
 
 def gatehouse(W):
     S = W.sx
     # twin gate towers flank a 24-wide passage (x 372..395)
-    tower(W, 344, S - 28, 371, S - 1, floors=8, fh=14, spire_r=12, spire_h=14)
-    tower(W, 396, S - 28, 423, S - 1, floors=8, fh=14, spire_r=12, spire_h=14)
+    tower(W, 344, S - 28, 371, S - 1, floors=10, fh=14, spire_r=12, spire_h=16)
+    tower(W, 396, S - 28, 423, S - 1, floors=10, fh=14, spire_r=12, spire_h=16)
     # arch beam spanning the passage
     W.fill(372, GY + 34, S - WALL, 395, GY + 40, S - 1, DT)
     W.fill(372, GY + 36, S - WALL, 395, GY + 36, S - 1, GLOW)
@@ -237,28 +237,32 @@ def citadel(W):
             W.fill(x, GY, z, x + 1, GY + 10, z + 1, BRK); W.fill(x, GY + 10, z, x + 1, GY + 10, z + 1, GLOW)
     # four corner towers
     for (tx, tz) in ((x0 - 2, z0 - 2), (x1 - 25, z0 - 2), (x0 - 2, z1 - 25), (x1 - 25, z1 - 25)):
-        tower(W, tx, tz, tx + 27, tz + 27, floors=7, fh=12, spire_r=13, spire_h=14, thick=3)
+        tower(W, tx, tz, tx + 27, tz + 27, floors=9, fh=12, spire_r=13, spire_h=24, thick=3)
     # keep (Royal Level) on top of the main hall
     kx0, kz0, kx1, kz1 = 336, 224, 431, 319
-    ktop = shell(W, kx0, kz0, kx1, kz1, floors=4, fh=12, thick=3, y0=GY + 48, roof=DT)   # GY+48 .. GY+95
-    for f in range(4):
+    ktop = shell(W, kx0, kz0, kx1, kz1, floors=6, fh=12, thick=3, y0=GY + 48, roof=DT)   # GY+48 .. GY+119
+    ladder_shaft(W, kx0 + 3, kz0 + 3, GY + 48, ktop - 1, "east")
+    for f in range(6):
         windows_ring(W, kx0, kz0, kx1, kz1, GY + 48 + f * 12 + 4, h=6, step=7, wd=3, glass=BG if f % 2 else PG)
         lattice_lights(W, kx0 + 3, kz0 + 3, kx1 - 3, kz1 - 3, GY + 48 + f * 12 + 11, step=8, off=4)
     merlons(W, kx0, kz0, kx1, kz1, ktop + 1, BRK, 2)
     for (ex, ez) in ((kx0, kz0), (kx1, kz0), (kx0, kz1), (kx1, kz1)):
         W.fill(ex - 1, GY + 48, ez - 1, ex + 1, ktop, ez + 1, BRK); W.fill(ex, GY + 48, ez, ex, ktop + 1, ez, GLOW)
-        spire(W, ex, ez, 4, ktop + 2, 18)
+        spire(W, ex, ez, 4, ktop + 2, 30)
     # central tower + great spire
     tx0, tz0, tx1, tz1 = 360, 248, 407, 295
-    ttop = shell(W, tx0, tz0, tx1, tz1, floors=1, fh=12, thick=3, y0=GY + 96, roof=DT)   # GY+96 .. GY+107
-    windows_ring(W, tx0, tz0, tx1, tz1, GY + 100, h=5, step=6, wd=3, glass=BG)
-    spire(W, 383, 271, 23, ttop + 1, 20)
+    ttop = shell(W, tx0, tz0, tx1, tz1, floors=3, fh=12, thick=3, y0=GY + 120, roof=DT)   # GY+120 .. GY+155
+    for f in range(3):
+        windows_ring(W, tx0, tz0, tx1, tz1, GY + 120 + f * 12 + 4, h=5, step=6, wd=3, glass=BG)
+        lattice_lights(W, tx0 + 3, tz0 + 3, tx1 - 3, tz1 - 3, GY + 120 + f * 12 + 11, step=8, off=4)
+    ladder_shaft(W, tx0 + 3, tz0 + 3, GY + 120, ttop - 1, "east")
+    spire(W, 383, 271, 23, ttop + 1, 64)                                   # great spire, tip ~ GY+220
     # 8 intermediate spires on the main roof
     for (sx, sz) in ((x0 + 60, z0 + 8), (x1 - 60, z0 + 8), (x0 + 60, z1 - 8), (x1 - 60, z1 - 8), (x0 + 8, z0 + 60), (x0 + 8, z1 - 60), (x1 - 8, z0 + 60), (x1 - 8, z1 - 60)):
         W.fill(sx - 5, top1 + 1, sz - 5, sx + 5, top1 + 6, sz + 5, BRK); W.fill(sx - 4, top1 + 2, sz - 4, sx + 4, top1 + 5, sz + 4, AIR)
-        spire(W, sx, sz, 6, top1 + 7, 24)
+        spire(W, sx, sz, 6, top1 + 7, 40)
     # great banner on the keep facade
-    for yy in range(GY + 60, GY + 84, 2):
+    for yy in range(GY + 60, GY + 108, 2):
         W.set(386, yy, kz1 + 1, "minecraft:purple_wall_banner[facing=south]"); W.set(387, yy, kz1 + 1, "minecraft:purple_wall_banner[facing=south]")
     # ---- main entrance (south, 24 wide) : member-tier command-block doors
     W.fill(372, GY, z1 - 3, 395, GY + 17, z1, AIR)

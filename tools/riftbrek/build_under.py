@@ -301,9 +301,42 @@ def kit_hall(W):
         sign(W, x, y0 + 1, z + 2, ["CREATOR KIT", c.upper(), "stand on pad", "members only"], rot=8)
 
 
+def shulker_stations(W):
+    """Real vanilla mechanics: a hopper pulls items out of a shulker box above it (unloader) / pushes items into a
+    shulker box below it (loader).  Place a loaded/empty shulker box on the marked pad by hand or with a dispenser."""
+    y0 = L.level_floor(7)
+    for u in range(4):
+        x, z = 130 + u * 4, 560
+        W.set(x, y0 + 5, z, "minecraft:shulker_box[facing=up]")                    # UNLOADER: shulker above ...
+        hopper(W, x, y0 + 4, z, "down")                                             # ... hopper pulls from it ...
+        chest(W, x, y0 + 3, z, "south")                                             # ... into a chest
+        sign(W, x, y0 + 1, z - 1, ["SHULKER", "UNLOADER", "box on top", "-> chest"], rot=8)
+        W.fill(x, y0 + 1, z, x, y0 + 2, z, BRK)
+    for u in range(4):
+        x, z = 130 + u * 4, 570
+        chest(W, x, y0 + 5, z, "south")                                             # LOADER: chest ...
+        hopper(W, x, y0 + 4, z, "down")                                             # ... hopper pushes down ...
+        W.set(x, y0 + 3, z, "minecraft:shulker_box[facing=up]")                     # ... into a shulker box
+        sign(W, x, y0 + 1, z - 1, ["SHULKER", "LOADER", "chest on top", "-> box"], rot=8)
+        W.fill(x, y0 + 1, z, x, y0 + 2, z, BRK)
+
+
+def synth_hall(W):
+    """B11 'synthesis hall': command-driven resource generators (NOT survival-legit farms)."""
+    y0 = L.level_floor(11)
+    sx, sz = L.SYNTH_ORIGIN
+    for u, (name, table, label) in enumerate(L.SYNTH):
+        x = sx + u * 6
+        cmdblock(W, x, y0 + 1, sz, f"function riftbrek:industry/synth_{name}")
+        chest(W, x, y0 + 2, sz, "south")
+        sign(W, x, y0 + 1, sz - 1, ["SYNTHESIS", label[:15], "command-driven", "not survival"], rot=8)
+        W.fill(x - 1, y0 + 1, sz - 1, x - 1, y0 + 3, sz + 1, DB)
+        W.fill(x + 1, y0 + 1, sz - 1, x + 1, y0 + 3, sz + 1, DB)
+
+
 def machines(W, lv):
     for hall in L.SORT_HALLS:
         ox, oz, ytop = sorter_hall(W, hall)
         intake(W, ox, oz, ytop, hall["name"].upper())
-    smelters(W); crop_plots(W); transport(W); veil_hq(W); royal_level(W); extra_gates(W); kit_hall(W); levels_signs(W)
+    smelters(W); crop_plots(W); transport(W); veil_hq(W); royal_level(W); extra_gates(W); kit_hall(W); levels_signs(W); shulker_stations(W); synth_hall(W)
     surface_hatches(W, lv)

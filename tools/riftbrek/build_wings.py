@@ -163,35 +163,15 @@ def intake(W, x, z, y_bottom, label):
     sign(W, x + 3, GY, z, ["AUTO-STORAGE", "INTAKE " + label, "drop items in", "the chests"], rot=12)
 
 
+BLIMP_LANE_X = 250
+BLIMP_DOCKS = [("A", 78, "TERMINAL"), ("B", 480, "PLAZA"), ("C", 700, "CHECKPOINT")]
+
+
 def blimp(W):
-    cx, cy, cz = 383, GY + 96, 78
-    a, b = 64, 17
-    xs = np.arange(cx - a, cx + a + 1); ys = np.arange(cy - b, cy + b + 1); zs = np.arange(cz - b, cz + b + 1)
-    Y, Z, X = np.meshgrid(ys, zs, xs, indexing="ij")
-    d = ((X - cx) / a) ** 2 + ((Y - cy) / b) ** 2 + ((Z - cz) / b) ** 2
-    shell_m = (d <= 1.0) & (d > 0.88)
-    sub = W.a[ys[0]:ys[-1] + 1, zs[0]:zs[-1] + 1, xs[0]:xs[-1] + 1]
-    band = ((X - cx + 70) // 10) % 4
-    wh, pu, bl = W.B(WH), W.B(PU), W.B(BL)
-    mat = np.where(band == 0, pu, wh).astype(np.uint16)
-    sub[shell_m] = mat[shell_m]
-    # belly + spine stripe in blue
-    stripe = shell_m & (np.abs(Z - cz) <= 1) & (Y > cy)
-    sub[stripe] = bl
-    # tail fins
-    for k in range(18):
-        W.fill(cx - 64 + k // 2, cy + 6 + k, cz, cx - 46, cy + 6 + k, cz, PU)
-        W.fill(cx - 64 + k // 2, cy - 6 - k, cz, cx - 46, cy - 6 - k, cz, PU)
-        W.fill(cx - 64 + k // 2, cy, cz + 6 + k, cx - 46, cy, cz + 6 + k, PU)
-        W.fill(cx - 64 + k // 2, cy, cz - 6 - k, cx - 46, cy, cz - 6 - k, PU)
-    # gondola + lights
-    W.fill(cx - 14, cy - b - 6, cz - 4, cx + 14, cy - b - 1, cz + 4, WH)
-    W.fill(cx - 13, cy - b - 5, cz - 3, cx + 13, cy - b - 2, cz + 3, AIR)
-    W.fill(cx - 13, cy - b - 4, cz - 4, cx + 13, cy - b - 3, cz - 4, LG); W.fill(cx - 13, cy - b - 4, cz + 4, cx + 13, cy - b - 3, cz + 4, LG)
-    for x in range(cx - 12, cx + 13, 4):
-        W.set(x, cy - b - 2, cz, SEA)
-    # mooring mast + gantry (static display)
-    mx, mz = 296, 78
+    """Terminal hall + mast (scenery) and three dock pads on the blimp lane (x=250).  The airship itself is a moving
+    display-entity vehicle created by the data pack (riftbrek:blimp/*): it is NOT stored in the schematic."""
+    cx, mz = 383, 78
+    mx = 296
     W.fill(mx - 6, GY, mz - 6, mx + 6, GY + 100, mz + 6, BRK)
     W.fill(mx - 4, GY, mz - 4, mx + 4, GY + 100, mz + 4, AIR)
     for y in range(GY + 10, GY + 100, 12):
@@ -201,20 +181,30 @@ def blimp(W):
     for y in range(GY + 98, GY + 101):
         W.fill(mx - 8, y, mz - 8, mx + 8, y, mz - 8, IB); W.fill(mx - 8, y, mz + 8, mx + 8, y, mz + 8, IB)
         W.fill(mx - 8, y, mz - 8, mx - 8, y, mz + 8, IB); W.fill(mx + 8, y, mz - 8, mx + 8, y, mz + 8, IB)
-    W.fill(mx + 8, GY + 97, mz - 2, cx - 64, GY + 97, mz + 2, DT)               # gantry to the nose
-    W.fill(mx + 8, GY + 98, mz - 2, cx - 64, GY + 98, mz - 2, IB); W.fill(mx + 8, GY + 98, mz + 2, cx - 64, GY + 98, mz + 2, IB)
     spire(W, mx, mz, 6, GY + 101, 12)
-    # terminal hall below the blimp
     tx0, tz0, tx1, tz1 = 330, 24, 437, 124
     top = shell(W, tx0, tz0, tx1, tz1, 3, 14, thick=3, roof=DT)
     for f in range(3):
         windows_ring(W, tx0, tz0, tx1, tz1, GY + f * 14 + 4, h=5, step=6, wd=3, glass=LG)
         lattice_lights(W, tx0 + 3, tz0 + 3, tx1 - 3, tz1 - 3, GY + f * 14 + 13, step=8, off=4)
-    W.fill(372, GY, tz1 - 2, 395, GY + 12, tz1, AIR)                       # south door arch (public hall)
+    W.fill(372, GY, tz1 - 2, 395, GY + 12, tz1, AIR)
     ladder_shaft(W, tx0 + 3, tz0 + 3, GY, top - 1, "east")
-    sign(W, 383, GY, tz1 + 3, ["BLIMP TERMINAL", "Airander 10", "STATIC DISPLAY", "flying blimp: NOT BUILT"], rot=0)
+    sign(W, 383, GY, tz1 + 3, ["BLIMP TERMINAL", "Airander line", "dock A/B/C on", "the west lane"], rot=0)
     road(W, 372, tz1 + 1, 395, 175, "z")
     cmdblock(W, 383, GROUND_TOP - 1, 70, "function riftbrek:zone/visible")
+    # three dock pads on the lane x=250: disk platform, glow ring, lamp posts, sign
+    for (nm, dz, label) in BLIMP_DOCKS:
+        disk(W, BLIMP_LANE_X, dz, 12, GROUND_TOP, GROUND_TOP, DT)
+        disk(W, BLIMP_LANE_X, dz, 10, GROUND_TOP, GROUND_TOP, PU)
+        disk(W, BLIMP_LANE_X, dz, 8, GROUND_TOP, GROUND_TOP, DT)
+        disk(W, BLIMP_LANE_X, dz, 12, GROUND_TOP, GROUND_TOP, GLOW, hollow=True)
+        for k in range(6):
+            a = 2 * np.pi * k / 6
+            x, z = int(round(BLIMP_LANE_X + 13 * np.cos(a))), int(round(dz + 13 * np.sin(a)))
+            W.fill(x, GY, z, x, GY + 5, z, BRK); W.set(x, GY + 6, z, SEA)
+        sign(W, BLIMP_LANE_X + 3, GY, dz + 3, ["BLIMP DOCK " + nm, label, "board when the", "airship lands"], rot=8, color="purple")
+    # blimp controller (always-active command block) hidden under dock A
+    cmdblock(W, BLIMP_LANE_X, GROUND_TOP - 1, BLIMP_DOCKS[0][1], "function riftbrek:blimp/tick")
 
 
 def chicken_chambers(W):
@@ -253,7 +243,7 @@ def landscaping(W, rng):
     while n < 160 and tries < 4000:
         tries += 1
         x = int(rng.integers(24, S - 24)); z = int(rng.integers(24, S - 24))
-        if W.a[GROUND_TOP, z, x] != grass:
+        if W.a[GROUND_TOP, z, x] != grass or 232 <= x <= 268:
             continue
         box = W.a[GY:GY + 12, max(z - 4, 0):z + 5, max(x - 4, 0):x + 5]
         gb = W.a[GROUND_TOP, max(z - 4, 0):z + 5, max(x - 4, 0):x + 5]

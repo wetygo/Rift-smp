@@ -215,12 +215,19 @@ Macro functions take a compound argument. Use exact Minecraft names; the player 
 | `riftbrek:admin/_setstatus` | internal - do not call by hand |
 | `riftbrek:admin/_setstatus2` | internal - do not call by hand |
 | `riftbrek:admin/_write` | internal - do not call by hand |
+| `riftbrek:admin/blimp_off` | internal - do not call by hand |
+| `riftbrek:admin/blimp_on` | internal - do not call by hand |
+| `riftbrek:admin/forceload` | internal - do not call by hand |
+| `riftbrek:admin/forceload_do` | internal - do not call by hand |
+| `riftbrek:admin/forceload_off` | internal - do not call by hand |
+| `riftbrek:admin/forceload_remove_do` | internal - do not call by hand |
 | `riftbrek:admin/gate_test` | public (player/OP) |
 | `riftbrek:admin/incident` | public (player/OP) |
 | `riftbrek:admin/leader` | public (player/OP) |
 | `riftbrek:admin/leader_apply` | internal - do not call by hand |
 | `riftbrek:admin/lockdown_off` | public (player/OP) |
 | `riftbrek:admin/lockdown_on` | public (player/OP) |
+| `riftbrek:admin/origin` | internal - do not call by hand |
 | `riftbrek:admin/recover` | public (player/OP) |
 | `riftbrek:admin/register` | public (player/OP) |
 | `riftbrek:admin/register_apply` | internal - do not call by hand |
@@ -241,6 +248,15 @@ Macro functions take a compound argument. Use exact Minecraft names; the player 
 | `riftbrek:admin/visitor_apply` | internal - do not call by hand |
 | `riftbrek:admin/visitor_grant` | internal - do not call by hand |
 | `riftbrek:admin/whois` | public (player/OP) |
+| `riftbrek:blimp/board` | internal - do not call by hand |
+| `riftbrek:blimp/left` | internal - do not call by hand |
+| `riftbrek:blimp/mount` | internal - do not call by hand |
+| `riftbrek:blimp/move_n` | internal - do not call by hand |
+| `riftbrek:blimp/move_s` | internal - do not call by hand |
+| `riftbrek:blimp/next` | internal - do not call by hand |
+| `riftbrek:blimp/run` | internal - do not call by hand |
+| `riftbrek:blimp/spawn` | internal - do not call by hand |
+| `riftbrek:blimp/tick` | internal - do not call by hand |
 | `riftbrek:book/fetch` | internal - do not call by hand |
 | `riftbrek:book/give_member` | internal - do not call by hand |
 | `riftbrek:book/give_veil` | internal - do not call by hand |
@@ -286,6 +302,14 @@ Macro functions take a compound argument. Use exact Minecraft names; the player 
 | `riftbrek:industry/run_farm_carrots` | command-block only |
 | `riftbrek:industry/run_farm_potatoes` | command-block only |
 | `riftbrek:industry/run_farm_wheat` | command-block only |
+| `riftbrek:industry/synth_blaze` | internal - do not call by hand |
+| `riftbrek:industry/synth_bones` | internal - do not call by hand |
+| `riftbrek:industry/synth_flesh` | internal - do not call by hand |
+| `riftbrek:industry/synth_gunpowder` | internal - do not call by hand |
+| `riftbrek:industry/synth_iron` | internal - do not call by hand |
+| `riftbrek:industry/synth_pearls` | internal - do not call by hand |
+| `riftbrek:industry/synth_string` | internal - do not call by hand |
+| `riftbrek:industry/synth_witch` | internal - do not call by hand |
 | `riftbrek:kit/_cooldown_check` | internal - do not call by hand |
 | `riftbrek:kit/_done` | internal - do not call by hand |
 | `riftbrek:kit/abstracters` | public (player/OP) |

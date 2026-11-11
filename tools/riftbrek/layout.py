@@ -2,7 +2,7 @@
 module so command-block positions / relative offsets can never drift apart."""
 
 # ---- world frame --------------------------------------------------------------------------
-SX, SY, SZ = 768, 224, 768          # schematic size (x, y, z); local y 0 == world y -64
+SX, SY, SZ = 768, 384, 768          # schematic size (x, y, z); local y 0 == world y -64, top == world y 319 (build limit)
 GROUND_TOP = 95                       # last solid ground layer (local y)  -> world y = 31
 GY = GROUND_TOP + 1                   # first buildable layer above the ground
 WORLD_Y0 = -64                        # world Y of local y=0
@@ -106,3 +106,25 @@ SORT_HALLS = [
 def sort_col(i, k):
     """offset of the category hopper H(i,k) relative to the hall controller (dx, dy, dz)."""
     return (2 + 2 * i, 0, 2 + 2 * k)
+
+
+# rectangles (local x0,z0,x1,z1) that should stay loaded so the machines keep running when nobody is near
+FORCELOAD = [
+    ("sorter A (B5)", 554, 468, 600, 486),
+    ("sorter B (B6)", 554, 516, 592, 534),
+    ("industry hall B7", 48, 470, 262, 610),
+    ("synthesis hall B11", 200, 280, 330, 330),
+    ("blimp lane x=250", 232, 60, 268, 720),
+    ("checkpoint / chunk-ban square", 352, 652, 415, 712),
+]
+SYNTH = [  # (name, entity loot table, label)
+    ("iron", "minecraft:entities/iron_golem", "IRON"),
+    ("gunpowder", "minecraft:entities/creeper", "GUNPOWDER"),
+    ("bones", "minecraft:entities/skeleton", "BONES+ARROWS"),
+    ("string", "minecraft:entities/spider", "STRING"),
+    ("flesh", "minecraft:entities/zombie", "ROTTEN FLESH"),
+    ("pearls", "minecraft:entities/enderman", "ENDER PEARLS"),
+    ("blaze", "minecraft:entities/blaze", "BLAZE RODS"),
+    ("witch", "minecraft:entities/witch", "WITCH DROPS"),
+]
+SYNTH_ORIGIN = (220, 300)     # x, z of the first unit (B11); unit pitch 6 along x

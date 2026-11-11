@@ -20,6 +20,11 @@ Ground surface (first walkable layer) is local y = 96 = world y 32.
 | B11 | y 8 (world -56) |
 | B12 | y 0 (world -64) |
 
+## command blocks: `blimp/` (1)
+| function | local x,y,z | world offset (y-64) |
+|---|---|---|
+| `blimp/tick` | 250, 94, 78 | +250, 30, +78 |
+
 ## command blocks: `door/` (20)
 | function | local x,y,z | world offset (y-64) |
 |---|---|---|
@@ -44,7 +49,7 @@ Ground surface (first walkable layer) is local y = 96 = world y 32.
 | `door/veil_w12` | 97, 99, 300 | +97, 35, +300 |
 | `door/wildcards_w12` | 105, 99, 470 | +105, 35, +470 |
 
-## command blocks: `industry/` (10)
+## command blocks: `industry/` (18)
 | function | local x,y,z | world offset (y-64) |
 |---|---|---|
 | `industry/pulse_crafter` | 57, 42, 580 | +57, -22, +580 |
@@ -57,6 +62,14 @@ Ground surface (first walkable layer) is local y = 96 = world y 32.
 | `industry/run_farm_carrots` | 80, 40, 490 | +80, -24, +490 |
 | `industry/run_farm_potatoes` | 96, 40, 490 | +96, -24, +490 |
 | `industry/run_farm_wheat` | 64, 40, 490 | +64, -24, +490 |
+| `industry/synth_blaze` | 256, 9, 300 | +256, -55, +300 |
+| `industry/synth_bones` | 232, 9, 300 | +232, -55, +300 |
+| `industry/synth_flesh` | 244, 9, 300 | +244, -55, +300 |
+| `industry/synth_gunpowder` | 226, 9, 300 | +226, -55, +300 |
+| `industry/synth_iron` | 220, 9, 300 | +220, -55, +300 |
+| `industry/synth_pearls` | 250, 9, 300 | +250, -55, +300 |
+| `industry/synth_string` | 238, 9, 300 | +238, -55, +300 |
+| `industry/synth_witch` | 262, 9, 300 | +262, -55, +300 |
 
 ## command blocks: `kit/` (12)
 | function | local x,y,z | world offset (y-64) |

@@ -142,7 +142,7 @@ def functions(pack_root):
 
 
 KNOWN_CMDS = {"scoreboard", "execute", "tellraw", "tag", "give", "clear", "effect", "function", "data", "team", "gamerule", "setblock",
-              "fill", "item", "loot", "tp", "time", "title"}
+              "fill", "item", "loot", "tp", "time", "title", "ride", "forceload", "kill", "summon"}
 
 
 def lint_functions(ids, texts):

@@ -1,12 +1,12 @@
-== build: 2026-11-11T20:34Z   (static analysis / model tests only - NOT run in Minecraft)
+== build: 2026-11-11T21:08Z   (static analysis / model tests only - NOT run in Minecraft)
 == validate
-shape/palette/tiles: ((224, 768, 768), 89, 231)
+shape/palette/tiles: ((384, 768, 768), 111, 259)
 datapack lint errors: 0
 schematic errors: 0  gate rows: 128
-{'ladder': 2991, 'iron_door': 264, 'dispenser': 4, 'hopper': 378, 'chest': 306, 'furnace': 4, 'crafter': 6, 'command_blocks_ok': 55}
+{'ladder': 3473, 'iron_door': 264, 'dispenser': 4, 'chest': 2013, 'hopper': 386, 'furnace': 4, 'crafter': 6, 'command_blocks_ok': 64}
 consistency errors: 0 {'sorters': 2, 'doors': 20, 'farms': 4, 'pulses': 6}
 == walkability (doors counted open)
-outside gate comp 1 labels 83
+outside gate comp 1 labels 78
 OK   gate passage inside (383, 96, 740) comp 1
 OK   citadel entrance hall (360, 96, 340) comp 1
 OK   citadel ramp bottom (383, 98, 362) comp 1

@@ -4,7 +4,7 @@ import numpy as np
 from . import layout as L
 from . import build_common as C
 from .world import World
-from . import build_surface as S, build_wings as WG, build_under as U
+from . import build_surface as S, build_wings as WG, build_under as U, build_furnish as FU
 
 
 def build_world():
@@ -21,6 +21,7 @@ def build_world():
     WG.archive(W); WG.unstables(W); WG.abstracters(W); WG.veil(W); WG.wildcards(W); WG.nexus(W); log("wings")
     WG.blimp(W); WG.chicken_chambers(W); log("blimp terminal + chambers")
     n = WG.landscaping(W, rng); log("trees %d" % n)
+    log("furnished quadrants %d" % FU.furnish(W)); log("light blocks %d" % FU.lights(W))
     U.machines(W, lv); log("machinery")
     return W
 
