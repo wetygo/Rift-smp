@@ -26,6 +26,12 @@ ADMIN = [  # (function, args, who, what, example)
     ("admin/whois", '{id}', "OP", "Prints the FULL registry record (including Veil real names) to the operator only.", "/function riftbrek:admin/whois {id:1001}"),
     ("admin/gate_test", "-", "run AS the player", "Shows which door tiers the player passes right now.", "/execute as Steve run function riftbrek:admin/gate_test"),
     ("admin/reset_cooldown", "-", "run AS the player", "Resets the kit cooldown for that player.", "/execute as Steve run function riftbrek:admin/reset_cooldown"),
+    ("admin/origin", "{x,z}", "OP", "Stores the world X/Z where you pasted schematic local (0,0). Needed by verify/forceload.", "/function riftbrek:admin/origin {x:1000,z:-500}"),
+    ("admin/verify", "-", "OP", "Checks 9 signature blocks of the pasted schematic and prints PASS/FAIL for each (chunks must be loaded).", "/function riftbrek:admin/verify"),
+    ("admin/forceload", "-", "OP", "Force-loads sorters, industry, synthesis hall, blimp lane and checkpoint (after admin/origin).", "/function riftbrek:admin/forceload"),
+    ("admin/forceload_off", "-", "OP", "Removes those force-loaded chunks.", "/function riftbrek:admin/forceload_off"),
+    ("admin/blimp_on", "-", "OP", "Spawns the experimental airship at dock A and starts its route.", "/function riftbrek:admin/blimp_on"),
+    ("admin/blimp_off", "-", "OP", "Removes the airship.", "/function riftbrek:admin/blimp_off"),
     ("admin/recover", "-", "OP", "Admin recovery: re-runs load (objectives, teams, storage defaults). Never resets player data.", "/function riftbrek:admin/recover"),
 ]
 PLAYER = [

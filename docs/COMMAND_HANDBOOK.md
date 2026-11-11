@@ -118,7 +118,43 @@ Macro functions take a compound argument. Use exact Minecraft names; the player 
 - Resets the kit cooldown for that player.
 - example: `/execute as Steve run function riftbrek:admin/reset_cooldown`
 
-### C35. `riftbrek:admin/recover`
+### C35. `riftbrek:admin/origin`
+- who: OP
+- args: `{x,z}`
+- Stores the world X/Z where you pasted schematic local (0,0). Needed by verify/forceload.
+- example: `/function riftbrek:admin/origin {x:1000,z:-500}`
+
+### C36. `riftbrek:admin/verify`
+- who: OP
+- args: `-`
+- Checks 9 signature blocks of the pasted schematic and prints PASS/FAIL for each (chunks must be loaded).
+- example: `/function riftbrek:admin/verify`
+
+### C37. `riftbrek:admin/forceload`
+- who: OP
+- args: `-`
+- Force-loads sorters, industry, synthesis hall, blimp lane and checkpoint (after admin/origin).
+- example: `/function riftbrek:admin/forceload`
+
+### C38. `riftbrek:admin/forceload_off`
+- who: OP
+- args: `-`
+- Removes those force-loaded chunks.
+- example: `/function riftbrek:admin/forceload_off`
+
+### C39. `riftbrek:admin/blimp_on`
+- who: OP
+- args: `-`
+- Spawns the experimental airship at dock A and starts its route.
+- example: `/function riftbrek:admin/blimp_on`
+
+### C40. `riftbrek:admin/blimp_off`
+- who: OP
+- args: `-`
+- Removes the airship.
+- example: `/function riftbrek:admin/blimp_off`
+
+### C41. `riftbrek:admin/recover`
 - who: OP
 - args: `-`
 - Admin recovery: re-runs load (objectives, teams, storage defaults). Never resets player data.
@@ -215,11 +251,11 @@ Macro functions take a compound argument. Use exact Minecraft names; the player 
 | `riftbrek:admin/_setstatus` | internal - do not call by hand |
 | `riftbrek:admin/_setstatus2` | internal - do not call by hand |
 | `riftbrek:admin/_write` | internal - do not call by hand |
-| `riftbrek:admin/blimp_off` | internal - do not call by hand |
-| `riftbrek:admin/blimp_on` | internal - do not call by hand |
-| `riftbrek:admin/forceload` | internal - do not call by hand |
+| `riftbrek:admin/blimp_off` | public (player/OP) |
+| `riftbrek:admin/blimp_on` | public (player/OP) |
+| `riftbrek:admin/forceload` | public (player/OP) |
 | `riftbrek:admin/forceload_do` | internal - do not call by hand |
-| `riftbrek:admin/forceload_off` | internal - do not call by hand |
+| `riftbrek:admin/forceload_off` | public (player/OP) |
 | `riftbrek:admin/forceload_remove_do` | internal - do not call by hand |
 | `riftbrek:admin/gate_test` | public (player/OP) |
 | `riftbrek:admin/incident` | public (player/OP) |
@@ -227,7 +263,7 @@ Macro functions take a compound argument. Use exact Minecraft names; the player 
 | `riftbrek:admin/leader_apply` | internal - do not call by hand |
 | `riftbrek:admin/lockdown_off` | public (player/OP) |
 | `riftbrek:admin/lockdown_on` | public (player/OP) |
-| `riftbrek:admin/origin` | internal - do not call by hand |
+| `riftbrek:admin/origin` | public (player/OP) |
 | `riftbrek:admin/recover` | public (player/OP) |
 | `riftbrek:admin/register` | public (player/OP) |
 | `riftbrek:admin/register_apply` | internal - do not call by hand |
@@ -244,6 +280,8 @@ Macro functions take a compound argument. Use exact Minecraft names; the player 
 | `riftbrek:admin/unleader_apply` | internal - do not call by hand |
 | `riftbrek:admin/unroyal` | public (player/OP) |
 | `riftbrek:admin/unroyal_apply` | internal - do not call by hand |
+| `riftbrek:admin/verify` | public (player/OP) |
+| `riftbrek:admin/verify_do` | internal - do not call by hand |
 | `riftbrek:admin/visitor` | public (player/OP) |
 | `riftbrek:admin/visitor_apply` | internal - do not call by hand |
 | `riftbrek:admin/visitor_grant` | internal - do not call by hand |

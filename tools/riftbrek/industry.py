@@ -193,6 +193,30 @@ def forceload(P):
     P.fn("admin/forceload_off", ["function riftbrek:admin/forceload_remove_do with storage riftbrek:cfg origin"])
 
 
+def verify(P):
+    y = lambda ly: ly + L.WORLD_Y0
+    GY = L.GY
+    checks = [
+        ("ground (grass) at local 100,95,100", 100, 95, 100, "minecraft:grass_block"),
+        ("gatehouse door controller", 378, GY + 3, 760, "minecraft:repeating_command_block"),
+        ("citadel entrance controller", 378, GY + 3, 366, "minecraft:repeating_command_block"),
+        ("blimp controller (dock A)", 250, L.GROUND_TOP - 1, 78, "minecraft:repeating_command_block"),
+        ("sorter A controller (B5)", 560, L.level_floor(5) + 4, 472, "minecraft:repeating_command_block"),
+        ("sorter B controller (B6)", 560, L.level_floor(6) + 4, 520, "minecraft:repeating_command_block"),
+        ("synthesis unit (B11)", L.SYNTH_ORIGIN[0], L.level_floor(11) + 1, L.SYNTH_ORIGIN[1], "minecraft:repeating_command_block"),
+        ("great spire tip region (citadel)", 383, GY + 170, 271, "minecraft:black_concrete"),
+        ("south-east corner tower base", 760, GY + 10, 760, "minecraft:polished_blackstone_bricks"),
+    ]
+    lines = ["# macro: x,z = schematic origin (admin/origin).  Run: /function riftbrek:admin/verify",
+             'tellraw @s {"text":"[RIFTBREK] paste check (PASS = expected block found):","color":"light_purple"}']
+    for (label, x, ly, z, blk) in checks:
+        lines.append(f'$execute positioned $(x) {y(ly)} $(z) if block ~{x} ~ ~{z} {blk} run tellraw @s {{"text":"PASS  {label}","color":"green"}}')
+        lines.append(f'$execute positioned $(x) {y(ly)} $(z) unless block ~{x} ~ ~{z} {blk} run tellraw @s {{"text":"FAIL  {label} (chunk not loaded, wrong origin, or not pasted)","color":"red"}}')
+    P.fn("admin/verify_do", lines)
+    P.fn("admin/verify", ["# OP ONLY. Needs admin/origin first. Stand near the schematic so the chunks are loaded (or run admin/forceload first).",
+                          "function riftbrek:admin/verify_do with storage riftbrek:cfg origin"])
+
+
 def add(P):
     move_fn(P)
     for h in L.SORT_HALLS:
@@ -202,3 +226,4 @@ def add(P):
     synth(P)
     blimp(P)
     forceload(P)
+    verify(P)
