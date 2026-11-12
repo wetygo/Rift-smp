@@ -7,4 +7,5 @@
 * Creator-inspired kits (FlameFrags, Wemmbu, TheobaldTheBird, ParrotX2, ManePear, SpokeIsHere) are original loadouts named in their honour; they are not endorsed by or verified with those creators.
 
 * **Wildezz** — original author of Basic Furnace Array, Carrot & Firework Crafters, The Stone Factory, Full Dam and Ghast Hydration Facility (name from the `.litematic` metadata, preserved in the converted files). Supplied by the project owner; recoloured by `tools/annex.py`. These designs are theirs, not RIFTBREK's.
-* **Airlander 10** world save (1.19.2) supplied by the project owner; builder not identified in the files. The hull geometry is reused as the moving blimp. Please supply the creator's name so it can be credited.
+* **Airlander 10** — built by **Krodo** (per the project owner); world save (1.19.2) supplied by the project owner. The hull geometry is reused as the moving blimp.
+* **Storage Tech community builds** (supplied by the project owner; authors from file metadata): **hykn55** (Gemini TNT Storage v1.4.1 / v1.2.2), **Nyx_9841** (Brewer Chunkloading + Storage, Chronostasis Station), **SandCaribou1890**, **Pando_UwU** and **Kvil** (Wave Bolt v1.0.4 modules). **Wildezz** also authored CLM Large. All are their designs, ported to 1.21.11 only; credit them if you share the schematic and make sure you may redistribute them.

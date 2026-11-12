@@ -4,14 +4,14 @@ Minecraft Java **1.21.11**, Fabric + Litematica. Built to the concept render in 
 
 | deliverable | file |
 |---|---|
-| ONE master schematic (768 × 384 × 768, world Y -64..319) | `dist/RIFTBREK_Vanguard_Headquarters_MASTER.litematic` |
+| ONE master schematic: 768 × 384 × 768 HQ + east annex quarter with 27 imported builds (29 regions) | `dist/RIFTBREK_Vanguard_Headquarters_MASTER.litematic` |
 | ONE data pack (format 94.1) | `dist/RIFTBREK_Vanguard_Datapack.zip` (source: `datapack/RIFTBREK_Vanguard_Datapack/`) |
 | everything in one ZIP | `dist/RIFTBREK_Vanguard_FINAL_BUNDLE.zip` |
 | install guide | `docs/INSTALL.md` |
 | every command, numbered | `docs/COMMAND_HANDBOOK.md` |
 | where every machine is | `docs/MODULE_INDEX.md` |
 | what is tested / untested | `docs/TEST_REPORT.md`, `docs/TEST_RESULTS_AUTO.txt` |
-| Wildezz builds recoloured purple + Airlander notes | `docs/ANNEX.md`, `dist/annex/*.litematic` |
+| 27 imported builds (inside the master) + Airlander notes | `docs/ANNEX.md`, `docs/ANNEX_MAP.md`, `dist/annex/*.litematic` |
 | what is NOT built | `docs/KNOWN_GAPS.md` |
 | credits | `docs/CREDITS.md` |
 

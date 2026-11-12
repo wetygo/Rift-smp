@@ -5,7 +5,7 @@
    18,
    58
   ],
-  "palette_in": 251,
+  "palette_in": 214,
   "palette_out": 214,
   "changed": {
    "waxed_cut_copper -> amethyst_block": 1,
@@ -81,9 +81,10 @@
    351
   ],
   "entities": 0,
-  "secs": 0.014610052108764648,
+  "secs": 0.007606029510498047,
   "solid": 6405,
-  "data_version_in": 4903
+  "data_version_in": 4903,
+  "warn": {}
  },
  "Ghast_Hydration_Facility.litematic": {
   "size": [
@@ -91,7 +92,7 @@
    58,
    464
   ],
-  "palette_in": 1012,
+  "palette_in": 955,
   "palette_out": 955,
   "changed": {
    "birch_log -> purple_concrete": 1,
@@ -139,9 +140,10 @@
    4773
   ],
   "entities": 0,
-  "secs": 1.1645476818084717,
+  "secs": 0.5333058834075928,
   "solid": 418646,
-  "data_version_in": 4556
+  "data_version_in": 4556,
+  "warn": {}
  },
  "The_Stone_Factory.litematic": {
   "size": [
@@ -149,7 +151,7 @@
    87,
    103
   ],
-  "palette_in": 1002,
+  "palette_in": 791,
   "palette_out": 791,
   "changed": {
    "waxed_cut_copper -> amethyst_block": 1,
@@ -255,9 +257,10 @@
    1480
   ],
   "entities": 18,
-  "secs": 0.4658842086791992,
+  "secs": 0.2159411907196045,
   "solid": 67518,
-  "data_version_in": 4903
+  "data_version_in": 4903,
+  "warn": {}
  },
  "Full_Dam.litematic": {
   "size": [
@@ -265,7 +268,7 @@
    145,
    294
   ],
-  "palette_in": 774,
+  "palette_in": 715,
   "palette_out": 715,
   "changed": {
    "stripped_mangrove_wood -> purple_concrete": 1,
@@ -294,6 +297,7 @@
    "waxed_copper_grate -> tinted_glass": 1,
    "birch_wall_sign -> crimson_wall_sign": 1,
    "waxed_copper_trapdoor -> iron_trapdoor": 5,
+   "chain -> iron_chain": 2,
    "yellow_wool -> purple_wool": 1,
    "bamboo_fence -> crimson_fence": 6,
    "stripped_bamboo_block -> purple_concrete": 1,
@@ -426,9 +430,10 @@
    154
   ],
   "entities": 0,
-  "secs": 2.0518198013305664,
+  "secs": 1.3273224830627441,
   "solid": 373639,
-  "data_version_in": 4438
+  "data_version_in": 4438,
+  "warn": {}
  },
  "Carrot__Firework_Crafters.litematic": {
   "size": [
@@ -436,7 +441,7 @@
    35,
    41
   ],
-  "palette_in": 504,
+  "palette_in": 408,
   "palette_out": 408,
   "changed": {
    "mangrove_stairs -> purpur_stairs": 16,
@@ -515,8 +520,9 @@
    585
   ],
   "entities": 0,
-  "secs": 0.03337407112121582,
+  "secs": 0.011463165283203125,
   "solid": 17710,
-  "data_version_in": 4903
+  "data_version_in": 4903,
+  "warn": {}
  }
 }

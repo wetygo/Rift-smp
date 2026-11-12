@@ -1,0 +1,519 @@
+[
+ {
+  "name": "Ghast Hydration Facility",
+  "file": "0fb78075-Ghast_Hydration_Facility.litematic",
+  "author": "Wildezz",
+  "community": "Wildezz",
+  "purple": true,
+  "x": 800,
+  "y": 96,
+  "z": 10,
+  "size": [
+   352,
+   58,
+   464
+  ],
+  "dv": 4556,
+  "tiles": 4773,
+  "ents": 0,
+  "warn": {}
+ },
+ {
+  "name": "Full Dam",
+  "file": "6671672b-Full_Dam.litematic",
+  "author": "Wildezz",
+  "community": "Wildezz",
+  "purple": true,
+  "x": 1162,
+  "y": 96,
+  "z": 10,
+  "size": [
+   419,
+   145,
+   294
+  ],
+  "dv": 4438,
+  "tiles": 154,
+  "ents": 0,
+  "warn": {}
+ },
+ {
+  "name": "Wave Bolt - Straight Bolt Massive",
+  "file": "Straight Bolt Massive.litematic",
+  "author": "SandCaribou1890 / Pando_UwU / Kvil",
+  "community": "Wave Bolt (Storage Tech)",
+  "purple": false,
+  "x": 1591,
+  "y": 96,
+  "z": 10,
+  "size": [
+   9,
+   3,
+   256
+  ],
+  "dv": 3953,
+  "tiles": 256,
+  "ents": 0,
+  "warn": {}
+ },
+ {
+  "name": "Wave Bolt - Diagonal Bolt Massive",
+  "file": "Diagonal Bolt Massive.litematic",
+  "author": "SandCaribou1890 / Pando_UwU / Kvil",
+  "community": "Wave Bolt (Storage Tech)",
+  "purple": false,
+  "x": 1610,
+  "y": 96,
+  "z": 10,
+  "size": [
+   130,
+   4,
+   157
+  ],
+  "dv": 3953,
+  "tiles": 260,
+  "ents": 0,
+  "warn": {}
+ },
+ {
+  "name": "The Stone Factory",
+  "file": "560a30fd-The_Stone_Factory.litematic",
+  "author": "Wildezz",
+  "community": "Wildezz",
+  "purple": true,
+  "x": 1750,
+  "y": 96,
+  "z": 10,
+  "size": [
+   109,
+   87,
+   103
+  ],
+  "dv": 4903,
+  "tiles": 1480,
+  "ents": 18,
+  "warn": {}
+ },
+ {
+  "name": "Brewer Chunkloading + Storage",
+  "file": "1798fc07-Brewer_Chunkloading__Storage.litematic",
+  "author": "Nyx_9841",
+  "community": "Storage Tech",
+  "purple": false,
+  "x": 800,
+  "y": 96,
+  "z": 484,
+  "size": [
+   80,
+   96,
+   80
+  ],
+  "dv": 3465,
+  "tiles": 1867,
+  "ents": 43,
+  "warn": {
+   "dropped item tag pages": 30
+  }
+ },
+ {
+  "name": "Wave Bolt - 4 Hexit 3 Way Intersection v1.0.5",
+  "file": "4 Hexit 3 Way Intersection v1.0.5.litematic",
+  "author": "SandCaribou1890 / Pando_UwU / Kvil",
+  "community": "Wave Bolt (Storage Tech)",
+  "purple": false,
+  "x": 890,
+  "y": 96,
+  "z": 484,
+  "size": [
+   37,
+   6,
+   63
+  ],
+  "dv": 3953,
+  "tiles": 150,
+  "ents": 0,
+  "warn": {}
+ },
+ {
+  "name": "Wave Bolt - 4 Hexit 4 Way Intersection v1.0.5",
+  "file": "4 Hexit 4 Way Intersection v1.0.5.litematic",
+  "author": "SandCaribou1890 / Pando_UwU / Kvil",
+  "community": "Wave Bolt (Storage Tech)",
+  "purple": false,
+  "x": 937,
+  "y": 96,
+  "z": 484,
+  "size": [
+   63,
+   6,
+   63
+  ],
+  "dv": 3953,
+  "tiles": 196,
+  "ents": 0,
+  "warn": {}
+ },
+ {
+  "name": "Basic Furnace Array",
+  "file": "0ad45a18-Basic_Furnace_Array.litematic",
+  "author": "Wildezz",
+  "community": "Wildezz",
+  "purple": true,
+  "x": 1010,
+  "y": 96,
+  "z": 484,
+  "size": [
+   30,
+   18,
+   58
+  ],
+  "dv": 4903,
+  "tiles": 351,
+  "ents": 0,
+  "warn": {}
+ },
+ {
+  "name": "Carrot & Firework Crafters",
+  "file": "fac1892b-Carrot__Firework_Crafters.litematic",
+  "author": "Wildezz",
+  "community": "Wildezz",
+  "purple": true,
+  "x": 1050,
+  "y": 96,
+  "z": 484,
+  "size": [
+   63,
+   35,
+   41
+  ],
+  "dv": 4903,
+  "tiles": 585,
+  "ents": 0,
+  "warn": {}
+ },
+ {
+  "name": "Wave Bolt - 4 Hexit Right Diagonal Transition v1.0.4",
+  "file": "4 Hexit Right Diagonal Transition v1.0.4.litematic",
+  "author": "SandCaribou1890 / Pando_UwU / Kvil",
+  "community": "Wave Bolt (Storage Tech)",
+  "purple": false,
+  "x": 1123,
+  "y": 96,
+  "z": 484,
+  "size": [
+   32,
+   5,
+   35
+  ],
+  "dv": 3953,
+  "tiles": 60,
+  "ents": 0,
+  "warn": {}
+ },
+ {
+  "name": "Chronostasis Station",
+  "file": "3570dcf6-Chronostasis_Station.litematic",
+  "author": "Nyx_9841",
+  "community": "Storage Tech",
+  "purple": false,
+  "x": 1165,
+  "y": 96,
+  "z": 484,
+  "size": [
+   17,
+   27,
+   34
+  ],
+  "dv": 3120,
+  "tiles": 183,
+  "ents": 0,
+  "warn": {
+   "dropped item tag pages": 1
+  }
+ },
+ {
+  "name": "Wave Bolt - Straight Bolt",
+  "file": "Straight Bolt.litematic",
+  "author": "SandCaribou1890 / Pando_UwU / Kvil",
+  "community": "Wave Bolt (Storage Tech)",
+  "purple": false,
+  "x": 1192,
+  "y": 96,
+  "z": 484,
+  "size": [
+   9,
+   3,
+   32
+  ],
+  "dv": 3953,
+  "tiles": 32,
+  "ents": 0,
+  "warn": {}
+ },
+ {
+  "name": "Wave Bolt - 4 Hexit Left Diagonal Transition v1.0.4",
+  "file": "4 Hexit Left Diagonal Transition v1.0.4.litematic",
+  "author": "SandCaribou1890 / Pando_UwU / Kvil",
+  "community": "Wave Bolt (Storage Tech)",
+  "purple": false,
+  "x": 1211,
+  "y": 96,
+  "z": 484,
+  "size": [
+   30,
+   5,
+   29
+  ],
+  "dv": 3953,
+  "tiles": 50,
+  "ents": 0,
+  "warn": {}
+ },
+ {
+  "name": "Gemini TNT Storage v1.4.1/v1.2.2",
+  "file": "ca48aa3a-Gemini-TNT-v1.4.1-Storage-v1.2.2mc1.21.litematic",
+  "author": "hykn55",
+  "community": "Storage Tech",
+  "purple": false,
+  "x": 1251,
+  "y": 96,
+  "z": 484,
+  "size": [
+   23,
+   31,
+   28
+  ],
+  "dv": 3700,
+  "tiles": 841,
+  "ents": 4,
+  "warn": {}
+ },
+ {
+  "name": "Wave Bolt - 4 Hexit Bolt Station v1.0.6",
+  "file": "4 Hexit Bolt Station v1.0.6.litematic",
+  "author": "SandCaribou1890 / Pando_UwU / Kvil",
+  "community": "Wave Bolt (Storage Tech)",
+  "purple": false,
+  "x": 1284,
+  "y": 96,
+  "z": 484,
+  "size": [
+   35,
+   12,
+   27
+  ],
+  "dv": 3953,
+  "tiles": 228,
+  "ents": 1,
+  "warn": {}
+ },
+ {
+  "name": "CLM Large",
+  "file": "3a9f0913-CLM_Large.litematic",
+  "author": "Wildezz",
+  "community": "Wildezz",
+  "purple": true,
+  "x": 1329,
+  "y": 96,
+  "z": 484,
+  "size": [
+   53,
+   17,
+   19
+  ],
+  "dv": 4556,
+  "tiles": 753,
+  "ents": 222,
+  "warn": {}
+ },
+ {
+  "name": "Wave Bolt - Diagonal Bolt",
+  "file": "Diagonal Bolt.litematic",
+  "author": "SandCaribou1890 / Pando_UwU / Kvil",
+  "community": "Wave Bolt (Storage Tech)",
+  "purple": false,
+  "x": 1392,
+  "y": 96,
+  "z": 484,
+  "size": [
+   38,
+   4,
+   12
+  ],
+  "dv": 3953,
+  "tiles": 24,
+  "ents": 0,
+  "warn": {}
+ },
+ {
+  "name": "Wave Bolt - 4 Hexit Subnet Transition v1.0.4",
+  "file": "4 Hexit Subnet Transition v1.0.4.litematic",
+  "author": "SandCaribou1890 / Pando_UwU / Kvil",
+  "community": "Wave Bolt (Storage Tech)",
+  "purple": false,
+  "x": 1440,
+  "y": 96,
+  "z": 484,
+  "size": [
+   8,
+   4,
+   11
+  ],
+  "dv": 3953,
+  "tiles": 6,
+  "ents": 0,
+  "warn": {}
+ },
+ {
+  "name": "Wave Bolt - Corner Bolt",
+  "file": "Corner Bolt.litematic",
+  "author": "SandCaribou1890 / Pando_UwU / Kvil",
+  "community": "Wave Bolt (Storage Tech)",
+  "purple": false,
+  "x": 1458,
+  "y": 96,
+  "z": 484,
+  "size": [
+   12,
+   3,
+   11
+  ],
+  "dv": 3953,
+  "tiles": 14,
+  "ents": 0,
+  "warn": {}
+ },
+ {
+  "name": "Wave Bolt - Diagonal Bolt Flying Machine Kvil v1.0.0",
+  "file": "Diagonal Bolt Flying Machine Kvil v1.0.0.litematic",
+  "author": "SandCaribou1890 / Pando_UwU / Kvil",
+  "community": "Wave Bolt (Storage Tech)",
+  "purple": false,
+  "x": 1480,
+  "y": 96,
+  "z": 484,
+  "size": [
+   11,
+   5,
+   10
+  ],
+  "dv": 3953,
+  "tiles": 0,
+  "ents": 0,
+  "warn": {}
+ },
+ {
+  "name": "Wave Bolt - 6w Floor Placer v1.0.0",
+  "file": "6w Floor Placer v1.0.0.litematic",
+  "author": "SandCaribou1890 / Pando_UwU / Kvil",
+  "community": "Wave Bolt (Storage Tech)",
+  "purple": false,
+  "x": 1501,
+  "y": 96,
+  "z": 484,
+  "size": [
+   9,
+   3,
+   5
+  ],
+  "dv": 3953,
+  "tiles": 3,
+  "ents": 0,
+  "warn": {}
+ },
+ {
+  "name": "Wave Bolt - Block Pusher (downwards) v1.0.0",
+  "file": "Block Pusher (downwards) v1.0.0.litematic",
+  "author": "SandCaribou1890 / Pando_UwU / Kvil",
+  "community": "Wave Bolt (Storage Tech)",
+  "purple": false,
+  "x": 1520,
+  "y": 96,
+  "z": 484,
+  "size": [
+   9,
+   4,
+   5
+  ],
+  "dv": 3953,
+  "tiles": 0,
+  "ents": 0,
+  "warn": {}
+ },
+ {
+  "name": "Wave Bolt - Bolt 6w Lane Splitter v1.0.1",
+  "file": "Bolt 6w Lane Splitter v1.0.1.litematic",
+  "author": "SandCaribou1890 / Pando_UwU / Kvil",
+  "community": "Wave Bolt (Storage Tech)",
+  "purple": false,
+  "x": 1539,
+  "y": 96,
+  "z": 484,
+  "size": [
+   10,
+   2,
+   5
+  ],
+  "dv": 3953,
+  "tiles": 0,
+  "ents": 0,
+  "warn": {}
+ },
+ {
+  "name": "Wave Bolt - Bolt Block Puller (simpler) v1.0.0",
+  "file": "Bolt Block Puller (simpler) v1.0.0.litematic",
+  "author": "SandCaribou1890 / Pando_UwU / Kvil",
+  "community": "Wave Bolt (Storage Tech)",
+  "purple": false,
+  "x": 1559,
+  "y": 96,
+  "z": 484,
+  "size": [
+   9,
+   3,
+   5
+  ],
+  "dv": 3953,
+  "tiles": 0,
+  "ents": 0,
+  "warn": {}
+ },
+ {
+  "name": "Wave Bolt - Diagonal Rail Curver Kvil",
+  "file": "Diagonal Rail Curver Kvil.litematic",
+  "author": "SandCaribou1890 / Pando_UwU / Kvil",
+  "community": "Wave Bolt (Storage Tech)",
+  "purple": false,
+  "x": 1578,
+  "y": 96,
+  "z": 484,
+  "size": [
+   5,
+   3,
+   5
+  ],
+  "dv": 3953,
+  "tiles": 0,
+  "ents": 0,
+  "warn": {}
+ },
+ {
+  "name": "Wave Bolt - Rail Curver",
+  "file": "Rail Curver.litematic",
+  "author": "SandCaribou1890 / Pando_UwU / Kvil",
+  "community": "Wave Bolt (Storage Tech)",
+  "purple": false,
+  "x": 1593,
+  "y": 96,
+  "z": 484,
+  "size": [
+   6,
+   4,
+   5
+  ],
+  "dv": 3120,
+  "tiles": 0,
+  "ents": 0,
+  "warn": {}
+ }
+]

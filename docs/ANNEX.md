@@ -1,4 +1,20 @@
-# Annex pack — Wildezz builds, recoloured, plus the Airlander 10
+# Annex pack — imported builds, now INSIDE the master schematic
+
+**The MASTER `.litematic` now contains 29 regions:** the HQ, an "Annex Plateau" (grass over stone, east of the wall, x ≥ 768) and **27 imported builds** placed on it. One paste brings everything. Exact positions: `docs/ANNEX_MAP.md` (auto-generated). The same builds are also in `dist/annex/` as separate files.
+
+| group | builds | author (from file metadata) | treatment |
+|---|---|---|---|
+| Wildezz | Basic Furnace Array, Carrot & Firework Crafters, The Stone Factory, Full Dam, Ghast Hydration Facility, CLM Large | Wildezz | recoloured purple, switches colour-coded |
+| Storage Tech | Gemini TNT Storage v1.4.1 / v1.2.2 | hykn55 | 1.21.11 port only (original colours) |
+| Storage Tech | Brewer Chunkloading + Storage, Chronostasis Station | Nyx_9841 | 1.21.11 port only |
+| Wave Bolt (zip, v1.0.4) | 18 modules: straight / massive / corner / diagonals / 4-Hexit intersections, bolt station, subnet + diagonal transitions, flying-machine builders (floor placer, block pusher/puller, lane splitter, rail curvers) | SandCaribou1890, Pando_UwU, Kvil | 1.21.11 port only |
+| Airlander 10 | the moving blimp | Krodo | see bottom |
+
+**Old files were upgraded.** Several were saved in 1.19–1.20.4 (data versions 3120/3465/3700): item stacks (`Count`/`tag` → `count`/components), JSON sign text and custom names, item-frame data, missing tile-entity ids and `chain` → `iron_chain` were rewritten for 1.21.11 (`tools/legacy.py`). Dropped: banner patterns, written-book pages (31 items), unsupported item tags. `tools/validate.py` re-reads every region and checks for leftover old-format NBT, tile-entity/block mismatches, bad item counts and unsupported signs: 0 errors.
+
+**Read this before relying on the older builds:** they were designed for 1.19–1.20. Minecraft 1.21.2 removed ender-pearl chunk loading, and other redstone/engine behaviour changed between 1.20 and 1.21.11. **Chronostasis Station and Brewer Chunkloading very likely will not keep chunks loaded in 1.21.11** (use `/forceload`, see INSTALL). I did not recolour the Storage-Tech or Wave Bolt builds because their colours may encode lanes; say the word and I will recolour them too.
+
+# (earlier notes) Wildezz builds, recoloured, plus the Airlander 10
 
 Source files were supplied by you. **Original author per file metadata: "Wildezz"** (all five). Their designs are NOT mine:
 credit them, and make sure you have the right to redistribute or modify them before publishing anywhere.
@@ -40,4 +56,4 @@ Paste the HQ master first, then these with Litematica, same Y as the ground (ann
 (Positive x is east, positive z is south, as in the HQ. Pick any other spot if you prefer; none of the pastes overlap.) Each file is a separate Litematica placement; paste with replace behaviour = All on a flat/void area.
 
 ## Airlander 10 (the blimp)
-The `.zip` you sent is a **1.19.2 world save**, not a schematic. I extracted the ship from it (55 × 32 × 92 blocks, white concrete hull with smooth-quartz trim, cabin with beds/levers/buttons; the 4 command blocks in it were empty). It is used as the moving blimp: ~1,900 `block_display` boxes (black accents → purple) + 6 seats, driven by `riftbrek:blimp/*` along the west lane (x=250) between docks A (z 110), B (z 480), C (z 700). Cabin interior details (doors, beds, buttons) are left out of the moving version. Start it with `/function riftbrek:admin/blimp_on`. Untested; if ~1,900 entities lag your client, run `/function riftbrek:admin/blimp_off`.
+The `.zip` you sent is a **1.19.2 world save**, not a schematic (the ship was built by **Krodo**). I extracted the ship from it (55 × 32 × 92 blocks, white concrete hull with smooth-quartz trim, cabin with beds/levers/buttons; the 4 command blocks in it were empty). It is used as the moving blimp: ~1,900 `block_display` boxes (black accents → purple) + 6 seats, driven by `riftbrek:blimp/*` along the west lane (x=250) between docks A (z 110), B (z 480), C (z 700). Cabin interior details (doors, beds, buttons) are left out of the moving version. Start it with `/function riftbrek:admin/blimp_on`. Untested; if ~1,900 entities lag your client, run `/function riftbrek:admin/blimp_off`.

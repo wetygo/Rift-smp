@@ -77,12 +77,12 @@ def loads(data):
     def u(fmt, n): return struct.unpack(fmt, f.read(n))[0]
 
     def pay(t):
-        if t == 1: return u(">b", 1)
-        if t == 2: return u(">h", 2)
+        if t == 1: return Byte(u(">b", 1))
+        if t == 2: return Short(u(">h", 2))
         if t == 3: return u(">i", 4)
-        if t == 4: return u(">q", 8)
-        if t == 5: return u(">f", 4)
-        if t == 6: return u(">d", 8)
+        if t == 4: return Long(u(">q", 8))
+        if t == 5: return Float(u(">f", 4))
+        if t == 6: return Double(u(">d", 8))
         if t == 7: n = u(">i", 4); return f.read(n)
         if t == 8: n = u(">H", 2); return f.read(n).decode()
         if t == 9:
@@ -93,7 +93,7 @@ def loads(data):
                 tt = u(">b", 1)
                 if tt == 0: return d
                 n = u(">H", 2); k = f.read(n).decode(); d[k] = pay(tt)
-        if t == 11: n = u(">i", 4); return list(struct.unpack(">%di" % n, f.read(4 * n)))
+        if t == 11: n = u(">i", 4); return IntArray(struct.unpack(">%di" % n, f.read(4 * n)))
         if t == 12: n = u(">i", 4); return ("longs", n, f.read(8 * n))
     t = u(">b", 1); n = u(">H", 2); f.read(n)
     return pay(t)

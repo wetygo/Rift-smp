@@ -291,3 +291,125 @@ def check_consistency(a, pal, tiles, texts):
                     y, z, x = np.argwhere(touch)[0]
                     errs.append(f"redstone block adjacent to hopper at {x},{y},{z} (axis {ax}) - hopper would be locked")
     return errs, dict(sorters=n_sort, doors=n_door, farms=n_farm, pulses=n_pulse)
+
+
+# ------------------------------------------------------------------ imported (annex) regions
+TE_BLOCKS = {
+    "chest": ("chest", "trapped_chest"), "hopper": ("hopper",), "dispenser": ("dispenser",), "dropper": ("dropper",),
+    "furnace": ("furnace",), "blast_furnace": ("blast_furnace",), "smoker": ("smoker",), "barrel": ("barrel",),
+    "brewing_stand": ("brewing_stand",), "beacon": ("beacon",), "comparator": ("comparator",), "crafter": ("crafter",),
+    "lectern": ("lectern",), "ender_chest": ("ender_chest",), "chiseled_bookshelf": ("chiseled_bookshelf",),
+    "daylight_detector": ("daylight_detector",), "campfire": ("campfire", "soul_campfire"), "shelf": None,
+    "shulker_box": None, "sign": None, "hanging_sign": None, "banner": None, "bed": None, "command_block": None,
+}
+
+
+def decode_region(r):
+    sx, sy, sz = r["Size"]["x"], r["Size"]["y"], r["Size"]["z"]
+    pal = [(p["Name"], p.get("Properties", {})) for p in r["BlockStatePalette"]]
+    bits = max(2, (len(pal) - 1).bit_length())
+    raw = r["BlockStates"]
+    raw = np.frombuffer(raw[2] if isinstance(raw, tuple) else raw, ">u8").astype(np.uint64)
+    n = sx * sy * sz
+    flat = np.zeros(n, np.uint16)
+    mask = np.uint64((1 << bits) - 1)
+    for s in range(0, n, 1 << 24):
+        e = min(n, s + (1 << 24))
+        pos = np.arange(s, e, dtype=np.uint64) * np.uint64(bits)
+        li = (pos // np.uint64(64)).astype(np.int64)
+        sh = pos % np.uint64(64)
+        v = raw[li] >> sh
+        over = (sh + np.uint64(bits)) > np.uint64(64)
+        nxt = raw[np.minimum(li + 1, len(raw) - 1)]
+        v[over] |= nxt[over] << (np.uint64(64) - sh[over])
+        flat[s:e] = (v & mask).astype(np.uint16)
+    return pal, flat.reshape(sy, sz, sx)
+
+
+def legacy_leftovers(obj, path=""):
+    """any 1.20-or-older NBT shape left in a tile entity / entity"""
+    bad = []
+    if isinstance(obj, dict):
+        for k, v in obj.items():
+            if k in ("Count", "Text1", "Text2", "Text3", "Text4", "GlowingText") or (k == "tag" and isinstance(v, dict)):
+                bad.append(f"{path}/{k}")
+            bad += legacy_leftovers(v, path + "/" + k)
+    elif isinstance(obj, list):
+        for i, v in enumerate(obj):
+            bad += legacy_leftovers(v, path)
+    return bad
+
+
+def check_regions(master):
+    d = nbt.loads(gzip.open(master).read())
+    out = []
+    for name, r in list(d["Regions"].items())[1:]:
+        if name == "Annex Plateau":
+            continue
+        pal, a = decode_region(r)
+        names = [n.split(":")[1] for n, p in pal]
+        errs = []
+        for i, n in enumerate(names):
+            if any(k in n for k in ("cinnabar", "sulfur")) or n in ("chain", "grass"):
+                errs.append(f"block not valid in 1.21.11: {n}")
+        # tile entity vs block
+        miss = 0
+        for t in r["TileEntities"]:
+            x, y, z = t["x"], t["y"], t["z"]
+            if not (0 <= x < a.shape[2] and 0 <= y < a.shape[0] and 0 <= z < a.shape[1]):
+                errs.append(f"TE out of bounds {x},{y},{z}"); continue
+            bn = names[a[y, z, x]]
+            tid = t["id"].split(":")[1]
+            exp = TE_BLOCKS.get(tid, "?")
+            if exp is None:
+                ok = tid in bn or (tid == "sign" and bn.endswith("sign")) or (tid == "shulker_box" and bn.endswith("shulker_box")) or (tid == "command_block" and "command_block" in bn)
+            elif exp == "?":
+                ok = True
+            else:
+                ok = bn in exp
+            if not ok:
+                miss += 1
+                if miss <= 3:
+                    errs.append(f"TE {tid} on block {bn} at {x},{y},{z}")
+        if miss > 3:
+            errs.append(f"... {miss} TE/block mismatches in total")
+        for t in r["TileEntities"]:
+            lb = legacy_leftovers(t)
+            if lb:
+                errs.append(f"legacy NBT in TE {t['id']} at {t['x']},{t['y']},{t['z']}: {lb[:3]}"); break
+        for e in r["Entities"]:
+            lb = legacy_leftovers(e)
+            if lb:
+                errs.append(f"legacy NBT in entity {e.get('id')}: {lb[:3]}"); break
+        # sign message lists must be homogeneous compounds
+        for t in r["TileEntities"]:
+            if t["id"].endswith("sign"):
+                for side in ("front_text", "back_text"):
+                    ms = t.get(side, {}).get("messages", [])
+                    if ms and not (all(isinstance(m, dict) for m in ms) or all(isinstance(m, str) and not m.startswith("{") for m in ms)):
+                        errs.append(f"sign messages mixed/JSON-string at {t['x']},{t['y']},{t['z']}"); break
+        # item stacks need int count + string id
+        def items(o):
+            if isinstance(o, dict):
+                if "id" in o and "count" in o:
+                    yield o
+                for v in o.values():
+                    yield from items(v)
+            elif isinstance(o, list):
+                for v in o:
+                    yield from items(v)
+        bad_items = sum(1 for t in r["TileEntities"] for it in items(t) if not isinstance(it["count"], int) or isinstance(it["count"], bool))
+        if bad_items:
+            errs.append(f"{bad_items} item stacks with non-int count")
+        # supports: standing signs, wall banners, ladders, doors
+        solid = ~np.isin(a, [i for i, n in enumerate(names) if n == "air" or n.endswith("sign") or "banner" in n or n in ("ladder", "lever", "water", "lava") or n.endswith("carpet") or n.endswith("rail") or "torch" in n or n.endswith("button") or n.endswith("_door") or n.endswith("trapdoor") or n.endswith("pressure_plate") or n == "redstone_wire" or n == "tripwire_hook"])
+        for i, (n, p) in enumerate(pal):
+            base = names[i]
+            if base.endswith("_sign") and "wall" not in base and "hanging" not in base:
+                pts = np.argwhere(a == i)
+                bad = [(x, y, z) for (y, z, x) in pts if y == 0 or not solid[y - 1, z, x]]
+                if bad:
+                    errs.append(f"{len(bad)} unsupported standing {base} e.g. {bad[0]}")
+        pals = len(pal)
+        out.append((name, errs, dict(size=(a.shape[2], a.shape[0], a.shape[1]), palette=pals, tiles=len(r["TileEntities"]), entities=len(r["Entities"]))))
+    return out

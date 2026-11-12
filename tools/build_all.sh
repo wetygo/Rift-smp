@@ -10,6 +10,10 @@ datapack.package('../datapack/RIFTBREK_Vanguard_Datapack', '../dist/RIFTBREK_Van
 build_main.main('../dist')
 "
 LIT=../dist/RIFTBREK_Vanguard_Headquarters_MASTER.litematic
+# imported builds (Wildezz / Storage Tech / Wave Bolt): set RIFTBREK_ANNEX_SRC to a folder holding the supplied .litematic files
+if [ -n "${RIFTBREK_ANNEX_SRC:-}" ]; then
+  python3 -I assemble.py $LIT "$RIFTBREK_ANNEX_SRC" --report ../docs/annex_placement.json
+fi
 PACK=../datapack/RIFTBREK_Vanguard_Datapack
 {
   echo "== build: $(date -u +%Y-%m-%dT%H:%MZ)   (static analysis / model tests only - NOT run in Minecraft)"

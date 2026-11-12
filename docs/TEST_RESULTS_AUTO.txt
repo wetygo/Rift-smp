@@ -1,10 +1,38 @@
-== build: 2026-11-12T00:02Z   (static analysis / model tests only - NOT run in Minecraft)
+== build: 2026-11-12T00:24Z   (static analysis / model tests only - NOT run in Minecraft)
 == validate
 shape/palette/tiles: ((384, 768, 768), 111, 259)
 datapack lint errors: 0
 schematic errors: 0  gate rows: 128
 {'ladder': 3473, 'iron_door': 264, 'dispenser': 4, 'chest': 2013, 'hopper': 386, 'furnace': 4, 'crafter': 6, 'command_blocks_ok': 64}
 consistency errors: 0 {'sorters': 2, 'doors': 20, 'farms': 4, 'pulses': 6}
+annex regions checked: 27  errors: 0
+  OK   Annex - Ghast Hydration Facility (Wildezz) {'size': (352, 58, 464), 'palette': 955, 'tiles': 4773, 'entities': 0}
+  OK   Annex - Full Dam (Wildezz) {'size': (419, 145, 294), 'palette': 715, 'tiles': 154, 'entities': 0}
+  OK   Annex - Wave Bolt - Straight Bolt Massive (SandCaribou1890 / Pando_UwU / Kvil) {'size': (9, 3, 256), 'palette': 13, 'tiles': 256, 'entities': 0}
+  OK   Annex - Wave Bolt - Diagonal Bolt Massive (SandCaribou1890 / Pando_UwU / Kvil) {'size': (130, 4, 157), 'palette': 22, 'tiles': 260, 'entities': 0}
+  OK   Annex - The Stone Factory (Wildezz) {'size': (109, 87, 103), 'palette': 791, 'tiles': 1480, 'entities': 18}
+  OK   Annex - Brewer Chunkloading + Storage (Nyx_9841) {'size': (80, 96, 80), 'palette': 358, 'tiles': 1867, 'entities': 43}
+  OK   Annex - Wave Bolt - 4 Hexit 3 Way Intersection v1.0.5 (SandCaribou1890 / Pando_UwU / Kvil) {'size': (37, 6, 63), 'palette': 130, 'tiles': 150, 'entities': 0}
+  OK   Annex - Wave Bolt - 4 Hexit 4 Way Intersection v1.0.5 (SandCaribou1890 / Pando_UwU / Kvil) {'size': (63, 6, 63), 'palette': 145, 'tiles': 196, 'entities': 0}
+  OK   Annex - Basic Furnace Array (Wildezz) {'size': (30, 18, 58), 'palette': 214, 'tiles': 351, 'entities': 0}
+  OK   Annex - Carrot & Firework Crafters (Wildezz) {'size': (63, 35, 41), 'palette': 408, 'tiles': 585, 'entities': 0}
+  OK   Annex - Wave Bolt - 4 Hexit Right Diagonal Transition v1.0.4 (SandCaribou1890 / Pando_UwU / Kvil) {'size': (32, 5, 35), 'palette': 69, 'tiles': 60, 'entities': 0}
+  OK   Annex - Chronostasis Station (Nyx_9841) {'size': (17, 27, 34), 'palette': 233, 'tiles': 183, 'entities': 0}
+  OK   Annex - Wave Bolt - Straight Bolt (SandCaribou1890 / Pando_UwU / Kvil) {'size': (9, 3, 32), 'palette': 13, 'tiles': 32, 'entities': 0}
+  OK   Annex - Wave Bolt - 4 Hexit Left Diagonal Transition v1.0.4 (SandCaribou1890 / Pando_UwU / Kvil) {'size': (30, 5, 29), 'palette': 64, 'tiles': 50, 'entities': 0}
+  OK   Annex - Gemini TNT Storage v1.4.1/v1.2.2 (hykn55) {'size': (23, 31, 28), 'palette': 421, 'tiles': 841, 'entities': 4}
+  OK   Annex - Wave Bolt - 4 Hexit Bolt Station v1.0.6 (SandCaribou1890 / Pando_UwU / Kvil) {'size': (35, 12, 27), 'palette': 210, 'tiles': 228, 'entities': 1}
+  OK   Annex - CLM Large (Wildezz) {'size': (53, 17, 19), 'palette': 114, 'tiles': 753, 'entities': 222}
+  OK   Annex - Wave Bolt - Diagonal Bolt (SandCaribou1890 / Pando_UwU / Kvil) {'size': (38, 4, 12), 'palette': 22, 'tiles': 24, 'entities': 0}
+  OK   Annex - Wave Bolt - 4 Hexit Subnet Transition v1.0.4 (SandCaribou1890 / Pando_UwU / Kvil) {'size': (8, 4, 11), 'palette': 29, 'tiles': 6, 'entities': 0}
+  OK   Annex - Wave Bolt - Corner Bolt (SandCaribou1890 / Pando_UwU / Kvil) {'size': (12, 3, 11), 'palette': 22, 'tiles': 14, 'entities': 0}
+  OK   Annex - Wave Bolt - Diagonal Bolt Flying Machine Kvil v1.0.0 (SandCaribou1890 / Pando_UwU / Kvil) {'size': (11, 5, 10), 'palette': 15, 'tiles': 0, 'entities': 0}
+  OK   Annex - Wave Bolt - 6w Floor Placer v1.0.0 (SandCaribou1890 / Pando_UwU / Kvil) {'size': (9, 3, 5), 'palette': 22, 'tiles': 3, 'entities': 0}
+  OK   Annex - Wave Bolt - Block Pusher (downwards) v1.0.0 (SandCaribou1890 / Pando_UwU / Kvil) {'size': (9, 4, 5), 'palette': 11, 'tiles': 0, 'entities': 0}
+  OK   Annex - Wave Bolt - Bolt 6w Lane Splitter v1.0.1 (SandCaribou1890 / Pando_UwU / Kvil) {'size': (10, 2, 5), 'palette': 13, 'tiles': 0, 'entities': 0}
+  OK   Annex - Wave Bolt - Bolt Block Puller (simpler) v1.0.0 (SandCaribou1890 / Pando_UwU / Kvil) {'size': (9, 3, 5), 'palette': 11, 'tiles': 0, 'entities': 0}
+  OK   Annex - Wave Bolt - Diagonal Rail Curver Kvil (SandCaribou1890 / Pando_UwU / Kvil) {'size': (5, 3, 5), 'palette': 16, 'tiles': 0, 'entities': 0}
+  OK   Annex - Wave Bolt - Rail Curver (SandCaribou1890 / Pando_UwU / Kvil) {'size': (6, 4, 5), 'palette': 11, 'tiles': 0, 'entities': 0}
 == walkability (doors counted open)
 outside gate comp 1 labels 78
 OK   gate passage inside (383, 96, 740) comp 1

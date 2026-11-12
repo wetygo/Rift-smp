@@ -137,6 +137,17 @@ def main():
     w("- crop plots + smelters + crafters (B7): x 48..262, z 470..610")
     w("- checkpoint / chunk-ban square: x 360..407, z 660..707")
     open(os.path.join(ROOT, "docs", "MODULE_INDEX.md"), "w").write("\n".join(M) + "\n")
+    # ---- annex map (from assemble.py's report)
+    import json
+    rp = os.path.join(ROOT, "docs", "annex_placement.json")
+    if os.path.exists(rp):
+        info = json.load(open(rp))
+        A = ["# Annex quarter map (auto-generated)\n",
+             "All builds below are extra regions of the MASTER `.litematic`, on a grass plateau east of the HQ wall (x >= 768). Coordinates are HQ-local; world = origin + (x, y-64, z). The plateau top is local y 95 like the HQ.\n",
+             "| build | author | community | local x,y,z | size X x Y x Z | source data ver | recoloured purple |", "|---|---|---|---|---|---|---|"]
+        for i in sorted(info, key=lambda i: (i["z"], i["x"])):
+            A.append(f"| {i['name']} | {i['author']} | {i['community']} | {i['x']}, {i['y']}, {i['z']} | {i['size'][0]} x {i['size'][1]} x {i['size'][2]} | {i['dv']} | {'yes' if i['purple'] else 'no (original colours)'} |")
+        open(os.path.join(ROOT, "docs", "ANNEX_MAP.md"), "w").write("\n".join(A) + "\n")
     # coverage check: every function id must appear in the handbook
     txt = open(os.path.join(ROOT, "docs", "COMMAND_HANDBOOK.md")).read()
     missing = [f for f in ids if f"`{f}`" not in txt]

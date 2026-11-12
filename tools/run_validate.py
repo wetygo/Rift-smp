@@ -18,3 +18,11 @@ ids, texts = validate.functions(pack)
 ce, cs = validate.check_consistency(a, pal, r["TileEntities"], texts)
 print("consistency errors:", len(ce), cs)
 for x in ce[:30]: print("   CS:", x)
+
+res = validate.check_regions(lit)
+tot = sum(len(e) for _, e, _ in res)
+print("annex regions checked:", len(res), " errors:", tot)
+for name, errs, st in res:
+    print(("  OK   " if not errs else "  FAIL ") + name, st)
+    for e in errs[:6]:
+        print("        ", e)

@@ -39,6 +39,10 @@ def map_block(name, props):
     """returns (name, props) in 1.21.11 + purple theme.  props is not mutated."""
     n = name.split(":")[1]
     p = dict(props)
+    if n == "chain":
+        return "minecraft:iron_chain", p
+    if n == "grass":
+        return "minecraft:short_grass", {}
     # --- blocks that do not exist in 1.21.11 (newer game versions) ---
     if "cinnabar" in n or n.endswith("sulfur") or "sulfur_" in n or n == "potent_sulfur":
         if "sulfur" in n or "potent" in n:
@@ -161,9 +165,13 @@ def find_switch_groups(arr, pal):
 DECOR = re.compile(r"(_concrete|_wool|_terracotta|polished_blackstone|_bricks|smooth_|quartz_block|deepslate_tiles|polished_deepslate|^stone$|purpur_block|tuff|andesite|diorite)$")
 
 
-def convert(src, dst, label):
+def prepare(src, theme=True, recolor_switches=True):
+    """read a litematic, make it 1.21.11-safe (+ optional purple retheme), return arrays + metadata (no file written)."""
+    import legacy
+    legacy.WARN.clear()
     t0 = time.time()
     d, r, pal, arr = read_lit(src)
+    dv = d.get("MinecraftDataVersion", 0)
     sy, sz, sx = arr.shape
     newpal, remap, changed = [], np.zeros(len(pal), np.uint32), collections.Counter()
     pidx = {}
@@ -174,37 +182,61 @@ def convert(src, dst, label):
         return pidx[k]
     pid("minecraft:air", {})
     for i, (nm, pr) in enumerate(pal):
-        nn, np_ = map_block(nm, pr)
+        nn, np_ = map_block(nm, pr) if theme else compat_block(nm, pr)
         remap[i] = pid(nn, np_)
         if nn != nm:
             changed[nm.split(":")[1] + " -> " + nn.split(":")[1]] += 1
     out = remap[arr]
-    # --- switch colour coding (levers): each switch group gets its own accent colour --------------
-    groups, pts = find_switch_groups(arr, pal)
     gcol = {}
-    for gi, g in enumerate(groups):
-        col = COLOURS[gi % len(COLOURS)]
-        cb = pid(f"minecraft:{col}_concrete", {})
-        for (x, y, z, face, facing, s) in g:
-            sx_, sy_, sz_ = s
-            # plane of the lever's support block
-            offs = [(a, 0, b) for a in (-1, 0, 1) for b in (-1, 0, 1)] if face in ("floor", "ceiling") else \
-                   ([(a, b, 0) for a in (-1, 0, 1) for b in (-1, 0, 1)] if facing in ("north", "south") else [(0, b, a) for a in (-1, 0, 1) for b in (-1, 0, 1)])
-            for (ox, oy, oz) in offs:
-                X, Y, Z = sx_ + ox, sy_ + oy, sz_ + oz
-                if 0 <= X < sx and 0 <= Y < sy and 0 <= Z < sz:
-                    nm = newpal[out[Y, Z, X]][0].split(":")[1]
-                    if (ox, oy, oz) == (0, 0, 0) and nm not in ("air",) or DECOR.search(nm):
-                        out[Y, Z, X] = cb
-        gcol[gi] = (col, len(g), g[0][:3])
-    # --- tile entities / entities ---------------------------------------------------------------------
+    if recolor_switches:
+        groups, pts = find_switch_groups(arr, pal)
+        for gi, g in enumerate(groups):
+            col = COLOURS[gi % len(COLOURS)]
+            cb = pid(f"minecraft:{col}_concrete", {})
+            for (x, y, z, face, facing, s_) in g:
+                sx_, sy_, sz_ = s_
+                offs = [(a, 0, b) for a in (-1, 0, 1) for b in (-1, 0, 1)] if face in ("floor", "ceiling") else \
+                       ([(a, b, 0) for a in (-1, 0, 1) for b in (-1, 0, 1)] if facing in ("north", "south") else [(0, b, a) for a in (-1, 0, 1) for b in (-1, 0, 1)])
+                for (ox, oy, oz) in offs:
+                    X, Y, Z = sx_ + ox, sy_ + oy, sz_ + oz
+                    if 0 <= X < sx and 0 <= Y < sy and 0 <= Z < sz:
+                        nm = newpal[out[Y, Z, X]][0].split(":")[1]
+                        if (ox, oy, oz) == (0, 0, 0) and nm not in ("air",) or DECOR.search(nm):
+                            out[Y, Z, X] = cb
+            gcol[gi] = (col, len(g), g[0][:3])
     tiles = []
     for t in r["TileEntities"]:
+        if "id" not in t:                                   # 1.19-era litematics omit the id: infer from the block
+            t = dict(t)
+            bn = pal[arr[t["y"], t["z"], t["x"]]][0].split(":")[1]
+            t["id"] = "minecraft:" + ("shulker_box" if bn.endswith("shulker_box") else "hanging_sign" if "hanging_sign" in bn else
+                                      "sign" if bn.endswith("sign") else "banner" if bn.endswith("banner") else
+                                      "chest" if bn in ("chest", "trapped_chest") else "command_block" if "command_block" in bn else bn)
         if t["id"].endswith("potent_sulfur"):
             continue
         tiles.append(t)
     ents = r["Entities"]
-    # --- write 1.21.11 litematic --------------------------------------------------------------------------
+    tiles, ents = legacy.convert_all(tiles, ents, dv)
+    meta = d["Metadata"]
+    return dict(arr=out, pal=newpal, tiles=tiles, ents=ents, size=(sx, sy, sz), meta=meta, dv=dv, changed=changed,
+                switches=gcol, tiles_in=len(r["TileEntities"]), warn=dict(legacy.WARN), secs=time.time() - t0)
+
+
+def compat_block(name, props):
+    """version fixes only (no recolour)"""
+    n = name.split(":")[1]
+    if n == "chain":
+        return "minecraft:iron_chain", dict(props)
+    if n == "grass":
+        return "minecraft:short_grass", {}
+    if "cinnabar" in n or "sulfur" in n:
+        return map_block(name, props)
+    return name, dict(props)
+
+
+def pack_region(prep, position=(0, 0, 0)):
+    out, newpal = prep["arr"], prep["pal"]
+    sx, sy, sz = prep["size"]
     bits = max(2, (len(newpal) - 1).bit_length())
     n = out.size
     pad = (-n) % 64
@@ -215,24 +247,43 @@ def convert(src, dst, label):
         packed[:, li] |= flat[:, j] << np.uint64(sh)
         if sh + bits > 64:
             packed[:, li + 1] |= flat[:, j] >> np.uint64(64 - sh)
-    total = (n + bits - 1) * 0  # unused
     longs_needed = (n * bits + 63) // 64
     data = packed.reshape(-1)[:longs_needed].astype(">u8").tobytes()
     palnbt = [{"Name": nm, **({"Properties": pr} if pr else {})} for nm, pr in newpal]
+    return {"Position": {"x": int(position[0]), "y": int(position[1]), "z": int(position[2])}, "Size": {"x": sx, "y": sy, "z": sz},
+            "BlockStatePalette": palnbt, "BlockStates": data, "TileEntities": prep["tiles"], "Entities": prep["ents"],
+            "PendingBlockTicks": [], "PendingFluidTicks": []}
+
+
+def write_litematic(path, regions, name, author, desc, total=None, enclosing=None):
     now = Long(int(time.time() * 1000))
-    meta = d["Metadata"]
-    region = {"Position": {"x": 0, "y": 0, "z": 0}, "Size": {"x": sx, "y": sy, "z": sz}, "BlockStatePalette": palnbt,
-              "BlockStates": data, "TileEntities": tiles, "Entities": ents, "PendingBlockTicks": [], "PendingFluidTicks": []}
+    if enclosing is None:
+        mx = max(r["Position"]["x"] + r["Size"]["x"] for r in regions.values())
+        my = max(r["Position"]["y"] + r["Size"]["y"] for r in regions.values())
+        mz = max(r["Position"]["z"] + r["Size"]["z"] for r in regions.values())
+        enclosing = (mx, my, mz)
+    vol = sum(r["Size"]["x"] * r["Size"]["y"] * r["Size"]["z"] for r in regions.values())
     root = {"MinecraftDataVersion": 4671, "Version": 6, "SubVersion": 1,
-            "Metadata": {"Name": f"{meta.get('Name','')} (RIFTBREK purple)", "Author": f"{meta.get('Author','?')} (original) / RIFTBREK retheme",
-                         "Description": f"Retheme of '{meta.get('Name','')}' by {meta.get('Author','?')}: purple/black/white/blue palette, 1.21.11-safe blocks, colour-coded switches. Untested in-game.",
-                         "RegionCount": 1, "TotalBlocks": int(np.count_nonzero(out)), "TotalVolume": int(n),
-                         "EnclosingSize": {"x": sx, "y": sy, "z": sz}, "TimeCreated": now, "TimeModified": now},
-            "Regions": {label: region}}
-    with gzip.GzipFile(dst, "wb", compresslevel=6, mtime=0) as f:
+            "Metadata": {"Name": name, "Author": author, "Description": desc, "RegionCount": len(regions),
+                         "TotalBlocks": int(total or 0), "TotalVolume": int(vol),
+                         "EnclosingSize": {"x": enclosing[0], "y": enclosing[1], "z": enclosing[2]}, "TimeCreated": now, "TimeModified": now},
+            "Regions": regions}
+    tmp = path + ".tmp"
+    with gzip.GzipFile(tmp, "wb", compresslevel=6, mtime=0) as f:
         f.write(nbt.dumps(root))
-    return dict(size=(sx, sy, sz), palette_in=len(pal), palette_out=len(newpal), changed=changed, switches=gcol, tiles=(len(r["TileEntities"]), len(tiles)),
-                entities=len(ents), secs=time.time() - t0, solid=int(np.count_nonzero(out)), data_version_in=d.get("MinecraftDataVersion"))
+    os.replace(tmp, path)                      # atomic: never leave a truncated master behind
+
+
+def convert(src, dst, label, theme=True):
+    prep = prepare(src, theme=theme, recolor_switches=theme)
+    meta = prep["meta"]
+    reg = pack_region(prep)
+    sfx = "(RIFTBREK purple)" if theme else "(RIFTBREK 1.21.11 port)"
+    write_litematic(dst, {label: reg}, f"{meta.get('Name','')} {sfx}", f"{meta.get('Author','?')} (original) / RIFTBREK port",
+                    f"Port of '{meta.get('Name','')}' by {meta.get('Author','?')} to 1.21.11" + (": purple retheme, colour-coded switches." if theme else ".") + " Untested in-game.",
+                    total=int(np.count_nonzero(prep["arr"])))
+    return dict(size=prep["size"], palette_in=len(prep["pal"]), palette_out=len(prep["pal"]), changed=prep["changed"], switches=prep["switches"],
+                tiles=(prep["tiles_in"], len(prep["tiles"])), entities=len(prep["ents"]), secs=prep["secs"], solid=int(np.count_nonzero(prep["arr"])), data_version_in=prep["dv"], warn=prep["warn"])
 
 
 if __name__ == "__main__":
