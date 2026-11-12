@@ -3,7 +3,7 @@
 ## Not built
 | item | status | what is needed |
 |---|---|---|
-| **Blimp** | BUILT but EXPERIMENTAL/UNTESTED: a display-entity airship moved by `riftbrek:blimp/*` along a west lane with 3 docks and 6 seats. It is an original small ship (44 blocks), not the "Airander 10" from the video (link could not be inspected). | An in-game test; the exact Airander download if you want that model. |
+| **Blimp** | BUILT but EXPERIMENTAL/UNTESTED: a display-entity airship moved by `riftbrek:blimp/*` along a west lane with 3 docks and 6 seats. It now uses the Airlander 10 you supplied (55×32×92, cabin interior left out). | An in-game test; the exact Airander download if you want that model. |
 | Shulker box loader / unloader | BUILT (B7): hopper above/below a shulker box, plain vanilla mechanics; untested. | — |
 | Iron farm, mob grinders | NOT built as real farms. B11 has 8 **command-driven** generators (iron, gunpowder, bones, string, flesh, pearls, blaze, witch) that insert entity loot into chests; not survival-legit. Villager halls not built. 4 command-assisted crop plots exist. | A verified design source for real farms. |
 | Pure-redstone item sorter | NOT built. Sorting is **datapack-driven** (command blocks move stacks with `item replace`). | A tested vanilla design if command-block-free storage is required. |

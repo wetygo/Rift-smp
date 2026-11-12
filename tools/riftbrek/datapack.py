@@ -60,6 +60,7 @@ def build(root):
         "scoreboard players set #20 rb_const 20",
         "scoreboard players set #200 rb_const 200",
         "scoreboard players set #100 rb_const 100",
+        "scoreboard players set #2 rb_const 2",
         "execute unless score #ON rb_bl = #ON rb_bl run scoreboard players set #ON rb_bl 0",
         "execute unless score #SPAWNED rb_bl = #SPAWNED rb_bl run scoreboard players set #SPAWNED rb_bl 0",
         "execute unless score #PH rb_bl = #PH rb_bl run scoreboard players set #PH rb_bl 0",

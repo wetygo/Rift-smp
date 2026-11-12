@@ -112,7 +112,7 @@ def blimp(P):
     """Moving airship = display entities + armor-stand seats driven by this function set. Experimental / untested."""
     import math
     ph = "#PH rb_bl"; tt = "#T rb_bl"
-    P.fn("blimp/spawn", ["# runs at the dock-A controller: builds the ship 1.5 blocks above the block (ground level)",
+    P.fn("blimp/spawn", ["# runs at the dock-A controller: builds the Airlander 10 with its cabin floor 4.5 blocks above the block (hull sits on the pad)",
         "scoreboard players set #SPAWNED rb_bl 1", "scoreboard players set #PH rb_bl 0", "scoreboard players set #T rb_bl 0"] + _blimp_summons())
     P.fn("blimp/tick", [
         "# controller (repeating command block under dock A). The ship only exists after: /function riftbrek:admin/blimp_on",
@@ -126,15 +126,21 @@ def blimp(P):
     for p_ in (0, 2, 4, 6):
         run.append(f"execute if score #PH rb_bl matches {p_} if score #T rb_bl matches 1..100 run function riftbrek:blimp/board")
         run.append(f"execute if score #PH rb_bl matches {p_} if score #T rb_bl matches 600.. run function riftbrek:blimp/next")
-    for p_, d, n in ((1, "s", 804), (3, "s", 440), (5, "n", 440), (7, "n", 804)):
+    for p_, d, n in ((1, "s", 740), (3, "s", 440), (5, "n", 440), (7, "n", 740)):
         run.append(f"execute if score #PH rb_bl matches {p_} run function riftbrek:blimp/move_{d}")
         run.append(f"execute if score #PH rb_bl matches {p_} if score #T rb_bl matches {n}.. run function riftbrek:blimp/next")
     P.fn("blimp/run", run)
     P.fn("blimp/next", ["scoreboard players set #T rb_bl 0", "scoreboard players add #PH rb_bl 1",
                         "execute if score #PH rb_bl matches 8.. run scoreboard players set #PH rb_bl 0"])
-    P.fn("blimp/move_s", ["# 0.5 block/tick south (+z) along the lane x=250; all hull + seat entities move together",
-                          "execute as @e[tag=rb_blimp] at @s run tp @s ~ ~ ~0.5"])
-    P.fn("blimp/move_n", ["execute as @e[tag=rb_blimp] at @s run tp @s ~ ~ ~-0.5"])
+    P.fn("blimp/move_s", ["# 0.5 block/tick south (+z) along the lane x=250. Seats every tick; the ~1900 hull boxes every 2 ticks (1 block, interpolated by teleport_duration:2)",
+                          "execute as @e[tag=rb_seat] at @s run tp @s ~ ~ ~0.5",
+                          "scoreboard players operation #M rb_bl = #T rb_bl",
+                          "scoreboard players operation #M rb_bl %= #2 rb_const",
+                          "execute if score #M rb_bl matches 0 as @e[tag=rb_hull] at @s run tp @s ~ ~ ~1"])
+    P.fn("blimp/move_n", ["execute as @e[tag=rb_seat] at @s run tp @s ~ ~ ~-0.5",
+                          "scoreboard players operation #M rb_bl = #T rb_bl",
+                          "scoreboard players operation #M rb_bl %= #2 rb_const",
+                          "execute if score #M rb_bl matches 0 as @e[tag=rb_hull] at @s run tp @s ~ ~ ~-1"])
     P.fn("blimp/board", [
         "# during the first 5 s of every stop: authorised players within 8 blocks of the ship are seated (6 seats). Lockdown = no boarding.",
         "execute unless score #GLOBAL rb_lock matches 1 as @e[tag=rb_seat,limit=1] at @s as @a[distance=..8,tag=!rb_riding,tag=!rb_nob,tag=!rb_revoked,scores={rb_cred=1..,rb_clear=1..}] run function riftbrek:blimp/mount"])
@@ -154,28 +160,21 @@ def blimp(P):
 
 
 def _blimp_summons():
-    import math
-    L_ = []
-    def disp(block, tx, ty, tz, sx, sy, sz):
-        return ('summon minecraft:block_display ~ ~1.5 ~ {Tags:["rb_blimp"],teleport_duration:2,block_state:{Name:"minecraft:%s"},'
-                'transformation:{left_rotation:[0f,0f,0f,1f],right_rotation:[0f,0f,0f,1f],translation:[%.2ff,%.2ff,%.2ff],scale:[%.2ff,%.2ff,%.2ff]}}'
-                % (block, tx, ty, tz, sx, sy, sz))
-    half = 22.0
-    for k in range(-11, 11):
-        zc = 2.0 * k + 1.0
-        r = 8.0 * math.sqrt(max(0.0, 1 - (zc / half) ** 2))
-        r = max(r, 1.0)
-        blk = "purple_concrete" if k % 4 == 0 else "white_concrete"
-        L_.append(disp(blk, -r, 9.0 - r, 2.0 * k, 2 * r, 2 * r, 2.0))
-    L_.append(disp("blue_concrete", -0.3, 17.0, -20.0, 0.6, 1.2, 40.0))              # spine stripe
-    L_.append(disp("purple_concrete", -0.3, 9.0, -24.0, 0.6, 9.0, 7.0))              # top fin
-    L_.append(disp("purple_concrete", -0.3, 0.5, -24.0, 0.6, 8.0, 7.0))              # bottom fin
-    L_.append(disp("purple_concrete", -8.0, 8.7, -24.0, 16.0, 0.6, 7.0))             # horizontal fin
-    L_.append(disp("white_concrete", -2.5, 0.2, -6.0, 5.0, 3.0, 12.0))               # gondola
-    L_.append(disp("light_blue_stained_glass", -2.6, 1.4, -5.0, 5.2, 1.0, 10.0))     # gondola windows
-    for i, (sx, sz) in enumerate(((-1.2, -4.0), (1.2, -4.0), (-1.2, 0.0), (1.2, 0.0), (-1.2, 4.0), (1.2, 4.0))):
-        L_.append('summon minecraft:armor_stand ~%.1f ~1.5 ~%.1f {Invisible:1b,NoGravity:1b,Invulnerable:1b,Silent:1b,Tags:["rb_blimp","rb_seat"],DisabledSlots:4144959}' % (sx, sz))
-    return L_
+    """Airlander 10 (user supplied world) as ~1900 block_display boxes + 6 armor-stand seats, relative to the cabin floor."""
+    import json, os
+    boxes = json.load(open(os.path.join(os.path.dirname(__file__), "airlander_boxes.json")))
+    out = []
+    for (nm, props, x, y, z, sx, sy, sz) in boxes:
+        st = 'block_state:{Name:"%s"' % nm
+        if props:
+            st += ",Properties:{%s}" % ",".join('%s:"%s"' % (k, v) for k, v in sorted(props.items()))
+        st += "}"
+        out.append('summon minecraft:block_display ~ ~4.5 ~ {Tags:["rb_blimp","rb_hull"],teleport_duration:2,%s,'
+                   'transformation:{left_rotation:[0f,0f,0f,1f],right_rotation:[0f,0f,0f,1f],translation:[%df,%df,%df],scale:[%df,%df,%df]}}'
+                   % (st, x, y, z, sx, sy, sz))
+    for (sx, sz) in ((-1.0, -2.0), (1.0, -2.0), (-1.0, 0.0), (1.0, 0.0), (-1.0, 2.0), (1.0, 2.0)):
+        out.append('summon minecraft:armor_stand ~%.1f ~4.5 ~%.1f {Invisible:1b,NoGravity:1b,Invulnerable:1b,Silent:1b,Tags:["rb_blimp","rb_seat"],DisabledSlots:4144959}' % (sx, sz))
+    return out
 
 
 def forceload(P):
@@ -200,7 +199,7 @@ def verify(P):
         ("ground (grass) at local 100,95,100", 100, 95, 100, "minecraft:grass_block"),
         ("gatehouse door controller", 378, GY + 3, 760, "minecraft:repeating_command_block"),
         ("citadel entrance controller", 378, GY + 3, 366, "minecraft:repeating_command_block"),
-        ("blimp controller (dock A)", 250, L.GROUND_TOP - 1, 78, "minecraft:repeating_command_block"),
+        ("blimp controller (dock A)", 250, L.GROUND_TOP - 1, 110, "minecraft:repeating_command_block"),
         ("sorter A controller (B5)", 560, L.level_floor(5) + 4, 472, "minecraft:repeating_command_block"),
         ("sorter B controller (B6)", 560, L.level_floor(6) + 4, 520, "minecraft:repeating_command_block"),
         ("synthesis unit (B11)", L.SYNTH_ORIGIN[0], L.level_floor(11) + 1, L.SYNTH_ORIGIN[1], "minecraft:repeating_command_block"),

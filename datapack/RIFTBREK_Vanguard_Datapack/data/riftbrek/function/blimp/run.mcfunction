@@ -12,10 +12,10 @@ execute if score #PH rb_bl matches 4 if score #T rb_bl matches 600.. run functio
 execute if score #PH rb_bl matches 6 if score #T rb_bl matches 1..100 run function riftbrek:blimp/board
 execute if score #PH rb_bl matches 6 if score #T rb_bl matches 600.. run function riftbrek:blimp/next
 execute if score #PH rb_bl matches 1 run function riftbrek:blimp/move_s
-execute if score #PH rb_bl matches 1 if score #T rb_bl matches 804.. run function riftbrek:blimp/next
+execute if score #PH rb_bl matches 1 if score #T rb_bl matches 740.. run function riftbrek:blimp/next
 execute if score #PH rb_bl matches 3 run function riftbrek:blimp/move_s
 execute if score #PH rb_bl matches 3 if score #T rb_bl matches 440.. run function riftbrek:blimp/next
 execute if score #PH rb_bl matches 5 run function riftbrek:blimp/move_n
 execute if score #PH rb_bl matches 5 if score #T rb_bl matches 440.. run function riftbrek:blimp/next
 execute if score #PH rb_bl matches 7 run function riftbrek:blimp/move_n
-execute if score #PH rb_bl matches 7 if score #T rb_bl matches 804.. run function riftbrek:blimp/next
+execute if score #PH rb_bl matches 7 if score #T rb_bl matches 740.. run function riftbrek:blimp/next

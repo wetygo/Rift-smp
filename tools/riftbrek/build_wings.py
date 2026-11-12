@@ -164,7 +164,7 @@ def intake(W, x, z, y_bottom, label):
 
 
 BLIMP_LANE_X = 250
-BLIMP_DOCKS = [("A", 78, "TERMINAL"), ("B", 480, "PLAZA"), ("C", 700, "CHECKPOINT")]
+BLIMP_DOCKS = [("A", 110, "TERMINAL"), ("B", 480, "PLAZA"), ("C", 700, "CHECKPOINT")]
 
 
 def blimp(W):
@@ -189,7 +189,7 @@ def blimp(W):
         lattice_lights(W, tx0 + 3, tz0 + 3, tx1 - 3, tz1 - 3, GY + f * 14 + 13, step=8, off=4)
     W.fill(372, GY, tz1 - 2, 395, GY + 12, tz1, AIR)
     ladder_shaft(W, tx0 + 3, tz0 + 3, GY, top - 1, "east")
-    sign(W, 383, GY, tz1 + 3, ["BLIMP TERMINAL", "Airander line", "dock A/B/C on", "the west lane"], rot=0)
+    sign(W, 383, GY, tz1 + 3, ["BLIMP TERMINAL", "Airlander 10", "dock A/B/C on", "the west lane"], rot=0)
     road(W, 372, tz1 + 1, 395, 175, "z")
     cmdblock(W, 383, GROUND_TOP - 1, 70, "function riftbrek:zone/visible")
     # three dock pads on the lane x=250: disk platform, glow ring, lamp posts, sign
@@ -243,7 +243,7 @@ def landscaping(W, rng):
     while n < 160 and tries < 4000:
         tries += 1
         x = int(rng.integers(24, S - 24)); z = int(rng.integers(24, S - 24))
-        if W.a[GROUND_TOP, z, x] != grass or 232 <= x <= 268:
+        if W.a[GROUND_TOP, z, x] != grass or 218 <= x <= 284:
             continue
         box = W.a[GY:GY + 12, max(z - 4, 0):z + 5, max(x - 4, 0):x + 5]
         gb = W.a[GROUND_TOP, max(z - 4, 0):z + 5, max(x - 4, 0):x + 5]

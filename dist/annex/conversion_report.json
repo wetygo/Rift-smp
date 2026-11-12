@@ -1,0 +1,522 @@
+{
+ "Basic_Furnace_Array.litematic": {
+  "size": [
+   30,
+   18,
+   58
+  ],
+  "palette_in": 251,
+  "palette_out": 214,
+  "changed": {
+   "waxed_cut_copper -> amethyst_block": 1,
+   "waxed_cut_copper_stairs -> purpur_stairs": 3,
+   "orange_carpet -> purple_carpet": 1,
+   "waxed_cut_copper_slab -> purpur_slab": 2,
+   "stripped_dark_oak_log -> purple_concrete": 3,
+   "stripped_mangrove_log -> purple_concrete": 3,
+   "mangrove_wall_sign -> crimson_wall_sign": 4,
+   "waxed_copper_bulb -> redstone_lamp": 1,
+   "mangrove_stairs -> purpur_stairs": 10,
+   "waxed_lightning_rod -> lightning_rod": 4,
+   "smooth_red_sandstone -> polished_blackstone": 1,
+   "mangrove_shelf -> crimson_shelf": 4,
+   "waxed_copper_bars -> iron_bars": 6,
+   "cut_red_sandstone -> polished_blackstone_bricks": 1,
+   "mangrove_trapdoor -> crimson_trapdoor": 7,
+   "smooth_red_sandstone_slab -> polished_blackstone_slab": 1,
+   "chiseled_red_sandstone -> chiseled_polished_blackstone": 1,
+   "resin_brick_wall -> polished_blackstone_wall": 14,
+   "mangrove_fence -> crimson_fence": 6,
+   "acacia_trapdoor -> crimson_trapdoor": 5,
+   "polished_cinnabar_slab -> polished_blackstone_brick_slab": 3,
+   "cinnabar_brick_slab -> polished_blackstone_brick_slab": 3,
+   "bamboo_fence -> crimson_fence": 1,
+   "bamboo_trapdoor -> crimson_trapdoor": 2,
+   "polished_cinnabar_wall -> polished_blackstone_brick_wall": 12,
+   "shroomlight -> sea_lantern": 1,
+   "stripped_mangrove_wood -> purple_concrete": 3,
+   "resin_brick_slab -> purpur_slab": 2,
+   "red_sandstone_wall -> polished_blackstone_wall": 1,
+   "waxed_copper_grate -> tinted_glass": 1,
+   "mangrove_slab -> purpur_slab": 3,
+   "waxed_copper_trapdoor -> iron_trapdoor": 1,
+   "acacia_button -> crimson_button": 1,
+   "polished_cinnabar -> polished_blackstone_bricks": 1,
+   "smooth_red_sandstone_stairs -> polished_blackstone_stairs": 2,
+   "waxed_copper_block -> amethyst_block": 1,
+   "mangrove_planks -> purple_terracotta": 1,
+   "spruce_fence -> crimson_fence": 2,
+   "polished_cinnabar_stairs -> polished_blackstone_brick_stairs": 3,
+   "stripped_dark_oak_wood -> purple_concrete": 3,
+   "mangrove_sign -> crimson_sign": 1,
+   "dark_oak_trapdoor -> crimson_trapdoor": 4,
+   "spruce_trapdoor -> crimson_trapdoor": 2,
+   "spruce_wall_sign -> crimson_wall_sign": 1,
+   "dark_oak_slab -> purpur_slab": 1,
+   "dark_oak_stairs -> purpur_stairs": 2,
+   "jungle_trapdoor -> crimson_trapdoor": 1
+  },
+  "switches": {
+   "0": [
+    "red",
+    4,
+    [
+     "22",
+     "6",
+     "8"
+    ]
+   ],
+   "1": [
+    "orange",
+    4,
+    [
+     "22",
+     "6",
+     "39"
+    ]
+   ]
+  },
+  "tiles": [
+   351,
+   351
+  ],
+  "entities": 0,
+  "secs": 0.014610052108764648,
+  "solid": 6405,
+  "data_version_in": 4903
+ },
+ "Ghast_Hydration_Facility.litematic": {
+  "size": [
+   352,
+   58,
+   464
+  ],
+  "palette_in": 1012,
+  "palette_out": 955,
+  "changed": {
+   "birch_log -> purple_concrete": 1,
+   "pink_terracotta -> purple_terracotta": 1,
+   "spruce_log -> purple_concrete": 1,
+   "red_terracotta -> purple_terracotta": 1,
+   "magenta_terracotta -> purple_terracotta": 1,
+   "yellow_concrete -> purple_concrete": 1,
+   "light_blue_concrete -> blue_concrete": 1,
+   "mangrove_stairs -> purpur_stairs": 17,
+   "pale_oak_slab -> purpur_slab": 1,
+   "light_blue_terracotta -> blue_terracotta": 1,
+   "jungle_log -> purple_concrete": 1,
+   "waxed_copper_bulb -> redstone_lamp": 2,
+   "cyan_wool -> blue_wool": 1,
+   "waxed_copper_grate -> tinted_glass": 1,
+   "stripped_mangrove_log -> purple_concrete": 3,
+   "mangrove_trapdoor -> crimson_trapdoor": 16,
+   "mangrove_planks -> purple_terracotta": 1,
+   "bamboo_trapdoor -> crimson_trapdoor": 4,
+   "red_nether_brick_stairs -> purpur_stairs": 4,
+   "pale_oak_button -> crimson_button": 4,
+   "orange_concrete -> purple_concrete": 1,
+   "pale_oak_shelf -> crimson_shelf": 8,
+   "pale_oak_trapdoor -> crimson_trapdoor": 16,
+   "pale_oak_fence -> crimson_fence": 5,
+   "dark_oak_button -> crimson_button": 1,
+   "smooth_red_sandstone_slab -> polished_blackstone_slab": 2,
+   "smooth_red_sandstone -> polished_blackstone": 1,
+   "orange_stained_glass -> purple_stained_glass": 1,
+   "orange_stained_glass_pane -> purple_stained_glass_pane": 5,
+   "acacia_shelf -> crimson_shelf": 4,
+   "pale_oak_hanging_sign -> crimson_hanging_sign": 3,
+   "waxed_copper_bars -> iron_bars": 11,
+   "pale_oak_stairs -> purpur_stairs": 2,
+   "oak_fence_gate -> crimson_fence_gate": 1,
+   "dark_oak_wall_sign -> crimson_wall_sign": 2,
+   "oxidized_lightning_rod -> lightning_rod": 1,
+   "stripped_pale_oak_wood -> purple_concrete": 1,
+   "cyan_terracotta -> blue_terracotta": 1
+  },
+  "switches": {},
+  "tiles": [
+   4773,
+   4773
+  ],
+  "entities": 0,
+  "secs": 1.1645476818084717,
+  "solid": 418646,
+  "data_version_in": 4556
+ },
+ "The_Stone_Factory.litematic": {
+  "size": [
+   109,
+   87,
+   103
+  ],
+  "palette_in": 1002,
+  "palette_out": 791,
+  "changed": {
+   "waxed_cut_copper -> amethyst_block": 1,
+   "waxed_copper_block -> amethyst_block": 1,
+   "waxed_chiseled_copper -> chiseled_polished_blackstone": 1,
+   "waxed_copper_grate -> tinted_glass": 1,
+   "waxed_cut_copper_stairs -> purpur_stairs": 35,
+   "spruce_trapdoor -> crimson_trapdoor": 9,
+   "waxed_copper_bulb -> redstone_lamp": 2,
+   "waxed_copper_bars -> iron_bars": 16,
+   "waxed_copper_trapdoor -> iron_trapdoor": 15,
+   "acacia_shelf -> crimson_shelf": 4,
+   "waxed_cut_copper_slab -> purpur_slab": 3,
+   "acacia_trapdoor -> crimson_trapdoor": 17,
+   "red_sandstone_wall -> polished_blackstone_wall": 30,
+   "oxidized_copper_trapdoor -> iron_trapdoor": 1,
+   "cut_red_sandstone_slab -> polished_blackstone_slab": 2,
+   "cyan_terracotta -> blue_terracotta": 1,
+   "mangrove_fence -> crimson_fence": 16,
+   "oak_fence_gate -> crimson_fence_gate": 7,
+   "mangrove_slab -> purpur_slab": 2,
+   "red_terracotta -> purple_terracotta": 1,
+   "mangrove_stairs -> purpur_stairs": 26,
+   "mangrove_trapdoor -> crimson_trapdoor": 14,
+   "cinnabar_brick_slab -> polished_blackstone_brick_slab": 3,
+   "polished_cinnabar_slab -> polished_blackstone_brick_slab": 3,
+   "bamboo_fence -> crimson_fence": 8,
+   "bamboo_trapdoor -> crimson_trapdoor": 15,
+   "mangrove_planks -> purple_terracotta": 1,
+   "shroomlight -> sea_lantern": 1,
+   "spruce_shelf -> crimson_shelf": 1,
+   "bamboo_slab -> purpur_slab": 3,
+   "pale_oak_shelf -> crimson_shelf": 3,
+   "resin_clump -> air": 1,
+   "polished_sulfur_wall -> polished_blackstone_brick_wall": 3,
+   "pale_oak_trapdoor -> crimson_trapdoor": 10,
+   "birch_trapdoor -> crimson_trapdoor": 10,
+   "polished_sulfur_stairs -> polished_blackstone_brick_stairs": 5,
+   "polished_sulfur_slab -> polished_blackstone_brick_slab": 3,
+   "polished_cinnabar -> polished_blackstone_bricks": 1,
+   "cinnabar_bricks -> polished_blackstone_bricks": 1,
+   "stripped_mangrove_wood -> purple_concrete": 3,
+   "polished_cinnabar_wall -> polished_blackstone_brick_wall": 21,
+   "mangrove_fence_gate -> crimson_fence_gate": 5,
+   "polished_cinnabar_stairs -> polished_blackstone_brick_stairs": 25,
+   "chiseled_cinnabar -> chiseled_polished_blackstone": 1,
+   "mangrove_shelf -> crimson_shelf": 4,
+   "cinnabar_slab -> polished_blackstone_brick_slab": 2,
+   "smooth_red_sandstone -> polished_blackstone": 1,
+   "stripped_mangrove_log -> purple_concrete": 2,
+   "cinnabar_brick_wall -> polished_blackstone_brick_wall": 3,
+   "glowstone -> sea_lantern": 1,
+   "spruce_wall_sign -> crimson_wall_sign": 2,
+   "acacia_stairs -> purpur_stairs": 14,
+   "mangrove_wall_sign -> crimson_wall_sign": 2,
+   "cinnabar_brick_stairs -> polished_blackstone_brick_stairs": 17,
+   "acacia_planks -> purple_terracotta": 1,
+   "resin_brick_slab -> purpur_slab": 1,
+   "waxed_exposed_copper_grate -> tinted_glass": 1,
+   "red_sandstone_stairs -> polished_blackstone_stairs": 3,
+   "oxidized_copper -> blue_concrete": 1,
+   "bamboo_stairs -> purpur_stairs": 13,
+   "chiseled_sulfur -> chiseled_polished_blackstone": 1,
+   "birch_shelf -> crimson_shelf": 4,
+   "ochre_froglight -> sea_lantern": 2,
+   "cinnabar -> polished_blackstone_bricks": 1,
+   "stripped_bamboo_block -> purple_concrete": 2,
+   "bamboo_planks -> purple_terracotta": 1,
+   "sulfur -> purpur_block": 1,
+   "polished_sulfur -> purpur_block": 1,
+   "sulfur_bricks -> purpur_block": 1,
+   "potent_sulfur -> purple_concrete": 1,
+   "pale_oak_slab -> purpur_slab": 2,
+   "cinnabar_stairs -> polished_blackstone_brick_stairs": 1,
+   "sulfur_stairs -> polished_blackstone_brick_stairs": 1,
+   "sulfur_brick_stairs -> polished_blackstone_brick_stairs": 1,
+   "sulfur_brick_slab -> polished_blackstone_brick_slab": 1,
+   "sulfur_slab -> polished_blackstone_brick_slab": 1,
+   "cinnabar_wall -> polished_blackstone_brick_wall": 2
+  },
+  "switches": {
+   "0": [
+    "red",
+    1,
+    [
+     "51",
+     "3",
+     "30"
+    ]
+   ],
+   "1": [
+    "orange",
+    1,
+    [
+     "83",
+     "19",
+     "51"
+    ]
+   ]
+  },
+  "tiles": [
+   1511,
+   1480
+  ],
+  "entities": 18,
+  "secs": 0.4658842086791992,
+  "solid": 67518,
+  "data_version_in": 4903
+ },
+ "Full_Dam.litematic": {
+  "size": [
+   419,
+   145,
+   294
+  ],
+  "palette_in": 774,
+  "palette_out": 715,
+  "changed": {
+   "stripped_mangrove_wood -> purple_concrete": 1,
+   "mangrove_planks -> purple_terracotta": 1,
+   "mangrove_stairs -> purpur_stairs": 19,
+   "gold_block -> amethyst_block": 1,
+   "mangrove_trapdoor -> crimson_trapdoor": 16,
+   "light_blue_wool -> blue_wool": 1,
+   "emerald_block -> amethyst_block": 1,
+   "red_concrete -> purple_concrete": 1,
+   "waxed_copper_bulb -> redstone_lamp": 2,
+   "yellow_carpet -> purple_carpet": 1,
+   "birch_trapdoor -> crimson_trapdoor": 16,
+   "yellow_concrete -> purple_concrete": 1,
+   "bamboo_stairs -> purpur_stairs": 9,
+   "lapis_block -> blue_concrete": 1,
+   "diamond_block -> amethyst_block": 1,
+   "red_concrete_powder -> purple_concrete_powder": 1,
+   "stripped_mangrove_log -> purple_concrete": 1,
+   "red_terracotta -> purple_terracotta": 1,
+   "dark_oak_trapdoor -> crimson_trapdoor": 7,
+   "mangrove_slab -> purpur_slab": 2,
+   "red_wool -> purple_wool": 1,
+   "dark_oak_fence -> crimson_fence": 1,
+   "jungle_trapdoor -> crimson_trapdoor": 4,
+   "waxed_copper_grate -> tinted_glass": 1,
+   "birch_wall_sign -> crimson_wall_sign": 1,
+   "waxed_copper_trapdoor -> iron_trapdoor": 5,
+   "yellow_wool -> purple_wool": 1,
+   "bamboo_fence -> crimson_fence": 6,
+   "stripped_bamboo_block -> purple_concrete": 1,
+   "sandstone_wall -> polished_blackstone_wall": 18,
+   "red_candle -> purple_candle": 3,
+   "bamboo_planks -> purple_terracotta": 1,
+   "bamboo_trapdoor -> crimson_trapdoor": 3,
+   "lime_concrete -> blue_concrete": 1,
+   "orange_stained_glass_pane -> purple_stained_glass_pane": 8,
+   "spruce_hanging_sign -> crimson_hanging_sign": 2,
+   "bamboo_slab -> purpur_slab": 2,
+   "ochre_froglight -> sea_lantern": 2,
+   "light_blue_stained_glass -> blue_stained_glass": 1,
+   "mangrove_fence -> crimson_fence": 2,
+   "red_carpet -> purple_carpet": 1,
+   "dark_oak_button -> crimson_button": 1,
+   "spruce_wall_sign -> crimson_wall_sign": 1,
+   "red_stained_glass -> purple_stained_glass": 1,
+   "cherry_stairs -> purpur_stairs": 1,
+   "mangrove_wall_sign -> crimson_wall_sign": 1,
+   "oak_wall_sign -> crimson_wall_sign": 2,
+   "copper_trapdoor -> iron_trapdoor": 1,
+   "exposed_copper_trapdoor -> iron_trapdoor": 1,
+   "spruce_trapdoor -> crimson_trapdoor": 1,
+   "spruce_leaves -> cherry_leaves": 1
+  },
+  "switches": {
+   "0": [
+    "red",
+    3,
+    [
+     "222",
+     "2",
+     "267"
+    ]
+   ],
+   "1": [
+    "orange",
+    3,
+    [
+     "7",
+     "100",
+     "58"
+    ]
+   ],
+   "2": [
+    "yellow",
+    5,
+    [
+     "164",
+     "100",
+     "219"
+    ]
+   ],
+   "3": [
+    "lime",
+    6,
+    [
+     "175",
+     "100",
+     "219"
+    ]
+   ],
+   "4": [
+    "cyan",
+    6,
+    [
+     "243",
+     "100",
+     "219"
+    ]
+   ],
+   "5": [
+    "light_blue",
+    6,
+    [
+     "254",
+     "100",
+     "219"
+    ]
+   ],
+   "6": [
+    "magenta",
+    3,
+    [
+     "411",
+     "100",
+     "58"
+    ]
+   ],
+   "7": [
+    "pink",
+    1,
+    [
+     "209",
+     "124",
+     "242"
+    ]
+   ],
+   "8": [
+    "white",
+    1,
+    [
+     "199",
+     "125",
+     "242"
+    ]
+   ],
+   "9": [
+    "green",
+    1,
+    [
+     "219",
+     "125",
+     "242"
+    ]
+   ],
+   "10": [
+    "red",
+    2,
+    [
+     "209",
+     "131",
+     "239"
+    ]
+   ]
+  },
+  "tiles": [
+   154,
+   154
+  ],
+  "entities": 0,
+  "secs": 2.0518198013305664,
+  "solid": 373639,
+  "data_version_in": 4438
+ },
+ "Carrot__Firework_Crafters.litematic": {
+  "size": [
+   63,
+   35,
+   41
+  ],
+  "palette_in": 504,
+  "palette_out": 408,
+  "changed": {
+   "mangrove_stairs -> purpur_stairs": 16,
+   "cinnabar_brick_slab -> polished_blackstone_brick_slab": 3,
+   "polished_cinnabar_slab -> polished_blackstone_brick_slab": 3,
+   "waxed_copper_grate -> tinted_glass": 2,
+   "stripped_dark_oak_wood -> purple_concrete": 3,
+   "bamboo_fence -> crimson_fence": 5,
+   "spruce_shelf -> crimson_shelf": 4,
+   "bamboo_trapdoor -> crimson_trapdoor": 4,
+   "mangrove_fence -> crimson_fence": 14,
+   "spruce_trapdoor -> crimson_trapdoor": 14,
+   "shroomlight -> sea_lantern": 1,
+   "polished_cinnabar_wall -> polished_blackstone_brick_wall": 18,
+   "mangrove_shelf -> crimson_shelf": 5,
+   "chiseled_cinnabar -> chiseled_polished_blackstone": 1,
+   "acacia_trapdoor -> crimson_trapdoor": 2,
+   "stripped_mangrove_wood -> purple_concrete": 3,
+   "mangrove_slab -> purpur_slab": 2,
+   "mangrove_planks -> purple_terracotta": 1,
+   "mangrove_trapdoor -> crimson_trapdoor": 5,
+   "pale_oak_trapdoor -> crimson_trapdoor": 5,
+   "spruce_fence -> crimson_fence": 9,
+   "dark_oak_planks -> purple_terracotta": 1,
+   "orange_concrete_powder -> purple_concrete_powder": 1,
+   "cinnabar_brick_stairs -> polished_blackstone_brick_stairs": 5,
+   "polished_cinnabar_stairs -> polished_blackstone_brick_stairs": 7,
+   "mangrove_log -> purple_concrete": 1,
+   "stripped_mangrove_log -> purple_concrete": 2,
+   "waxed_copper_bulb -> redstone_lamp": 2,
+   "yellow_concrete -> purple_concrete": 1,
+   "yellow_wool -> purple_wool": 1,
+   "gold_block -> amethyst_block": 1,
+   "yellow_concrete_powder -> purple_concrete_powder": 1,
+   "stripped_spruce_wood -> purple_concrete": 1,
+   "jungle_log -> purple_concrete": 2,
+   "oak_planks -> purple_terracotta": 1,
+   "waxed_cut_copper_stairs -> purpur_stairs": 5,
+   "stripped_dark_oak_log -> purple_concrete": 2,
+   "stripped_pale_oak_wood -> purple_concrete": 1,
+   "mangrove_fence_gate -> crimson_fence_gate": 1,
+   "dark_oak_trapdoor -> crimson_trapdoor": 9,
+   "pale_oak_wall_sign -> crimson_wall_sign": 1,
+   "waxed_cut_copper -> amethyst_block": 1,
+   "oak_trapdoor -> crimson_trapdoor": 6,
+   "spruce_planks -> purple_terracotta": 1,
+   "stripped_spruce_log -> purple_concrete": 3,
+   "waxed_copper_trapdoor -> iron_trapdoor": 5,
+   "spruce_hanging_sign -> crimson_hanging_sign": 2,
+   "waxed_cut_copper_slab -> purpur_slab": 2,
+   "waxed_lightning_rod -> lightning_rod": 2,
+   "dark_oak_shelf -> crimson_shelf": 1,
+   "dark_oak_stairs -> purpur_stairs": 6,
+   "dark_oak_slab -> purpur_slab": 1,
+   "spruce_stairs -> purpur_stairs": 4,
+   "red_shulker_box -> purple_shulker_box": 1,
+   "oxidized_copper_trapdoor -> iron_trapdoor": 2,
+   "cinnabar_bricks -> polished_blackstone_bricks": 1,
+   "mangrove_wall_sign -> crimson_wall_sign": 1,
+   "red_wool -> purple_wool": 1,
+   "red_terracotta -> purple_terracotta": 1
+  },
+  "switches": {
+   "0": [
+    "red",
+    1,
+    [
+     "33",
+     "10",
+     "15"
+    ]
+   ]
+  },
+  "tiles": [
+   585,
+   585
+  ],
+  "entities": 0,
+  "secs": 0.03337407112121582,
+  "solid": 17710,
+  "data_version_in": 4903
+ }
+}

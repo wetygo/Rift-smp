@@ -23,7 +23,7 @@ Ground surface (first walkable layer) is local y = 96 = world y 32.
 ## command blocks: `blimp/` (1)
 | function | local x,y,z | world offset (y-64) |
 |---|---|---|
-| `blimp/tick` | 250, 94, 78 | +250, 30, +78 |
+| `blimp/tick` | 250, 94, 110 | +250, 30, +110 |
 
 ## command blocks: `door/` (20)
 | function | local x,y,z | world offset (y-64) |

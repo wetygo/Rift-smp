@@ -11,6 +11,7 @@ Minecraft Java **1.21.11**, Fabric + Litematica. Built to the concept render in 
 | every command, numbered | `docs/COMMAND_HANDBOOK.md` |
 | where every machine is | `docs/MODULE_INDEX.md` |
 | what is tested / untested | `docs/TEST_REPORT.md`, `docs/TEST_RESULTS_AUTO.txt` |
+| Wildezz builds recoloured purple + Airlander notes | `docs/ANNEX.md`, `dist/annex/*.litematic` |
 | what is NOT built | `docs/KNOWN_GAPS.md` |
 | credits | `docs/CREDITS.md` |
 
@@ -33,7 +34,7 @@ in-game bugs; `docs/TEST_REPORT.md` has a 15-minute smoke-test checklist that fi
 * 16-thick, 96-tall perimeter wall with parapet, patrol tunnels, 4 corner towers, 8 wall towers, south gatehouse with 12 command-block doors, Chunk Ban Square (safe simulation) behind it
 * Royal Citadel (192×192, keep, 48-step grand ramp, **Throne Room** behind royal-tier doors, great spire), Central Plaza with crystal fountain
 * Six faction wings: Archivist (Grand Archive), Unstables (dome + 4 wind-charge chicken chambers), Abstracters (arena), Veil, Wildcards, Storage Nexus
-* Blimp terminal + 3 dock pads on the west lane; a **moving** display-entity airship (experimental, untested) started with `/function riftbrek:admin/blimp_on`
+* Blimp terminal + 3 dock pads on the west lane; a **moving** Airlander 10 (your supplied ship as ~1,900 display entities; experimental, untested) started with `/function riftbrek:admin/blimp_on`
 * Underground B1–B12: security, offices, 2-level Grand Archive, **2 sorter halls**, kit hall, industry (smelters, crafters, crop plots, shulker loaders/unloaders), B11 command-driven synthesis hall, transport (powered-rail ring + blue-ice highway), Veil HQ + secret tunnels, royal vaults, reserves
 * 20 command-block door gates in 4 widths/tiers (public, member, leader, royal, 6 factions), lockdown-aware
 

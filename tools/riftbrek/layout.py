@@ -114,7 +114,7 @@ FORCELOAD = [
     ("sorter B (B6)", 554, 516, 592, 534),
     ("industry hall B7", 48, 470, 262, 610),
     ("synthesis hall B11", 200, 280, 330, 330),
-    ("blimp lane x=250", 232, 60, 268, 720),
+    ("blimp lane x=250", 218, 30, 284, 740),
     ("checkpoint / chunk-ban square", 352, 652, 415, 712),
 ]
 SYNTH = [  # (name, entity loot table, label)

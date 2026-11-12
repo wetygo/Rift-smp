@@ -6,8 +6,8 @@ $execute positioned $(x) 35 $(z) if block ~378 ~ ~760 minecraft:repeating_comman
 $execute positioned $(x) 35 $(z) unless block ~378 ~ ~760 minecraft:repeating_command_block run tellraw @s {"text":"FAIL  gatehouse door controller (chunk not loaded, wrong origin, or not pasted)","color":"red"}
 $execute positioned $(x) 35 $(z) if block ~378 ~ ~366 minecraft:repeating_command_block run tellraw @s {"text":"PASS  citadel entrance controller","color":"green"}
 $execute positioned $(x) 35 $(z) unless block ~378 ~ ~366 minecraft:repeating_command_block run tellraw @s {"text":"FAIL  citadel entrance controller (chunk not loaded, wrong origin, or not pasted)","color":"red"}
-$execute positioned $(x) 30 $(z) if block ~250 ~ ~78 minecraft:repeating_command_block run tellraw @s {"text":"PASS  blimp controller (dock A)","color":"green"}
-$execute positioned $(x) 30 $(z) unless block ~250 ~ ~78 minecraft:repeating_command_block run tellraw @s {"text":"FAIL  blimp controller (dock A) (chunk not loaded, wrong origin, or not pasted)","color":"red"}
+$execute positioned $(x) 30 $(z) if block ~250 ~ ~110 minecraft:repeating_command_block run tellraw @s {"text":"PASS  blimp controller (dock A)","color":"green"}
+$execute positioned $(x) 30 $(z) unless block ~250 ~ ~110 minecraft:repeating_command_block run tellraw @s {"text":"FAIL  blimp controller (dock A) (chunk not loaded, wrong origin, or not pasted)","color":"red"}
 $execute positioned $(x) -4 $(z) if block ~560 ~ ~472 minecraft:repeating_command_block run tellraw @s {"text":"PASS  sorter A controller (B5)","color":"green"}
 $execute positioned $(x) -4 $(z) unless block ~560 ~ ~472 minecraft:repeating_command_block run tellraw @s {"text":"FAIL  sorter A controller (B5) (chunk not loaded, wrong origin, or not pasted)","color":"red"}
 $execute positioned $(x) -12 $(z) if block ~560 ~ ~520 minecraft:repeating_command_block run tellraw @s {"text":"PASS  sorter B controller (B6)","color":"green"}
