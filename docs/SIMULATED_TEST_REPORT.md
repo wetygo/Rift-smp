@@ -85,7 +85,7 @@
 ## 6. Ready-made world files: independent read-back vs the master schematic
 ```
 region headers: 4909 chunk slots checked, 0 wrong
-chunks 4894/4894  sections 117456  block mismatches 0  tile entities 12811/12811 (bad 0, missing 0)  entities 288/288  [20s]
+chunks 4894/4894  sections 117456  block mismatches 0  tile entities 12811/12811 (bad 0, missing 0)  entities 288/288  [19s]
 RESULT: PASS - exported world is block-for-block identical to the master schematic
 ```
 
@@ -98,4 +98,4 @@ model_test.py: FAILED: 0
 ## 8. Still NOT verifiable here
 Behaviour inside the real game: that Minecraft accepts the region files without complaint (format follows the 1.21.11 chunk layout and was read back with a reader validated on a genuine 1.19.2 save), that command blocks/hoppers/redstone work, that imported builds work in 1.21.11, performance with ~1,900 blimp entities.
 
-_generated in 40s_
+_generated in 41s_

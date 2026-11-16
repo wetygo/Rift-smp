@@ -92,12 +92,23 @@ def old_tag_to_components(tag):
     return comp
 
 
+def _item_compat(i):
+    """cinnabar/sulfur items belong to a newer game version than 1.21.11 -> purple-theme stand-ins"""
+    n = i.split(":")[-1]
+    if "cinnabar" in n or "sulfur" in n:
+        suf = "slab" if n.endswith("slab") else "stairs" if n.endswith("stairs") else "wall" if n.endswith("wall") else None
+        if n == "potent_sulfur" or n == "sulfur_spike":
+            return "minecraft:amethyst_shard"
+        return "minecraft:" + ("purpur_" + suf if suf in ("slab", "stairs") else "purpur_block" if suf is None else "blackstone_wall")
+    return i
+
+
 def fix_item(it, dv):
     """item stack dict (any age) -> {id, count[, components]} (Slot kept if present)"""
     out = {}
     if "Slot" in it:
         out["Slot"] = Byte(int(it["Slot"]))
-    out["id"] = it["id"]
+    out["id"] = _item_compat(it["id"])
     out["count"] = int(it.get("count", it.get("Count", 1)))
     comp = {}
     if "tag" in it:
@@ -176,5 +187,17 @@ def fix_entity(e, dv):
 def convert_all(tiles, ents, dv):
     """returns (tiles, ents) upgraded; no-op for already-current data"""
     if dv >= 4325 and dv >= 4500:
-        return tiles, ents
+        return [_compat_walk(t) for t in tiles], [_compat_walk(e) for e in ents]
     return [fix_tile(t, dv) for t in tiles], [fix_entity(e, dv) for e in ents]
+
+
+def _compat_walk(o):
+    """current-version data: only swap item ids that this game version lacks"""
+    if isinstance(o, dict):
+        r = {k: _compat_walk(v) for k, v in o.items()}
+        if isinstance(r.get("id"), str) and ("count" in r or "Count" in r):
+            r["id"] = _item_compat(r["id"])
+        return r
+    if isinstance(o, list):
+        return [_compat_walk(v) for v in o]
+    return o

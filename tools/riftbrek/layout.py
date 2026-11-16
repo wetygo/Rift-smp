@@ -52,16 +52,19 @@ SORT_SLOTS = 5        # hopper slots
 _COLORS = ["white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray", "light_gray", "cyan", "purple", "blue", "brown", "green", "red", "black"]
 SHULKERS = ["minecraft:shulker_box"] + ["minecraft:%s_shulker_box" % c for c in _COLORS]
 
+import json as _json, os as _os
+FAM = _json.load(open(_os.path.join(_os.path.dirname(__file__), "item_families.json")))   # explicit ids from the 1.21.11 item registry (no tags)
+
 # category -> list of item predicates (each its own command line)
 CATS_A = [
-    ("logs",      ["#minecraft:logs"]),
-    ("planks",    ["#minecraft:planks"]),
+    ("logs",      FAM["logs"]),
+    ("planks",    FAM["planks"]),
     ("stone",     ["minecraft:stone", "minecraft:cobblestone", "minecraft:deepslate", "minecraft:cobbled_deepslate",
                    "minecraft:andesite", "minecraft:diorite", "minecraft:granite", "minecraft:tuff", "minecraft:blackstone"]),
-    ("sand_gravel", ["#minecraft:sand", "minecraft:gravel", "minecraft:clay_ball", "minecraft:clay"]),
+    ("sand_gravel", FAM["sand"] + ["minecraft:gravel", "minecraft:clay_ball", "minecraft:clay"]),
     ("dirt",      ["minecraft:dirt", "minecraft:grass_block", "minecraft:podzol", "minecraft:mycelium", "minecraft:coarse_dirt"]),
-    ("wool",      ["#minecraft:wool", "#minecraft:wool_carpets"]),
-    ("coal",      ["#minecraft:coals", "minecraft:coal_block"]),
+    ("wool",      FAM["wool"] + FAM["wool_carpets"]),
+    ("coal",      FAM["coals"] + ["minecraft:coal_block"]),
     ("iron",      ["minecraft:iron_ingot", "minecraft:raw_iron", "minecraft:iron_nugget", "minecraft:iron_block"]),
     ("copper",    ["minecraft:copper_ingot", "minecraft:raw_copper", "minecraft:copper_block"]),
     ("gold",      ["minecraft:gold_ingot", "minecraft:raw_gold", "minecraft:gold_nugget", "minecraft:gold_block"]),
@@ -69,18 +72,18 @@ CATS_A = [
     ("gems",      ["minecraft:diamond", "minecraft:emerald", "minecraft:diamond_block", "minecraft:emerald_block",
                    "minecraft:netherite_ingot", "minecraft:netherite_scrap", "minecraft:ancient_debris"]),
     ("glass",     ["minecraft:glass", "minecraft:tinted_glass", "minecraft:glass_pane"]),
-    ("terracotta", ["#minecraft:terracotta"]),
-    ("saplings_leaves", ["#minecraft:saplings", "#minecraft:leaves", "#minecraft:flowers"]),
+    ("terracotta", FAM["terracotta"]),
+    ("saplings_leaves", FAM["saplings"] + FAM["leaves"] + FAM["flowers"]),
     ("decor_valuables", ["minecraft:amethyst_shard", "minecraft:amethyst_block", "minecraft:obsidian", "minecraft:crying_obsidian"]),
     ("misc",      None),     # catch-all / overflow
 ]
 CATS_B = [
-    ("swords",    ["#minecraft:swords"]),
-    ("pickaxes",  ["#minecraft:pickaxes"]),
-    ("axes",      ["#minecraft:axes"]),
-    ("shovels_hoes", ["#minecraft:shovels", "#minecraft:hoes"]),
-    ("armor",     ["#minecraft:trimmable_armor", "minecraft:shield", "minecraft:elytra", "minecraft:turtle_helmet"]),
-    ("ranged",    ["minecraft:bow", "minecraft:crossbow", "minecraft:trident", "minecraft:mace", "#minecraft:arrows", "minecraft:wind_charge"]),
+    ("swords",    FAM["swords"]),
+    ("pickaxes",  FAM["pickaxes"]),
+    ("axes",      FAM["axes"]),
+    ("shovels_hoes", FAM["shovels"] + FAM["hoes"]),
+    ("armor",     FAM["armor"] + ["minecraft:shield", "minecraft:elytra"]),
+    ("ranged",    ["minecraft:bow", "minecraft:crossbow", "minecraft:trident", "minecraft:mace", "minecraft:wind_charge"] + FAM["arrows"]),
     ("food",      ["minecraft:cooked_beef", "minecraft:cooked_porkchop", "minecraft:bread", "minecraft:golden_apple",
                    "minecraft:enchanted_golden_apple", "minecraft:golden_carrot", "minecraft:cooked_chicken", "minecraft:cooked_mutton"]),
     ("crops",     ["minecraft:wheat", "minecraft:carrot", "minecraft:potato", "minecraft:beetroot", "minecraft:sugar_cane",

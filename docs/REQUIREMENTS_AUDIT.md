@@ -33,8 +33,8 @@ Legend: **DONE+CHECKED** = built and checked by my static/model/simulated tests 
 **B1. Anything at all about real Minecraft behaviour** — I only have my own static checks, a model interpreter for the access logic, and a mail/launch/paste simulation.
 
 **B2. 1.21.11 syntax/format I could not execute** (each is isolated so a failure disables only that feature):
-- game rule name `command_block_output` (the pack tries it on load; if `/reload` complains, run the rule by hand);
-- item tags used by the sorter (`#minecraft:logs`, `planks`, `wool`, `sand`, `coals`, `swords`, `pickaxes`, `trimmable_armor` …) — one file per category;
+- **Registry-checked now** (`tools/registry_check.py`, PrismarineJS minecraft-data 3.119.0 for 1.21.11; command grammar from the 1.21.6 Brigadier tree): all 5,233 block states valid (0 problems); 59,324 data-pack command lines parse (1 rejected); every item/entity/effect/particle/sound id valid (0 unknown). Sorter categories now use explicit item-id lists instead of tags. Stone Factory chest items from a newer game version (cinnabar/sulfur) were swapped for purpur/amethyst stand-ins.
+- game rule name `command_block_output` — the only line the checker rejects (1.21.6 grammar vs 1.21.11 rename); isolated, if `/reload` complains run the rule by hand;
 - `execute if items …`, `item replace … from block …`, `loot insert … mine`/`loot …`, `ride … mount`, `forceload` via macros, `data modify block … front_text.messages`, `title`/`playsound`/`stopsound`;
 - written-book matching: the pack matches **four** possible encodings of a book's title/name — I don't know which one 1.21.11 uses, at least one should match;
 - reading page 1 of a Book & Quill for messages (`SelectedItem.components."minecraft:writable_book_content".pages[0]`, string or `{raw:…}`);
