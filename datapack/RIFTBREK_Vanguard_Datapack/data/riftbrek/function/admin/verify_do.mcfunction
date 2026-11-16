@@ -16,5 +16,5 @@ $execute positioned $(x) -55 $(z) if block ~220 ~ ~300 minecraft:repeating_comma
 $execute positioned $(x) -55 $(z) unless block ~220 ~ ~300 minecraft:repeating_command_block run tellraw @s {"text":"FAIL  synthesis unit (B11) (chunk not loaded, wrong origin, or not pasted)","color":"red"}
 $execute positioned $(x) 202 $(z) if block ~383 ~ ~271 minecraft:black_concrete run tellraw @s {"text":"PASS  great spire tip region (citadel)","color":"green"}
 $execute positioned $(x) 202 $(z) unless block ~383 ~ ~271 minecraft:black_concrete run tellraw @s {"text":"FAIL  great spire tip region (citadel) (chunk not loaded, wrong origin, or not pasted)","color":"red"}
-$execute positioned $(x) 42 $(z) if block ~760 ~ ~760 minecraft:polished_blackstone_bricks run tellraw @s {"text":"PASS  south-east corner tower base","color":"green"}
-$execute positioned $(x) 42 $(z) unless block ~760 ~ ~760 minecraft:polished_blackstone_bricks run tellraw @s {"text":"FAIL  south-east corner tower base (chunk not loaded, wrong origin, or not pasted)","color":"red"}
+$execute positioned $(x) 42 $(z) if block ~766 ~ ~750 minecraft:polished_blackstone_bricks run tellraw @s {"text":"PASS  south-east corner tower wall","color":"green"}
+$execute positioned $(x) 42 $(z) unless block ~766 ~ ~750 minecraft:polished_blackstone_bricks run tellraw @s {"text":"FAIL  south-east corner tower wall (chunk not loaded, wrong origin, or not pasted)","color":"red"}

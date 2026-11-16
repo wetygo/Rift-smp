@@ -204,7 +204,7 @@ def verify(P):
         ("sorter B controller (B6)", 560, L.level_floor(6) + 4, 520, "minecraft:repeating_command_block"),
         ("synthesis unit (B11)", L.SYNTH_ORIGIN[0], L.level_floor(11) + 1, L.SYNTH_ORIGIN[1], "minecraft:repeating_command_block"),
         ("great spire tip region (citadel)", 383, GY + 170, 271, "minecraft:black_concrete"),
-        ("south-east corner tower base", 760, GY + 10, 760, "minecraft:polished_blackstone_bricks"),
+        ("south-east corner tower wall", 766, GY + 10, 750, "minecraft:polished_blackstone_bricks"),
     ]
     lines = ["# macro: x,z = schematic origin (admin/origin).  Run: /function riftbrek:admin/verify",
              'tellraw @s {"text":"[RIFTBREK] paste check (PASS = expected block found):","color":"light_purple"}']

@@ -148,6 +148,13 @@ def main():
         for i in sorted(info, key=lambda i: (i["z"], i["x"])):
             A.append(f"| {i['name']} | {i['author']} | {i['community']} | {i['x']}, {i['y']}, {i['z']} | {i['size'][0]} x {i['size'][1]} x {i['size'][2]} | {i['dv']} | {'yes' if i['purple'] else 'no (original colours)'} |")
         open(os.path.join(ROOT, "docs", "ANNEX_MAP.md"), "w").write("\n".join(A) + "\n")
+    zp = os.path.join(ROOT, "datapack", "paste_zones.json")
+    if os.path.exists(zp):
+        zs = json.load(open(zp))
+        Z = ["| zone | block range x0..x1 , z0..z1 (local = world X,Z when origin is 0,0) | chunks |", "|---|---|---|"]
+        for m in zs:
+            Z.append(f"| {m['n']} | {m['blocks'][0]}..{m['blocks'][2]} , {m['blocks'][1]}..{m['blocks'][3]} | {m['chunks']} |")
+        open(os.path.join(ROOT, "docs", "PASTE_ZONES.md"), "w").write("# Paste zones (auto-generated)\n\n" + "\n".join(Z) + "\n")
     # coverage check: every function id must appear in the handbook
     txt = open(os.path.join(ROOT, "docs", "COMMAND_HANDBOOK.md")).read()
     missing = [f for f in ids if f"`{f}`" not in txt]

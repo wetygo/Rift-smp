@@ -50,7 +50,7 @@ def build(root):
 
     # ------------------------------------------------------------------ load / tick
     objs = ["rb_clear", "rb_cred", "rb_role", "rb_id", "rb_visitor", "rb_kit", "rb_lastkit", "rb_issued",
-            "rb_denied", "rb_incident", "rb_lock", "rb_tmp", "rb_const", "rb_msgcd", "rb_cbs", "rb_bl"]
+            "rb_denied", "rb_incident", "rb_lock", "rb_tmp", "rb_const", "rb_msgcd", "rb_cbs", "rb_bl", "rb_p"]
     load = ["# Runs on every /reload and world start. NOTHING here may reset persistent player data."]
     load += [f"scoreboard objectives add {o} dummy" for o in objs]
     load.append("scoreboard objectives add rb_req trigger")

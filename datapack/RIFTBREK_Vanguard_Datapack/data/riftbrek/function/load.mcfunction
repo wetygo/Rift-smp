@@ -15,6 +15,7 @@ scoreboard objectives add rb_const dummy
 scoreboard objectives add rb_msgcd dummy
 scoreboard objectives add rb_cbs dummy
 scoreboard objectives add rb_bl dummy
+scoreboard objectives add rb_p dummy
 scoreboard objectives add rb_req trigger
 execute unless score #GLOBAL rb_lock = #GLOBAL rb_lock run scoreboard players set #GLOBAL rb_lock 0
 execute unless score #NEXT rb_id = #NEXT rb_id run scoreboard players set #NEXT rb_id 1000
