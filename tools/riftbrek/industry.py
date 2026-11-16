@@ -226,3 +226,5 @@ def add(P):
     blimp(P)
     forceload(P)
     verify(P)
+    from . import quarters_dp
+    quarters_dp.add(P)

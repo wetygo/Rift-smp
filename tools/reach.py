@@ -11,7 +11,7 @@ d, r, pal, a = validate.load_litematic(lit)
 names = [p[0].split(":")[1] for p in pal]
 NONSOLID = ("air", "ladder", "iron_door", "sign", "wall_banner", "banner", "lever", "button", "carpet", "rail", "lightning_rod",
             "redstone_lamp_x", "wheat", "carrots", "potatoes", "beetroots", "water")
-passable_ids = [i for i, n in enumerate(names) if n in NONSOLID or n.endswith("_sign") or n.endswith("banner") or n.endswith("_rail") or n.endswith("carpet")]
+passable_ids = [i for i, n in enumerate(names) if n in NONSOLID or n.endswith("_sign") or n.endswith("banner") or n.endswith("_rail") or n.endswith("carpet") or n.endswith("_door")]
 P = np.isin(a, passable_ids)
 # standing cell: cell passable and head passable
 S = P.copy()
@@ -64,6 +64,14 @@ pts = {
     "B1 N-S tunnel x=300": (300, L.level_floor(1) + 1, 200),
     "abstracters basement (B1)": (580, L.level_floor(1) + 1, 310),
     "comms room (B2)": (350, L.level_floor(2) + 1, 428),
+    "quarters lobby": (L.QBX + 41, GY, L.QBZ + 6),
+    "quarters corridor f2": (L.QBX + 20, GY + 12, L.QBZ + 12),
+    "quarters room 1": (L.QBX + 5, GY, L.QBZ + 6),
+    "quarters room 22": (L.QBX + 41, GY + 12, L.QBZ + 19),
+    "quarters control room": (L.QBX + 41, GY, L.QBZ + 19),
+    "quarters roof pad": (L.Q_ROOF_PAD[0] + 3, GY + 3 * L.Q_FH + 1, L.Q_ROOF_PAD[1]),
+    "ruined vault interior (B12)": (330, L.level_floor(12) + 1, 318),
+    "surface launch pad": (L.LAUNCH_PADS[0][0] + 1, GY, L.LAUNCH_PADS[0][1] + 1),
     "throne room floor": (383, GY + 49, 280),
 }
 for k, (x, y, z) in pts.items():

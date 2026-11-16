@@ -20,18 +20,70 @@ Ground surface (first walkable layer) is local y = 96 = world y 32.
 | B11 | y 8 (world -56) |
 | B12 | y 0 (world -64) |
 
+## command blocks: `alarm/` (46)
+| function | local x,y,z | world offset (y-64) |
+|---|---|---|
+| `alarm/all` | 517, 99, 583 | +517, 35, +583 |
+| `alarm/emergency_1 with storage cfg origin` | 489, 97, 576 | +489, 33, +576 |
+| `alarm/emergency_10 with storage cfg origin` | 525, 103, 576 | +525, 39, +576 |
+| `alarm/emergency_11 with storage cfg origin` | 489, 103, 585 | +489, 39, +585 |
+| `alarm/emergency_12 with storage cfg origin` | 501, 103, 585 | +501, 39, +585 |
+| `alarm/emergency_13 with storage cfg origin` | 513, 103, 585 | +513, 39, +585 |
+| `alarm/emergency_14 with storage cfg origin` | 525, 103, 585 | +525, 39, +585 |
+| `alarm/emergency_15 with storage cfg origin` | 489, 109, 576 | +489, 45, +576 |
+| `alarm/emergency_16 with storage cfg origin` | 501, 109, 576 | +501, 45, +576 |
+| `alarm/emergency_17 with storage cfg origin` | 513, 109, 576 | +513, 45, +576 |
+| `alarm/emergency_18 with storage cfg origin` | 525, 109, 576 | +525, 45, +576 |
+| `alarm/emergency_19 with storage cfg origin` | 489, 109, 585 | +489, 45, +585 |
+| `alarm/emergency_2 with storage cfg origin` | 501, 97, 576 | +501, 33, +576 |
+| `alarm/emergency_20 with storage cfg origin` | 501, 109, 585 | +501, 45, +585 |
+| `alarm/emergency_21 with storage cfg origin` | 513, 109, 585 | +513, 45, +585 |
+| `alarm/emergency_22 with storage cfg origin` | 525, 109, 585 | +525, 45, +585 |
+| `alarm/emergency_3 with storage cfg origin` | 513, 97, 576 | +513, 33, +576 |
+| `alarm/emergency_4 with storage cfg origin` | 489, 97, 585 | +489, 33, +585 |
+| `alarm/emergency_5 with storage cfg origin` | 501, 97, 585 | +501, 33, +585 |
+| `alarm/emergency_6 with storage cfg origin` | 513, 97, 585 | +513, 33, +585 |
+| `alarm/emergency_7 with storage cfg origin` | 489, 103, 576 | +489, 39, +576 |
+| `alarm/emergency_8 with storage cfg origin` | 501, 103, 576 | +501, 39, +576 |
+| `alarm/emergency_9 with storage cfg origin` | 513, 103, 576 | +513, 39, +576 |
+| `alarm/reset` | 518, 99, 583 | +518, 35, +583 |
+| `alarm/room_1 with storage cfg origin` | 515, 97, 583 | +515, 33, +583 |
+| `alarm/room_10 with storage cfg origin` | 524, 97, 583 | +524, 33, +583 |
+| `alarm/room_11 with storage cfg origin` | 515, 98, 583 | +515, 34, +583 |
+| `alarm/room_12 with storage cfg origin` | 516, 98, 583 | +516, 34, +583 |
+| `alarm/room_13 with storage cfg origin` | 517, 98, 583 | +517, 34, +583 |
+| `alarm/room_14 with storage cfg origin` | 518, 98, 583 | +518, 34, +583 |
+| `alarm/room_15 with storage cfg origin` | 519, 98, 583 | +519, 34, +583 |
+| `alarm/room_16 with storage cfg origin` | 520, 98, 583 | +520, 34, +583 |
+| `alarm/room_17 with storage cfg origin` | 521, 98, 583 | +521, 34, +583 |
+| `alarm/room_18 with storage cfg origin` | 522, 98, 583 | +522, 34, +583 |
+| `alarm/room_19 with storage cfg origin` | 523, 98, 583 | +523, 34, +583 |
+| `alarm/room_2 with storage cfg origin` | 516, 97, 583 | +516, 33, +583 |
+| `alarm/room_20 with storage cfg origin` | 524, 98, 583 | +524, 34, +583 |
+| `alarm/room_21 with storage cfg origin` | 515, 99, 583 | +515, 35, +583 |
+| `alarm/room_22 with storage cfg origin` | 516, 99, 583 | +516, 35, +583 |
+| `alarm/room_3 with storage cfg origin` | 517, 97, 583 | +517, 33, +583 |
+| `alarm/room_4 with storage cfg origin` | 518, 97, 583 | +518, 33, +583 |
+| `alarm/room_5 with storage cfg origin` | 519, 97, 583 | +519, 33, +583 |
+| `alarm/room_6 with storage cfg origin` | 520, 97, 583 | +520, 33, +583 |
+| `alarm/room_7 with storage cfg origin` | 521, 97, 583 | +521, 33, +583 |
+| `alarm/room_8 with storage cfg origin` | 522, 97, 583 | +522, 33, +583 |
+| `alarm/room_9 with storage cfg origin` | 523, 97, 583 | +523, 33, +583 |
+
 ## command blocks: `blimp/` (1)
 | function | local x,y,z | world offset (y-64) |
 |---|---|---|
 | `blimp/tick` | 250, 94, 110 | +250, 30, +110 |
 
-## command blocks: `door/` (20)
+## command blocks: `door/` (22)
 | function | local x,y,z | world offset (y-64) |
 |---|---|---|
 | `door/abstracters_w12` | 625, 99, 300 | +625, 35, +300 |
 | `door/archivist_w12` | 121, 99, 273 | +121, 35, +273 |
+| `door/leader` | 514, 99, 583 | +514, 35, +583 |
 | `door/leader_w6` | 381, 92, 450 | +381, 28, +450 |
 | `door/member` | 34, 99, 381 | +34, 35, +381 |
+| `door/member` | 519, 99, 569 | +519, 35, +569 |
 | `door/member` | 733, 99, 381 | +733, 35, +381 |
 | `door/member_w12` | 378, 99, 366 | +378, 35, +366 |
 | `door/member_w12` | 629, 99, 450 | +629, 35, +450 |
@@ -87,6 +139,41 @@ Ground surface (first walkable layer) is local y = 96 = world y 32.
 | `kit/pad_veil` | 99, 94, 308 | +99, 30, +308 |
 | `kit/pad_wildcards` | 107, 94, 478 | +107, 30, +478 |
 
+## command blocks: `launch/` (5)
+| function | local x,y,z | world offset (y-64) |
+|---|---|---|
+| `launch/pad` | 323, 94, 433 | +323, 30, +433 |
+| `launch/pad` | 323, 94, 527 | +323, 30, +527 |
+| `launch/pad` | 443, 94, 433 | +443, 30, +433 |
+| `launch/pad` | 443, 94, 527 | +443, 30, +527 |
+| `launch/pad` | 502, 113, 581 | +502, 49, +581 |
+
+## command blocks: `mail/` (22)
+| function | local x,y,z | world offset (y-64) |
+|---|---|---|
+| `mail/room_1` | 488, 96, 573 | +488, 32, +573 |
+| `mail/room_10` | 524, 102, 573 | +524, 38, +573 |
+| `mail/room_11` | 488, 102, 588 | +488, 38, +588 |
+| `mail/room_12` | 500, 102, 588 | +500, 38, +588 |
+| `mail/room_13` | 512, 102, 588 | +512, 38, +588 |
+| `mail/room_14` | 524, 102, 588 | +524, 38, +588 |
+| `mail/room_15` | 488, 108, 573 | +488, 44, +573 |
+| `mail/room_16` | 500, 108, 573 | +500, 44, +573 |
+| `mail/room_17` | 512, 108, 573 | +512, 44, +573 |
+| `mail/room_18` | 524, 108, 573 | +524, 44, +573 |
+| `mail/room_19` | 488, 108, 588 | +488, 44, +588 |
+| `mail/room_2` | 500, 96, 573 | +500, 32, +573 |
+| `mail/room_20` | 500, 108, 588 | +500, 44, +588 |
+| `mail/room_21` | 512, 108, 588 | +512, 44, +588 |
+| `mail/room_22` | 524, 108, 588 | +524, 44, +588 |
+| `mail/room_3` | 512, 96, 573 | +512, 32, +573 |
+| `mail/room_4` | 488, 96, 588 | +488, 32, +588 |
+| `mail/room_5` | 500, 96, 588 | +500, 32, +588 |
+| `mail/room_6` | 512, 96, 588 | +512, 32, +588 |
+| `mail/room_7` | 488, 102, 573 | +488, 38, +573 |
+| `mail/room_8` | 500, 102, 573 | +500, 38, +573 |
+| `mail/room_9` | 512, 102, 573 | +512, 38, +573 |
+
 ## command blocks: `msg/` (17)
 | function | local x,y,z | world offset (y-64) |
 |---|---|---|
@@ -107,6 +194,32 @@ Ground surface (first walkable layer) is local y = 96 = world y 32.
 | `msg/board` | 613, 95, 251 | +613, 31, +251 |
 | `msg/board` | 621, 95, 306 | +621, 31, +306 |
 | `msg/board` | 625, 95, 456 | +625, 31, +456 |
+
+## command blocks: `privacy/` (22)
+| function | local x,y,z | world offset (y-64) |
+|---|---|---|
+| `privacy/room_1` | 477, 97, 574 | +477, 33, +574 |
+| `privacy/room_10` | 513, 103, 574 | +513, 39, +574 |
+| `privacy/room_11` | 477, 103, 587 | +477, 39, +587 |
+| `privacy/room_12` | 489, 103, 587 | +489, 39, +587 |
+| `privacy/room_13` | 501, 103, 587 | +501, 39, +587 |
+| `privacy/room_14` | 513, 103, 587 | +513, 39, +587 |
+| `privacy/room_15` | 477, 109, 574 | +477, 45, +574 |
+| `privacy/room_16` | 489, 109, 574 | +489, 45, +574 |
+| `privacy/room_17` | 501, 109, 574 | +501, 45, +574 |
+| `privacy/room_18` | 513, 109, 574 | +513, 45, +574 |
+| `privacy/room_19` | 477, 109, 587 | +477, 45, +587 |
+| `privacy/room_2` | 489, 97, 574 | +489, 33, +574 |
+| `privacy/room_20` | 489, 109, 587 | +489, 45, +587 |
+| `privacy/room_21` | 501, 109, 587 | +501, 45, +587 |
+| `privacy/room_22` | 513, 109, 587 | +513, 45, +587 |
+| `privacy/room_3` | 501, 97, 574 | +501, 33, +574 |
+| `privacy/room_4` | 477, 97, 587 | +477, 33, +587 |
+| `privacy/room_5` | 489, 97, 587 | +489, 33, +587 |
+| `privacy/room_6` | 501, 97, 587 | +501, 33, +587 |
+| `privacy/room_7` | 477, 103, 574 | +477, 39, +574 |
+| `privacy/room_8` | 489, 103, 574 | +489, 39, +574 |
+| `privacy/room_9` | 501, 103, 574 | +501, 39, +574 |
 
 ## command blocks: `storage/` (2)
 | function | local x,y,z | world offset (y-64) |

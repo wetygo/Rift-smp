@@ -31,6 +31,7 @@ python3 -I zip_world.py
   echo "== validate"; python3 run_validate.py $LIT $PACK
   echo "== walkability (doors counted open)"; python3 reach.py $LIT | grep -E "^(OK|FAIL)|labels"
   echo "== underground pockets not connected to the outside (must be 0)"; python3 diag_levels.py $LIT | tail -3
+  echo "== book-mail simulation"; python3 mail_sim.py $PACK | tail -12
   echo "== access-logic model test"; python3 model_test.py $PACK
 } | tee ../docs/TEST_RESULTS_AUTO.txt
 python3 make_docs.py

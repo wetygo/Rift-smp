@@ -147,6 +147,12 @@ def run_cmd(ctx, line, depth=0):
                         i += 6
                     else:
                         return
+                elif kind == "items" and t[i + 2] == "entity":
+                    who = eval_sel(contexts[0], t[i + 3]) if t[i + 3].startswith("@") else []
+                    slot, pred = t[i + 4], t[i + 5]
+                    ok = bool(who) and getattr(who[0], "inv", {}).get(slot) == pred
+                    if ok == neg: return
+                    i += 6
                 elif kind in ("items", "data", "block"):
                     return
                 else:
@@ -157,10 +163,12 @@ def run_cmd(ctx, line, depth=0):
                 rest = " ".join(t[i + 2:])
                 if rest.startswith("at @s "):
                     rest = rest[6:]
-                if not rest.startswith("run "):
-                    return                      # unmodelled execute chain (e.g. positioned/if ... as ...)
                 for p in ps:
-                    run_cmd(Ctx(ctx.w, ctx.players, p, ctx.near), rest[4:], depth)
+                    nctx = Ctx(ctx.w, ctx.players, p, ctx.near)
+                    if rest.startswith("run "):
+                        run_cmd(nctx, rest[4:], depth)
+                    else:
+                        run_cmd(nctx, "execute " + rest, depth)      # keep evaluating the remaining conditions for this entity
                 return
             elif w == "run":
                 run_cmd(ctx, " ".join(t[i + 1:]), depth)
@@ -314,6 +322,19 @@ check("ledger entries never store a username", "$(mc)" not in lg and "mc" not in
 print("== stolen book: no function reads book/item data for authorisation")
 auth_texts = "".join(TEXTS[k] for k in TEXTS if k.startswith(("riftbrek:door/", "riftbrek:gate", "riftbrek:kit/")))
 check("no door/kit logic inspects held items or book NBT", "written_book" not in auth_texts.replace("give @s minecraft:written_book", "") and "SelectedItem" not in auth_texts and "Inventory" not in auth_texts)
+print("== launch pads (1000 blocks up, elytra required)")
+def launch(player):
+    w6 = World(); run_fn(Ctx(w6, [player], None, near=[player]), "riftbrek:launch/pad")
+    return any(l.startswith("tp @s") for l in player.log)
+pa = P("Wing", {"rb_member", "rb_birds"}, rb_clear=2, rb_cred=1); pa.inv = {"armor.chest": "minecraft:elytra"}
+check("member wearing an elytra is launched", launch(pa))
+pb = P("NoWing", {"rb_member", "rb_birds"}, rb_clear=2, rb_cred=1); pb.inv = {}
+check("member without elytra is NOT launched", not launch(pb))
+pc = P("RevWing", {"rb_revoked"}, rb_clear=0, rb_cred=0); pc.inv = {"armor.chest": "minecraft:elytra"}
+check("revoked player with elytra is NOT launched", not launch(pc))
+pd = P("VisWing", {"rb_guest"}, rb_clear=1, rb_cred=1, rb_visitor=100); pd.inv = {"armor.chest": "minecraft:elytra"}
+check("visitor with elytra is NOT launched", not launch(pd))
+check("launch height is 1000 blocks", "tp @s ~ ~1000 ~" in TEXTS["riftbrek:launch/go"])
 print("== message system")
 def sent(player, fn):
     w2 = World(); pl = [player]

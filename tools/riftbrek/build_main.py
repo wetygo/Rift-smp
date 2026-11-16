@@ -4,7 +4,7 @@ import numpy as np
 from . import layout as L
 from . import build_common as C
 from .world import World
-from . import build_surface as S, build_wings as WG, build_under as U, build_furnish as FU, build_furnish2 as F2
+from . import build_quarters as Q, build_surface as S, build_wings as WG, build_under as U, build_furnish as FU, build_furnish2 as F2
 
 
 def build_world():
@@ -20,9 +20,11 @@ def build_world():
     S.citadel(W); log("citadel")
     WG.archive(W); WG.unstables(W); WG.abstracters(W); WG.veil(W); WG.wildcards(W); WG.nexus(W); log("wings")
     WG.blimp(W); WG.chicken_chambers(W); log("blimp terminal + chambers")
+    Q.build_quarters(W); Q.launch_pads(W); log("member quarters + launch pads")
     n = WG.landscaping(W, rng); log("trees %d" % n)
     log("furnished quadrants %d" % FU.furnish(W)); log("light blocks %d" % FU.lights(W))
     U.machines(W, lv); log("machinery")
+    log("ruined vault: %d chests" % Q.ruined_vault(W, rng))
     from .build_wings import WINGS
     log("furnished perimeter items (shells) %d, underground %d" % (F2.furnish_shells(W, [(v[0], v[1], v[2], v[3]) for v in WINGS.values()]), F2.furnish_underground(W)))
     # tunnel / room ceilings sit at ground level: repaint the visible ones back to grass (not under buildings)

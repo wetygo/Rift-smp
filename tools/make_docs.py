@@ -60,7 +60,7 @@ PLAYER = [
 
 def classify(fid):
     n = fid.split(":")[1]
-    if n.startswith(("door/", "zone/", "kit/pad_", "industry/run_farm_", "industry/pulse_crafter")) or re.match(r"storage/sort_\w$", n):
+    if n.startswith(("door/", "zone/", "alarm/", "mail/", "privacy/", "launch/", "kit/pad_", "industry/run_farm_", "industry/pulse_crafter")) or re.match(r"storage/sort_\w$", n):
         return "cb"
     if n in {a[0] for a in ADMIN} or n.startswith("msg/") or n in ("registry/public", "registry/leader_private", "registry/self", "book/issue", "req/dispatch", "req/help") \
             or re.match(r"kit/(birds|unstables|abstracters|veil|archivist|wildcards|request|creator_\w+)$", n):

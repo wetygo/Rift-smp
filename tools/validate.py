@@ -96,7 +96,7 @@ def check_world(a, pal, tiles, fn_ids):
         if tid == "command_block":
             if "command_block" not in n:
                 errs.append(f"command TE without command block at {x},{y},{z}: {n}")
-            m = re.match(r"function (riftbrek:[a-z0-9_/]+)$", t["Command"])
+            m = re.match(r"function (riftbrek:[a-z0-9_/]+)(?: with storage \S+ \S+)?$", t["Command"])
             if not m or m.group(1) not in fn_ids:
                 errs.append(f"command block at {x},{y},{z} calls unknown function: {t['Command']}")
             else:
@@ -149,7 +149,7 @@ def functions(pack_root):
 
 
 KNOWN_CMDS = {"scoreboard", "execute", "tellraw", "tag", "give", "clear", "effect", "function", "data", "team", "gamerule", "setblock",
-              "fill", "item", "loot", "tp", "time", "title", "ride", "forceload", "kill", "summon"}
+              "fill", "item", "loot", "tp", "time", "title", "ride", "forceload", "kill", "summon", "playsound", "stopsound", "particle"}
 
 
 def lint_functions(ids, texts):
@@ -286,6 +286,49 @@ def check_consistency(a, pal, tiles, texts):
         m = re.match(r"riftbrek:kit/pad_(\w+)$", fid)
         if m:
             need("glazed_terracotta" in name(a[y + 1, z, x]), f"kit pad {m.group(1)} at {x},{y},{z}: no pad block above the command block")
+    # ---- Member Quarters: every room wired as the data pack expects
+    cmd_at = {(t["x"], t["y"], t["z"]): t for t in tiles if t["id"].endswith("command_block")}
+    rooms_q = [r for r in L.q_rooms() if r["kind"] == "room"]
+    for r in rooms_q:
+        n = r["n"]
+        mx, my, mz = r["mail_cb"]
+        need(cmd_at.get((mx, my, mz), {}).get("Command") == f"function riftbrek:mail/room_{n}", f"room {n}: mail command block wrong/missing")
+        need(name(a[my + 1, mz, mx]) == "dispenser", f"room {n}: no dispenser on the mail block")
+        ex, ey, ez = r["emerg_cb"]
+        t = cmd_at.get((ex, ey, ez), {})
+        need(t.get("Command") == f"function riftbrek:alarm/emergency_{n} with storage riftbrek:cfg origin" and int(t.get("auto", 1)) == 0, f"room {n}: emergency block wrong (must be impulse)")
+        need(B(ex - 1, ey, ez)[0] == "stone_button" and B(ex - 1, ey, ez)[1].get("facing") == "west", f"room {n}: emergency button missing/misplaced")
+        px, py, pz = r["priv_cb"]
+        need(cmd_at.get((px, py, pz), {}).get("Command") == f"function riftbrek:privacy/room_{n}", f"room {n}: privacy command block wrong")
+        need(B(px + 1, py, pz) == ("lever", {"face": "wall", "facing": "east", "powered": "true"}), f"room {n}: privacy lever wrong")
+        gx0, gy0, gz0, gx1, gy1, gz1 = r["gap"]
+        cells = [(x, y, gz0) for x in range(gx0, gx1 + 1) for y in range(gy0, gy1 + 1)]
+        need(all(name(a[y, z, x]) == "lava" for (x, y, z) in cells), f"room {n}: window gap is not full of lava")
+        need(any(l.startswith("execute if block ~1 ~ ~ minecraft:lever[powered=true] run fill ~%d ~%d ~%d ~%d ~%d ~%d minecraft:lava" % (gx0 - px, gy0 - py, gz0 - pz, gx1 - px, gy1 - py, gz1 - pz)) for l in texts[f"riftbrek:privacy/room_{n}"].split("\n")), f"room {n}: privacy function fills a different region than the window gap")
+        for fn in (f"riftbrek:alarm/room_{n}", f"riftbrek:alarm/emergency_{n}"):
+            need(fn in texts, f"missing {fn}")
+    panel = [c for (x, y, z), c in cmd_at.items() if c["Command"].startswith(("function riftbrek:alarm/room_", "function riftbrek:alarm/all", "function riftbrek:alarm/reset")) and int(c.get("auto", 1)) == 0 and z == L.QBZ + 15]
+    need(len(panel) == len(rooms_q) + 2, f"control panel: expected {len(rooms_q) + 2} buttons-blocks, found {len(panel)}")
+    for (x, y, z), c in cmd_at.items():
+        if c["Command"].startswith("function riftbrek:alarm/") and z == L.QBZ + 15:
+            need(B(x, y, z + 1)[0] == "stone_button", f"control panel button missing at {x},{y},{z + 1}")
+    pads = [(x, y, z) for (x, y, z), c in cmd_at.items() if c["Command"] == "function riftbrek:launch/pad"]
+    need(len(pads) == len(L.LAUNCH_PADS) + 1, f"launch pads: expected {len(L.LAUNCH_PADS) + 1}, found {len(pads)}")
+    for (x, y, z) in pads:
+        need("glazed_terracotta" in name(a[y + 1, z, x]), f"launch pad block missing above command block {x},{y},{z}")
+        need(all(name(a[y + k, z, x]) == "air" for k in range(2, 6)), f"launch pad {x},{y},{z}: headroom blocked")
+    # every lava block in the HQ must be fully enclosed (no air / open face next to it)
+    lv_ids = [i for i, (n_, p_) in enumerate(pal) if n_ == "minecraft:lava"]
+    if lv_ids:
+        Lm = np.isin(a, lv_ids)
+        air_ids = [i for i, (n_, p_) in enumerate(pal) if n_ == "minecraft:air"]
+        Am = np.isin(a, air_ids)
+        for ax in (0, 1, 2):
+            for sh in (1, -1):
+                leak = Lm & np.roll(Am, sh, axis=ax)
+                if leak.any():
+                    y, z, x = np.argwhere(leak)[0]
+                    errs.append(f"lava at {x},{y},{z} touches air (would flow) on axis {ax}")
     # no redstone block may touch a hopper (would lock it); check the whole world cheaply
     rb = [i for i, (n, p) in enumerate(pal) if n == "minecraft:redstone_block"]
     hp = [i for i, (n, p) in enumerate(pal) if n == "minecraft:hopper"]

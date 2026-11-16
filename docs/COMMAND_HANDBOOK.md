@@ -191,61 +191,354 @@ Macro functions take a compound argument. Use exact Minecraft names; the player 
 
 ## 4. Command-block-only functions (called by blocks inside the schematic - not typed by anyone)
 
-- C60. `riftbrek:door/abstracters`
-- C61. `riftbrek:door/abstracters_w12`
-- C62. `riftbrek:door/abstracters_w6`
-- C63. `riftbrek:door/archivist`
-- C64. `riftbrek:door/archivist_w12`
-- C65. `riftbrek:door/archivist_w6`
-- C66. `riftbrek:door/birds`
-- C67. `riftbrek:door/birds_w12`
-- C68. `riftbrek:door/birds_w6`
-- C69. `riftbrek:door/leader`
-- C70. `riftbrek:door/leader_w12`
-- C71. `riftbrek:door/leader_w6`
-- C72. `riftbrek:door/member`
-- C73. `riftbrek:door/member_w12`
-- C74. `riftbrek:door/member_w6`
-- C75. `riftbrek:door/public`
-- C76. `riftbrek:door/public_w12`
-- C77. `riftbrek:door/public_w6`
-- C78. `riftbrek:door/royal`
-- C79. `riftbrek:door/royal_w12`
-- C80. `riftbrek:door/royal_w6`
-- C81. `riftbrek:door/unstables`
-- C82. `riftbrek:door/unstables_w12`
-- C83. `riftbrek:door/unstables_w6`
-- C84. `riftbrek:door/veil`
-- C85. `riftbrek:door/veil_w12`
-- C86. `riftbrek:door/veil_w6`
-- C87. `riftbrek:door/wildcards`
-- C88. `riftbrek:door/wildcards_w12`
-- C89. `riftbrek:door/wildcards_w6`
-- C90. `riftbrek:industry/pulse_crafter`
-- C91. `riftbrek:industry/run_farm_beetroot`
-- C92. `riftbrek:industry/run_farm_carrots`
-- C93. `riftbrek:industry/run_farm_potatoes`
-- C94. `riftbrek:industry/run_farm_wheat`
-- C95. `riftbrek:kit/pad_abstracters`
-- C96. `riftbrek:kit/pad_archivist`
-- C97. `riftbrek:kit/pad_birds`
-- C98. `riftbrek:kit/pad_creator_flame`
-- C99. `riftbrek:kit/pad_creator_manepear`
-- C100. `riftbrek:kit/pad_creator_parrot`
-- C101. `riftbrek:kit/pad_creator_spoke`
-- C102. `riftbrek:kit/pad_creator_theobald`
-- C103. `riftbrek:kit/pad_creator_wemmbu`
-- C104. `riftbrek:kit/pad_unstables`
-- C105. `riftbrek:kit/pad_veil`
-- C106. `riftbrek:kit/pad_wildcards`
-- C107. `riftbrek:storage/sort_a`
-- C108. `riftbrek:storage/sort_b`
-- C109. `riftbrek:zone/cbs_eject`
-- C110. `riftbrek:zone/cbs_hit`
-- C111. `riftbrek:zone/chunkban`
-- C112. `riftbrek:zone/lockdown_siren`
-- C113. `riftbrek:zone/visible`
-- C114. `riftbrek:zone/visible_wide`
+- C60. `riftbrek:alarm/all`
+- C61. `riftbrek:alarm/emergency_1`
+- C62. `riftbrek:alarm/emergency_10`
+- C63. `riftbrek:alarm/emergency_11`
+- C64. `riftbrek:alarm/emergency_12`
+- C65. `riftbrek:alarm/emergency_13`
+- C66. `riftbrek:alarm/emergency_14`
+- C67. `riftbrek:alarm/emergency_15`
+- C68. `riftbrek:alarm/emergency_16`
+- C69. `riftbrek:alarm/emergency_17`
+- C70. `riftbrek:alarm/emergency_18`
+- C71. `riftbrek:alarm/emergency_19`
+- C72. `riftbrek:alarm/emergency_2`
+- C73. `riftbrek:alarm/emergency_20`
+- C74. `riftbrek:alarm/emergency_21`
+- C75. `riftbrek:alarm/emergency_22`
+- C76. `riftbrek:alarm/emergency_3`
+- C77. `riftbrek:alarm/emergency_4`
+- C78. `riftbrek:alarm/emergency_5`
+- C79. `riftbrek:alarm/emergency_6`
+- C80. `riftbrek:alarm/emergency_7`
+- C81. `riftbrek:alarm/emergency_8`
+- C82. `riftbrek:alarm/emergency_9`
+- C83. `riftbrek:alarm/reset`
+- C84. `riftbrek:alarm/ring_here`
+- C85. `riftbrek:alarm/room_1`
+- C86. `riftbrek:alarm/room_10`
+- C87. `riftbrek:alarm/room_11`
+- C88. `riftbrek:alarm/room_12`
+- C89. `riftbrek:alarm/room_13`
+- C90. `riftbrek:alarm/room_14`
+- C91. `riftbrek:alarm/room_15`
+- C92. `riftbrek:alarm/room_16`
+- C93. `riftbrek:alarm/room_17`
+- C94. `riftbrek:alarm/room_18`
+- C95. `riftbrek:alarm/room_19`
+- C96. `riftbrek:alarm/room_2`
+- C97. `riftbrek:alarm/room_20`
+- C98. `riftbrek:alarm/room_21`
+- C99. `riftbrek:alarm/room_22`
+- C100. `riftbrek:alarm/room_3`
+- C101. `riftbrek:alarm/room_4`
+- C102. `riftbrek:alarm/room_5`
+- C103. `riftbrek:alarm/room_6`
+- C104. `riftbrek:alarm/room_7`
+- C105. `riftbrek:alarm/room_8`
+- C106. `riftbrek:alarm/room_9`
+- C107. `riftbrek:door/abstracters`
+- C108. `riftbrek:door/abstracters_w12`
+- C109. `riftbrek:door/abstracters_w6`
+- C110. `riftbrek:door/archivist`
+- C111. `riftbrek:door/archivist_w12`
+- C112. `riftbrek:door/archivist_w6`
+- C113. `riftbrek:door/birds`
+- C114. `riftbrek:door/birds_w12`
+- C115. `riftbrek:door/birds_w6`
+- C116. `riftbrek:door/leader`
+- C117. `riftbrek:door/leader_w12`
+- C118. `riftbrek:door/leader_w6`
+- C119. `riftbrek:door/member`
+- C120. `riftbrek:door/member_w12`
+- C121. `riftbrek:door/member_w6`
+- C122. `riftbrek:door/public`
+- C123. `riftbrek:door/public_w12`
+- C124. `riftbrek:door/public_w6`
+- C125. `riftbrek:door/royal`
+- C126. `riftbrek:door/royal_w12`
+- C127. `riftbrek:door/royal_w6`
+- C128. `riftbrek:door/unstables`
+- C129. `riftbrek:door/unstables_w12`
+- C130. `riftbrek:door/unstables_w6`
+- C131. `riftbrek:door/veil`
+- C132. `riftbrek:door/veil_w12`
+- C133. `riftbrek:door/veil_w6`
+- C134. `riftbrek:door/wildcards`
+- C135. `riftbrek:door/wildcards_w12`
+- C136. `riftbrek:door/wildcards_w6`
+- C137. `riftbrek:industry/pulse_crafter`
+- C138. `riftbrek:industry/run_farm_beetroot`
+- C139. `riftbrek:industry/run_farm_carrots`
+- C140. `riftbrek:industry/run_farm_potatoes`
+- C141. `riftbrek:industry/run_farm_wheat`
+- C142. `riftbrek:kit/pad_abstracters`
+- C143. `riftbrek:kit/pad_archivist`
+- C144. `riftbrek:kit/pad_birds`
+- C145. `riftbrek:kit/pad_creator_flame`
+- C146. `riftbrek:kit/pad_creator_manepear`
+- C147. `riftbrek:kit/pad_creator_parrot`
+- C148. `riftbrek:kit/pad_creator_spoke`
+- C149. `riftbrek:kit/pad_creator_theobald`
+- C150. `riftbrek:kit/pad_creator_wemmbu`
+- C151. `riftbrek:kit/pad_unstables`
+- C152. `riftbrek:kit/pad_veil`
+- C153. `riftbrek:kit/pad_wildcards`
+- C154. `riftbrek:launch/go`
+- C155. `riftbrek:launch/no_elytra`
+- C156. `riftbrek:launch/pad`
+- C157. `riftbrek:mail/move`
+- C158. `riftbrek:mail/room_1`
+- C159. `riftbrek:mail/room_10`
+- C160. `riftbrek:mail/room_10_slot_0`
+- C161. `riftbrek:mail/room_10_slot_1`
+- C162. `riftbrek:mail/room_10_slot_2`
+- C163. `riftbrek:mail/room_10_slot_3`
+- C164. `riftbrek:mail/room_10_slot_4`
+- C165. `riftbrek:mail/room_10_slot_5`
+- C166. `riftbrek:mail/room_10_slot_6`
+- C167. `riftbrek:mail/room_10_slot_7`
+- C168. `riftbrek:mail/room_10_slot_8`
+- C169. `riftbrek:mail/room_11`
+- C170. `riftbrek:mail/room_11_slot_0`
+- C171. `riftbrek:mail/room_11_slot_1`
+- C172. `riftbrek:mail/room_11_slot_2`
+- C173. `riftbrek:mail/room_11_slot_3`
+- C174. `riftbrek:mail/room_11_slot_4`
+- C175. `riftbrek:mail/room_11_slot_5`
+- C176. `riftbrek:mail/room_11_slot_6`
+- C177. `riftbrek:mail/room_11_slot_7`
+- C178. `riftbrek:mail/room_11_slot_8`
+- C179. `riftbrek:mail/room_12`
+- C180. `riftbrek:mail/room_12_slot_0`
+- C181. `riftbrek:mail/room_12_slot_1`
+- C182. `riftbrek:mail/room_12_slot_2`
+- C183. `riftbrek:mail/room_12_slot_3`
+- C184. `riftbrek:mail/room_12_slot_4`
+- C185. `riftbrek:mail/room_12_slot_5`
+- C186. `riftbrek:mail/room_12_slot_6`
+- C187. `riftbrek:mail/room_12_slot_7`
+- C188. `riftbrek:mail/room_12_slot_8`
+- C189. `riftbrek:mail/room_13`
+- C190. `riftbrek:mail/room_13_slot_0`
+- C191. `riftbrek:mail/room_13_slot_1`
+- C192. `riftbrek:mail/room_13_slot_2`
+- C193. `riftbrek:mail/room_13_slot_3`
+- C194. `riftbrek:mail/room_13_slot_4`
+- C195. `riftbrek:mail/room_13_slot_5`
+- C196. `riftbrek:mail/room_13_slot_6`
+- C197. `riftbrek:mail/room_13_slot_7`
+- C198. `riftbrek:mail/room_13_slot_8`
+- C199. `riftbrek:mail/room_14`
+- C200. `riftbrek:mail/room_14_slot_0`
+- C201. `riftbrek:mail/room_14_slot_1`
+- C202. `riftbrek:mail/room_14_slot_2`
+- C203. `riftbrek:mail/room_14_slot_3`
+- C204. `riftbrek:mail/room_14_slot_4`
+- C205. `riftbrek:mail/room_14_slot_5`
+- C206. `riftbrek:mail/room_14_slot_6`
+- C207. `riftbrek:mail/room_14_slot_7`
+- C208. `riftbrek:mail/room_14_slot_8`
+- C209. `riftbrek:mail/room_15`
+- C210. `riftbrek:mail/room_15_slot_0`
+- C211. `riftbrek:mail/room_15_slot_1`
+- C212. `riftbrek:mail/room_15_slot_2`
+- C213. `riftbrek:mail/room_15_slot_3`
+- C214. `riftbrek:mail/room_15_slot_4`
+- C215. `riftbrek:mail/room_15_slot_5`
+- C216. `riftbrek:mail/room_15_slot_6`
+- C217. `riftbrek:mail/room_15_slot_7`
+- C218. `riftbrek:mail/room_15_slot_8`
+- C219. `riftbrek:mail/room_16`
+- C220. `riftbrek:mail/room_16_slot_0`
+- C221. `riftbrek:mail/room_16_slot_1`
+- C222. `riftbrek:mail/room_16_slot_2`
+- C223. `riftbrek:mail/room_16_slot_3`
+- C224. `riftbrek:mail/room_16_slot_4`
+- C225. `riftbrek:mail/room_16_slot_5`
+- C226. `riftbrek:mail/room_16_slot_6`
+- C227. `riftbrek:mail/room_16_slot_7`
+- C228. `riftbrek:mail/room_16_slot_8`
+- C229. `riftbrek:mail/room_17`
+- C230. `riftbrek:mail/room_17_slot_0`
+- C231. `riftbrek:mail/room_17_slot_1`
+- C232. `riftbrek:mail/room_17_slot_2`
+- C233. `riftbrek:mail/room_17_slot_3`
+- C234. `riftbrek:mail/room_17_slot_4`
+- C235. `riftbrek:mail/room_17_slot_5`
+- C236. `riftbrek:mail/room_17_slot_6`
+- C237. `riftbrek:mail/room_17_slot_7`
+- C238. `riftbrek:mail/room_17_slot_8`
+- C239. `riftbrek:mail/room_18`
+- C240. `riftbrek:mail/room_18_slot_0`
+- C241. `riftbrek:mail/room_18_slot_1`
+- C242. `riftbrek:mail/room_18_slot_2`
+- C243. `riftbrek:mail/room_18_slot_3`
+- C244. `riftbrek:mail/room_18_slot_4`
+- C245. `riftbrek:mail/room_18_slot_5`
+- C246. `riftbrek:mail/room_18_slot_6`
+- C247. `riftbrek:mail/room_18_slot_7`
+- C248. `riftbrek:mail/room_18_slot_8`
+- C249. `riftbrek:mail/room_19`
+- C250. `riftbrek:mail/room_19_slot_0`
+- C251. `riftbrek:mail/room_19_slot_1`
+- C252. `riftbrek:mail/room_19_slot_2`
+- C253. `riftbrek:mail/room_19_slot_3`
+- C254. `riftbrek:mail/room_19_slot_4`
+- C255. `riftbrek:mail/room_19_slot_5`
+- C256. `riftbrek:mail/room_19_slot_6`
+- C257. `riftbrek:mail/room_19_slot_7`
+- C258. `riftbrek:mail/room_19_slot_8`
+- C259. `riftbrek:mail/room_1_slot_0`
+- C260. `riftbrek:mail/room_1_slot_1`
+- C261. `riftbrek:mail/room_1_slot_2`
+- C262. `riftbrek:mail/room_1_slot_3`
+- C263. `riftbrek:mail/room_1_slot_4`
+- C264. `riftbrek:mail/room_1_slot_5`
+- C265. `riftbrek:mail/room_1_slot_6`
+- C266. `riftbrek:mail/room_1_slot_7`
+- C267. `riftbrek:mail/room_1_slot_8`
+- C268. `riftbrek:mail/room_2`
+- C269. `riftbrek:mail/room_20`
+- C270. `riftbrek:mail/room_20_slot_0`
+- C271. `riftbrek:mail/room_20_slot_1`
+- C272. `riftbrek:mail/room_20_slot_2`
+- C273. `riftbrek:mail/room_20_slot_3`
+- C274. `riftbrek:mail/room_20_slot_4`
+- C275. `riftbrek:mail/room_20_slot_5`
+- C276. `riftbrek:mail/room_20_slot_6`
+- C277. `riftbrek:mail/room_20_slot_7`
+- C278. `riftbrek:mail/room_20_slot_8`
+- C279. `riftbrek:mail/room_21`
+- C280. `riftbrek:mail/room_21_slot_0`
+- C281. `riftbrek:mail/room_21_slot_1`
+- C282. `riftbrek:mail/room_21_slot_2`
+- C283. `riftbrek:mail/room_21_slot_3`
+- C284. `riftbrek:mail/room_21_slot_4`
+- C285. `riftbrek:mail/room_21_slot_5`
+- C286. `riftbrek:mail/room_21_slot_6`
+- C287. `riftbrek:mail/room_21_slot_7`
+- C288. `riftbrek:mail/room_21_slot_8`
+- C289. `riftbrek:mail/room_22`
+- C290. `riftbrek:mail/room_22_slot_0`
+- C291. `riftbrek:mail/room_22_slot_1`
+- C292. `riftbrek:mail/room_22_slot_2`
+- C293. `riftbrek:mail/room_22_slot_3`
+- C294. `riftbrek:mail/room_22_slot_4`
+- C295. `riftbrek:mail/room_22_slot_5`
+- C296. `riftbrek:mail/room_22_slot_6`
+- C297. `riftbrek:mail/room_22_slot_7`
+- C298. `riftbrek:mail/room_22_slot_8`
+- C299. `riftbrek:mail/room_2_slot_0`
+- C300. `riftbrek:mail/room_2_slot_1`
+- C301. `riftbrek:mail/room_2_slot_2`
+- C302. `riftbrek:mail/room_2_slot_3`
+- C303. `riftbrek:mail/room_2_slot_4`
+- C304. `riftbrek:mail/room_2_slot_5`
+- C305. `riftbrek:mail/room_2_slot_6`
+- C306. `riftbrek:mail/room_2_slot_7`
+- C307. `riftbrek:mail/room_2_slot_8`
+- C308. `riftbrek:mail/room_3`
+- C309. `riftbrek:mail/room_3_slot_0`
+- C310. `riftbrek:mail/room_3_slot_1`
+- C311. `riftbrek:mail/room_3_slot_2`
+- C312. `riftbrek:mail/room_3_slot_3`
+- C313. `riftbrek:mail/room_3_slot_4`
+- C314. `riftbrek:mail/room_3_slot_5`
+- C315. `riftbrek:mail/room_3_slot_6`
+- C316. `riftbrek:mail/room_3_slot_7`
+- C317. `riftbrek:mail/room_3_slot_8`
+- C318. `riftbrek:mail/room_4`
+- C319. `riftbrek:mail/room_4_slot_0`
+- C320. `riftbrek:mail/room_4_slot_1`
+- C321. `riftbrek:mail/room_4_slot_2`
+- C322. `riftbrek:mail/room_4_slot_3`
+- C323. `riftbrek:mail/room_4_slot_4`
+- C324. `riftbrek:mail/room_4_slot_5`
+- C325. `riftbrek:mail/room_4_slot_6`
+- C326. `riftbrek:mail/room_4_slot_7`
+- C327. `riftbrek:mail/room_4_slot_8`
+- C328. `riftbrek:mail/room_5`
+- C329. `riftbrek:mail/room_5_slot_0`
+- C330. `riftbrek:mail/room_5_slot_1`
+- C331. `riftbrek:mail/room_5_slot_2`
+- C332. `riftbrek:mail/room_5_slot_3`
+- C333. `riftbrek:mail/room_5_slot_4`
+- C334. `riftbrek:mail/room_5_slot_5`
+- C335. `riftbrek:mail/room_5_slot_6`
+- C336. `riftbrek:mail/room_5_slot_7`
+- C337. `riftbrek:mail/room_5_slot_8`
+- C338. `riftbrek:mail/room_6`
+- C339. `riftbrek:mail/room_6_slot_0`
+- C340. `riftbrek:mail/room_6_slot_1`
+- C341. `riftbrek:mail/room_6_slot_2`
+- C342. `riftbrek:mail/room_6_slot_3`
+- C343. `riftbrek:mail/room_6_slot_4`
+- C344. `riftbrek:mail/room_6_slot_5`
+- C345. `riftbrek:mail/room_6_slot_6`
+- C346. `riftbrek:mail/room_6_slot_7`
+- C347. `riftbrek:mail/room_6_slot_8`
+- C348. `riftbrek:mail/room_7`
+- C349. `riftbrek:mail/room_7_slot_0`
+- C350. `riftbrek:mail/room_7_slot_1`
+- C351. `riftbrek:mail/room_7_slot_2`
+- C352. `riftbrek:mail/room_7_slot_3`
+- C353. `riftbrek:mail/room_7_slot_4`
+- C354. `riftbrek:mail/room_7_slot_5`
+- C355. `riftbrek:mail/room_7_slot_6`
+- C356. `riftbrek:mail/room_7_slot_7`
+- C357. `riftbrek:mail/room_7_slot_8`
+- C358. `riftbrek:mail/room_8`
+- C359. `riftbrek:mail/room_8_slot_0`
+- C360. `riftbrek:mail/room_8_slot_1`
+- C361. `riftbrek:mail/room_8_slot_2`
+- C362. `riftbrek:mail/room_8_slot_3`
+- C363. `riftbrek:mail/room_8_slot_4`
+- C364. `riftbrek:mail/room_8_slot_5`
+- C365. `riftbrek:mail/room_8_slot_6`
+- C366. `riftbrek:mail/room_8_slot_7`
+- C367. `riftbrek:mail/room_8_slot_8`
+- C368. `riftbrek:mail/room_9`
+- C369. `riftbrek:mail/room_9_slot_0`
+- C370. `riftbrek:mail/room_9_slot_1`
+- C371. `riftbrek:mail/room_9_slot_2`
+- C372. `riftbrek:mail/room_9_slot_3`
+- C373. `riftbrek:mail/room_9_slot_4`
+- C374. `riftbrek:mail/room_9_slot_5`
+- C375. `riftbrek:mail/room_9_slot_6`
+- C376. `riftbrek:mail/room_9_slot_7`
+- C377. `riftbrek:mail/room_9_slot_8`
+- C378. `riftbrek:privacy/room_1`
+- C379. `riftbrek:privacy/room_10`
+- C380. `riftbrek:privacy/room_11`
+- C381. `riftbrek:privacy/room_12`
+- C382. `riftbrek:privacy/room_13`
+- C383. `riftbrek:privacy/room_14`
+- C384. `riftbrek:privacy/room_15`
+- C385. `riftbrek:privacy/room_16`
+- C386. `riftbrek:privacy/room_17`
+- C387. `riftbrek:privacy/room_18`
+- C388. `riftbrek:privacy/room_19`
+- C389. `riftbrek:privacy/room_2`
+- C390. `riftbrek:privacy/room_20`
+- C391. `riftbrek:privacy/room_21`
+- C392. `riftbrek:privacy/room_22`
+- C393. `riftbrek:privacy/room_3`
+- C394. `riftbrek:privacy/room_4`
+- C395. `riftbrek:privacy/room_5`
+- C396. `riftbrek:privacy/room_6`
+- C397. `riftbrek:privacy/room_7`
+- C398. `riftbrek:privacy/room_8`
+- C399. `riftbrek:privacy/room_9`
+- C400. `riftbrek:storage/sort_a`
+- C401. `riftbrek:storage/sort_b`
+- C402. `riftbrek:zone/cbs_eject`
+- C403. `riftbrek:zone/cbs_hit`
+- C404. `riftbrek:zone/chunkban`
+- C405. `riftbrek:zone/lockdown_siren`
+- C406. `riftbrek:zone/visible`
+- C407. `riftbrek:zone/visible_wide`
 
 ## 5. Full function index (what is public vs internal)
 
@@ -300,6 +593,53 @@ Macro functions take a compound argument. Use exact Minecraft names; the player 
 | `riftbrek:admin/visitor_apply` | internal - do not call by hand |
 | `riftbrek:admin/visitor_grant` | internal - do not call by hand |
 | `riftbrek:admin/whois` | public (player/OP) |
+| `riftbrek:alarm/all` | command-block only |
+| `riftbrek:alarm/emergency_1` | command-block only |
+| `riftbrek:alarm/emergency_10` | command-block only |
+| `riftbrek:alarm/emergency_11` | command-block only |
+| `riftbrek:alarm/emergency_12` | command-block only |
+| `riftbrek:alarm/emergency_13` | command-block only |
+| `riftbrek:alarm/emergency_14` | command-block only |
+| `riftbrek:alarm/emergency_15` | command-block only |
+| `riftbrek:alarm/emergency_16` | command-block only |
+| `riftbrek:alarm/emergency_17` | command-block only |
+| `riftbrek:alarm/emergency_18` | command-block only |
+| `riftbrek:alarm/emergency_19` | command-block only |
+| `riftbrek:alarm/emergency_2` | command-block only |
+| `riftbrek:alarm/emergency_20` | command-block only |
+| `riftbrek:alarm/emergency_21` | command-block only |
+| `riftbrek:alarm/emergency_22` | command-block only |
+| `riftbrek:alarm/emergency_3` | command-block only |
+| `riftbrek:alarm/emergency_4` | command-block only |
+| `riftbrek:alarm/emergency_5` | command-block only |
+| `riftbrek:alarm/emergency_6` | command-block only |
+| `riftbrek:alarm/emergency_7` | command-block only |
+| `riftbrek:alarm/emergency_8` | command-block only |
+| `riftbrek:alarm/emergency_9` | command-block only |
+| `riftbrek:alarm/reset` | command-block only |
+| `riftbrek:alarm/ring_here` | command-block only |
+| `riftbrek:alarm/room_1` | command-block only |
+| `riftbrek:alarm/room_10` | command-block only |
+| `riftbrek:alarm/room_11` | command-block only |
+| `riftbrek:alarm/room_12` | command-block only |
+| `riftbrek:alarm/room_13` | command-block only |
+| `riftbrek:alarm/room_14` | command-block only |
+| `riftbrek:alarm/room_15` | command-block only |
+| `riftbrek:alarm/room_16` | command-block only |
+| `riftbrek:alarm/room_17` | command-block only |
+| `riftbrek:alarm/room_18` | command-block only |
+| `riftbrek:alarm/room_19` | command-block only |
+| `riftbrek:alarm/room_2` | command-block only |
+| `riftbrek:alarm/room_20` | command-block only |
+| `riftbrek:alarm/room_21` | command-block only |
+| `riftbrek:alarm/room_22` | command-block only |
+| `riftbrek:alarm/room_3` | command-block only |
+| `riftbrek:alarm/room_4` | command-block only |
+| `riftbrek:alarm/room_5` | command-block only |
+| `riftbrek:alarm/room_6` | command-block only |
+| `riftbrek:alarm/room_7` | command-block only |
+| `riftbrek:alarm/room_8` | command-block only |
+| `riftbrek:alarm/room_9` | command-block only |
 | `riftbrek:blimp/board` | internal - do not call by hand |
 | `riftbrek:blimp/left` | internal - do not call by hand |
 | `riftbrek:blimp/mount` | internal - do not call by hand |
@@ -401,12 +741,236 @@ Macro functions take a compound argument. Use exact Minecraft names; the player 
 | `riftbrek:kit/unstables` | public (player/OP) |
 | `riftbrek:kit/veil` | public (player/OP) |
 | `riftbrek:kit/wildcards` | public (player/OP) |
+| `riftbrek:launch/go` | command-block only |
+| `riftbrek:launch/no_elytra` | command-block only |
+| `riftbrek:launch/pad` | command-block only |
 | `riftbrek:load` | internal - do not call by hand |
 | `riftbrek:log/entry_kit` | internal - do not call by hand |
 | `riftbrek:log/entry_leader` | internal - do not call by hand |
 | `riftbrek:log/entry_register` | internal - do not call by hand |
 | `riftbrek:log/entry_revoke` | internal - do not call by hand |
 | `riftbrek:log/entry_royal` | internal - do not call by hand |
+| `riftbrek:mail/move` | command-block only |
+| `riftbrek:mail/room_1` | command-block only |
+| `riftbrek:mail/room_10` | command-block only |
+| `riftbrek:mail/room_10_slot_0` | command-block only |
+| `riftbrek:mail/room_10_slot_1` | command-block only |
+| `riftbrek:mail/room_10_slot_2` | command-block only |
+| `riftbrek:mail/room_10_slot_3` | command-block only |
+| `riftbrek:mail/room_10_slot_4` | command-block only |
+| `riftbrek:mail/room_10_slot_5` | command-block only |
+| `riftbrek:mail/room_10_slot_6` | command-block only |
+| `riftbrek:mail/room_10_slot_7` | command-block only |
+| `riftbrek:mail/room_10_slot_8` | command-block only |
+| `riftbrek:mail/room_11` | command-block only |
+| `riftbrek:mail/room_11_slot_0` | command-block only |
+| `riftbrek:mail/room_11_slot_1` | command-block only |
+| `riftbrek:mail/room_11_slot_2` | command-block only |
+| `riftbrek:mail/room_11_slot_3` | command-block only |
+| `riftbrek:mail/room_11_slot_4` | command-block only |
+| `riftbrek:mail/room_11_slot_5` | command-block only |
+| `riftbrek:mail/room_11_slot_6` | command-block only |
+| `riftbrek:mail/room_11_slot_7` | command-block only |
+| `riftbrek:mail/room_11_slot_8` | command-block only |
+| `riftbrek:mail/room_12` | command-block only |
+| `riftbrek:mail/room_12_slot_0` | command-block only |
+| `riftbrek:mail/room_12_slot_1` | command-block only |
+| `riftbrek:mail/room_12_slot_2` | command-block only |
+| `riftbrek:mail/room_12_slot_3` | command-block only |
+| `riftbrek:mail/room_12_slot_4` | command-block only |
+| `riftbrek:mail/room_12_slot_5` | command-block only |
+| `riftbrek:mail/room_12_slot_6` | command-block only |
+| `riftbrek:mail/room_12_slot_7` | command-block only |
+| `riftbrek:mail/room_12_slot_8` | command-block only |
+| `riftbrek:mail/room_13` | command-block only |
+| `riftbrek:mail/room_13_slot_0` | command-block only |
+| `riftbrek:mail/room_13_slot_1` | command-block only |
+| `riftbrek:mail/room_13_slot_2` | command-block only |
+| `riftbrek:mail/room_13_slot_3` | command-block only |
+| `riftbrek:mail/room_13_slot_4` | command-block only |
+| `riftbrek:mail/room_13_slot_5` | command-block only |
+| `riftbrek:mail/room_13_slot_6` | command-block only |
+| `riftbrek:mail/room_13_slot_7` | command-block only |
+| `riftbrek:mail/room_13_slot_8` | command-block only |
+| `riftbrek:mail/room_14` | command-block only |
+| `riftbrek:mail/room_14_slot_0` | command-block only |
+| `riftbrek:mail/room_14_slot_1` | command-block only |
+| `riftbrek:mail/room_14_slot_2` | command-block only |
+| `riftbrek:mail/room_14_slot_3` | command-block only |
+| `riftbrek:mail/room_14_slot_4` | command-block only |
+| `riftbrek:mail/room_14_slot_5` | command-block only |
+| `riftbrek:mail/room_14_slot_6` | command-block only |
+| `riftbrek:mail/room_14_slot_7` | command-block only |
+| `riftbrek:mail/room_14_slot_8` | command-block only |
+| `riftbrek:mail/room_15` | command-block only |
+| `riftbrek:mail/room_15_slot_0` | command-block only |
+| `riftbrek:mail/room_15_slot_1` | command-block only |
+| `riftbrek:mail/room_15_slot_2` | command-block only |
+| `riftbrek:mail/room_15_slot_3` | command-block only |
+| `riftbrek:mail/room_15_slot_4` | command-block only |
+| `riftbrek:mail/room_15_slot_5` | command-block only |
+| `riftbrek:mail/room_15_slot_6` | command-block only |
+| `riftbrek:mail/room_15_slot_7` | command-block only |
+| `riftbrek:mail/room_15_slot_8` | command-block only |
+| `riftbrek:mail/room_16` | command-block only |
+| `riftbrek:mail/room_16_slot_0` | command-block only |
+| `riftbrek:mail/room_16_slot_1` | command-block only |
+| `riftbrek:mail/room_16_slot_2` | command-block only |
+| `riftbrek:mail/room_16_slot_3` | command-block only |
+| `riftbrek:mail/room_16_slot_4` | command-block only |
+| `riftbrek:mail/room_16_slot_5` | command-block only |
+| `riftbrek:mail/room_16_slot_6` | command-block only |
+| `riftbrek:mail/room_16_slot_7` | command-block only |
+| `riftbrek:mail/room_16_slot_8` | command-block only |
+| `riftbrek:mail/room_17` | command-block only |
+| `riftbrek:mail/room_17_slot_0` | command-block only |
+| `riftbrek:mail/room_17_slot_1` | command-block only |
+| `riftbrek:mail/room_17_slot_2` | command-block only |
+| `riftbrek:mail/room_17_slot_3` | command-block only |
+| `riftbrek:mail/room_17_slot_4` | command-block only |
+| `riftbrek:mail/room_17_slot_5` | command-block only |
+| `riftbrek:mail/room_17_slot_6` | command-block only |
+| `riftbrek:mail/room_17_slot_7` | command-block only |
+| `riftbrek:mail/room_17_slot_8` | command-block only |
+| `riftbrek:mail/room_18` | command-block only |
+| `riftbrek:mail/room_18_slot_0` | command-block only |
+| `riftbrek:mail/room_18_slot_1` | command-block only |
+| `riftbrek:mail/room_18_slot_2` | command-block only |
+| `riftbrek:mail/room_18_slot_3` | command-block only |
+| `riftbrek:mail/room_18_slot_4` | command-block only |
+| `riftbrek:mail/room_18_slot_5` | command-block only |
+| `riftbrek:mail/room_18_slot_6` | command-block only |
+| `riftbrek:mail/room_18_slot_7` | command-block only |
+| `riftbrek:mail/room_18_slot_8` | command-block only |
+| `riftbrek:mail/room_19` | command-block only |
+| `riftbrek:mail/room_19_slot_0` | command-block only |
+| `riftbrek:mail/room_19_slot_1` | command-block only |
+| `riftbrek:mail/room_19_slot_2` | command-block only |
+| `riftbrek:mail/room_19_slot_3` | command-block only |
+| `riftbrek:mail/room_19_slot_4` | command-block only |
+| `riftbrek:mail/room_19_slot_5` | command-block only |
+| `riftbrek:mail/room_19_slot_6` | command-block only |
+| `riftbrek:mail/room_19_slot_7` | command-block only |
+| `riftbrek:mail/room_19_slot_8` | command-block only |
+| `riftbrek:mail/room_1_slot_0` | command-block only |
+| `riftbrek:mail/room_1_slot_1` | command-block only |
+| `riftbrek:mail/room_1_slot_2` | command-block only |
+| `riftbrek:mail/room_1_slot_3` | command-block only |
+| `riftbrek:mail/room_1_slot_4` | command-block only |
+| `riftbrek:mail/room_1_slot_5` | command-block only |
+| `riftbrek:mail/room_1_slot_6` | command-block only |
+| `riftbrek:mail/room_1_slot_7` | command-block only |
+| `riftbrek:mail/room_1_slot_8` | command-block only |
+| `riftbrek:mail/room_2` | command-block only |
+| `riftbrek:mail/room_20` | command-block only |
+| `riftbrek:mail/room_20_slot_0` | command-block only |
+| `riftbrek:mail/room_20_slot_1` | command-block only |
+| `riftbrek:mail/room_20_slot_2` | command-block only |
+| `riftbrek:mail/room_20_slot_3` | command-block only |
+| `riftbrek:mail/room_20_slot_4` | command-block only |
+| `riftbrek:mail/room_20_slot_5` | command-block only |
+| `riftbrek:mail/room_20_slot_6` | command-block only |
+| `riftbrek:mail/room_20_slot_7` | command-block only |
+| `riftbrek:mail/room_20_slot_8` | command-block only |
+| `riftbrek:mail/room_21` | command-block only |
+| `riftbrek:mail/room_21_slot_0` | command-block only |
+| `riftbrek:mail/room_21_slot_1` | command-block only |
+| `riftbrek:mail/room_21_slot_2` | command-block only |
+| `riftbrek:mail/room_21_slot_3` | command-block only |
+| `riftbrek:mail/room_21_slot_4` | command-block only |
+| `riftbrek:mail/room_21_slot_5` | command-block only |
+| `riftbrek:mail/room_21_slot_6` | command-block only |
+| `riftbrek:mail/room_21_slot_7` | command-block only |
+| `riftbrek:mail/room_21_slot_8` | command-block only |
+| `riftbrek:mail/room_22` | command-block only |
+| `riftbrek:mail/room_22_slot_0` | command-block only |
+| `riftbrek:mail/room_22_slot_1` | command-block only |
+| `riftbrek:mail/room_22_slot_2` | command-block only |
+| `riftbrek:mail/room_22_slot_3` | command-block only |
+| `riftbrek:mail/room_22_slot_4` | command-block only |
+| `riftbrek:mail/room_22_slot_5` | command-block only |
+| `riftbrek:mail/room_22_slot_6` | command-block only |
+| `riftbrek:mail/room_22_slot_7` | command-block only |
+| `riftbrek:mail/room_22_slot_8` | command-block only |
+| `riftbrek:mail/room_2_slot_0` | command-block only |
+| `riftbrek:mail/room_2_slot_1` | command-block only |
+| `riftbrek:mail/room_2_slot_2` | command-block only |
+| `riftbrek:mail/room_2_slot_3` | command-block only |
+| `riftbrek:mail/room_2_slot_4` | command-block only |
+| `riftbrek:mail/room_2_slot_5` | command-block only |
+| `riftbrek:mail/room_2_slot_6` | command-block only |
+| `riftbrek:mail/room_2_slot_7` | command-block only |
+| `riftbrek:mail/room_2_slot_8` | command-block only |
+| `riftbrek:mail/room_3` | command-block only |
+| `riftbrek:mail/room_3_slot_0` | command-block only |
+| `riftbrek:mail/room_3_slot_1` | command-block only |
+| `riftbrek:mail/room_3_slot_2` | command-block only |
+| `riftbrek:mail/room_3_slot_3` | command-block only |
+| `riftbrek:mail/room_3_slot_4` | command-block only |
+| `riftbrek:mail/room_3_slot_5` | command-block only |
+| `riftbrek:mail/room_3_slot_6` | command-block only |
+| `riftbrek:mail/room_3_slot_7` | command-block only |
+| `riftbrek:mail/room_3_slot_8` | command-block only |
+| `riftbrek:mail/room_4` | command-block only |
+| `riftbrek:mail/room_4_slot_0` | command-block only |
+| `riftbrek:mail/room_4_slot_1` | command-block only |
+| `riftbrek:mail/room_4_slot_2` | command-block only |
+| `riftbrek:mail/room_4_slot_3` | command-block only |
+| `riftbrek:mail/room_4_slot_4` | command-block only |
+| `riftbrek:mail/room_4_slot_5` | command-block only |
+| `riftbrek:mail/room_4_slot_6` | command-block only |
+| `riftbrek:mail/room_4_slot_7` | command-block only |
+| `riftbrek:mail/room_4_slot_8` | command-block only |
+| `riftbrek:mail/room_5` | command-block only |
+| `riftbrek:mail/room_5_slot_0` | command-block only |
+| `riftbrek:mail/room_5_slot_1` | command-block only |
+| `riftbrek:mail/room_5_slot_2` | command-block only |
+| `riftbrek:mail/room_5_slot_3` | command-block only |
+| `riftbrek:mail/room_5_slot_4` | command-block only |
+| `riftbrek:mail/room_5_slot_5` | command-block only |
+| `riftbrek:mail/room_5_slot_6` | command-block only |
+| `riftbrek:mail/room_5_slot_7` | command-block only |
+| `riftbrek:mail/room_5_slot_8` | command-block only |
+| `riftbrek:mail/room_6` | command-block only |
+| `riftbrek:mail/room_6_slot_0` | command-block only |
+| `riftbrek:mail/room_6_slot_1` | command-block only |
+| `riftbrek:mail/room_6_slot_2` | command-block only |
+| `riftbrek:mail/room_6_slot_3` | command-block only |
+| `riftbrek:mail/room_6_slot_4` | command-block only |
+| `riftbrek:mail/room_6_slot_5` | command-block only |
+| `riftbrek:mail/room_6_slot_6` | command-block only |
+| `riftbrek:mail/room_6_slot_7` | command-block only |
+| `riftbrek:mail/room_6_slot_8` | command-block only |
+| `riftbrek:mail/room_7` | command-block only |
+| `riftbrek:mail/room_7_slot_0` | command-block only |
+| `riftbrek:mail/room_7_slot_1` | command-block only |
+| `riftbrek:mail/room_7_slot_2` | command-block only |
+| `riftbrek:mail/room_7_slot_3` | command-block only |
+| `riftbrek:mail/room_7_slot_4` | command-block only |
+| `riftbrek:mail/room_7_slot_5` | command-block only |
+| `riftbrek:mail/room_7_slot_6` | command-block only |
+| `riftbrek:mail/room_7_slot_7` | command-block only |
+| `riftbrek:mail/room_7_slot_8` | command-block only |
+| `riftbrek:mail/room_8` | command-block only |
+| `riftbrek:mail/room_8_slot_0` | command-block only |
+| `riftbrek:mail/room_8_slot_1` | command-block only |
+| `riftbrek:mail/room_8_slot_2` | command-block only |
+| `riftbrek:mail/room_8_slot_3` | command-block only |
+| `riftbrek:mail/room_8_slot_4` | command-block only |
+| `riftbrek:mail/room_8_slot_5` | command-block only |
+| `riftbrek:mail/room_8_slot_6` | command-block only |
+| `riftbrek:mail/room_8_slot_7` | command-block only |
+| `riftbrek:mail/room_8_slot_8` | command-block only |
+| `riftbrek:mail/room_9` | command-block only |
+| `riftbrek:mail/room_9_slot_0` | command-block only |
+| `riftbrek:mail/room_9_slot_1` | command-block only |
+| `riftbrek:mail/room_9_slot_2` | command-block only |
+| `riftbrek:mail/room_9_slot_3` | command-block only |
+| `riftbrek:mail/room_9_slot_4` | command-block only |
+| `riftbrek:mail/room_9_slot_5` | command-block only |
+| `riftbrek:mail/room_9_slot_6` | command-block only |
+| `riftbrek:mail/room_9_slot_7` | command-block only |
+| `riftbrek:mail/room_9_slot_8` | command-block only |
 | `riftbrek:msg/_hist_faction` | public (player/OP) |
 | `riftbrek:msg/_hist_iter` | public (player/OP) |
 | `riftbrek:msg/announce` | public (player/OP) |
@@ -530,6 +1094,28 @@ Macro functions take a compound argument. Use exact Minecraft names; the player 
 | `riftbrek:paste/zone_9_off` | internal - do not call by hand |
 | `riftbrek:paste/zone_9_on` | internal - do not call by hand |
 | `riftbrek:paste/zone_9_tp` | internal - do not call by hand |
+| `riftbrek:privacy/room_1` | command-block only |
+| `riftbrek:privacy/room_10` | command-block only |
+| `riftbrek:privacy/room_11` | command-block only |
+| `riftbrek:privacy/room_12` | command-block only |
+| `riftbrek:privacy/room_13` | command-block only |
+| `riftbrek:privacy/room_14` | command-block only |
+| `riftbrek:privacy/room_15` | command-block only |
+| `riftbrek:privacy/room_16` | command-block only |
+| `riftbrek:privacy/room_17` | command-block only |
+| `riftbrek:privacy/room_18` | command-block only |
+| `riftbrek:privacy/room_19` | command-block only |
+| `riftbrek:privacy/room_2` | command-block only |
+| `riftbrek:privacy/room_20` | command-block only |
+| `riftbrek:privacy/room_21` | command-block only |
+| `riftbrek:privacy/room_22` | command-block only |
+| `riftbrek:privacy/room_3` | command-block only |
+| `riftbrek:privacy/room_4` | command-block only |
+| `riftbrek:privacy/room_5` | command-block only |
+| `riftbrek:privacy/room_6` | command-block only |
+| `riftbrek:privacy/room_7` | command-block only |
+| `riftbrek:privacy/room_8` | command-block only |
+| `riftbrek:privacy/room_9` | command-block only |
 | `riftbrek:registry/fetch_show` | internal - do not call by hand |
 | `riftbrek:registry/fetch_show_veil` | internal - do not call by hand |
 | `riftbrek:registry/iter` | internal - do not call by hand |

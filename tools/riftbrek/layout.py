@@ -128,3 +128,51 @@ SYNTH = [  # (name, entity loot table, label)
     ("witch", "minecraft:entities/witch", "WITCH DROPS"),
 ]
 SYNTH_ORIGIN = (220, 300)     # x, z of the first unit (B11); unit pitch 6 along x
+
+
+# ---- Member Quarters (BAT-style rooms): numbered rooms with alarm / emergency / book-mail / lava-curtain privacy --------------
+QBX, QBZ = 478, 568            # south-west corner of the block (local x, z)
+Q_FH = 6                       # floor height (5 air + 1 slab)
+Q_W, Q_D = 49, 26
+
+
+def q_rooms():
+    """list of dicts: n (room number), f floor, row 'N'/'S', i column, x0, y, zr0 (interior z start) + all fixed cell positions"""
+    from . import layout as _L
+    rooms = []
+    n = 0
+    order = []
+    for f in range(3):
+        for row in ("N", "S"):
+            for i in range(4):
+                order.append((f, row, i))
+    for (f, row, i) in order:
+        kind = "room"
+        if f == 0 and row == "N" and i == 3:
+            kind = "lobby"
+        if f == 0 and row == "S" and i == 3:
+            kind = "control"
+        r = dict(f=f, row=row, i=i, kind=kind)
+        if kind == "room":
+            n += 1; r["n"] = n
+        x0 = QBX + 12 * i
+        y = _L.GY + Q_FH * f
+        r.update(x0=x0, y=y)
+        if row == "N":
+            r.update(zin0=QBZ + 3, zin1=QBZ + 9, zgap=QBZ + 1, zA=QBZ + 5, zE=QBZ + 8, zP=QBZ + 6, zdoor=QBZ + 10, zsign=QBZ + 11, zbed=QBZ + 4)
+        else:
+            r.update(zin0=QBZ + 16, zin1=QBZ + 22, zgap=QBZ + 24, zA=QBZ + 20, zE=QBZ + 17, zP=QBZ + 19, zdoor=QBZ + 15, zsign=QBZ + 14, zbed=QBZ + 19)
+        # cell positions used by BOTH the builder and the data-pack generator
+        r["mail_cb"] = (x0 + 10, y, r["zA"])                   # repeating command block; the dispenser sits on top of it
+        r["emerg_cb"] = (x0 + 11, y + 1, r["zE"])              # impulse command block in the east partition; button on its west face
+        r["priv_cb"] = (x0 - 1, y + 1, r["zP"])                # repeating; lever on its east face
+        r["gap"] = (x0 + 3, y + 1, r["zgap"], x0 + 7, y + 3, r["zgap"])
+        r["centre"] = (x0 + 5, y + 1, (r["zin0"] + r["zin1"]) // 2)
+        rooms.append(r)
+    return rooms
+
+
+Q_CONTROL = None   # filled lazily by control_room()
+LAUNCH_PADS = [(323, 433), (443, 433), (323, 527), (443, 527)]       # surface pads (x, z)
+LAUNCH_HEIGHT = 1000
+Q_ROOF_PAD = (QBX + 24, QBZ + 13)
