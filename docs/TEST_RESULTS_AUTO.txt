@@ -1,35 +1,9 @@
-== build: 2026-11-16T19:55Z   (static analysis / model tests only - NOT run in Minecraft)
+== build: 2026-11-16T20:01Z   (static analysis / model tests only - NOT run in Minecraft)
 == validate
 shape/palette/tiles: ((384, 768, 768), 180, 527)
 datapack lint errors: 0
-schematic errors: 44  gate rows: 130
-    44 command block
-   SC: command block at 489,97,576 calls unknown function: function riftbrek:alarm/emergency_1 with storage riftbrek:cfg origin
-   SC: command block at 501,97,576 calls unknown function: function riftbrek:alarm/emergency_2 with storage riftbrek:cfg origin
-   SC: command block at 513,97,576 calls unknown function: function riftbrek:alarm/emergency_3 with storage riftbrek:cfg origin
-   SC: command block at 489,97,585 calls unknown function: function riftbrek:alarm/emergency_4 with storage riftbrek:cfg origin
-   SC: command block at 501,97,585 calls unknown function: function riftbrek:alarm/emergency_5 with storage riftbrek:cfg origin
-   SC: command block at 513,97,585 calls unknown function: function riftbrek:alarm/emergency_6 with storage riftbrek:cfg origin
-   SC: command block at 489,103,576 calls unknown function: function riftbrek:alarm/emergency_7 with storage riftbrek:cfg origin
-   SC: command block at 501,103,576 calls unknown function: function riftbrek:alarm/emergency_8 with storage riftbrek:cfg origin
-   SC: command block at 513,103,576 calls unknown function: function riftbrek:alarm/emergency_9 with storage riftbrek:cfg origin
-   SC: command block at 525,103,576 calls unknown function: function riftbrek:alarm/emergency_10 with storage riftbrek:cfg origin
-   SC: command block at 489,103,585 calls unknown function: function riftbrek:alarm/emergency_11 with storage riftbrek:cfg origin
-   SC: command block at 501,103,585 calls unknown function: function riftbrek:alarm/emergency_12 with storage riftbrek:cfg origin
-   SC: command block at 513,103,585 calls unknown function: function riftbrek:alarm/emergency_13 with storage riftbrek:cfg origin
-   SC: command block at 525,103,585 calls unknown function: function riftbrek:alarm/emergency_14 with storage riftbrek:cfg origin
-   SC: command block at 489,109,576 calls unknown function: function riftbrek:alarm/emergency_15 with storage riftbrek:cfg origin
-   SC: command block at 501,109,576 calls unknown function: function riftbrek:alarm/emergency_16 with storage riftbrek:cfg origin
-   SC: command block at 513,109,576 calls unknown function: function riftbrek:alarm/emergency_17 with storage riftbrek:cfg origin
-   SC: command block at 525,109,576 calls unknown function: function riftbrek:alarm/emergency_18 with storage riftbrek:cfg origin
-   SC: command block at 489,109,585 calls unknown function: function riftbrek:alarm/emergency_19 with storage riftbrek:cfg origin
-   SC: command block at 501,109,585 calls unknown function: function riftbrek:alarm/emergency_20 with storage riftbrek:cfg origin
-   SC: command block at 513,109,585 calls unknown function: function riftbrek:alarm/emergency_21 with storage riftbrek:cfg origin
-   SC: command block at 525,109,585 calls unknown function: function riftbrek:alarm/emergency_22 with storage riftbrek:cfg origin
-   SC: command block at 515,97,583 calls unknown function: function riftbrek:alarm/room_1 with storage riftbrek:cfg origin
-   SC: command block at 516,97,583 calls unknown function: function riftbrek:alarm/room_2 with storage riftbrek:cfg origin
-   SC: command block at 517,97,583 calls unknown function: function riftbrek:alarm/room_3 with storage riftbrek:cfg origin
-{'ladder': 3581, 'iron_door': 268, 'dispenser': 26, 'chest': 3241, 'hopper': 386, 'furnace': 4, 'crafter': 6, 'command_blocks_ok': 134}
+schematic errors: 0  gate rows: 130
+{'ladder': 3581, 'iron_door': 268, 'dispenser': 26, 'chest': 3241, 'hopper': 386, 'furnace': 4, 'crafter': 6, 'command_blocks_ok': 178}
 consistency errors: 0 {'sorters': 2, 'doors': 22, 'farms': 4, 'pulses': 6}
 annex regions checked: 27  errors: 0
   OK   Annex - Ghast Hydration Facility (Wildezz) {'size': (352, 58, 464), 'palette': 955, 'tiles': 4773, 'entities': 0}
@@ -60,7 +34,7 @@ annex regions checked: 27  errors: 0
   OK   Annex - Wave Bolt - Diagonal Rail Curver Kvil (SandCaribou1890 / Pando_UwU / Kvil) {'size': (5, 3, 5), 'palette': 16, 'tiles': 0, 'entities': 0}
   OK   Annex - Wave Bolt - Rail Curver (SandCaribou1890 / Pando_UwU / Kvil) {'size': (6, 4, 5), 'palette': 11, 'tiles': 0, 'entities': 0}
 == walkability (doors counted open)
-outside gate comp 1 labels 93
+outside gate comp 1 labels 77
 OK   gate passage inside (383, 96, 740) comp 1
 OK   citadel entrance hall (360, 96, 340) comp 1
 OK   citadel ramp bottom (383, 98, 362) comp 1
@@ -97,7 +71,7 @@ OK   comms room (B2) (350, 81, 428) comp 1
 OK   quarters lobby (519, 96, 574) comp 1
 OK   quarters corridor f2 (498, 108, 580) comp 1
 OK   quarters room 1 (483, 96, 574) comp 1
-FAIL quarters room 22 (519, 108, 587) comp 57
+OK   quarters room 22 (519, 108, 587) comp 1
 OK   quarters control room (519, 96, 587) comp 1
 OK   quarters roof pad (505, 115, 581) comp 1
 OK   ruined vault interior (B12) (330, 1, 318) comp 1

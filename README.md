@@ -44,6 +44,8 @@ in-game bugs; `docs/TEST_REPORT.md` has a 15-minute smoke-test checklist that fi
 * **Message system:** `/trigger rb_req set 30..37` radio calls, `40/41/42` book messages (faction / all / leaders), `43` announcements (leaders/royal; title, bell, live bulletin-board signs), `44` history, `45` last announcement. Veil are always anonymous.
 * **Paste problem solved:** see `docs/PASTE_GUIDE.md` (ready-made world files + zone method) and `docs/SIMULATED_TEST_REPORT.md`.
 
+* **Member Quarters (BAT-style):** 22 rooms with emergency buttons, a per-room/all-room alarm control room, book mail between room dispensers, lava-curtain windows, elytra launch pads (1,000 blocks up) and a blown-up treasure vault — see `docs/QUARTERS.md`.
+
 ## Rebuild / re-verify
 
 ```bash
