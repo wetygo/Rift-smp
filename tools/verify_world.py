@@ -55,7 +55,8 @@ def main(master, outdir):
                 lut = np.array([gidx[ex.pkey(n, p)] for n, p in pal], np.uint16)
                 got[(s["Y"] + 4) * 16:(s["Y"] + 5) * 16] = lut[arr]
                 secs += 1
-            exp = world[:, cz * 16:(cz + 1) * 16, cx * 16:(cx + 1) * 16]
+            lx, lz = cx - ex.OX // 16, cz - ex.OZ // 16
+            exp = world[:, lz * 16:(lz + 1) * 16, lx * 16:(lx + 1) * 16]
             d = int((got != exp).sum())
             if d:
                 bad += d

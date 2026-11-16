@@ -9,6 +9,9 @@ from riftbrek.nbt import Byte, Long, IntArray
 import validate
 
 DV = 4671
+OX = int(os.environ.get('RIFTBREK_OX', '0'))   # world X/Z of schematic local 0,0 (multiple of 512 so region files stay aligned)
+OZ = int(os.environ.get('RIFTBREK_OZ', '0'))
+assert OX % 512 == 0 and OZ % 512 == 0, 'origin must be a multiple of 512'
 WORLD_Y0 = -64
 
 
@@ -39,13 +42,13 @@ def build_world_array(master):
         sy, sz, sx = a.shape
         world[py:py + sy, pz:pz + sz, px:px + sx] = remap[a]
         for t in r["TileEntities"]:
-            t = dict(t); t["x"] += px; t["y"] += py + WORLD_Y0; t["z"] += pz
+            t = dict(t); t["x"] += px + OX; t["y"] += py + WORLD_Y0; t["z"] += pz + OZ
             tiles.append(t)
         for e in r["Entities"]:
             e = dict(e); pos = [float(c) for c in e["Pos"]]
-            e["Pos"] = [nbt.Double(pos[0] + px), nbt.Double(pos[1] + py + WORLD_Y0), nbt.Double(pos[2] + pz)]
+            e["Pos"] = [nbt.Double(pos[0] + px + OX), nbt.Double(pos[1] + py + WORLD_Y0), nbt.Double(pos[2] + pz + OZ)]
             if "TileX" in e:
-                e["TileX"] = int(e["TileX"]) + px; e["TileY"] = int(e["TileY"]) + py + WORLD_Y0; e["TileZ"] = int(e["TileZ"]) + pz
+                e["TileX"] = int(e["TileX"]) + px + OX; e["TileY"] = int(e["TileY"]) + py + WORLD_Y0; e["TileZ"] = int(e["TileZ"]) + pz + OZ
             ents.append(e)
         print(f"  placed {name}: {a.shape}", flush=True)
     return world, gpal, tiles, ents
@@ -68,7 +71,8 @@ def pack_section(ids16):
     return u.tolist(), longs.astype(">u8").tobytes()
 
 
-def chunk_nbt(cx, cz, world, gpal, tiles_by_chunk):
+def chunk_nbt(cx, cz, world, gpal, tiles_by_chunk, acx=None, acz=None):
+    acx = cx if acx is None else acx; acz = cz if acz is None else acz
     secs = []
     for sy in range(24):
         blk = world[sy * 16:(sy + 1) * 16, cz * 16:(cz + 1) * 16, cx * 16:(cx + 1) * 16]
@@ -84,8 +88,8 @@ def chunk_nbt(cx, cz, world, gpal, tiles_by_chunk):
         if data is not None:
             bs["data"] = data
         secs.append({"Y": Byte(sy - 4), "block_states": bs, "biomes": {"palette": ["minecraft:plains"]}})
-    return {"DataVersion": DV, "xPos": cx, "zPos": cz, "yPos": -4, "Status": "minecraft:full", "LastUpdate": Long(0),
-            "InhabitedTime": Long(0), "isLightOn": Byte(0), "sections": secs, "block_entities": tiles_by_chunk.get((cx, cz), []),
+    return {"DataVersion": DV, "xPos": acx, "zPos": acz, "yPos": -4, "Status": "minecraft:full", "LastUpdate": Long(0),
+            "InhabitedTime": Long(0), "isLightOn": Byte(0), "sections": secs, "block_entities": tiles_by_chunk.get((acx, acz), []),
             "structures": {"References": {}, "starts": {}}, "fluid_ticks": [], "block_ticks": [],
             "PostProcessing": [[] for _ in range(24)]}
 
@@ -128,8 +132,9 @@ def export(master, outdir):
         for cz in range(Z // 16):
             if not world[:, cz * 16:(cz + 1) * 16, cx * 16:(cx + 1) * 16].any():
                 continue
-            raw = nbt.dumps(chunk_nbt(cx, cz, world, gpal, tbc))
-            regions.setdefault((cx >> 5, cz >> 5), {})[(cx & 31, cz & 31)] = raw
+            acx, acz = cx + OX // 16, cz + OZ // 16
+            raw = nbt.dumps(chunk_nbt(cx, cz, world, gpal, tbc, acx, acz))
+            regions.setdefault((acx >> 5, acz >> 5), {})[(acx & 31, acz & 31)] = raw
             nch += 1
     for (rx, rz), ch in regions.items():
         write_region(os.path.join(outdir, "region", f"r.{rx}.{rz}.mca"), ch)
@@ -140,7 +145,7 @@ def export(master, outdir):
     for (rx, rz), ch in eregs.items():
         write_region(os.path.join(outdir, "entities", f"r.{rx}.{rz}.mca"), ch)
     info = dict(chunks=nch, region_files=len(regions), entity_files=len(eregs), tiles=len(tiles), entities=len(ents),
-                palette=len(gpal), box=[X, 384, Z], secs=round(time.time() - t0))
+                palette=len(gpal), box=[X, 384, Z], origin=[OX, OZ], secs=round(time.time() - t0))
     json.dump(info, open(os.path.join(outdir, "export_info.json"), "w"))
     print("exported", info)
     return info
