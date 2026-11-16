@@ -4,7 +4,7 @@ from . import layout as L
 from . import industry as IND
 from .build_common import *
 from .build_surface import pad, sign as _s
-from .build_wings import intake
+from .build_wings import intake, WINGS
 
 RING = 36   # centre line of the service ring corridor (x=36..731 / z=36..731)
 
@@ -52,6 +52,7 @@ def underground(W):
     lv[2].room(330, 420, 437, 540, floor=PB)
     lv[2].room(300, 200, 467, 260, floor=PB)
     lv[2].room(372, 261, 395, 419, floor=PB)
+    lv[2].room(RING + 3, 229, 299, 233, floor=PB, h=4)       # tunnel: ring -> the B2 office block (was an isolated pocket)
     # B3-B4 Grand Archive (two levels tall) under the Archivist wing
     lv[3].room(48, 138, 206, 266, floor=BRK)
     lv[4].room(48, 138, 206, 266, floor=BRK)
@@ -91,8 +92,25 @@ def underground(W):
     lv[11].room(RING + 3, 400, 199, 404, floor=DB, h=4)
     lv[12].room(RING + 3, 400, 199, 404, floor=DB, h=4)
     lv[10].room(RING + 3, 270, 299, 274, floor=BK, h=4)
+    # --- wing basements (B1) + tunnel network ---------------------------------------------------------------
+    for key, (wx0, wz0, wx1, wz1, floors, fh, face) in WINGS.items():
+        lv[1].room(wx0 + 3, wz0 + 3, wx1 - 3, wz1 - 3, floor=PB)
+        cz = (wz0 + wz1) // 2
+        if wx0 < 300:
+            lv[1].room(RING + 3, cz - 2, wx0 + 2, cz + 2, floor=PB, h=4)        # stub: ring -> basement (west wings)
+        else:
+            lv[1].room(wx1 - 2, cz - 2, 731 - 3, cz + 2, floor=PB, h=4)         # stub: basement -> ring (east wings)
+    for (tz) in (285, 440, 645):                                                   # E-W tunnels under the three roads
+        lv[1].room(RING + 3, tz - 2, 731 - 3, tz + 2, floor=PB, h=4)
+    for tx in (300, 470):                                                          # N-S tunnels flanking the citadel
+        lv[1].room(tx - 2, 100, tx + 2, 700, floor=PB, h=4)
     for k in lv:
         lv[k].finish()
+    for key, (wx0, wz0, wx1, wz1, floors, fh, face) in WINGS.items():            # basement partition rooms + ladders up into the wing
+        partitions(W, wx0 + 3, wz0 + 3, wx1 - 3, wz1 - 3, lv[1].y0 + 1, h=6, pitch=24, wall=DB)
+        ladder_shaft(W, wx0 + 3, wz0 + 3, lv[1].y0 + 1, GY - 1, "east")
+        if wx1 < 700:        # the Nexus' east wall touches the service ring (no wall to hang a ladder on): one ladder is enough
+            ladder_shaft(W, wx1 - 3, wz1 - 3, lv[1].y0 + 1, GY - 1, "west")
     # --- Grand Archive: remove the slab between B3 and B4 so it is one tall hall, add stacks
     y3, y4 = lv[3].y0, lv[4].y0
     W.fill(49, y4 + 7, 139, 205, y4 + 8, 265, AIR)
@@ -334,9 +352,34 @@ def synth_hall(W):
         W.fill(x + 1, y0 + 1, sz - 1, x + 1, y0 + 3, sz + 1, DB)
 
 
+def board(W, x, y, z, rot=0):
+    """bulletin board: command block under a standing sign; the data pack redraws the sign after every announcement"""
+    cmdblock(W, x, y - 1, z, "function riftbrek:msg/board")
+    sign(W, x, y, z, ["BULLETIN", "no messages", "", ""], rot=rot, color="yellow")
+
+
+def boards(W):
+    from .build_wings import BLIMP_DOCKS, BLIMP_LANE_X
+    GYb = GY
+    spots = [(376, GYb, 740, 0), (383 + 22, GYb, 470, 0), (352, GYb, 350, 0)]          # gatehouse court, plaza, citadel hall
+    for key, (wx0, wz0, wx1, wz1, floors, fh, face) in WINGS.items():                  # every wing lobby
+        gx = (wx0 + wx1) // 2 - 6
+        spots.append((gx - 4, GYb, (wz0 + 6) if face == "north" else (wz1 - 6), 0))
+    for (nm, dz, label) in BLIMP_DOCKS:
+        spots.append((BLIMP_LANE_X - 6, GYb, dz + 6, 0))
+    y2 = L.level_floor(2) + 1
+    for k in range(4):
+        spots.append((340 + k * 20, y2, 430, 0))                                       # comms room under the plaza (B2)
+    spots.append((383, L.level_floor(1) + 1, 600, 0))                                  # security corridor
+    for (x, y, z, r) in spots:
+        board(W, x, y, z, r)
+    sign(W, 360, y2, 432, ["COMMS ROOM", "announcements:", "/trigger rb_req", "set 43 (leaders)"], rot=0, color="purple")
+
+
 def machines(W, lv):
     for hall in L.SORT_HALLS:
         ox, oz, ytop = sorter_hall(W, hall)
         intake(W, ox, oz, ytop, hall["name"].upper())
     smelters(W); crop_plots(W); transport(W); veil_hq(W); royal_level(W); extra_gates(W); kit_hall(W); levels_signs(W); shulker_stations(W); synth_hall(W)
     surface_hatches(W, lv)
+    boards(W)

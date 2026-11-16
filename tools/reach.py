@@ -59,6 +59,11 @@ pts = {
     "B10 royal hall": (380, L.level_floor(10) + 1, 300),
     "B10 vault 1 interior": (321, L.level_floor(10) + 1, 205),
     "B12 reserve": (300, L.level_floor(12) + 1, 300),
+    "archivist basement (B1)": (47, L.level_floor(1) + 1, 140),
+    "B1 tunnel under road R1": (150, L.level_floor(1) + 1, 285),
+    "B1 N-S tunnel x=300": (300, L.level_floor(1) + 1, 200),
+    "abstracters basement (B1)": (580, L.level_floor(1) + 1, 310),
+    "comms room (B2)": (350, L.level_floor(2) + 1, 428),
     "throne room floor": (383, GY + 49, 280),
 }
 for k, (x, y, z) in pts.items():

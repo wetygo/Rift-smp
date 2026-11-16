@@ -23,6 +23,13 @@ Numbering is stable: **C1.. = player commands, C20.. = operator commands, C60.. 
 | C10 | `/trigger rb_req set 14` | **ParrotX2-inspired kit** - Members only. |
 | C11 | `/trigger rb_req set 15` | **ManePear-inspired kit** - Members only. |
 | C12 | `/trigger rb_req set 16` | **SpokeIsHere-inspired kit** - Members only. |
+| C13 | `/trigger rb_req set 30-37` | **Radio calls** - Preset faction messages: 30 backup, 31 all clear, 32 intruder, 33 meet at plaza, 34 need supplies, 35 heading out, 36 medic, 37 lockdown requested. |
+| C14 | `/trigger rb_req set 40` | **Book message to your faction** - Hold a Book & Quill with the text on page 1. Veil appear as 'operative RB-VL-id', never by name. |
+| C15 | `/trigger rb_req set 41` | **Book message to ALL members** - Same, to every active member (prefix [ALL]). |
+| C16 | `/trigger rb_req set 42` | **Book message to leaders** - Leaders and royals only. |
+| C17 | `/trigger rb_req set 43` | **Announcement** - Leaders/royals: title + bell sound for everyone, and every bulletin-board sign updates. |
+| C18 | `/trigger rb_req set 44` | **Message history** - Last 20 messages (sender faction only). |
+| C19 | `/trigger rb_req set 45` | **Last announcement** - Re-read the latest announcement. |
 
 ## 2. Operator commands (OP level 2+)
 
@@ -154,7 +161,13 @@ Macro functions take a compound argument. Use exact Minecraft names; the player 
 - Removes the airship.
 - example: `/function riftbrek:admin/blimp_off`
 
-### C41. `riftbrek:admin/recover`
+### C41. `riftbrek:admin/board_refresh`
+- who: OP
+- args: `-`
+- Forces every loaded bulletin-board sign to redraw.
+- example: `/function riftbrek:admin/board_refresh`
+
+### C42. `riftbrek:admin/recover`
 - who: OP
 - args: `-`
 - Admin recovery: re-runs load (objectives, teams, storage defaults). Never resets player data.
@@ -253,6 +266,7 @@ Macro functions take a compound argument. Use exact Minecraft names; the player 
 | `riftbrek:admin/_write` | internal - do not call by hand |
 | `riftbrek:admin/blimp_off` | public (player/OP) |
 | `riftbrek:admin/blimp_on` | public (player/OP) |
+| `riftbrek:admin/board_refresh` | public (player/OP) |
 | `riftbrek:admin/forceload` | public (player/OP) |
 | `riftbrek:admin/forceload_do` | internal - do not call by hand |
 | `riftbrek:admin/forceload_off` | public (player/OP) |
@@ -393,6 +407,31 @@ Macro functions take a compound argument. Use exact Minecraft names; the player 
 | `riftbrek:log/entry_register` | internal - do not call by hand |
 | `riftbrek:log/entry_revoke` | internal - do not call by hand |
 | `riftbrek:log/entry_royal` | internal - do not call by hand |
+| `riftbrek:msg/_hist_faction` | public (player/OP) |
+| `riftbrek:msg/_hist_iter` | public (player/OP) |
+| `riftbrek:msg/announce` | public (player/OP) |
+| `riftbrek:msg/board` | public (player/OP) |
+| `riftbrek:msg/book_all` | public (player/OP) |
+| `riftbrek:msg/book_announce` | public (player/OP) |
+| `riftbrek:msg/book_faction` | public (player/OP) |
+| `riftbrek:msg/book_leaders` | public (player/OP) |
+| `riftbrek:msg/do_all` | public (player/OP) |
+| `riftbrek:msg/do_announce` | public (player/OP) |
+| `riftbrek:msg/do_faction` | public (player/OP) |
+| `riftbrek:msg/do_leaders` | public (player/OP) |
+| `riftbrek:msg/history` | public (player/OP) |
+| `riftbrek:msg/quick_0` | public (player/OP) |
+| `riftbrek:msg/quick_1` | public (player/OP) |
+| `riftbrek:msg/quick_2` | public (player/OP) |
+| `riftbrek:msg/quick_3` | public (player/OP) |
+| `riftbrek:msg/quick_4` | public (player/OP) |
+| `riftbrek:msg/quick_5` | public (player/OP) |
+| `riftbrek:msg/quick_6` | public (player/OP) |
+| `riftbrek:msg/quick_7` | public (player/OP) |
+| `riftbrek:msg/read_last` | public (player/OP) |
+| `riftbrek:msg/to_all` | public (player/OP) |
+| `riftbrek:msg/to_faction` | public (player/OP) |
+| `riftbrek:msg/to_leaders` | public (player/OP) |
 | `riftbrek:paste/init` | internal - do not call by hand |
 | `riftbrek:paste/status` | internal - do not call by hand |
 | `riftbrek:paste/zone_10_check` | internal - do not call by hand |

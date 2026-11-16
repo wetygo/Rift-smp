@@ -87,6 +87,27 @@ Ground surface (first walkable layer) is local y = 96 = world y 32.
 | `kit/pad_veil` | 99, 94, 308 | +99, 30, +308 |
 | `kit/pad_wildcards` | 107, 94, 478 | +107, 30, +478 |
 
+## command blocks: `msg/` (17)
+| function | local x,y,z | world offset (y-64) |
+|---|---|---|
+| `msg/board` | 93, 95, 306 | +93, 31, +306 |
+| `msg/board` | 101, 95, 476 | +101, 31, +476 |
+| `msg/board` | 117, 95, 267 | +117, 31, +267 |
+| `msg/board` | 244, 95, 116 | +244, 31, +116 |
+| `msg/board` | 244, 95, 486 | +244, 31, +486 |
+| `msg/board` | 244, 95, 706 | +244, 31, +706 |
+| `msg/board` | 340, 80, 430 | +340, 16, +430 |
+| `msg/board` | 352, 95, 350 | +352, 31, +350 |
+| `msg/board` | 360, 80, 430 | +360, 16, +430 |
+| `msg/board` | 376, 95, 740 | +376, 31, +740 |
+| `msg/board` | 380, 80, 430 | +380, 16, +430 |
+| `msg/board` | 383, 88, 600 | +383, 24, +600 |
+| `msg/board` | 400, 80, 430 | +400, 16, +430 |
+| `msg/board` | 405, 95, 470 | +405, 31, +470 |
+| `msg/board` | 613, 95, 251 | +613, 31, +251 |
+| `msg/board` | 621, 95, 306 | +621, 31, +306 |
+| `msg/board` | 625, 95, 456 | +625, 31, +456 |
+
 ## command blocks: `storage/` (2)
 | function | local x,y,z | world offset (y-64) |
 |---|---|---|

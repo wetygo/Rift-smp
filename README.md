@@ -38,6 +38,12 @@ in-game bugs; `docs/TEST_REPORT.md` has a 15-minute smoke-test checklist that fi
 * Underground B1–B12: security, offices, 2-level Grand Archive, **2 sorter halls**, kit hall, industry (smelters, crafters, crop plots, shulker loaders/unloaders), B11 command-driven synthesis hall, transport (powered-rail ring + blue-ice highway), Veil HQ + secret tunnels, royal vaults, reserves
 * 20 command-block door gates in 4 widths/tiers (public, member, leader, royal, 6 factions), lockdown-aware
 
+## Added in the latest pass
+* **Furnished:** towers, citadel floors, terminal, wing basements, B1 barracks/cells, B2 offices, B9 Veil lounge, B6 kit hall (beds, chests, tables + chairs, bookshelves, lecterns, workstations, banners).
+* **Rooms and tunnels:** furnished basement rooms under every wing, E-W tunnels under the three roads, N-S tunnels flanking the citadel, stub tunnels to the service ring, a B2 comms room. Zero disconnected underground pockets (checked).
+* **Message system:** `/trigger rb_req set 30..37` radio calls, `40/41/42` book messages (faction / all / leaders), `43` announcements (leaders/royal; title, bell, live bulletin-board signs), `44` history, `45` last announcement. Veil are always anonymous.
+* **Paste problem solved:** see `docs/PASTE_GUIDE.md` (ready-made world files + zone method) and `docs/SIMULATED_TEST_REPORT.md`.
+
 ## Rebuild / re-verify
 
 ```bash

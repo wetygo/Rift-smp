@@ -4,7 +4,7 @@ import numpy as np
 from . import layout as L
 from . import build_common as C
 from .world import World
-from . import build_surface as S, build_wings as WG, build_under as U, build_furnish as FU
+from . import build_surface as S, build_wings as WG, build_under as U, build_furnish as FU, build_furnish2 as F2
 
 
 def build_world():
@@ -23,6 +23,16 @@ def build_world():
     n = WG.landscaping(W, rng); log("trees %d" % n)
     log("furnished quadrants %d" % FU.furnish(W)); log("light blocks %d" % FU.lights(W))
     U.machines(W, lv); log("machinery")
+    from .build_wings import WINGS
+    log("furnished perimeter items (shells) %d, underground %d" % (F2.furnish_shells(W, [(v[0], v[1], v[2], v[3]) for v in WINGS.values()]), F2.furnish_underground(W)))
+    # tunnel / room ceilings sit at ground level: repaint the visible ones back to grass (not under buildings)
+    gi = {W.B("minecraft:deepslate_tiles"), W.B("minecraft:deepslate_bricks")}
+    grass = W.B("minecraft:grass_block[snowy=false]")
+    g = W.a[L.GROUND_TOP, 16:L.SX - 16, 16:L.SX - 16]
+    free = W.a[L.GY:L.GY + 14, 16:L.SX - 16, 16:L.SX - 16].max(axis=0) == 0
+    m = np.isin(g, list(gi)) & free
+    g[m] = grass
+    log("repainted %d ceiling cells to grass" % int(m.sum()))
     return W
 
 

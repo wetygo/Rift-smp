@@ -32,6 +32,7 @@ ADMIN = [  # (function, args, who, what, example)
     ("admin/forceload_off", "-", "OP", "Removes those force-loaded chunks.", "/function riftbrek:admin/forceload_off"),
     ("admin/blimp_on", "-", "OP", "Spawns the experimental airship at dock A and starts its route.", "/function riftbrek:admin/blimp_on"),
     ("admin/blimp_off", "-", "OP", "Removes the airship.", "/function riftbrek:admin/blimp_off"),
+    ("admin/board_refresh", "-", "OP", "Forces every loaded bulletin-board sign to redraw.", "/function riftbrek:admin/board_refresh"),
     ("admin/recover", "-", "OP", "Admin recovery: re-runs load (objectives, teams, storage defaults). Never resets player data.", "/function riftbrek:admin/recover"),
 ]
 PLAYER = [
@@ -47,6 +48,13 @@ PLAYER = [
     ("14", "ParrotX2-inspired kit", "Members only."),
     ("15", "ManePear-inspired kit", "Members only."),
     ("16", "SpokeIsHere-inspired kit", "Members only."),
+    ("30-37", "Radio calls", "Preset faction messages: 30 backup, 31 all clear, 32 intruder, 33 meet at plaza, 34 need supplies, 35 heading out, 36 medic, 37 lockdown requested."),
+    ("40", "Book message to your faction", "Hold a Book & Quill with the text on page 1. Veil appear as 'operative RB-VL-id', never by name."),
+    ("41", "Book message to ALL members", "Same, to every active member (prefix [ALL])."),
+    ("42", "Book message to leaders", "Leaders and royals only."),
+    ("43", "Announcement", "Leaders/royals: title + bell sound for everyone, and every bulletin-board sign updates."),
+    ("44", "Message history", "Last 20 messages (sender faction only)."),
+    ("45", "Last announcement", "Re-read the latest announcement."),
 ]
 
 
@@ -54,7 +62,7 @@ def classify(fid):
     n = fid.split(":")[1]
     if n.startswith(("door/", "zone/", "kit/pad_", "industry/run_farm_", "industry/pulse_crafter")) or re.match(r"storage/sort_\w$", n):
         return "cb"
-    if n in {a[0] for a in ADMIN} or n in ("registry/public", "registry/leader_private", "registry/self", "book/issue", "req/dispatch", "req/help") \
+    if n in {a[0] for a in ADMIN} or n.startswith("msg/") or n in ("registry/public", "registry/leader_private", "registry/self", "book/issue", "req/dispatch", "req/help") \
             or re.match(r"kit/(birds|unstables|abstracters|veil|archivist|wildcards|request|creator_\w+)$", n):
         return "pub"
     return "int"

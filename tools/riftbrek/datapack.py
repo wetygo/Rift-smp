@@ -37,6 +37,93 @@ def tellraw(sel, text, color):
     return 'tellraw %s {"text":"%s","color":"%s"}' % (sel, text, color)
 
 
+def msg_system(P, QUICK):
+    fac = L.FACTIONS
+    gate = ["tag @s remove rb_msg_ok",
+            "execute if entity @s[tag=rb_member,tag=!rb_revoked,scores={rb_cred=1..}] unless score @s rb_msgcd matches 1.. run tag @s add rb_msg_ok",
+            "execute if entity @s[tag=!rb_msg_ok] run tellraw @s {\"text\":\"Message blocked: active members only, and wait a moment between messages.\",\"color\":\"red\"}"]
+    # ---- quick radio calls (faction channel)
+    for i, text in enumerate(QUICK):
+        P.fn(f"msg/quick_{i}", [f'data modify storage riftbrek:msg raw set value "{text}"', "function riftbrek:msg/to_faction"])
+    # ---- text taken from the player's held Book & Quill (first page)
+    grab = ["# reads page 1 of the Book & Quill in the main hand (pages may be {raw:..} or plain strings)",
+            "data remove storage riftbrek:msg raw",
+            'data modify storage riftbrek:msg raw set from entity @s SelectedItem.components."minecraft:writable_book_content".pages[0]',
+            "execute if data storage riftbrek:msg raw.raw run data modify storage riftbrek:msg raw set from storage riftbrek:msg raw.raw",
+            "execute unless data storage riftbrek:msg raw run tellraw @s {\"text\":\"Hold a Book & Quill with your message on page 1 first.\",\"color\":\"yellow\"}"]
+    for nm, tgt in (("faction", "to_faction"), ("all", "to_all"), ("leaders", "to_leaders"), ("announce", "announce")):
+        P.fn(f"msg/book_{nm}", grab + [f"execute if data storage riftbrek:msg raw run function riftbrek:msg/{tgt}"])
+    # ---- channels
+    P.fn("msg/to_faction", gate + ["execute if entity @s[tag=rb_msg_ok] run function riftbrek:msg/do_faction"])
+    P.fn("msg/to_all", gate + ["execute if entity @s[tag=rb_msg_ok] run function riftbrek:msg/do_all"])
+    P.fn("msg/to_leaders", gate + ["execute if entity @s[tag=rb_msg_ok,tag=!rb_leader,tag=!rb_royal] run tellraw @s {\"text\":\"Leaders channel: leaders and royals only.\",\"color\":\"red\"}",
+                                   "execute if entity @s[tag=rb_msg_ok,tag=rb_leader] run function riftbrek:msg/do_leaders",
+                                   "execute if entity @s[tag=rb_msg_ok,tag=rb_royal,tag=!rb_leader] run function riftbrek:msg/do_leaders"])
+    body = '{"nbt":"raw","storage":"riftbrek:msg"}'
+    df, da = [], []
+    for f, (name, code, role, color, banner) in fac.items():
+        if f == "veil":
+            df.append(f'execute if entity @s[tag=rb_veil] run tellraw @a[tag=rb_veil,tag=!rb_revoked] [{{"text":"[Veil] ","color":"dark_purple"}},{{"text":"operative "}},{{"score":{{"name":"@s","objective":"rb_id"}}}},{{"text":": "}},{body}]')
+            da.append(f'execute if entity @s[tag=rb_veil] run tellraw @a[tag=rb_member,tag=!rb_revoked] [{{"text":"[ALL] ","color":"gold"}},{{"text":"Veil operative ","color":"dark_purple"}},{{"score":{{"name":"@s","objective":"rb_id"}}}},{{"text":": "}},{body}]')
+        else:
+            df.append(f'execute if entity @s[tag=rb_{f}] run tellraw @a[tag=rb_{f},tag=!rb_revoked] [{{"text":"[{name}] ","color":"{color}"}},{{"selector":"@s"}},{{"text":": "}},{body}]')
+            da.append(f'execute if entity @s[tag=rb_{f}] run tellraw @a[tag=rb_member,tag=!rb_revoked] [{{"text":"[ALL] ","color":"gold"}},{{"text":"{name} ","color":"{color}"}},{{"selector":"@s"}},{{"text":": "}},{body}]')
+    df += ["scoreboard players set @s rb_msgcd 40", "function riftbrek:msg/_hist_faction"]
+    da += ["scoreboard players set @s rb_msgcd 40", "function riftbrek:msg/_hist_faction"]
+    P.fn("msg/do_faction", df)
+    P.fn("msg/do_all", da)
+    P.fn("msg/do_leaders", [
+        f'execute unless entity @s[tag=rb_veil] run tellraw @a[tag=rb_leader,tag=!rb_revoked] [{{"text":"[Leaders] ","color":"red"}},{{"selector":"@s"}},{{"text":": "}},{body}]',
+        f'execute unless entity @s[tag=rb_veil] run tellraw @a[tag=rb_royal,tag=!rb_leader,tag=!rb_revoked] [{{"text":"[Leaders] ","color":"red"}},{{"selector":"@s"}},{{"text":": "}},{body}]',
+        f'execute if entity @s[tag=rb_veil] run tellraw @a[tag=rb_leader,tag=!rb_revoked] [{{"text":"[Leaders] ","color":"red"}},{{"text":"Veil operative "}},{{"score":{{"name":"@s","objective":"rb_id"}}}},{{"text":": "}},{body}]',
+        f'execute if entity @s[tag=rb_veil] run tellraw @a[tag=rb_royal,tag=!rb_leader,tag=!rb_revoked] [{{"text":"[Leaders] ","color":"red"}},{{"text":"Veil operative "}},{{"score":{{"name":"@s","objective":"rb_id"}}}},{{"text":": "}},{body}]',
+        "scoreboard players set @s rb_msgcd 40", "function riftbrek:msg/_hist_faction"])
+    # ---- history (anonymous for Veil: only the channel, never a name)
+    hist = ["data modify storage riftbrek:msg h set value {}", "data modify storage riftbrek:msg h.text set from storage riftbrek:msg raw"]
+    for f, (name, code, role, color, banner) in fac.items():
+        hist.append(f'execute if entity @s[tag=rb_{f}] run data modify storage riftbrek:msg h.from set value "{name}"')
+    hist += ["data modify storage riftbrek:msg history append from storage riftbrek:msg h",
+             "execute store result score #n rb_msg run data get storage riftbrek:msg history",
+             "execute if score #n rb_msg matches 21.. run data remove storage riftbrek:msg history[0]"]
+    P.fn("msg/_hist_faction", hist)
+    P.fn("msg/history", ['tellraw @s {"text":"=== last messages (sender faction only) ===","color":"light_purple"}',
+                         "data modify storage riftbrek:msg iter set from storage riftbrek:msg history", "function riftbrek:msg/_hist_iter"])
+    P.fn("msg/_hist_iter", [
+        'execute if data storage riftbrek:msg iter[0] run tellraw @s [{"text":"[","color":"gray"},{"nbt":"iter[0].from","storage":"riftbrek:msg"},{"text":"] "},{"nbt":"iter[0].text","storage":"riftbrek:msg","color":"white"}]',
+        "data remove storage riftbrek:msg iter[0]", "execute if data storage riftbrek:msg iter[0] run function riftbrek:msg/_hist_iter"])
+    # ---- announcements: leaders/royal only; update bulletin boards, title + sound for everyone
+    ann = ["tag @s remove rb_ann_ok",
+           "execute if entity @s[tag=!rb_revoked,scores={rb_cred=1..,rb_clear=4..}] unless score @s rb_msgcd matches 1.. run tag @s add rb_ann_ok",
+           'execute if entity @s[tag=!rb_ann_ok] run tellraw @s {"text":"Announcements: leaders and royals only (and wait a moment).","color":"red"}',
+           "execute if entity @s[tag=rb_ann_ok] run function riftbrek:msg/do_announce"]
+    P.fn("msg/announce", ann)
+    P.fn("msg/do_announce", [
+        "data modify storage riftbrek:msg last set value {}", "data modify storage riftbrek:msg last.text set from storage riftbrek:msg raw",
+        'data modify storage riftbrek:msg last.from set value "Vanguard command"'] + [
+        f'execute if entity @s[tag=rb_{f},tag=!rb_veil] run data modify storage riftbrek:msg last.from set value "{fac[f][0]} leadership"' for f in fac if f != "veil"] + [
+        'execute if entity @s[tag=rb_royal] run data modify storage riftbrek:msg last.from set value "The Crown"',
+        "scoreboard players add #VER rb_msg 1", "scoreboard players set #NEW rb_msg 2",
+        'data modify storage riftbrek:msg lines set value [{"text":"BULLETIN"},{"text":""},{"text":"read in chat"},{"text":"or /trigger 45"}]',
+        "data modify storage riftbrek:msg lines[1].text set from storage riftbrek:msg last.from",
+        'tellraw @a [{"text":"[ANNOUNCEMENT] ","color":"gold","bold":true},{"nbt":"last.from","storage":"riftbrek:msg","color":"light_purple"},{"text":": "},{"nbt":"last.text","storage":"riftbrek:msg","color":"white"}]',
+        'title @a actionbar [{"text":"ANNOUNCEMENT: ","color":"gold"},{"nbt":"last.text","storage":"riftbrek:msg","color":"white"}]',
+        "execute as @a at @s run playsound minecraft:block.note_block.bell master @s ~ ~ ~ 1 1",
+        "scoreboard players set @s rb_msgcd 100",
+        "data modify storage riftbrek:msg h set value {}", "data modify storage riftbrek:msg h.text set from storage riftbrek:msg raw",
+        'data modify storage riftbrek:msg h.from set from storage riftbrek:msg last.from',
+        "data modify storage riftbrek:msg history append from storage riftbrek:msg h"])
+    P.fn("msg/read_last", [
+        'execute unless score #VER rb_msg matches 1.. run tellraw @s {"text":"No announcements yet.","color":"gray"}',
+        'execute if score #VER rb_msg matches 1.. run tellraw @s [{"text":"[Last announcement] ","color":"gold"},{"nbt":"last.from","storage":"riftbrek:msg","color":"light_purple"},{"text":": "},{"nbt":"last.text","storage":"riftbrek:msg","color":"white"}]',
+        "scoreboard players operation @s rb_seen = #VER rb_msg"])
+    # ---- bulletin board (command block under a standing sign); runs AT the command block, sign is directly above
+    P.fn("msg/board", [
+        "# bulletin board: refreshes the sign above (2 ticks after every announcement) and shows the text in chat to anyone who walks up",
+        "execute if score #NEW rb_msg matches 1.. run data modify block ~ ~1 ~ front_text.messages set from storage riftbrek:msg lines",
+        "execute if score #VER rb_msg matches 1.. as @a[distance=..6] unless score @s rb_seen = #VER rb_msg run function riftbrek:msg/read_last"])
+    P.fn("admin/board_refresh", ["# OP ONLY: force every loaded bulletin board to redraw its sign", "scoreboard players set #NEW rb_msg 2"])
+
+
 def build(root):
     P = Pack(root)
     fac = L.FACTIONS
@@ -50,7 +137,7 @@ def build(root):
 
     # ------------------------------------------------------------------ load / tick
     objs = ["rb_clear", "rb_cred", "rb_role", "rb_id", "rb_visitor", "rb_kit", "rb_lastkit", "rb_issued",
-            "rb_denied", "rb_incident", "rb_lock", "rb_tmp", "rb_const", "rb_msgcd", "rb_cbs", "rb_bl", "rb_p"]
+            "rb_denied", "rb_incident", "rb_lock", "rb_tmp", "rb_const", "rb_msgcd", "rb_cbs", "rb_bl", "rb_p", "rb_msg", "rb_seen"]
     load = ["# Runs on every /reload and world start. NOTHING here may reset persistent player data."]
     load += [f"scoreboard objectives add {o} dummy" for o in objs]
     load.append("scoreboard objectives add rb_req trigger")
@@ -59,6 +146,10 @@ def build(root):
         "execute unless score #NEXT rb_id = #NEXT rb_id run scoreboard players set #NEXT rb_id 1000",
         "scoreboard players set #20 rb_const 20",
         "scoreboard players set #200 rb_const 200",
+        "execute unless score #VER rb_msg = #VER rb_msg run scoreboard players set #VER rb_msg 0",
+        "scoreboard players set #NEW rb_msg 2",
+        "execute unless data storage riftbrek:msg history run data modify storage riftbrek:msg history set value []",
+        "execute unless data storage riftbrek:msg lines run data modify storage riftbrek:msg lines set value [{\"text\":\"BULLETIN\"},{\"text\":\"no messages\"},{\"text\":\"\"},{\"text\":\"\"}]",
         "scoreboard players set #100 rb_const 100",
         "scoreboard players set #2 rb_const 2",
         "execute unless score #ON rb_bl = #ON rb_bl run scoreboard players set #ON rb_bl 0",
@@ -89,6 +180,7 @@ def build(root):
     ])
 
     tick = [
+        "execute if score #NEW rb_msg matches 1.. run scoreboard players remove #NEW rb_msg 1",
         "scoreboard players enable @a rb_req",
         "execute as @a[scores={rb_req=1..}] run function riftbrek:req/dispatch",
         "# Veil operatives are kept invisible everywhere (zone/visible overrides this for non-Veil only).",
@@ -114,8 +206,18 @@ def build(root):
     creators = ["flame", "wemmbu", "theobald", "parrot", "manepear", "spoke"]
     for i, c in enumerate(creators):
         disp.append(f"execute if score @s rb_req matches {11 + i} run function riftbrek:kit/creator_{c}")
+    QUICK = ["Need backup at my location!", "All clear.", "Intruder spotted!", "Meet at the Central Plaza.", "Need supplies.", "Heading out.", "Medic needed.", "Lockdown requested."]
+    for i in range(len(QUICK)):
+        disp.append(f"execute if score @s rb_req matches {30 + i} run function riftbrek:msg/quick_{i}")
+    disp += ["execute if score @s rb_req matches 40 run function riftbrek:msg/book_faction",
+             "execute if score @s rb_req matches 41 run function riftbrek:msg/book_all",
+             "execute if score @s rb_req matches 42 run function riftbrek:msg/book_leaders",
+             "execute if score @s rb_req matches 43 run function riftbrek:msg/book_announce",
+             "execute if score @s rb_req matches 44 run function riftbrek:msg/history",
+             "execute if score @s rb_req matches 45 run function riftbrek:msg/read_last"]
     disp += ["scoreboard players set @s rb_req 0", "scoreboard players enable @s rb_req"]
     P.fn("req/dispatch", disp)
+    msg_system(P, QUICK)
     P.fn("req/help", [
         tellraw("@s", "RIFTBREK commands: /trigger rb_req set N  |  1 ID book | 2 faction kit | 3 public roster | 4 leader registry | 5 my status | 11-16 creator kits | 9 help", "light_purple")])
 
@@ -280,7 +382,9 @@ def build(root):
     P.fn("admin/lockdown_on", [
         "# OP ONLY. Closes every door except Royal-tier doors.",
         "scoreboard players set #GLOBAL rb_lock 1",
-        'tellraw @a {"text":"RIFTBREK LOCKDOWN: secure facilities closed by staff.","color":"red"}'])
+        'tellraw @a {"text":"RIFTBREK LOCKDOWN: secure facilities closed by staff.","color":"red"}',
+        'title @a title {"text":"LOCKDOWN","color":"red","bold":true}',
+        "execute as @a at @s run playsound minecraft:block.bell.use master @s ~ ~ ~ 1 0.6"])
     P.fn("admin/lockdown_off", [
         "scoreboard players set #GLOBAL rb_lock 0",
         'tellraw @a {"text":"RIFTBREK LOCKDOWN LIFTED.","color":"green"}'])

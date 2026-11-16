@@ -1,3 +1,4 @@
+execute if score #NEW rb_msg matches 1.. run scoreboard players remove #NEW rb_msg 1
 scoreboard players enable @a rb_req
 execute as @a[scores={rb_req=1..}] run function riftbrek:req/dispatch
 # Veil operatives are kept invisible everywhere (zone/visible overrides this for non-Veil only).

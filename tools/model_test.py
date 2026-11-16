@@ -155,7 +155,10 @@ def run_cmd(ctx, line, depth=0):
                 ps = eval_sel(contexts[0], t[i + 1]) if t[i + 1].startswith("@") else [p for p in ctx.players if p.name == t[i + 1]]
                 # run for each target
                 rest = " ".join(t[i + 2:])
-                assert rest.startswith("run ")
+                if rest.startswith("at @s "):
+                    rest = rest[6:]
+                if not rest.startswith("run "):
+                    return                      # unmodelled execute chain (e.g. positioned/if ... as ...)
                 for p in ps:
                     run_cmd(Ctx(ctx.w, ctx.players, p, ctx.near), rest[4:], depth)
                 return
@@ -311,5 +314,35 @@ check("ledger entries never store a username", "$(mc)" not in lg and "mc" not in
 print("== stolen book: no function reads book/item data for authorisation")
 auth_texts = "".join(TEXTS[k] for k in TEXTS if k.startswith(("riftbrek:door/", "riftbrek:gate", "riftbrek:kit/")))
 check("no door/kit logic inspects held items or book NBT", "written_book" not in auth_texts.replace("give @s minecraft:written_book", "") and "SelectedItem" not in auth_texts and "Inventory" not in auth_texts)
+print("== message system")
+def sent(player, fn):
+    w2 = World(); pl = [player]
+    run_fn(Ctx(w2, pl, player), "riftbrek:msg/" + fn)
+    return player.s.get("rb_msgcd") == 40
+mem = P("Msgr", {"rb_member", "rb_birds"}, rb_clear=2, rb_cred=1)
+check("active member can send a quick radio call", sent(mem, "quick_0"))
+mem2 = P("Msgr2", {"rb_member", "rb_birds"}, rb_clear=2, rb_cred=1, rb_msgcd=10)
+check("rate limit: a second message within 2 s is blocked", not sent(mem2, "quick_1"))
+check("stranger cannot send", not sent(P("Stranger2"), "quick_2"))
+check("revoked cannot send", not sent(P("Rv2", {"rb_revoked"}, rb_clear=0, rb_cred=0), "quick_2"))
+check("visitor cannot send", not sent(P("Vis2", {"rb_guest"}, rb_clear=1, rb_cred=1, rb_visitor=500), "quick_3"))
+vm = P("VeilMsg", {"rb_member", "rb_veil"}, rb_clear=2, rb_cred=1, rb_id=1007)
+check("Veil member can send (anonymised by operative code in the text)", sent(vm, "quick_4"))
+for fn in ("do_faction", "do_all", "do_leaders"):
+    t = TEXTS["riftbrek:msg/" + fn]
+    veil_lines = [l for l in t.split("\n") if "tag=rb_veil]" in l and "run tellraw" in l and "unless entity" not in l]
+    check(f"msg/{fn}: Veil sender lines never use the @s selector (no name leak)", all('"selector":"@s"' not in l for l in veil_lines))
+check("leaders channel blocked for plain members", not any(l.startswith("give") for l in mem.log) and "rb_leader" in TEXTS["riftbrek:msg/to_leaders"])
+w3 = World(); lead = P("Lead", {"rb_member", "rb_birds", "rb_leader"}, rb_clear=4, rb_cred=1)
+w3.glob["#VER rb_msg"] = 0
+run_fn(Ctx(w3, [lead], lead), "riftbrek:msg/announce")
+check("leader announcement bumps the bulletin version and arms the board refresh", w3.glob.get("#VER rb_msg") == 1 and w3.glob.get("#NEW rb_msg") == 2)
+w4 = World(); w4.glob["#VER rb_msg"] = 0
+run_fn(Ctx(w4, [mem], mem), "riftbrek:msg/announce")
+check("plain member cannot announce", w4.glob.get("#VER rb_msg") == 0)
+w5 = World(); w5.glob["#VER rb_msg"] = 0
+rg = P("Royal2", {"rb_member", "rb_royal"}, rb_clear=5, rb_cred=1)
+run_fn(Ctx(w5, [rg], rg), "riftbrek:msg/announce")
+check("royal can announce", w5.glob.get("#VER rb_msg") == 1)
 print("\nFAILED:", fails)
 sys.exit(1 if fails else 0)

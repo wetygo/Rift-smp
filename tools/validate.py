@@ -77,6 +77,13 @@ def check_world(a, pal, tiles, fn_ids):
             elif base in ("wheat", "carrots", "potatoes", "beetroots"):
                 if name(at(x, y - 1, z)) != "farmland":
                     errs.append(f"crop without farmland {x},{y},{z}")
+            elif base.endswith("_bed") and p["part"] == "foot":
+                dx, dy, dz = DIRS[p["facing"]]
+                o = at(x + dx, y, z + dz)
+                if not (name(o) == base and prop(o)["part"] == "head"):
+                    errs.append(f"bed foot without head at {x},{y},{z}")
+                if not is_solid(at(x, y - 1, z)):
+                    errs.append(f"bed floating at {x},{y},{z}")
             elif base == "lever":
                 dx, dy, dz = DIRS[p["facing"]] if p["face"] == "wall" else (0, 1 if p["face"] == "floor" else -1, 0)
                 b = at(x - dx, y - (dy if p["face"] != "wall" else 0), z - dz)

@@ -1,9 +1,9 @@
-== build: 2026-11-16T18:12Z   (static analysis / model tests only - NOT run in Minecraft)
+== build: 2026-11-16T18:46Z   (static analysis / model tests only - NOT run in Minecraft)
 == validate
-shape/palette/tiles: ((384, 768, 768), 111, 259)
+shape/palette/tiles: ((384, 768, 768), 160, 294)
 datapack lint errors: 0
 schematic errors: 0  gate rows: 128
-{'ladder': 3473, 'iron_door': 264, 'dispenser': 4, 'chest': 2013, 'hopper': 386, 'furnace': 4, 'crafter': 6, 'command_blocks_ok': 64}
+{'ladder': 3543, 'iron_door': 264, 'dispenser': 4, 'chest': 3146, 'hopper': 386, 'furnace': 4, 'crafter': 6, 'command_blocks_ok': 81}
 consistency errors: 0 {'sorters': 2, 'doors': 20, 'farms': 4, 'pulses': 6}
 annex regions checked: 27  errors: 0
   OK   Annex - Ghast Hydration Facility (Wildezz) {'size': (352, 58, 464), 'palette': 955, 'tiles': 4773, 'entities': 0}
@@ -34,7 +34,7 @@ annex regions checked: 27  errors: 0
   OK   Annex - Wave Bolt - Diagonal Rail Curver Kvil (SandCaribou1890 / Pando_UwU / Kvil) {'size': (5, 3, 5), 'palette': 16, 'tiles': 0, 'entities': 0}
   OK   Annex - Wave Bolt - Rail Curver (SandCaribou1890 / Pando_UwU / Kvil) {'size': (6, 4, 5), 'palette': 11, 'tiles': 0, 'entities': 0}
 == walkability (doors counted open)
-outside gate comp 1 labels 78
+outside gate comp 1 labels 77
 OK   gate passage inside (383, 96, 740) comp 1
 OK   citadel entrance hall (360, 96, 340) comp 1
 OK   citadel ramp bottom (383, 98, 362) comp 1
@@ -63,7 +63,15 @@ OK   B9 veil tunnel N (101, 25, 285) comp 1
 OK   B10 royal hall (380, 17, 300) comp 1
 OK   B10 vault 1 interior (321, 17, 205) comp 1
 OK   B12 reserve (300, 1, 300) comp 1
+OK   archivist basement (B1) (47, 89, 140) comp 1
+OK   B1 tunnel under road R1 (150, 89, 285) comp 1
+OK   B1 N-S tunnel x=300 (300, 89, 200) comp 1
+OK   abstracters basement (B1) (580, 89, 310) comp 1
+OK   comms room (B2) (350, 81, 428) comp 1
 OK   throne room floor (383, 145, 280) comp 1
+== underground pockets not connected to the outside (must be 0)
+outside component 1
+disconnected pockets: 0
 == access-logic model test
 == door matrix (open? expected)
 PASS door/public      Stranger        open=False expected=False
@@ -139,5 +147,19 @@ PASS member book lists Minecraft + Discord username + credential
 PASS ledger entries never store a username
 == stolen book: no function reads book/item data for authorisation
 PASS no door/kit logic inspects held items or book NBT
+== message system
+PASS active member can send a quick radio call
+PASS rate limit: a second message within 2 s is blocked
+PASS stranger cannot send
+PASS revoked cannot send
+PASS visitor cannot send
+PASS Veil member can send (anonymised by operative code in the text)
+PASS msg/do_faction: Veil sender lines never use the @s selector (no name leak)
+PASS msg/do_all: Veil sender lines never use the @s selector (no name leak)
+PASS msg/do_leaders: Veil sender lines never use the @s selector (no name leak)
+PASS leaders channel blocked for plain members
+PASS leader announcement bumps the bulletin version and arms the board refresh
+PASS plain member cannot announce
+PASS royal can announce
 
 FAILED: 0

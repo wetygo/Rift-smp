@@ -140,9 +140,13 @@ def windows_ring(W, x0, z0, x1, z1, y, h=3, glass=PG, step=5, wd=2, skip=()):
             W.fill(x, y, z, x, y + h - 1, z + wd - 1, glass)
 
 
+SHELLS = []     # every hollow multi-storey shell, for the furnishing pass
+
+
 def shell(W, x0, z0, x1, z1, floors, fh=10, wall=BRK, floor_b=DT, roof=BRK, thick=2, y0=None):
     """hollow multi-storey shell; storeys of height fh (air fh-1 + slab). returns top y."""
     y0 = GY if y0 is None else y0
+    SHELLS.append(dict(x0=x0, z0=z0, x1=x1, z1=z1, floors=floors, fh=fh, y0=y0, thick=thick))
     top = y0 + floors * fh - 1
     W.fill(x0, y0, z0, x1, top, z1, wall)
     W.fill(x0 + thick, y0, z0 + thick, x1 - thick, top, z1 - thick, AIR)
