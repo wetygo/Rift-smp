@@ -73,3 +73,14 @@ def add(P):
         "effect give @s minecraft:slow_falling 6 0 true",
         'title @s actionbar {"text":"LAUNCHED - open your elytra!","color":"aqua"}'])
     P.fn("launch/no_elytra", ['tellraw @s {"text":"Launch pad: wear an elytra in your chestplate slot first.","color":"yellow"}', "scoreboard players set @s rb_msgcd 60"])
+
+
+    # ------------------------------------------------------------------ perimeter intrusion alarm (sculk sensors -> impulse command block)
+    P.fn("alarm/intrusion", [
+        "# runs AT an impulse command block next to a sculk sensor on the wall. Only fires for UNREGISTERED players nearby (mobs and members are ignored); 10 s cooldown.",
+        "execute unless score #INT rb_msg matches 1.. if entity @a[distance=..18,gamemode=!spectator,tag=!rb_member,tag=!rb_guest] run function riftbrek:alarm/intrusion_fire"])
+    P.fn("alarm/intrusion_fire", [
+        "scoreboard players set #INT rb_msg 200",
+        'tellraw @a[tag=rb_member,tag=!rb_revoked] [{"text":"[INTRUSION] ","color":"red","bold":true},{"text":"an unregistered player was detected at the perimeter wall","color":"white"}]',
+        "execute as @a[tag=rb_member,tag=!rb_revoked] at @s run playsound minecraft:block.bell.use master @s ~ ~ ~ 0.6 0.5",
+        "playsound minecraft:block.bell.use master @a[distance=..40] ~ ~ ~ 3 0.5"])

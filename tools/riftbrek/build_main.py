@@ -20,7 +20,7 @@ def build_world():
     S.citadel(W); log("citadel")
     WG.archive(W); WG.unstables(W); WG.abstracters(W); WG.veil(W); WG.wildcards(W); WG.nexus(W); log("wings")
     WG.blimp(W); WG.chicken_chambers(W); log("blimp terminal + chambers")
-    Q.build_quarters(W); Q.launch_pads(W); log("member quarters + launch pads")
+    Q.build_quarters(W); Q.launch_pads(W); log("member quarters + launch pads, %d intrusion sensors" % Q.intrusion_sensors(W))
     n = WG.landscaping(W, rng); log("trees %d" % n)
     log("furnished quadrants %d" % FU.furnish(W)); log("light blocks %d" % FU.lights(W))
     U.machines(W, lv); log("machinery")

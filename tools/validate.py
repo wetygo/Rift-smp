@@ -317,6 +317,11 @@ def check_consistency(a, pal, tiles, texts):
     for (x, y, z) in pads:
         need("glazed_terracotta" in name(a[y + 1, z, x]), f"launch pad block missing above command block {x},{y},{z}")
         need(all(name(a[y + k, z, x]) == "air" for k in range(2, 6)), f"launch pad {x},{y},{z}: headroom blocked")
+    sens = [i for i, (n_, p_) in enumerate(pal) if n_ == "minecraft:sculk_sensor"]
+    intr = [k for k, c in cmd_at.items() if c["Command"] == "function riftbrek:alarm/intrusion"]
+    need(len(sens) and len(intr) == int(np.isin(a, sens).sum()), f"intrusion alarm: {len(intr)} command blocks vs {int(np.isin(a, sens).sum()) if sens else 0} sculk sensors")
+    for (x, y, z) in intr:
+        need(any(name(a[y + dy, z + dz, x + dx]) == "sculk_sensor" for dx, dy, dz in ((1, 0, 0), (-1, 0, 0), (0, 0, 1), (0, 0, -1))), f"intrusion command block {x},{y},{z} has no adjacent sculk sensor")
     # every lava block in the HQ must be fully enclosed (no air / open face next to it)
     lv_ids = [i for i, (n_, p_) in enumerate(pal) if n_ == "minecraft:lava"]
     if lv_ids:

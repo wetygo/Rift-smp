@@ -156,8 +156,9 @@ def plaza(W):
     for k in range(16):
         a = 2 * np.pi * k / 16
         x, z = int(round(cx + 62 * np.cos(a))), int(round(cz + 62 * np.sin(a)))
-        W.fill(x, GY, z, x, GY + 6, z, BRK); W.set(x, GY + 7, z, SEA); W.fill(x - 1, GY + 7, z, x + 1, GY + 7, z, GLOW); W.fill(x, GY + 7, z - 1, x, GY + 7, z + 1, GLOW)
-        W.set(x, GY + 7, z, SEA)
+        W.fill(x, GY, z, x, GY + 6, z, BRK); W.fill(x - 1, GY + 7, z, x + 1, GY + 7, z, GLOW); W.fill(x, GY + 7, z - 1, x, GY + 7, z + 1, GLOW)
+        W.set(x, GY + 7, z, "minecraft:redstone_lamp[lit=false]")                            # automatic night light:
+        W.set(x, GY + 8, z, "minecraft:daylight_detector[inverted=true,power=0]")            # inverted sensor powers the lamp after dark
     # cherry trees on the 70-ring
     for k in range(12):
         a = 2 * np.pi * (k + 0.5) / 12

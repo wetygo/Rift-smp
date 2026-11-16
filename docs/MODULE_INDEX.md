@@ -20,7 +20,13 @@ Ground surface (first walkable layer) is local y = 96 = world y 32.
 | B11 | y 8 (world -56) |
 | B12 | y 0 (world -64) |
 
-## command blocks: `alarm/` (46)
+## command blocks: `admin/` (2)
+| function | local x,y,z | world offset (y-64) |
+|---|---|---|
+| `admin/lockdown_off` | 520, 99, 583 | +520, 35, +583 |
+| `admin/lockdown_on` | 519, 99, 583 | +519, 35, +583 |
+
+## command blocks: `alarm/` (62)
 | function | local x,y,z | world offset (y-64) |
 |---|---|---|
 | `alarm/all` | 517, 99, 583 | +517, 35, +583 |
@@ -46,6 +52,22 @@ Ground surface (first walkable layer) is local y = 96 = world y 32.
 | `alarm/emergency_7 with storage cfg origin` | 489, 103, 576 | +489, 39, +576 |
 | `alarm/emergency_8 with storage cfg origin` | 501, 103, 576 | +501, 39, +576 |
 | `alarm/emergency_9 with storage cfg origin` | 513, 103, 576 | +513, 39, +576 |
+| `alarm/intrusion` | 18, 96, 80 | +18, 32, +80 |
+| `alarm/intrusion` | 18, 96, 250 | +18, 32, +250 |
+| `alarm/intrusion` | 18, 96, 520 | +18, 32, +520 |
+| `alarm/intrusion` | 18, 96, 690 | +18, 32, +690 |
+| `alarm/intrusion` | 80, 96, 18 | +80, 32, +18 |
+| `alarm/intrusion` | 80, 96, 749 | +80, 32, +749 |
+| `alarm/intrusion` | 250, 96, 18 | +250, 32, +18 |
+| `alarm/intrusion` | 250, 96, 749 | +250, 32, +749 |
+| `alarm/intrusion` | 520, 96, 18 | +520, 32, +18 |
+| `alarm/intrusion` | 520, 96, 749 | +520, 32, +749 |
+| `alarm/intrusion` | 690, 96, 18 | +690, 32, +18 |
+| `alarm/intrusion` | 690, 96, 749 | +690, 32, +749 |
+| `alarm/intrusion` | 749, 96, 80 | +749, 32, +80 |
+| `alarm/intrusion` | 749, 96, 250 | +749, 32, +250 |
+| `alarm/intrusion` | 749, 96, 520 | +749, 32, +520 |
+| `alarm/intrusion` | 749, 96, 690 | +749, 32, +690 |
 | `alarm/reset` | 518, 99, 583 | +518, 35, +583 |
 | `alarm/room_1 with storage cfg origin` | 515, 97, 583 | +515, 33, +583 |
 | `alarm/room_10 with storage cfg origin` | 524, 97, 583 | +524, 33, +583 |

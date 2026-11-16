@@ -112,19 +112,20 @@ def control_room(W, r):
     rooms = [q for q in L.q_rooms() if q["kind"] == "room"]
     cols = list(range(x0 + 1, x0 + 11))
     slots = [(c, y + 1 + row) for row in range(3) for c in cols]
-    labels = [("room", q["n"]) for q in rooms] + [("all", 0), ("reset", 0)]
+    labels = [("room", q["n"]) for q in rooms] + [("all", 0), ("reset", 0), ("lock", 0), ("unlock", 0)]
     for (cx, cy), lab in zip(slots, labels):
         cmd = (f"function riftbrek:alarm/room_{lab[1]} with storage riftbrek:cfg origin" if lab[0] == "room"
-               else "function riftbrek:alarm/all" if lab[0] == "all" else "function riftbrek:alarm/reset")
+               else "function riftbrek:alarm/all" if lab[0] == "all" else "function riftbrek:alarm/reset" if lab[0] == "reset"
+               else "function riftbrek:admin/lockdown_on" if lab[0] == "lock" else "function riftbrek:admin/lockdown_off")
         cmdblock(W, cx, cy, zwall, cmd, kind="impulse")
         _set_auto(W, cx, cy, zwall, 0)
         W.set(cx, cy, zwall + 1, "minecraft:stone_button[face=wall,facing=south,powered=false]")
-    names = [str(q["n"]) for q in rooms] + ["ALL", "RESET"]
+    names = [str(q["n"]) for q in rooms] + ["ALL", "RESET", "LOCKDOWN", "LIFT LOCK"]
     for ci, c in enumerate(cols):
         a, b = names[ci], names[ci + 10]
         c3 = names[ci + 20] if ci + 20 < len(names) else "-"
         wall_sign(W, c, y + 4, zwall + 1, "south", ["bottom->top", a, b, c3], color="yellow")
-    sign(W, x0 + 5, y, r["zin1"] - 1, ["CONTROL ROOM", "1 button = 1 room", "ALL = every room", "RESET = silence"], rot=8, color="red")
+    sign(W, x0 + 5, y, r["zin1"] - 1, ["CONTROL ROOM", "1 button = 1 room", "ALL / RESET alarms", "LOCKDOWN / LIFT"], rot=8, color="red")
 
 
 def pad_launch(W, x, ypad, z, label):
@@ -215,3 +216,16 @@ def ruined_vault(W, rng):
     W.fill(x0 - 1, y0, 316, x0 + 3, y0, 322, BK)
     sign(W, x0 - 3, y0 + 1, 319, ["OLD VAULT", "blown up long ago", "treasure remains", "mind the craters"], rot=4, color="yellow")
     return chests
+
+
+def intrusion_sensors(W):
+    """sculk sensors along the inside foot of the perimeter wall, each next to an impulse command block that runs alarm/intrusion"""
+    S = W.sx
+    n = 0
+    for t in (80, 250, 520, 690):
+        for (sx_, sz_, cx_, cz_) in ((t, 17, t, 18), (t, S - 18, t, S - 19), (17, t, 18, t), (S - 18, t, S - 19, t)):
+            W.set(sx_, GY, sz_, "minecraft:sculk_sensor[power=0,sculk_sensor_phase=inactive,waterlogged=false]")
+            cmdblock(W, cx_, GY, cz_, "function riftbrek:alarm/intrusion", kind="impulse")
+            _set_auto(W, cx_, GY, cz_, 0)
+            n += 1
+    return n

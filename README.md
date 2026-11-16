@@ -46,6 +46,8 @@ in-game bugs; `docs/TEST_REPORT.md` has a 15-minute smoke-test checklist that fi
 
 * **Member Quarters (BAT-style):** 22 rooms with emergency buttons, a per-room/all-room alarm control room, book mail between room dispensers, lava-curtain windows, elytra launch pads (1,000 blocks up) and a blown-up treasure vault — see `docs/QUARTERS.md`.
 
+* **Audit:** `docs/REQUIREMENTS_AUDIT.md` lists every request, its status, and everything that is not verified.
+
 ## Rebuild / re-verify
 
 ```bash

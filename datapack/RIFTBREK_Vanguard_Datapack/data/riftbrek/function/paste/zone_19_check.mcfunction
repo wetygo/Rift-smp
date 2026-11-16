@@ -1264,9 +1264,10 @@ execute unless score #c rb_p matches 2 run data modify storage riftbrek:paste mi
 scoreboard players set #c rb_p 0
 $execute positioned $(x) 31 $(z) if block ~744 ~ ~696 minecraft:grass_block run scoreboard players add #c rb_p 1
 $execute positioned $(x) -44 $(z) if block ~744 ~ ~696 minecraft:deepslate run scoreboard players add #c rb_p 1
+$execute positioned $(x) 32 $(z) if block ~749 ~ ~690 minecraft:command_block run scoreboard players add #c rb_p 1
 scoreboard players add #TOT rb_p 1
-execute if score #c rb_p matches 2 run scoreboard players add #OK rb_p 1
-execute unless score #c rb_p matches 2 run data modify storage riftbrek:paste miss append value {c:"46,43"}
+execute if score #c rb_p matches 3 run scoreboard players add #OK rb_p 1
+execute unless score #c rb_p matches 3 run data modify storage riftbrek:paste miss append value {c:"46,43"}
 scoreboard players set #c rb_p 0
 $execute positioned $(x) 31 $(z) if block ~760 ~ ~696 minecraft:grass_block run scoreboard players add #c rb_p 1
 $execute positioned $(x) -44 $(z) if block ~760 ~ ~696 minecraft:deepslate run scoreboard players add #c rb_p 1
@@ -1546,9 +1547,10 @@ execute unless score #c rb_p matches 2 run data modify storage riftbrek:paste mi
 scoreboard players set #c rb_p 0
 $execute positioned $(x) 31 $(z) if block ~696 ~ ~744 minecraft:grass_block run scoreboard players add #c rb_p 1
 $execute positioned $(x) -44 $(z) if block ~696 ~ ~744 minecraft:deepslate run scoreboard players add #c rb_p 1
+$execute positioned $(x) 32 $(z) if block ~690 ~ ~749 minecraft:command_block run scoreboard players add #c rb_p 1
 scoreboard players add #TOT rb_p 1
-execute if score #c rb_p matches 2 run scoreboard players add #OK rb_p 1
-execute unless score #c rb_p matches 2 run data modify storage riftbrek:paste miss append value {c:"43,46"}
+execute if score #c rb_p matches 3 run scoreboard players add #OK rb_p 1
+execute unless score #c rb_p matches 3 run data modify storage riftbrek:paste miss append value {c:"43,46"}
 scoreboard players set #c rb_p 0
 $execute positioned $(x) 31 $(z) if block ~712 ~ ~744 minecraft:grass_block run scoreboard players add #c rb_p 1
 $execute positioned $(x) -44 $(z) if block ~712 ~ ~744 minecraft:deepslate run scoreboard players add #c rb_p 1

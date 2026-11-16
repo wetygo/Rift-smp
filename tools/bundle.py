@@ -5,7 +5,7 @@ files = [("dist/RIFTBREK_READY_WORLD_region_files.zip", "RIFTBREK_READY_WORLD_re
          ("dist/RIFTBREK_Vanguard_Headquarters_MASTER.litematic", "RIFTBREK_Vanguard_Headquarters_MASTER.litematic"),
          ("dist/RIFTBREK_Vanguard_Datapack.zip", "RIFTBREK_Vanguard_Datapack.zip"),
          ("README.md", "README.md")]
-for n in ("ANNEX.md", "QUARTERS.md", "PASTE_GUIDE.md", "PASTE_ZONES.md", "SIMULATED_TEST_REPORT.md", "ANNEX_MAP.md", "INSTALL.md", "COMMAND_HANDBOOK.md", "MODULE_INDEX.md", "TEST_REPORT.md", "KNOWN_GAPS.md", "CREDITS.md", "TEST_RESULTS_AUTO.txt"):
+for n in ("ANNEX.md", "REQUIREMENTS_AUDIT.md", "QUARTERS.md", "PASTE_GUIDE.md", "PASTE_ZONES.md", "SIMULATED_TEST_REPORT.md", "ANNEX_MAP.md", "INSTALL.md", "COMMAND_HANDBOOK.md", "MODULE_INDEX.md", "TEST_REPORT.md", "KNOWN_GAPS.md", "CREDITS.md", "TEST_RESULTS_AUTO.txt"):
     files.append((f"docs/{n}", f"docs/{n}"))
 for n in os.listdir(os.path.join(root, "docs", "previews")):
     files.append((f"docs/previews/{n}", f"docs/previews/{n}"))
