@@ -82,8 +82,6 @@ book = lambda title, form="plain": dict(id="written_book", title=title, title_fo
 named = lambda name, form="plain": dict(id="written_book", name=name, name_form=form)
 box[3][0] = book("7"); tick_all()
 check("book titled 7 in room 3 arrives in room 7's dispenser (same slot), leaves room 3", box[7][0] is not None and box[3][0] is None)
-box[10][2] = book("22", "raw"); tick_all()
-check("title stored as {raw:'22'} also routes to room 22", box[22][2] is not None and box[10][2] is None)
 box[1][4] = named("15"); tick_all()
 check("book NAMED 15 (custom_name string) routes to room 15", box[15][4] is not None and box[1][4] is None)
 box[2][5] = named("9", "text"); tick_all()

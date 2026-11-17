@@ -45,7 +45,6 @@ def add(P):
                 dx, dy, dz = dst["mail_cb"][0] - sx, dst["mail_cb"][1] + 1 - sy, dst["mail_cb"][2] - sz
                 d = dst["n"]
                 for pred in (f'minecraft:written_book[minecraft:written_book_content~{{title:"{d}"}}]',
-                             f'minecraft:written_book[minecraft:written_book_content~{{title:{{raw:"{d}"}}}}]',
                              f'minecraft:written_book[minecraft:custom_name="{d}"]',
                              f'minecraft:written_book[minecraft:custom_name={{text:"{d}"}}]'):
                     lines.append(f"execute if items block ~ ~1 ~ container.{s} {pred} unless items block ~{dx} ~{dy} ~{dz} container.{s} * "
