@@ -1,2 +1,5 @@
 __pycache__/
 *.pyc
+mod/build/
+mod/.gradle/
+mod/.loom-cache/

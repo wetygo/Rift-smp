@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "id": "riftbrek",
+  "version": "${version}",
+  "name": "RIFTBREK Vanguard",
+  "description": "RIFTBREK Vanguard headquarters: factions, credentials, access doors, kits, messages, lockdown, sorting, blimp and member-quarters systems. Credits: Krodo (Airlander 10), the Storage Tech Discord, Wildezz.",
+  "authors": ["RIFTBREK"],
+  "license": "All-Rights-Reserved",
+  "environment": "*",
+  "entrypoints": { "main": ["riftbrek.RiftBrek"] },
+  "depends": { "fabricloader": ">=0.16", "minecraft": "1.21.11", "fabric-api": "*" }
+}
