@@ -216,6 +216,8 @@ def verify(P):
     _p = _o.path.join(_o.path.dirname(__file__), "..", "..", "mod", "src", "main", "resources", "riftbrek_probes.json")
     _o.makedirs(_o.path.dirname(_p), exist_ok=True)
     _j.dump([dict(label=l, x=x, y=y(ly), z=z, block=b) for (l, x, ly, z, b) in checks], open(_p, "w"), indent=1)
+    _j.dump([dict(name=n, x0=x0, z0=z0, x1=x1, z1=z1) for (n, x0, z0, x1, z1) in L.FORCELOAD],
+            open(_o.path.join(_o.path.dirname(_p), "riftbrek_forceload.json"), "w"), indent=1)
     P.fn("admin/verify", ["# OP ONLY. Needs admin/origin first. Chunks must be loaded: use the mod's /rift verify (loads them itself) or stand near the base.",
                           "function riftbrek:admin/verify_do with storage riftbrek:cfg origin"])
 

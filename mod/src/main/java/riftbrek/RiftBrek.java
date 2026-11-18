@@ -16,6 +16,9 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.storage.LevelResource;
+import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -66,11 +69,65 @@ public class RiftBrek implements ModInitializer {
         s.getCommands().performPrefixedCommand(s.createCommandSourceStack().withSuppressedOutput(), cmd);
     }
 
-    /** Removes the force-loads that belong to the origin currently stored in the world, then stores + loads the new one. */
+    // ---- force-load bookkeeping: the mod only ever removes chunks it added itself (recorded per world) ----
+    private static Path trackFile(MinecraftServer s) { return s.getWorldPath(LevelResource.ROOT).resolve("riftbrek_forceloads.json"); }
+
+    private static LongOpenHashSet readTracked(MinecraftServer s) {
+        LongOpenHashSet set = new LongOpenHashSet();
+        try {
+            Path f = trackFile(s);
+            if (Files.exists(f)) {
+                JsonArray arr = JsonParser.parseString(Files.readString(f)).getAsJsonObject().getAsJsonArray("chunks");
+                for (JsonElement e : arr) set.add(e.getAsLong());
+            }
+        } catch (Exception e) { LOG.warn("could not read riftbrek_forceloads.json: {}", e.toString()); }
+        return set;
+    }
+
+    private static void writeTracked(MinecraftServer s, LongOpenHashSet set) {
+        try {
+            JsonArray arr = new JsonArray();
+            for (long l : set) arr.add(l);
+            var o = new com.google.gson.JsonObject();
+            o.addProperty("note", "chunks force-loaded BY the RIFTBREK mod (only these are ever removed)");
+            o.add("chunks", arr);
+            Files.writeString(trackFile(s), o.toString());
+        } catch (Exception e) { LOG.warn("could not write riftbrek_forceloads.json: {}", e.toString()); }
+    }
+
+    private static LongOpenHashSet wantedChunks() throws Exception {
+        LongOpenHashSet want = new LongOpenHashSet();
+        try (var in = RiftBrek.class.getResourceAsStream("/riftbrek_forceload.json")) {
+            for (JsonElement e : JsonParser.parseReader(new InputStreamReader(in, StandardCharsets.UTF_8)).getAsJsonArray()) {
+                var o = e.getAsJsonObject();
+                int x0 = originX + o.get("x0").getAsInt(), x1 = originX + o.get("x1").getAsInt();
+                int z0 = originZ + o.get("z0").getAsInt(), z1 = originZ + o.get("z1").getAsInt();
+                for (int cx = x0 >> 4; cx <= x1 >> 4; cx++)
+                    for (int cz = z0 >> 4; cz <= z1 >> 4; cz++) want.add(ChunkPos.asLong(cx, cz));
+            }
+        }
+        return want;
+    }
+
+    /** Stores the origin for the data pack, un-forces ONLY the chunks this mod forced before, then forces the new set
+     *  (chunks that some admin/another mod had already force-loaded are left alone and never recorded as ours). */
     private static void applyOrigin(MinecraftServer s) {
-        run(s, "function riftbrek:admin/forceload_off");   // uses the OLD origin from storage (no-op if none stored)
+        ServerLevel level = s.overworld();
+        LongOpenHashSet mine = readTracked(s);
+        for (long l : mine) level.setChunkForced(ChunkPos.getX(l), ChunkPos.getZ(l), false);
+        mine.clear();
         run(s, "data modify storage riftbrek:cfg origin set value {x:" + originX + ",z:" + originZ + "}");
-        if (autoForceload) run(s, "function riftbrek:admin/forceload");
+        if (autoForceload) {
+            try {
+                var already = level.getForceLoadedChunks();
+                for (long l : wantedChunks()) {
+                    if (already.contains(l)) continue;           // someone else's force-load: do not touch, do not record
+                    level.setChunkForced(ChunkPos.getX(l), ChunkPos.getZ(l), true);
+                    mine.add(l);
+                }
+            } catch (Exception e) { LOG.error("force-load failed: {}", e.toString()); }
+        }
+        writeTracked(s, mine);
     }
 
     /** Own paste check: loads each probe chunk itself, so the result does not depend on where the player stands. */
