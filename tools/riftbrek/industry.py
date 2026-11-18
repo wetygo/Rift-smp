@@ -209,10 +209,14 @@ def verify(P):
     lines = ["# macro: x,z = schematic origin (admin/origin).  Run: /function riftbrek:admin/verify",
              'tellraw @s {"text":"[RIFTBREK] paste check (PASS = expected block found):","color":"light_purple"}']
     for (label, x, ly, z, blk) in checks:
-        lines.append(f'$execute positioned $(x) {y(ly)} $(z) if block ~{x} ~ ~{z} {blk} run tellraw @s {{"text":"PASS  {label}","color":"green"}}')
-        lines.append(f'$execute positioned $(x) {y(ly)} $(z) unless block ~{x} ~ ~{z} {blk} run tellraw @s {{"text":"FAIL  {label} (chunk not loaded, wrong origin, or not pasted)","color":"red"}}')
+        lines.append(f'$execute in minecraft:overworld positioned $(x) {y(ly)} $(z) if block ~{x} ~ ~{z} {blk} run tellraw @s {{"text":"PASS  {label}","color":"green"}}')
+        lines.append(f'$execute in minecraft:overworld positioned $(x) {y(ly)} $(z) unless block ~{x} ~ ~{z} {blk} run tellraw @s {{"text":"FAIL  {label} (chunk not loaded, wrong origin, or not pasted)","color":"red"}}')
     P.fn("admin/verify_do", lines)
-    P.fn("admin/verify", ["# OP ONLY. Needs admin/origin first. Stand near the schematic so the chunks are loaded (or run admin/forceload first).",
+    import json as _j, os as _o
+    _p = _o.path.join(_o.path.dirname(__file__), "..", "..", "mod", "src", "main", "resources", "riftbrek_probes.json")
+    _o.makedirs(_o.path.dirname(_p), exist_ok=True)
+    _j.dump([dict(label=l, x=x, y=y(ly), z=z, block=b) for (l, x, ly, z, b) in checks], open(_p, "w"), indent=1)
+    P.fn("admin/verify", ["# OP ONLY. Needs admin/origin first. Chunks must be loaded: use the mod's /rift verify (loads them itself) or stand near the base.",
                           "function riftbrek:admin/verify_do with storage riftbrek:cfg origin"])
 
 

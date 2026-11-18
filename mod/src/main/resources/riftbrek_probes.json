@@ -1,0 +1,65 @@
+[
+ {
+  "label": "ground (grass) at local 100,95,100",
+  "x": 100,
+  "y": 31,
+  "z": 100,
+  "block": "minecraft:grass_block"
+ },
+ {
+  "label": "gatehouse door controller",
+  "x": 378,
+  "y": 35,
+  "z": 760,
+  "block": "minecraft:repeating_command_block"
+ },
+ {
+  "label": "citadel entrance controller",
+  "x": 378,
+  "y": 35,
+  "z": 366,
+  "block": "minecraft:repeating_command_block"
+ },
+ {
+  "label": "blimp controller (dock A)",
+  "x": 250,
+  "y": 30,
+  "z": 110,
+  "block": "minecraft:repeating_command_block"
+ },
+ {
+  "label": "sorter A controller (B5)",
+  "x": 560,
+  "y": -4,
+  "z": 472,
+  "block": "minecraft:repeating_command_block"
+ },
+ {
+  "label": "sorter B controller (B6)",
+  "x": 560,
+  "y": -12,
+  "z": 520,
+  "block": "minecraft:repeating_command_block"
+ },
+ {
+  "label": "synthesis unit (B11)",
+  "x": 220,
+  "y": -55,
+  "z": 300,
+  "block": "minecraft:repeating_command_block"
+ },
+ {
+  "label": "great spire tip region (citadel)",
+  "x": 383,
+  "y": 202,
+  "z": 271,
+  "block": "minecraft:black_concrete"
+ },
+ {
+  "label": "south-east corner tower wall",
+  "x": 766,
+  "y": 42,
+  "z": 750,
+  "block": "minecraft:polished_blackstone_bricks"
+ }
+]

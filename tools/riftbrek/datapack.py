@@ -158,6 +158,7 @@ def build(root):
         "execute unless score #T rb_bl = #T rb_bl run scoreboard players set #T rb_bl 0",
         "scoreboard players set #600 rb_const 600",
         "execute unless data storage riftbrek:registry roster run data modify storage riftbrek:registry roster set value []",
+        "data modify storage riftbrek:const factions set value {" + ",".join(f"{k}:1b" for k in fac) + "}",
         "execute unless data storage riftbrek:registry players run data modify storage riftbrek:registry players set value {}",
         "execute unless data storage riftbrek:log entries run data modify storage riftbrek:log entries set value []",
         "function riftbrek:setup/teams",
@@ -185,7 +186,9 @@ def build(root):
         "scoreboard players enable @a rb_req",
         "execute as @a[scores={rb_req=1..}] run function riftbrek:req/dispatch",
         "# Veil operatives are kept invisible everywhere (zone/visible overrides this for non-Veil only).",
-        "execute as @a[tag=rb_veil,tag=!rb_revoked] run effect give @s minecraft:invisibility 4 0 true",
+        "execute as @a[tag=rb_veil,tag=!rb_revoked,scores={rb_cred=1..}] run effect give @s minecraft:invisibility 4 0 true",
+        "# a suspended / credential-less Veil member is NOT anonymous any more",
+        "execute as @a[tag=rb_veil,scores={rb_cred=..0}] run effect clear @s minecraft:invisibility",
         "# Visitor passes count down in ONLINE ticks.",
         "execute as @a[tag=rb_guest,scores={rb_visitor=1..}] run scoreboard players remove @s rb_visitor 1",
         "execute as @a[tag=rb_guest,scores={rb_visitor=..0}] run function riftbrek:visitor/expire",
@@ -245,11 +248,13 @@ def build(root):
     P.fn("admin/register", [
         "# OP ONLY.  /function riftbrek:admin/register {mc:\"PlayerName\",discord:\"discord_handle\",faction:\"birds\"}",
         "# faction = birds | unstables | abstracters | veil | archivist | wildcards.  Player must be ONLINE.",
-        '$execute unless entity @a[name=$(mc)] run tellraw @s {"text":"RIFTBREK: $(mc) must be online to register.","color":"red"}',
+        '$execute unless data storage riftbrek:const factions.$(faction) run return run tellraw @s {"text":"RIFTBREK: unknown faction \'$(faction)\' - use birds, unstables, abstracters, veil, archivist or wildcards. Nothing was changed.","color":"red"}',
+        '$execute unless entity @a[name=$(mc)] run return run tellraw @s {"text":"RIFTBREK: $(mc) must be online to register.","color":"red"}',
         '$execute as $(mc) run function riftbrek:admin/register_apply {mc:"$(mc)",discord:"$(discord)",faction:"$(faction)"}',
     ])
     P.fn("admin/register_apply", [
         "# executes AS the player being registered (macro args come from admin/register)",
+        '$execute unless data storage riftbrek:const factions.$(faction) run return run tellraw @s {"text":"RIFTBREK: unknown faction - nothing changed.","color":"red"}',
         "execute if score @s rb_id matches 1.. run tag @s add rb_rereg",
         "function riftbrek:admin/_clear_roles",
         "execute unless score @s rb_id matches 1.. run function riftbrek:admin/_newid",

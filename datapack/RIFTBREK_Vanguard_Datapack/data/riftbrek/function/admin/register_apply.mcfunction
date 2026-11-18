@@ -1,4 +1,5 @@
 # executes AS the player being registered (macro args come from admin/register)
+$execute unless data storage riftbrek:const factions.$(faction) run return run tellraw @s {"text":"RIFTBREK: unknown faction - nothing changed.","color":"red"}
 execute if score @s rb_id matches 1.. run tag @s add rb_rereg
 function riftbrek:admin/_clear_roles
 execute unless score @s rb_id matches 1.. run function riftbrek:admin/_newid

@@ -1,0 +1,46 @@
+RIFTBREK Vanguard - MOD package v1.0.1  (Minecraft Java 1.21.11, Fabric)
+=========================================================================
+The mod CONTAINS the data pack. Do NOT also install the separate data pack zip.
+
+WHAT YOU STILL NEED (not in this zip)
+  * Minecraft Java Edition 1.21.11 (the launcher's own Java 21 is fine; to double-click fabric-installer.jar you need Java 21 on the PC)
+  * Internet for the Fabric installer (it downloads the Fabric loader profile + libraries) and for Minecraft's first launch of that profile
+  * Fabric Loader 0.17.3 or newer (the installer gives you the latest; the bundled Fabric API 0.141.6 needs >= 0.17.3)
+
+IN THIS ZIP
+  fabric-installer.jar                         installs Fabric Loader for Minecraft 1.21.11
+  mods/fabric-api.jar, mods/riftbrek-vanguard-1.0.1.jar    put both in .minecraft/mods
+  standalone_world/RIFTBREK_Vanguard_World/    a ready world (void) with the base - option A
+  base_files/region + base_files/entities      only the base's chunks (placed at X 8192, Z 8192) - options B / C
+  MergeBase.java                               adds the base into an EXISTING world without losing other chunks - option C
+
+1) INSTALL FABRIC + THE MOD (always)
+   a. Run fabric-installer.jar -> Client -> Minecraft 1.21.11 -> Install. Start the launcher once, choose the new "fabric-loader-1.21.11" profile, then quit.
+   b. Copy the two jars from this zip's mods folder into .minecraft/mods (create the folder if missing). Essential for Fabric can be installed next to it.
+
+2) PUT THE BASE IN A WORLD - pick ONE option. BACK UP YOUR WORLD FIRST.
+   A. NEW WORLD (zero risk to your old world, cannot collide): copy standalone_world/RIFTBREK_Vanguard_World to .minecraft/saves/ and open it from Singleplayer. Cheats are already on.
+   B. EXISTING WORLD, no name collision: in your world folder check that these do NOT exist
+        region/:   r.16.16 r.16.17 r.17.16 r.17.17 r.18.16 r.18.17 r.19.16 r.19.17      entities/: r.17.17 r.18.16 r.19.16
+      If none exist, copy base_files/region/* and base_files/entities/* into your world's region/ and entities/ folders.
+   C. EXISTING WORLD, some of those names exist (a name collision is normal - the file also holds YOUR chunks): use the merge tool.
+        Close Minecraft. Open a terminal in this zip's folder and run (Java 21):
+          java MergeBase.java "<path to your world folder>" base_files --dry-run      <- shows what will happen, writes nothing
+          java MergeBase.java "<path to your world folder>" base_files               <- does it; keeps a r.X.Z.mca.riftbak backup next to each changed file
+        It only writes the base's chunks into your files; every other chunk stays. If the dry run reports "existing chunks replaced" those chunks were
+        where the base sits (empty or terrain there is replaced).
+   D. Need a different spot altogether: tell me the coordinates and I re-export; /rift origin only tells the mod where the files are, it does not move them.
+
+3) FIRST START
+   Open the world with the Fabric profile. The mod auto-loads the data pack, sets the origin (X 8192 Z 8192) and force-loads the machines (about 382 chunks).
+   Wait a few minutes for lighting. Cheats must be on (new world: already; existing: open to LAN with cheats).
+   /tp @s 8575 33 8932
+   /rift verify          -> 9 / 9 PASS (the mod loads the check chunks itself, so it works from anywhere, in any dimension)
+
+4) FIRST USE (OP / cheats)
+   /function riftbrek:admin/register {mc:"YOURNAME",discord:"yourdiscord",faction:"birds"}
+   /function riftbrek:admin/royal {mc:"YOURNAME"}
+   Players: /trigger rb_req set 1 (ID book), 2 (kit), 9 (help).  Unknown faction names are rejected before anything changes.
+
+CONFIG:  config/riftbrek.properties (originX, originZ, autoForceload).  /rift origin <x> <z> saves it and removes the old force-loads.
+Credits: Airlander 10 by Krodo; Storage Tech Discord builders; Wildezz.

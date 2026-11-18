@@ -35,6 +35,7 @@ execute unless score #PH rb_bl = #PH rb_bl run scoreboard players set #PH rb_bl 
 execute unless score #T rb_bl = #T rb_bl run scoreboard players set #T rb_bl 0
 scoreboard players set #600 rb_const 600
 execute unless data storage riftbrek:registry roster run data modify storage riftbrek:registry roster set value []
+data modify storage riftbrek:const factions set value {birds:1b,unstables:1b,abstracters:1b,veil:1b,archivist:1b,wildcards:1b}
 execute unless data storage riftbrek:registry players run data modify storage riftbrek:registry players set value {}
 execute unless data storage riftbrek:log entries run data modify storage riftbrek:log entries set value []
 function riftbrek:setup/teams
