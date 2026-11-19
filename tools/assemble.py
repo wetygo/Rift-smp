@@ -29,7 +29,7 @@ RULES = [
     (r"Chronostasis", "Chronostasis Station", "Nyx_9841", "Storage Tech", False),
 ]
 GAP = 10
-X0, Z0, ROW_W = 800, 10, 1100
+X0, Z0, ROW_W = 800, 16, 1100
 
 
 def find_sources(srcdir):
@@ -85,6 +85,11 @@ def main(master, srcdir, report=None):
     plate_prep = dict(arr=plate, pal=pal, tiles=[], ents=[], size=(pw, 96, pd))
     regions["Annex Plateau"] = annex.pack_region(plate_prep, (768, 0, 0))
     total += int(np.count_nonzero(plate))
+    # --- REDSTONE MEGA BUILDING: roof + walls over the whole plateau (before the builds, so they overwrite the light grid) --------------------------
+    from riftbrek import build_mega as M
+    shell_w = M.shell(pw, pd)
+    regions["Mega Shell"] = annex.pack_region(dict(arr=shell_w.a, pal=shell_w.palette, size=(pw, shell_w.sy, pd), tiles=shell_w.tiles, ents=[]), (768, 0, 0))
+    total += int(np.count_nonzero(shell_w.a)); del shell_w
     for (p, px, pz) in placements:
         py = L.GY
         name = f"Annex - {p['label']} ({p['author']})"
@@ -92,6 +97,28 @@ def main(master, srcdir, report=None):
         total += int(np.count_nonzero(p["arr"]))
         info.append(dict(name=p["label"], file=p["file"], author=p["author"], community=p["community"], purple=p["purple"],
                          x=px, y=py, z=pz, size=p["size"], dv=p["dv"], tiles=len(p["tiles"]), ents=len(p["ents"]), warn=p["warn"]))
+    # --- my own halls in free rectangles of the plateau ---------------------------------------------------------------------------------------------
+    occ = np.zeros((pd, pw), dtype=bool)
+    for (p, px, pz) in placements:
+        w, h, dd = p["size"]
+        occ[max(pz - 10, 0):pz + dd + 10, max(px - 768 - 10, 0):px - 768 + w + 10] = True
+    occ[:16, :] = True; occ[-16:, :] = True; occ[:, -16:] = True
+    mega = dict(halls={}, tests=[])
+    for (nm, hw, hd, fn) in M.HALLS:
+        pos = M.free_rect(occ, hw, hd)
+        assert pos, "no free rectangle for " + nm
+        hx, hz = pos
+        occ[hz - 4:hz + hd + 4, hx - 4:hx + hw + 4] = True
+        W = M.World(hw, L.GY + 14, hd)
+        M.ground(W); M.MEGA_TESTS.clear()
+        fn(W, 2, 2)
+        regions["Mega Hall - " + nm] = annex.pack_region(dict(arr=W.a, pal=W.palette, size=(hw, L.GY + 14, hd), tiles=W.tiles, ents=[]), (768 + hx, 0, hz))
+        total += int(np.count_nonzero(W.a))
+        mega["halls"][nm] = dict(x=768 + hx, z=hz, w=hw, d=hd)
+        for t in M.MEGA_TESTS:
+            mega["tests"].append(dict(hall=nm, off=[768 + hx, 0, hz], **t))
+        print("  hall", nm, "at HQ-local", 768 + hx, hz, flush=True)
+    json.dump(mega, open(os.path.join(os.path.dirname(os.path.abspath(master)), "..", "docs", "mega_info.json"), "w"), indent=1, default=list)
     annex.write_litematic(master, regions, "RIFTBREK Vanguard Headquarters - MASTER (+ annex quarter)",
                           "RIFTBREK Design; annex builds by Wildezz, Storage Tech community (hykn55, Nyx_9841, SandCaribou1890, Pando_UwU, Kvil), Airlander 10 by Krodo",
                           "768x384x768 HQ + east annex quarter with imported farms/storage/chunk-loading/Wave-Bolt builds on a grass plateau. Untested in-game.",

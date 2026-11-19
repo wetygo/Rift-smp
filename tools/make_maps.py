@@ -86,6 +86,8 @@ def hq(core, ward, ward_info):
     TW, TH = 2304, 1536
     top = np.zeros((TH, TW, 3), dtype=np.uint8); top[:] = (30, 70, 40)
     for (name, pal, a, px, py, pz, tiles) in es.load(core, 0):
+        if name == "Mega Shell":
+            del a; continue
         img, hh = topimg(a, pal); m = hh > 0
         ox, oz = px + 384, pz + 384
         h, w = hh.shape
@@ -111,7 +113,7 @@ def hq(core, ward, ward_info):
         label(d, x + O, z + O, t, 14, fill=(255, 235, 150))
     d.rectangle([O, O, O + 767, O + 767], outline=(255, 120, 255, 255), width=4)
     label(d, O + 384, O - 14, "ORIGINAL HQ 768 x 768  (origin X 8192 Z 8192)", 18, fill=(255, 150, 255))
-    label(d, O + 1500, O + 384, "ANNEX PLATEAU (Wildezz / Storage Tech builds)\nX 8960..10111  -  see docs/ANNEX_MAP.md", 22, fill=(255, 235, 150))
+    label(d, O + 1500, O + 384, "REDSTONE MEGA BUILDING (inside: Wildezz / Storage Tech builds + 3 halls)\nX 8960..10111  -  see docs/ANNEX_MAP.md, REDSTONE_MEGA.md", 22, fill=(255, 235, 150))
     # annex builds
     for line in open(os.path.join(os.path.dirname(__file__), "..", "docs", "ANNEX_MAP.md")):
         if line.startswith("| ") and "local x,y,z" not in line and not line.startswith("| ---") and not line.startswith("| build"):
@@ -122,6 +124,12 @@ def hq(core, ward, ward_info):
                 d.rectangle([x + O, z + O, x + sx + O, z + sz + O], outline=(255, 200, 80, 200), width=1)
                 if sx >= 70 and sz >= 70:
                     label(d, x + O + sx // 2, z + O + sz // 2, c[0][:30], 12)
+    mi = json.load(open(os.path.join(os.path.dirname(__file__), "..", "docs", "mega_info.json")))
+    for nm, h in mi["halls"].items():
+        d.rectangle([h["x"] + O, h["z"] + O, h["x"] + h["w"] + O, h["z"] + h["d"] + O], outline=(255, 120, 80, 255), width=3)
+        label(d, h["x"] + O + h["w"] // 2, h["z"] + O + h["d"] // 2, nm + "\n(my own, live-tested)", 14, fill=(255, 190, 150))
+    d.rectangle([768 + O, O, 1919 + O, 767 + O], outline=(255, 90, 90, 255), width=5)
+    label(d, 1344 + O, O + 25, "REDSTONE MEGA BUILDING (roofed, 160 high) - walls X 8960..10111, Z 8192..8959", 20, fill=(255, 150, 150))
     # ward buildings
     for (strip, lab, kind, x0, z0, x1, z1, fl) in ward_info["buildings"]:
         pz = {"N": 0, "S": 1152, "W": 384}[strip]

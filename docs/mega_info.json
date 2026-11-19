@@ -1,0 +1,408 @@
+{
+ "halls": {
+  "FURNACE ARRAY": {
+   "x": 1818,
+   "z": 18,
+   "w": 72,
+   "d": 42
+  },
+  "FARM HALL": {
+   "x": 1630,
+   "z": 206,
+   "w": 80,
+   "d": 42
+  },
+  "STORAGE VAULT": {
+   "x": 1714,
+   "z": 206,
+   "w": 104,
+   "d": 46
+  }
+ },
+ "tests": [
+  {
+   "hall": "FURNACE ARRAY",
+   "off": [
+    1818,
+    0,
+    18
+   ],
+   "kind": "furnace_row",
+   "name": "FURNACE ROW IRON",
+   "unit0": [
+    4,
+    96,
+    8
+   ],
+   "furnace0": [
+    4,
+    98,
+    8
+   ],
+   "out": [
+    66,
+    96,
+    8
+   ],
+   "ore": "minecraft:raw_iron"
+  },
+  {
+   "hall": "FURNACE ARRAY",
+   "off": [
+    1818,
+    0,
+    18
+   ],
+   "kind": "furnace_row",
+   "name": "FURNACE ROW COPPER",
+   "unit0": [
+    4,
+    96,
+    17
+   ],
+   "furnace0": [
+    4,
+    98,
+    17
+   ],
+   "out": [
+    66,
+    96,
+    17
+   ],
+   "ore": "minecraft:raw_copper"
+  },
+  {
+   "hall": "FURNACE ARRAY",
+   "off": [
+    1818,
+    0,
+    18
+   ],
+   "kind": "furnace_row",
+   "name": "FURNACE ROW GOLD",
+   "unit0": [
+    4,
+    96,
+    26
+   ],
+   "furnace0": [
+    4,
+    98,
+    26
+   ],
+   "out": [
+    66,
+    96,
+    26
+   ],
+   "ore": "minecraft:raw_gold"
+  },
+  {
+   "hall": "FURNACE ARRAY",
+   "off": [
+    1818,
+    0,
+    18
+   ],
+   "kind": "furnace_row",
+   "name": "FURNACE ROW STONE",
+   "unit0": [
+    4,
+    96,
+    35
+   ],
+   "furnace0": [
+    4,
+    98,
+    35
+   ],
+   "out": [
+    66,
+    96,
+    35
+   ],
+   "ore": "minecraft:cobblestone"
+  },
+  {
+   "hall": "FARM HALL",
+   "off": [
+    1630,
+    0,
+    206
+   ],
+   "kind": "farm",
+   "name": "AUTO MELON FARM",
+   "stem": [
+    6,
+    96,
+    8
+   ],
+   "fruit": [
+    7,
+    96,
+    8
+   ],
+   "piston": [
+    8,
+    96,
+    8
+   ],
+   "chest": [
+    7,
+    94,
+    8
+   ],
+   "fruit_block": "minecraft:melon"
+  },
+  {
+   "hall": "FARM HALL",
+   "off": [
+    1630,
+    0,
+    206
+   ],
+   "kind": "farm",
+   "name": "AUTO PUMPKIN FARM",
+   "stem": [
+    6,
+    96,
+    22
+   ],
+   "fruit": [
+    7,
+    96,
+    22
+   ],
+   "piston": [
+    8,
+    96,
+    22
+   ],
+   "chest": [
+    7,
+    94,
+    22
+   ],
+   "fruit_block": "minecraft:pumpkin"
+  },
+  {
+   "hall": "STORAGE VAULT",
+   "off": [
+    1714,
+    0,
+    206
+   ],
+   "kind": "haven_meters",
+   "tests": [
+    {
+     "kind": "meter",
+     "name": "VAULT 5/27",
+     "chest": [
+      10,
+      26
+     ],
+     "lamps": [
+      [
+       12,
+       28
+      ],
+      [
+       8,
+       29
+      ],
+      [
+       12,
+       30
+      ],
+      [
+       8,
+       31
+      ],
+      [
+       12,
+       32
+      ],
+      [
+       8,
+       33
+      ],
+      [
+       12,
+       34
+      ],
+      [
+       8,
+       35
+      ],
+      [
+       12,
+       36
+      ],
+      [
+       8,
+       37
+      ],
+      [
+       12,
+       38
+      ],
+      [
+       8,
+       39
+      ],
+      [
+       12,
+       40
+      ],
+      [
+       8,
+       41
+      ]
+     ],
+     "lamp_y": 96,
+     "slots": 5,
+     "expect": 3
+    },
+    {
+     "kind": "meter",
+     "name": "VAULT 13/27",
+     "chest": [
+      24,
+      26
+     ],
+     "lamps": [
+      [
+       26,
+       28
+      ],
+      [
+       22,
+       29
+      ],
+      [
+       26,
+       30
+      ],
+      [
+       22,
+       31
+      ],
+      [
+       26,
+       32
+      ],
+      [
+       22,
+       33
+      ],
+      [
+       26,
+       34
+      ],
+      [
+       22,
+       35
+      ],
+      [
+       26,
+       36
+      ],
+      [
+       22,
+       37
+      ],
+      [
+       26,
+       38
+      ],
+      [
+       22,
+       39
+      ],
+      [
+       26,
+       40
+      ],
+      [
+       22,
+       41
+      ]
+     ],
+     "lamp_y": 96,
+     "slots": 13,
+     "expect": 7
+    },
+    {
+     "kind": "meter",
+     "name": "VAULT 24/27",
+     "chest": [
+      38,
+      26
+     ],
+     "lamps": [
+      [
+       40,
+       28
+      ],
+      [
+       36,
+       29
+      ],
+      [
+       40,
+       30
+      ],
+      [
+       36,
+       31
+      ],
+      [
+       40,
+       32
+      ],
+      [
+       36,
+       33
+      ],
+      [
+       40,
+       34
+      ],
+      [
+       36,
+       35
+      ],
+      [
+       40,
+       36
+      ],
+      [
+       36,
+       37
+      ],
+      [
+       40,
+       38
+      ],
+      [
+       36,
+       39
+      ],
+      [
+       40,
+       40
+      ],
+      [
+       36,
+       41
+      ]
+     ],
+     "lamp_y": 96,
+     "slots": 24,
+     "expect": 13
+    }
+   ]
+  }
+ ]
+}

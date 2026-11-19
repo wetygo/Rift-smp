@@ -1,11 +1,16 @@
-== build: 2026-11-19T21:49Z   (static analysis / model tests only - NOT run in Minecraft)
+== build: 2026-11-19T22:14Z   (static analysis / model tests only - NOT run in Minecraft)
 == validate
 shape/palette/tiles: ((384, 768, 768), 238, 652)
 datapack lint errors: 0
 schematic errors: 0  gate rows: 136
 {'ladder': 4243, 'iron_door': 280, 'hopper': 600, 'chest': 3265, 'dispenser': 42, 'furnace': 4, 'crafter': 6, 'command_blocks_ok': 203}
 consistency errors: 0 {'sorters': 2, 'doors': 23, 'farms': 4, 'pulses': 6}
-annex regions checked: 35  errors: 1
+annex regions checked: 39  errors: 5
+  FAIL Mega Shell {'size': (1145, 262, 755), 'palette': 13, 'tiles': 8, 'entities': 0}
+         TE out of bounds 284,96,-1
+         TE out of bounds 284,96,755
+         TE out of bounds 856,96,-1
+         TE out of bounds 856,96,755
   OK   Annex - Ghast Hydration Facility (Wildezz) {'size': (352, 58, 464), 'palette': 955, 'tiles': 4773, 'entities': 0}
   OK   Annex - Full Dam (Wildezz) {'size': (419, 145, 294), 'palette': 715, 'tiles': 154, 'entities': 0}
   OK   Annex - Wave Bolt - Straight Bolt Massive (SandCaribou1890 / Pando_UwU / Kvil) {'size': (9, 3, 256), 'palette': 13, 'tiles': 256, 'entities': 0}
@@ -42,6 +47,9 @@ annex regions checked: 35  errors: 1
   OK   Annex - Wave Bolt - Bolt Block Puller (simpler) v1.0.0 (SandCaribou1890 / Pando_UwU / Kvil) {'size': (9, 3, 5), 'palette': 11, 'tiles': 0, 'entities': 0}
   OK   Annex - Wave Bolt - Diagonal Rail Curver Kvil (SandCaribou1890 / Pando_UwU / Kvil) {'size': (5, 3, 5), 'palette': 16, 'tiles': 0, 'entities': 0}
   OK   Annex - Wave Bolt - Rail Curver (SandCaribou1890 / Pando_UwU / Kvil) {'size': (6, 4, 5), 'palette': 11, 'tiles': 0, 'entities': 0}
+  OK   Mega Hall - FURNACE ARRAY {'size': (72, 110, 42), 'palette': 14, 'tiles': 737, 'entities': 0}
+  OK   Mega Hall - FARM HALL {'size': (80, 110, 42), 'palette': 21, 'tiles': 51, 'entities': 0}
+  OK   Mega Hall - STORAGE VAULT {'size': (104, 110, 46), 'palette': 31, 'tiles': 302, 'entities': 0}
 == walkability (doors counted open)
 outside gate comp 1 labels 121
 OK   gate passage inside (383, 96, 740) comp 1
