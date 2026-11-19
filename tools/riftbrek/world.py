@@ -90,7 +90,7 @@ class World:
                 out[:, li + 1] |= flat[:, j] >> np.uint64(64 - sh)
         return bits, out.reshape(-1).astype(">u8").tobytes()
 
-    def save(self, path, name, author, description, level=6):
+    def save(self, path, name, author, description, level=6, region_name="RIFTBREK Vanguard Headquarters"):
         bits, packed = self.pack()
         pal = []
         for nm, props in self.palette:
@@ -120,7 +120,7 @@ class World:
                 "EnclosingSize": {"x": self.sx, "y": self.sy, "z": self.sz},
                 "TimeCreated": now, "TimeModified": now,
             },
-            "Regions": {"RIFTBREK Vanguard Headquarters": region},
+            "Regions": {region_name: region},
         }
         raw = nbt.dumps(root)
         with gzip.GzipFile(path, "wb", compresslevel=level, mtime=0) as f:

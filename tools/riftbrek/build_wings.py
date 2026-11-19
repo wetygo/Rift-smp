@@ -67,7 +67,7 @@ def wing(W, key, label, tier, glass=PG, wall=BRK, trim=GLOW, pad_key=None):
         return x
     bz = z0 - 1 if face == "north" else z1 + 1
     bf = "north" if face == "north" else "south"
-    for yy in range(GY + 14, GY + 30, 3):
+    for yy in range(GY + 14, GY + 30 if top >= GY + 29 else top - 1, 3):      # low buildings: keep banners on the wall
         W.set(pier(gx - 6), yy, bz, "minecraft:purple_wall_banner[facing=%s]" % bf)
         W.set(pier(gx + 14), yy, bz, "minecraft:purple_wall_banner[facing=%s]" % bf)
     # wing tag: secure zone visibility + kit pad

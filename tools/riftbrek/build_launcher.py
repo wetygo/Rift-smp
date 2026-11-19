@@ -11,6 +11,7 @@ Layout (local, cell centre = (cx, cz), floor row y, dispenser row y+1, circuit r
 from .build_common import *
 from .nbt import Byte
 
+# NOTE: a repeater's facing property points toward its INPUT; callers below pass the INPUT side (opposite of signal flow)
 SLOW = "minecraft:repeater[delay=4,facing=%s,locked=false,powered=false]"
 FAST = "minecraft:repeater[delay=1,facing=%s,locked=false,powered=false]"
 DUST = "minecraft:redstone_wire[east=none,north=none,power=0,south=none,west=none]"
@@ -58,14 +59,14 @@ def launcher(W, cx, cz, y=GROUND_TOP, label="LAUNCHER"):
     # button + trunk (west of the cell, signal runs east)
     W.set(cx - 5, dy, cz, BRK); W.set(cx - 5, cy, cz, PB)                              # block that the button powers
     W.set(cx - 6, cy, cz, "minecraft:stone_button[face=wall,facing=west,powered=false]")
-    put(-4, 0, FAST % "east")
+    put(-4, 0, FAST % "west")
     put(-3, 0, DUST)
     put(-2, 0, DUST)       # splitter
     put(-1, 0, DUST)       # on top of the egg dispenser
     # north branch (wind charging): 2 slow repeaters
-    put(-2, -1, SLOW % "north"); put(-2, -2, DUST); put(-1, -2, SLOW % "east"); put(0, -2, DUST); put(0, -1, DUST)
+    put(-2, -1, SLOW % "south"); put(-2, -2, DUST); put(-1, -2, SLOW % "west"); put(0, -2, DUST); put(0, -1, DUST)
     # south branch (harming II): 3 slow repeaters
-    put(-2, 1, SLOW % "south"); put(-2, 2, SLOW % "south"); put(-2, 3, DUST); put(-1, 3, SLOW % "east"); put(0, 3, DUST); put(0, 2, DUST); put(0, 1, DUST)
+    put(-2, 1, SLOW % "north"); put(-2, 2, SLOW % "north"); put(-2, 3, DUST); put(-1, 3, SLOW % "west"); put(0, 3, DUST); put(0, 2, DUST); put(0, 1, DUST)
     W.fill(cx - 2, dy, cz + 2, cx, dy, cz + 3, BRK)
     fix_dust(W, [p for p in [(cx + dx, cy, cz + dz) for dx in range(-8, 3) for dz in range(-6, 7)] if W.get(*p) == "minecraft:redstone_wire"])
     sign(W, cx - 3, cy, cz - 2, [label, "stand on the", "glass block", "press button"], rot=4)
