@@ -1,4 +1,4 @@
-== build: 2026-11-19T10:32Z   (static analysis / model tests only - NOT run in Minecraft)
+== build: 2026-11-19T21:49Z   (static analysis / model tests only - NOT run in Minecraft)
 == validate
 shape/palette/tiles: ((384, 768, 768), 238, 652)
 datapack lint errors: 0

@@ -152,6 +152,12 @@ def build_strip(strip, rng, specs, extra):
             sign(W, x0 + 6, GY, z1 - 4 if face == "south" else z0 + 4, ["REDSTONE WORKS", "ward " + strip, "real redstone", "no command blocks"], rot=0, color="red")
             WARD_TESTS.append(dict(strip=strip, name=label + " haven", kind="haven", tests=json.loads(json.dumps(HV.HAVEN_TESTS, default=list))))
             haven_sh.append((x0, z0))
+    from . import build_wardunder as WU
+    links = list(range(507, sx - 40, 250)) if strip in "NS" else []
+    WARD_UNDER[strip] = WU.strip_underground(W, strip, specs, links, (684, 854))
+    n, big, lab = WU.connectivity(W, strip)
+    WARD_UNDER[strip]["components"] = n; WARD_UNDER[strip]["largest"] = big
+    print("   underground", strip, "components", n, "largest", big, flush=True)
     # furnishing: perimeter + per-room; the haven halls keep their ground floor empty
     shells = [s for s in C.SHELLS if not ((s["x0"], s["z0"]) in haven_sh)]
     keep = C.SHELLS[:]
@@ -170,6 +176,7 @@ def build_strip(strip, rng, specs, extra):
 
 
 STYLE_BY_POS = {}
+WARD_UNDER = {}
 
 
 def specs_for(strip):
@@ -256,7 +263,7 @@ def main(out_dir, only=None):
         del W, prep
     annex.write_litematic(path, regions, "RIFTBREK Outer Ward", "RIFTBREK Design",
                           "Outer ward: 3 strips around the HQ (2304 x 1536 total with the HQ). Origin world X 7808 Z 7808.", total=total, enclosing=(2304, SY, 1536))
-    json.dump(dict(origin=[WX, WZ], strips=STRIPS, tests=WARD_TESTS, buildings=BUILDINGS, gates=len(C.GATES)), open(os.path.join(out_dir, "ward_info.json"), "w"), default=list)
+    json.dump(dict(origin=[WX, WZ], strips=STRIPS, tests=WARD_TESTS, buildings=BUILDINGS, under=WARD_UNDER, gates=len(C.GATES)), open(os.path.join(out_dir, "ward_info.json"), "w"), default=list)
     print("saved", path, "buildings", len(BUILDINGS), "tests", len(WARD_TESTS))
     return path
 

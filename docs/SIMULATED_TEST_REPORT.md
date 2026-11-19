@@ -3,7 +3,7 @@
 **These are models and static replays, NOT a Minecraft run.** They show (1) why a normal Litematica paste of this schematic ends up partial, (2) that the zone-by-zone method covers 100 %, (3) that the data pack's probe functions detect exactly the missing chunks, (4) that the ready-made world files are block-for-block identical to the schematic. Throughput figures are *assumptions*, not measurements.
 
 ## 1. What has to be pasted
-- footprint 1920 x 384 x 768 blocks = 120 x 48 chunk grid, **5688 non-empty chunks**, 142,344,238 non-air blocks, 56,188 tile entities, 1419 entities.
+- footprint 1920 x 384 x 768 blocks = 120 x 48 chunk grid, **5688 non-empty chunks**, 142,338,463 non-air blocks, 56,188 tile entities, 1419 entities.
 - Litematica only places blocks in chunks the server has **loaded**. A player standing at the origin loads a square of (2R+1)^2 chunks (R = view/simulation distance).
 
 ## 2. Simulated Litematica paste standing still at the schematic origin / centre
@@ -30,7 +30,7 @@
 | zone | chunks | blocks | est. paste time @50k blk/s | @200k blk/s |
 |---|---|---|---|---|
 | 1 | 256 | 6,745,988 | 2.2 min | 0.6 min |
-| 2 | 256 | 6,603,386 | 2.2 min | 0.6 min |
+| 2 | 256 | 6,599,636 | 2.2 min | 0.5 min |
 | 3 | 256 | 6,889,826 | 2.3 min | 0.6 min |
 | 4 | 256 | 6,410,665 | 2.1 min | 0.5 min |
 | 5 | 256 | 6,476,147 | 2.2 min | 0.5 min |
@@ -46,7 +46,7 @@
 | 15 | 256 | 6,312,208 | 2.1 min | 0.5 min |
 | 16 | 128 | 3,043,128 | 1.0 min | 0.3 min |
 | 17 | 256 | 6,709,713 | 2.2 min | 0.6 min |
-| 18 | 256 | 6,285,589 | 2.1 min | 0.5 min |
+| 18 | 256 | 6,283,564 | 2.1 min | 0.5 min |
 | 19 | 256 | 6,988,698 | 2.3 min | 0.6 min |
 | 20 | 240 | 5,833,559 | 1.9 min | 0.5 min |
 | 21 | 240 | 5,924,087 | 2.0 min | 0.5 min |
@@ -85,7 +85,7 @@
 ## 6. Ready-made world files: independent read-back vs the master schematic
 ```
 region headers: 5740 chunk slots checked, 0 wrong
-chunks 5688/5688  sections 136512  block mismatches 0  tile entities 56188/56188 (bad 0, missing 0)  entities 1419/1419  [27s]
+chunks 5688/5688  sections 136512  block mismatches 0  tile entities 56188/56188 (bad 0, missing 0)  entities 1419/1419  [26s]
 RESULT: PASS - exported world is block-for-block identical to the master schematic
 ```
 
@@ -98,4 +98,4 @@ model_test.py: FAILED: 0
 ## 8. Still NOT verifiable here
 Behaviour inside the real game: that Minecraft accepts the region files without complaint (format follows the 1.21.11 chunk layout and was read back with a reader validated on a genuine 1.19.2 save), that command blocks/hoppers/redstone work, that imported builds work in 1.21.11, performance with ~1,900 blimp entities.
 
-_generated in 56s_
+_generated in 54s_

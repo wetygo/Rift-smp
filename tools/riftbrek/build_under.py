@@ -104,6 +104,8 @@ def underground(W):
         lv[1].room(RING + 3, tz - 2, 731 - 3, tz + 2, floor=PB, h=4)
     for tx in (300, 470):                                                          # N-S tunnels flanking the citadel
         lv[1].room(tx - 2, 100, tx + 2, 700, floor=PB, h=4)
+        lv[1].room(tx - 2, 0, tx + 2, 99, floor=PB, h=4)                           # ... continued north / south through the wall into the OUTER WARD tunnels
+        lv[1].room(tx - 2, 701, tx + 2, 767, floor=PB, h=4)
     for k in lv:
         lv[k].finish()
     for key, (wx0, wz0, wx1, wz1, floors, fh, face) in WINGS.items():            # basement partition rooms + ladders up into the wing

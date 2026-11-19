@@ -81,3 +81,11 @@ The original base and the annex are unchanged (origin X 8192 Z 8192, every old c
 
 ## Files
 `RIFTBREK_OUTER_WARD.litematic` (three regions, origin X 7808 Z 7808) and the merged region files in `RIFTBREK_WORLD_FILES_X7808_Z7808.zip` (the whole HQ: original + annex + ward + the Pipeline ring in ONE set of files, so nothing can overwrite anything). Not built: ward basements / underground levels (the original B1-B12 stay under the original base), farms, an arena.
+
+## Underground (added)
+- **Basements** under all 48 ward buildings (level B1, same floor height as the HQ's B1: world y 24), 6 high, 12-block rooms, furnished, with ladders up to the ground floor in two corners of every building.
+- **Tunnel network** (5 wide, 4 high, lit) at the same level: a trunk under each avenue (north ward z 8113 and 7816; south ward z 8887 and 9184; west ward x 8001), link tunnels under the connector roads, stubs into every basement. **Iron-trapdoor hatches** (ladder up) on the roads at every junction (green dots on the map).
+- **Connection to the HQ:** the HQ's two N-S B1 tunnels (core x 300 / 470, world X 8492 / 8662) now continue north and south through the HQ wall into the ward. Both ends pass a **member-tier command-block gate** (6 wide) - the HQ's B1 is member-only, so the ward tunnels must not be a way around it. Gates (command blocks): north ward `8489 28 8180` and `8659 28 8180`; south ward z 7808+1152+12 = `8972` at the same two X values. West ward joins via its trunk to the north and south trunks.
+- Checked: flood fill of the walking plane in every strip: all basements and tunnels are one connected network (the only cut-offs are the two gates on each side), on a live 1.21.11 server a gate command block runs and the tunnel is open on both sides of the HQ wall.
+- **Not built:** underground rails in the ward tunnels (they are walking tunnels), deeper ward levels (B2-B12 exist only under the original base), a tunnel under the annex (east).
+- Map: `docs/previews/MAP_UNDERGROUND_B1.png`.
