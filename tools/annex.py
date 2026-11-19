@@ -35,6 +35,10 @@ def read_lit(path):
     return d, r, pal, flat.reshape(sy, sz, sx)
 
 
+DYED_FAMILIES = {"wool", "carpet", "concrete", "concrete_powder", "terracotta", "glazed_terracotta", "stained_glass", "stained_glass_pane",
+                 "shulker_box", "bed", "banner", "wall_banner", "candle", "candle_cake"}
+
+
 def map_block(name, props):
     """returns (name, props) in 1.21.11 + purple theme.  props is not mutated."""
     n = name.split(":")[1]
@@ -125,7 +129,8 @@ def map_block(name, props):
     if m:
         col, rest = m.groups()
         new = "purple" if col in WARM else ("blue" if col in COOL else col)
-        if new != col:
+        # only recolour real colour families - purple_sand / purple_mushroom_block / purple_nether_bricks do not exist
+        if new != col and rest in DYED_FAMILIES:
             return f"minecraft:{new}_{rest}", p
     return name, p
 
@@ -220,6 +225,22 @@ def prepare(src, theme=True, recolor_switches=True):
             continue   # ghost/decorative tile entity left behind on a non-container block (harmless litematic export debris)
         tiles.append(t)
     ents = r["Entities"]
+    # negative-size regions: Litematica stores entity positions relative to the region's Position corner, so along each
+    # negative axis they run 0..-(n-1); move them into the same min-corner space as the block array (+ (n-1)).
+    sh = {k: (abs(r["Size"][k]) - 1 if r["Size"][k] < 0 else 0) for k in "xyz"}
+    if any(sh.values()):
+        fixed = []
+        for e in ents:
+            e = dict(e)
+            pos = [float(c) for c in e["Pos"]]
+            e["Pos"] = [nbt.Double(pos[0] + sh["x"]), nbt.Double(pos[1] + sh["y"]), nbt.Double(pos[2] + sh["z"])]
+            for ax, tk in (("x", "TileX"), ("y", "TileY"), ("z", "TileZ")):
+                if tk in e:
+                    e[tk] = type(e[tk])(int(e[tk]) + sh[ax])
+            if "block_pos" in e:
+                e["block_pos"] = [int(e["block_pos"][0]) + sh["x"], int(e["block_pos"][1]) + sh["y"], int(e["block_pos"][2]) + sh["z"]]
+            fixed.append(e)
+        ents = fixed
     tiles, ents = legacy.convert_all(tiles, ents, dv)
     meta = d["Metadata"]
     return dict(arr=out, pal=newpal, tiles=tiles, ents=ents, size=(sx, sy, sz), meta=meta, dv=dv, changed=changed,

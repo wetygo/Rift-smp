@@ -191,7 +191,7 @@ def parked_airship(W, cx, cy, cz, label="RESERVE"):
     W.fill(cx - 3, cy - 7, cz - 2, cx + 3, cy - 5, cz + 2, BRK)
     W.fill(cx - 2, cy - 6, cz - 1, cx + 2, cy - 6, cz + 1, LG)
     for dx in (-3, 3):
-        W.fill(cx + dx, cy - 7, cz, cx + dx, cy - 3, cz, "minecraft:chain")
+        W.fill(cx + dx, cy - 7, cz, cx + dx, cy - 3, cz, "minecraft:iron_chain")
     sign(W, cx, cy - 8, cz, [label, "Airlander 10", "(parked)", "real blocks, 0 entities"], rot=0)
 
 

@@ -250,7 +250,7 @@ def verify(P):
         ("ground (grass) at local 100,95,100", 100, 95, 100, "minecraft:grass_block"),
         ("gatehouse door controller", 378, GY + 3, 760, "minecraft:repeating_command_block"),
         ("citadel entrance controller", 378, GY + 3, 366, "minecraft:repeating_command_block"),
-        ("blimp controller (dock A)", 250, L.GROUND_TOP - 1, 110, "minecraft:repeating_command_block"),
+        ("blimp controller (dock A)", 250, BW.BLIMP_DOCK_Y - 1, 110, "minecraft:repeating_command_block"),
         ("sorter A controller (B5)", 560, L.level_floor(5) + 4, 472, "minecraft:repeating_command_block"),
         ("sorter B controller (B6)", 560, L.level_floor(6) + 4, 520, "minecraft:repeating_command_block"),
         ("synthesis unit (B11)", L.SYNTH_ORIGIN[0], L.level_floor(11) + 1, L.SYNTH_ORIGIN[1], "minecraft:repeating_command_block"),

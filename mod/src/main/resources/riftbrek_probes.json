@@ -23,7 +23,7 @@
  {
   "label": "blimp controller (dock A)",
   "x": 250,
-  "y": 30,
+  "y": 211,
   "z": 110,
   "block": "minecraft:repeating_command_block"
  },

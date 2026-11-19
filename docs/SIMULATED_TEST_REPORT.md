@@ -73,19 +73,19 @@
 - PASS  ground (grass) at local 100,95,100: expected `minecraft:grass_block` at (100,31,100), file has `minecraft:grass_block`
 - PASS  gatehouse door controller: expected `minecraft:repeating_command_block` at (378,35,760), file has `minecraft:repeating_command_block`
 - PASS  citadel entrance controller: expected `minecraft:repeating_command_block` at (378,35,366), file has `minecraft:repeating_command_block`
-- FAIL  blimp controller (dock A): expected `minecraft:repeating_command_block` at (250,30,110), file has `minecraft:stone`
+- PASS  blimp controller (dock A): expected `minecraft:repeating_command_block` at (250,211,110), file has `minecraft:repeating_command_block`
 - PASS  sorter A controller (B5): expected `minecraft:repeating_command_block` at (560,-4,472), file has `minecraft:repeating_command_block`
 - PASS  sorter B controller (B6): expected `minecraft:repeating_command_block` at (560,-12,520), file has `minecraft:repeating_command_block`
 - PASS  synthesis unit (B11): expected `minecraft:repeating_command_block` at (220,-55,300), file has `minecraft:repeating_command_block`
 - PASS  great spire tip region (citadel): expected `minecraft:black_concrete` at (383,202,271), file has `minecraft:black_concrete`
 - PASS  south-east corner tower wall: expected `minecraft:polished_blackstone_bricks` at (766,42,750), file has `minecraft:polished_blackstone_bricks`
 
-**8 / 9 verify probes pass** against the region files (origin X=0, Z=0).
+**9 / 9 verify probes pass** against the region files (origin X=0, Z=0).
 
 ## 6. Ready-made world files: independent read-back vs the master schematic
 ```
-region headers: 5738 chunk slots checked, 0 wrong
-chunks 5688/5688  sections 136512  block mismatches 0  tile entities 56108/56108 (bad 0, missing 0)  entities 1419/1419  [27s]
+region headers: 5740 chunk slots checked, 0 wrong
+chunks 5688/5688  sections 136512  block mismatches 0  tile entities 56108/56108 (bad 0, missing 0)  entities 1419/1419  [26s]
 RESULT: PASS - exported world is block-for-block identical to the master schematic
 ```
 
