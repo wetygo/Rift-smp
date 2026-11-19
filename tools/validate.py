@@ -45,7 +45,8 @@ def check_world(a, pal, tiles, fn_ids):
     solid_names = set()
     def is_solid(i):
         n = name(i)
-        return n != "air" and not any(k in n for k in ("sign", "banner", "lever", "button", "carpet", "rail", "ladder", "door", "lightning", "water", "leaves", "wheat", "carrots", "potatoes", "beetroots", "iron_bars", "glass", "lamp"))
+        # glass is a real full solid block in vanilla (sturdy face) - signs/banners/ladders attach to it fine, so it is NOT excluded here
+        return n != "air" and not any(k in n for k in ("sign", "banner", "lever", "button", "carpet", "rail", "ladder", "door", "lightning", "water", "leaves", "wheat", "carrots", "potatoes", "beetroots", "iron_bars", "lamp"))
     # block-support checks
     for i, (n, p) in enumerate(pal):
         base = n.split(":")[1]

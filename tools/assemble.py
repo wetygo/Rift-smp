@@ -10,13 +10,22 @@ import annex
 # (filename regex, label, original author(s), source community, purple?)
 RULES = [
     (r"Basic_Furnace_Array", "Basic Furnace Array", "Wildezz", "Wildezz", True),
+    (r"1728.Furnace.Array|2D.*Furnace", "2D 1728 Furnace Array", "Wildezz", "Wildezz", True),
     (r"Carrot.*Firework", "Carrot & Firework Crafters", "Wildezz", "Wildezz", True),
-    (r"Stone_Factory", "The Stone Factory", "Wildezz", "Wildezz", True),
-    (r"Full_Dam", "Full Dam", "Wildezz", "Wildezz", True),
-    (r"Ghast_Hydration", "Ghast Hydration Facility", "Wildezz", "Wildezz", True),
-    (r"CLM_Large", "CLM Large", "Wildezz", "Wildezz", True),
+    (r"Stone.?Factory", "The Stone Factory", "Wildezz", "Wildezz", True),
+    (r"Full.?Dam", "Full Dam", "Wildezz", "Wildezz", True),
+    (r"Ghast.?Hydration", "Ghast Hydration Facility", "Wildezz", "Wildezz", True),
+    (r"CLM.*Large", "CLM Large", "Wildezz", "Wildezz", True),
+    (r"CLM.*Medium", "CLM Medium", "Wildezz", "Wildezz", True),
+    (r"CLM.*Small", "CLM Small", "Wildezz", "Wildezz", True),
+    (r"Wildez.*Main.?Storage|Wildezz.*Main.?Storage", "Wildez Main Storage", "Wildezz", "Wildezz", True),
+    (r"Mob.?Switch.?Spire.*Overworld", "Mob Switch Spire (Overworld)", "Wildezz", "Wildezz", True),
+    (r"Mob.?Switch.?Spire.*Nether", "Mob Switch Spire (Nether)", "Wildezz", "Wildezz", True),
+    (r"Mob.?Switch.?Spire.*End", "Mob Switch Spire (End)", "Wildezz", "Wildezz", True),
+    (r"72k.*v2|.*yanjiang.*|magma.?machine", "72k Magma/Gold Farm v2", "Wildezz", "Wildezz", True),
+    (r"Sipover.*Tank", "Sipover Competition Tank N-S", "Wildezz", "Wildezz", True),
     (r"Gemini-TNT", "Gemini TNT Storage v1.4.1/v1.2.2", "hykn55", "Storage Tech", False),
-    (r"Brewer_Chunkloading", "Brewer Chunkloading + Storage", "Nyx_9841", "Storage Tech", False),
+    (r"Brewer.*Chunkloading", "Brewer Chunkloading + Storage", "Nyx_9841", "Storage Tech", False),
     (r"Chronostasis", "Chronostasis Station", "Nyx_9841", "Storage Tech", False),
 ]
 GAP = 10

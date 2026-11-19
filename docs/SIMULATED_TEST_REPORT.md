@@ -3,25 +3,25 @@
 **These are models and static replays, NOT a Minecraft run.** They show (1) why a normal Litematica paste of this schematic ends up partial, (2) that the zone-by-zone method covers 100 %, (3) that the data pack's probe functions detect exactly the missing chunks, (4) that the ready-made world files are block-for-block identical to the schematic. Throughput figures are *assumptions*, not measurements.
 
 ## 1. What has to be pasted
-- footprint 1888 x 384 x 768 blocks = 118 x 48 chunk grid, **4894 non-empty chunks**, 121,613,422 non-air blocks, 12,811 tile entities, 288 entities.
+- footprint 1920 x 384 x 768 blocks = 120 x 48 chunk grid, **5688 non-empty chunks**, 142,183,388 non-air blocks, 56,107 tile entities, 1419 entities.
 - Litematica only places blocks in chunks the server has **loaded**. A player standing at the origin loads a square of (2R+1)^2 chunks (R = view/simulation distance).
 
 ## 2. Simulated Litematica paste standing still at the schematic origin / centre
 
 | standing at | R (chunks) | chunks pasted | % of chunks | % of blocks |
 |---|---|---|---|---|
-| origin (0,0) | 8 | 81 / 4894 | 2% | 2% |
-| origin (0,0) | 12 | 169 / 4894 | 3% | 4% |
-| origin (0,0) | 16 | 289 / 4894 | 6% | 6% |
-| origin (0,0) | 32 | 1089 / 4894 | 22% | 22% |
-| HQ centre | 8 | 289 / 4894 | 6% | 5% |
-| HQ centre | 12 | 625 / 4894 | 13% | 11% |
-| HQ centre | 16 | 1089 / 4894 | 22% | 21% |
-| HQ centre | 32 | 2637 / 4894 | 54% | 55% |
-| annex centre | 8 | 289 / 4894 | 6% | 6% |
-| annex centre | 12 | 625 / 4894 | 13% | 13% |
-| annex centre | 16 | 1089 / 4894 | 22% | 22% |
-| annex centre | 32 | 2220 / 4894 | 45% | 45% |
+| origin (0,0) | 8 | 81 / 5688 | 1% | 2% |
+| origin (0,0) | 12 | 169 / 5688 | 3% | 3% |
+| origin (0,0) | 16 | 289 / 5688 | 5% | 5% |
+| origin (0,0) | 32 | 1089 / 5688 | 19% | 19% |
+| HQ centre | 8 | 289 / 5688 | 5% | 4% |
+| HQ centre | 12 | 625 / 5688 | 11% | 10% |
+| HQ centre | 16 | 1089 / 5688 | 19% | 18% |
+| HQ centre | 32 | 2727 / 5688 | 48% | 48% |
+| annex centre | 8 | 289 / 5688 | 5% | 5% |
+| annex centre | 12 | 625 / 5688 | 11% | 11% |
+| annex centre | 16 | 1089 / 5688 | 19% | 19% |
+| annex centre | 32 | 2914 / 5688 | 51% | 51% |
 
 => A single paste can never reach 100 %: even R=32 from the origin pastes a minority of the schematic. The part that is missing is every chunk that was not loaded. This matches "it didn't fully paste in".
 
@@ -29,41 +29,41 @@
 
 | zone | chunks | blocks | est. paste time @50k blk/s | @200k blk/s |
 |---|---|---|---|---|
-| 1 | 256 | 6,738,871 | 2.2 min | 0.6 min |
-| 2 | 256 | 6,601,064 | 2.2 min | 0.6 min |
-| 3 | 256 | 6,888,110 | 2.3 min | 0.6 min |
+| 1 | 256 | 6,745,988 | 2.2 min | 0.6 min |
+| 2 | 256 | 6,603,377 | 2.2 min | 0.6 min |
+| 3 | 256 | 6,888,034 | 2.3 min | 0.6 min |
 | 4 | 256 | 6,410,665 | 2.1 min | 0.5 min |
 | 5 | 256 | 6,476,147 | 2.2 min | 0.5 min |
 | 6 | 256 | 6,496,880 | 2.2 min | 0.5 min |
-| 7 | 256 | 6,344,736 | 2.1 min | 0.5 min |
-| 8 | 96 | 2,195,783 | 0.7 min | 0.2 min |
-| 9 | 256 | 6,283,320 | 2.1 min | 0.5 min |
-| 10 | 256 | 5,476,297 | 1.8 min | 0.5 min |
+| 7 | 256 | 6,486,251 | 2.2 min | 0.5 min |
+| 8 | 128 | 2,973,944 | 1.0 min | 0.2 min |
+| 9 | 256 | 6,290,308 | 2.1 min | 0.5 min |
+| 10 | 256 | 5,478,157 | 1.8 min | 0.5 min |
 | 11 | 256 | 6,517,796 | 2.2 min | 0.5 min |
-| 12 | 256 | 6,393,531 | 2.1 min | 0.5 min |
-| 13 | 256 | 6,415,830 | 2.1 min | 0.5 min |
-| 14 | 256 | 6,364,719 | 2.1 min | 0.5 min |
-| 15 | 256 | 6,291,706 | 2.1 min | 0.5 min |
-| 16 | 96 | 2,138,112 | 0.7 min | 0.2 min |
-| 17 | 256 | 6,703,050 | 2.2 min | 0.6 min |
-| 18 | 256 | 6,282,345 | 2.1 min | 0.5 min |
+| 12 | 256 | 6,384,655 | 2.1 min | 0.5 min |
+| 13 | 256 | 6,383,772 | 2.1 min | 0.5 min |
+| 14 | 256 | 6,368,309 | 2.1 min | 0.5 min |
+| 15 | 256 | 6,312,208 | 2.1 min | 0.5 min |
+| 16 | 128 | 3,043,128 | 1.0 min | 0.3 min |
+| 17 | 256 | 6,710,294 | 2.2 min | 0.6 min |
+| 18 | 256 | 6,284,292 | 2.1 min | 0.5 min |
 | 19 | 256 | 6,892,758 | 2.3 min | 0.6 min |
-| 20 | 80 | 1,788,850 | 0.6 min | 0.1 min |
-| 21 | 80 | 1,772,564 | 0.6 min | 0.1 min |
-| 22 | 80 | 1,769,472 | 0.6 min | 0.1 min |
-| 23 | 80 | 1,769,472 | 0.6 min | 0.1 min |
-| 24 | 30 | 601,344 | 0.2 min | 0.1 min |
+| 20 | 240 | 5,833,559 | 1.9 min | 0.5 min |
+| 21 | 240 | 5,924,087 | 2.0 min | 0.5 min |
+| 22 | 240 | 5,905,303 | 2.0 min | 0.5 min |
+| 23 | 240 | 5,885,898 | 2.0 min | 0.5 min |
+| 24 | 120 | 2,887,578 | 1.0 min | 0.2 min |
 
-- Cumulative chunk coverage after each pass: 5%, 10%, 16%, 21%, 26%, 31%, 37%, 39%, 44%, 49%, 54%, 60%, 65%, 70%, 75%, 77%, 82%, 88%, 93%, 94%, 96%, 98%, 99%, 100%. **Final: 100%**.
-- Total estimated paste time (assumed throughput only): 41 min at 50k blocks/s, 10 min at 200k blocks/s.
+- Cumulative chunk coverage after each pass: 5%, 9%, 14%, 18%, 23%, 27%, 32%, 34%, 38%, 43%, 47%, 52%, 56%, 61%, 65%, 68%, 72%, 77%, 81%, 85%, 89%, 94%, 98%, 100%. **Final: 100%**.
+- Total estimated paste time (assumed throughput only): 47 min at 50k blocks/s, 12 min at 200k blocks/s.
 
 ## 4. Probe functions (`riftbrek:paste/zone_N_check`) replayed against partial pastes
 
 | scenario | chunks truly missing | reported missing | false alarms | undetected |
 |---|---|---|---|---|
-| nothing pasted | 4894 | 4894 | 0 | 0 |
-| default paste at origin, R=12 | 4725 | 4725 | 0 | 0 |
-| random 70% of chunks | 1444 | 1444 | 0 | 0 |
+| nothing pasted | 5688 | 5688 | 0 | 0 |
+| default paste at origin, R=12 | 5519 | 5519 | 0 | 0 |
+| random 70% of chunks | 1707 | 1707 | 0 | 0 |
 | everything pasted | 0 | 0 | 0 | 0 |
 
 (`undetected` = a chunk that is missing but whose probes all pass, e.g. a probe block identical to void; `false alarms` must be 0.)
@@ -73,19 +73,19 @@
 - PASS  ground (grass) at local 100,95,100: expected `minecraft:grass_block` at (100,31,100), file has `minecraft:grass_block`
 - PASS  gatehouse door controller: expected `minecraft:repeating_command_block` at (378,35,760), file has `minecraft:repeating_command_block`
 - PASS  citadel entrance controller: expected `minecraft:repeating_command_block` at (378,35,366), file has `minecraft:repeating_command_block`
-- PASS  blimp controller (dock A): expected `minecraft:repeating_command_block` at (250,30,110), file has `minecraft:repeating_command_block`
+- FAIL  blimp controller (dock A): expected `minecraft:repeating_command_block` at (250,30,110), file has `minecraft:stone`
 - PASS  sorter A controller (B5): expected `minecraft:repeating_command_block` at (560,-4,472), file has `minecraft:repeating_command_block`
 - PASS  sorter B controller (B6): expected `minecraft:repeating_command_block` at (560,-12,520), file has `minecraft:repeating_command_block`
 - PASS  synthesis unit (B11): expected `minecraft:repeating_command_block` at (220,-55,300), file has `minecraft:repeating_command_block`
 - PASS  great spire tip region (citadel): expected `minecraft:black_concrete` at (383,202,271), file has `minecraft:black_concrete`
 - PASS  south-east corner tower wall: expected `minecraft:polished_blackstone_bricks` at (766,42,750), file has `minecraft:polished_blackstone_bricks`
 
-**9 / 9 verify probes pass** against the region files (origin X=0, Z=0).
+**8 / 9 verify probes pass** against the region files (origin X=0, Z=0).
 
 ## 6. Ready-made world files: independent read-back vs the master schematic
 ```
-region headers: 4909 chunk slots checked, 0 wrong
-chunks 4894/4894  sections 117456  block mismatches 0  tile entities 12811/12811 (bad 0, missing 0)  entities 288/288  [19s]
+region headers: 5738 chunk slots checked, 0 wrong
+chunks 5688/5688  sections 136512  block mismatches 0  tile entities 56107/56107 (bad 0, missing 0)  entities 1419/1419  [26s]
 RESULT: PASS - exported world is block-for-block identical to the master schematic
 ```
 
@@ -98,4 +98,4 @@ model_test.py: FAILED: 0
 ## 8. Still NOT verifiable here
 Behaviour inside the real game: that Minecraft accepts the region files without complaint (format follows the 1.21.11 chunk layout and was read back with a reader validated on a genuine 1.19.2 save), that command blocks/hoppers/redstone work, that imported builds work in 1.21.11, performance with ~1,900 blimp entities.
 
-_generated in 41s_
+_generated in 53s_

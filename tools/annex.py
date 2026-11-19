@@ -214,6 +214,10 @@ def prepare(src, theme=True, recolor_switches=True):
                                       "chest" if bn in ("chest", "trapped_chest") else "command_block" if "command_block" in bn else bn)
         if t["id"].endswith("potent_sulfur"):
             continue
+        bn_now = newpal[out[t["y"], t["z"], t["x"]]][0].split(":")[1] if 0 <= t["y"] < sy and 0 <= t["z"] < sz and 0 <= t["x"] < sx else ""
+        tid_now = t["id"].split(":")[1]
+        if tid_now in ("chest", "trapped_chest", "barrel", "shulker_box") and tid_now not in bn_now and "shulker_box" not in bn_now:
+            continue   # ghost/decorative tile entity left behind on a non-container block (harmless litematic export debris)
         tiles.append(t)
     ents = r["Entities"]
     tiles, ents = legacy.convert_all(tiles, ents, dv)

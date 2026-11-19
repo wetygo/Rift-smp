@@ -165,11 +165,44 @@ def intake(W, x, z, y_bottom, label):
 
 BLIMP_LANE_X = 250
 BLIMP_DOCKS = [("A", 110, "TERMINAL"), ("B", 480, "PLAZA"), ("C", 700, "CHECKPOINT")]
+BLIMP_DOCK_Y = GY + 180        # aerial docks: platforms this far above ground, reached by mast ladders
+BERTH_OFFSETS = [(-26, 0), (-9, 0), (9, 0), (26, 0)]   # 4 berths per dock, spaced along the lane (dx, dz) from the dock centre
+
+
+def parked_airship(W, cx, cy, cz, label="RESERVE"):
+    """Cheap REAL-BLOCK silhouette of a docked Airlander-10 (no entities, permanent part of the schematic): a 27-long
+    purple/white envelope on a lattice keel with a small gondola underneath.  ~340 blocks; baked in, costs nothing at runtime."""
+    half = 13
+    for dx in range(-half, half + 1):
+        t = 1 - (abs(dx) / half) ** 2        # ellipse profile along the hull
+        rad = max(1, int(round(4 * t ** 0.5)))
+        for dz in range(-rad, rad + 1):
+            for dy in range(-rad, rad + 1):
+                if dz * dz + dy * dy <= rad * rad:
+                    shell = dz * dz + dy * dy >= (rad - 1) * (rad - 1)
+                    mat = PU if shell and (dy >= 0) else (WH if shell else AIR)
+                    if mat != AIR:
+                        W.set(cx + dx, cy + dy, cz + dz, mat)
+    # fin at the tail, nose cone light
+    for dz in (-2, -1, 0, 1, 2):
+        W.set(cx - half, cy + 4, cz + dz, PU)
+    W.set(cx + half + 1, cy, cz, GLOW)
+    # gondola (small cabin) slung under the hull centre
+    W.fill(cx - 3, cy - 7, cz - 2, cx + 3, cy - 5, cz + 2, BRK)
+    W.fill(cx - 2, cy - 6, cz - 1, cx + 2, cy - 6, cz + 1, LG)
+    for dx in (-3, 3):
+        W.fill(cx + dx, cy - 7, cz, cx + dx, cy - 3, cz, "minecraft:chain")
+    sign(W, cx, cy - 8, cz, [label, "Airlander 10", "(parked)", "real blocks, 0 entities"], rot=0)
 
 
 def blimp(W):
-    """Terminal hall + mast (scenery) and three dock pads on the blimp lane (x=250).  The airship itself is a moving
-    display-entity vehicle created by the data pack (riftbrek:blimp/*): it is NOT stored in the schematic."""
+    """Terminal hall + mast (scenery), and THREE AERIAL docks high above the base: each is a landing platform at
+    y = BLIMP_DOCK_Y reached by a tower + ladder, with 4 marked berths. 2 of the 4 berths at every dock are filled
+    with a real-block (0 entity) parked Airlander-10 silhouette, baked permanently into the schematic. The other 2
+    berths are entity sockets: the data pack's single moving Airlander (riftbrek:blimp/*, ~1,900 display entities)
+    cycles through dock A/B/C's free berth, and an operator can spawn extra STATIC ships into the remaining sockets
+    with admin/blimp_park_<dock> - each one costs ~1,900 more display entities, so do that only after confirming
+    your server handles the first one smoothly (see docs/BLIMP_DOCKS.md)."""
     cx, mz = 383, 78
     mx = 296
     W.fill(mx - 6, GY, mz - 6, mx + 6, GY + 100, mz + 6, BRK)
@@ -179,7 +212,7 @@ def blimp(W):
     ladder_shaft(W, mx - 4, mz - 4, GY, GY + 99, "east")
     W.fill(mx - 8, GY + 96, mz - 8, mx + 8, GY + 97, mz + 8, DT)
     for y in range(GY + 98, GY + 101):
-        W.fill(mx - 8, y, mz - 8, mx + 8, y, mz - 8, IB); W.fill(mx - 8, y, mz + 8, mx + 8, y, mz + 8, IB)
+        W.fill(mx - 8, y, mz - 8, mx + 8, y, mz + 8, IB); W.fill(mx - 8, y, mz + 8, mx + 8, y, mz + 8, IB)
         W.fill(mx - 8, y, mz - 8, mx - 8, y, mz + 8, IB); W.fill(mx + 8, y, mz - 8, mx + 8, y, mz + 8, IB)
     spire(W, mx, mz, 6, GY + 101, 12)
     tx0, tz0, tx1, tz1 = 330, 24, 437, 124
@@ -189,45 +222,84 @@ def blimp(W):
         lattice_lights(W, tx0 + 3, tz0 + 3, tx1 - 3, tz1 - 3, GY + f * 14 + 13, step=8, off=4)
     W.fill(372, GY, tz1 - 2, 395, GY + 12, tz1, AIR)
     ladder_shaft(W, tx0 + 3, tz0 + 3, GY, top - 1, "east")
-    sign(W, 383, GY, tz1 + 3, ["BLIMP TERMINAL", "Airlander 10", "dock A/B/C on", "the west lane"], rot=0)
+    sign(W, 383, GY, tz1 + 3, ["BLIMP TERMINAL", "Airlander 10", "3 aerial docks", "ladder up the mast"], rot=0)
     road(W, 372, tz1 + 1, 395, 175, "z")
     cmdblock(W, 383, GROUND_TOP - 1, 70, "function riftbrek:zone/visible")
-    # three dock pads on the lane x=250: disk platform, glow ring, lamp posts, sign
+    # ---- three aerial docks, each a ring platform at BLIMP_DOCK_Y with 4 marked berths ----
     for (nm, dz, label) in BLIMP_DOCKS:
-        disk(W, BLIMP_LANE_X, dz, 12, GROUND_TOP, GROUND_TOP, DT)
-        disk(W, BLIMP_LANE_X, dz, 10, GROUND_TOP, GROUND_TOP, PU)
-        disk(W, BLIMP_LANE_X, dz, 8, GROUND_TOP, GROUND_TOP, DT)
-        disk(W, BLIMP_LANE_X, dz, 12, GROUND_TOP, GROUND_TOP, GLOW, hollow=True)
-        for k in range(6):
-            a = 2 * np.pi * k / 6
-            x, z = int(round(BLIMP_LANE_X + 13 * np.cos(a))), int(round(dz + 13 * np.sin(a)))
-            W.fill(x, GY, z, x, GY + 5, z, BRK); W.set(x, GY + 6, z, SEA)
-        sign(W, BLIMP_LANE_X + 3, GY, dz + 3, ["BLIMP DOCK " + nm, label, "board when the", "airship lands"], rot=8, color="purple")
-    # blimp controller (always-active command block) hidden under dock A
-    cmdblock(W, BLIMP_LANE_X, GROUND_TOP - 1, BLIMP_DOCKS[0][1], "function riftbrek:blimp/tick")
+        my, mast_cz = BLIMP_DOCK_Y, dz
+        W.fill(BLIMP_LANE_X - 2, GY, mast_cz - 2, BLIMP_LANE_X + 2, my - 1, mast_cz + 2, BRK)
+        W.fill(BLIMP_LANE_X - 1, GY, mast_cz - 1, BLIMP_LANE_X + 1, my - 1, mast_cz + 1, AIR)
+        ladder_shaft(W, BLIMP_LANE_X - 1, mast_cz - 1, GY, my - 2, "east")
+        for y in range(GY + 12, my - 1, 16):
+            W.fill(BLIMP_LANE_X - 2, y, mast_cz - 2, BLIMP_LANE_X + 2, y, mast_cz + 2, DT)
+        disk(W, BLIMP_LANE_X, mast_cz, 34, my, my, DT)
+        disk(W, BLIMP_LANE_X, mast_cz, 31, my, my, PU)
+        disk(W, BLIMP_LANE_X, mast_cz, 28, my, my, DT)
+        disk(W, BLIMP_LANE_X, mast_cz, 34, my, my, GLOW, hollow=True)
+        disk(W, BLIMP_LANE_X, mast_cz, 34, my + 1, my + 4, IB, hollow=True)         # safety rail
+        for k in range(8):
+            a = 2 * np.pi * k / 8
+            x, z = int(round(BLIMP_LANE_X + 35 * np.cos(a))), int(round(mast_cz + 35 * np.sin(a)))
+            W.fill(x, my + 1, z, x, my + 6, z, BRK); W.set(x, my + 7, z, SEA)
+        for i, (bdx, bdz) in enumerate(BERTH_OFFSETS):
+            bx, bz = BLIMP_LANE_X + bdx, mast_cz + bdz
+            disk(W, bx, bz, 7, my, my, LG)
+            W.set(bx, my - 1, bz - 8, DT)                  # the berth sign sits past the 7-radius floor disk - give it its own tile
+            sign(W, bx, my, bz - 8, ["BERTH %d" % (i + 1), ("PARKED" if i < 2 else "SOCKET (empty)")], rot=0, color="light_purple" if i < 2 else "gray")
+            if i < 2:
+                parked_airship(W, bx, my + 9, bz, label="DOCK %s BERTH %d" % (nm, i + 1))
+        # dock label sign LAST, and well clear of every berth disk (radius 7 at dz=0) so nothing overwrites it afterwards
+        W.set(BLIMP_LANE_X + 3, my - 1, mast_cz + 15, DT)
+        sign(W, BLIMP_LANE_X + 3, my, mast_cz + 15, ["AERIAL DOCK " + nm, label, "4 berths: 2 parked", "+ 2 ship sockets"], rot=8, color="purple")
+    # blimp controller (always-active command block) hidden under dock A's platform
+    cmdblock(W, BLIMP_LANE_X, BLIMP_DOCK_Y - 1, BLIMP_DOCKS[0][1], "function riftbrek:blimp/tick")
+
 
 
 def chicken_chambers(W):
-    """4 glass chambers; dispenser (wind charges) embedded in the south wall, lever outside."""
+    """4 glass chambers: real vanilla redstone, no command blocks, no gimmicks - every lever directly powers the
+    dispenser it sits against (verified against a real 1.21.11 server: lever -> adjacent dispenser reliably fires).
+    Bottom lever: a wind-charge dispenser blasts the chicken up the shaft. Climb the outside ladder to the roof
+    and pull the top lever: a second dispenser loaded with Splash Potion of Harming II (Instant Damage II) fires
+    into the shaft, dropping the chicken for feathers/raw chicken into a hopper floor -> chest.
+    (An earlier draft tried an all-automatic 'observer line' up the wall - stacked observers facing a dispenser do
+    NOT reliably see its 'triggered' flicker as a state change; tested on a real server and it never propagated,
+    so this uses two plain, directly-wired levers instead.)"""
     for k in range(4):
         x0 = 570 + k * 26
         z0 = 52
-        base = GROUND_TOP
         W.fill(x0 - 1, GROUND_TOP, z0 - 1, x0 + 9, GROUND_TOP, z0 + 9, DT)
         W.fill(x0, GY, z0, x0 + 8, GY + 30, z0 + 8, TG)
         W.fill(x0 + 1, GY, z0 + 1, x0 + 7, GY + 30, z0 + 7, AIR)
         W.fill(x0, GY + 31, z0, x0 + 8, GY + 31, z0 + 8, IB)
-        W.fill(x0, GY, z0, x0 + 8, GY + 1, z0 + 8, DB); W.fill(x0 + 1, GY, z0 + 1, x0 + 7, GY, z0 + 7, "minecraft:hay_block[axis=y]")
         for (ex, ez) in ((x0, z0), (x0 + 8, z0), (x0, z0 + 8), (x0 + 8, z0 + 8)):
             W.fill(ex, GY, ez, ex, GY + 30, ez, BRK)
-        # dispenser in the south wall facing north into the chamber, with wind charges
-        dx, dz = x0 + 4, z0 + 8
+        dx, dz = x0 + 4, z0 + 8        # wall column: bottom dispenser, observer line, top dispenser all share this x/z
+        # ---- collection floor: 3x3 hoppers under the landing spot, draining to a corner hopper -> chest ----
+        W.fill(x0, GY - 1, z0, x0 + 8, GY - 1, z0 + 8, DB)
+        for hx in range(x0 + 1, x0 + 8):
+            for hz in range(z0 + 1, z0 + 8):
+                face = "west" if hx > x0 + 1 else ("south" if hz > z0 + 1 else "down")
+                W.set(hx, GY, hz, f"minecraft:hopper[facing={face},enabled=true]")
+        W.set(x0 + 1, GY - 1, z0 + 1, "minecraft:hopper[facing=down,enabled=true]")
+        chest(W, x0 + 1, GY - 2, z0 + 1, facing="north")
+        # ---- bottom dispenser: wind charges, fired by the lever ----
         W.set(dx, GY + 2, dz, "minecraft:dispenser[facing=north,triggered=false]")
         W.tile(dx, GY + 2, dz, {"id": "minecraft:dispenser", "Items": [
             {"Slot": Byte(i), "id": "minecraft:wind_charge", "count": 64} for i in range(9)]})
         W.set(dx, GY + 2, dz + 1, "minecraft:lever[face=wall,facing=south,powered=false]")
-        W.fill(x0 + 1, GY + 1, z0 + 7, x0 + 7, GY + 1, z0 + 7, DB)
         sign(W, dx, GY, dz + 3, ["WIND-CHARGE", "CHAMBER %d" % (k + 1), "pull lever", "(chickens only)"], rot=0)
+        # ---- top dispenser: Splash Potion of Harming II (Instant Damage II), fired by a second lever ----
+        W.set(dx, GY + 28, dz, "minecraft:dispenser[facing=north,triggered=false]")
+        W.tile(dx, GY + 28, dz, {"id": "minecraft:dispenser", "Items": [
+            {"Slot": Byte(i), "id": "minecraft:splash_potion", "count": 1,
+             "components": {"minecraft:potion_contents": {"potion": "minecraft:strong_harming"}}} for i in range(9)]})
+        W.set(dx, GY + 28, dz + 1, "minecraft:lever[face=wall,facing=south,powered=false]")
+        sign(W, dx, GY + 25, dz - 1, ["KILL SWITCH", "Instant Damage II", "pull AFTER launching", "to drop the chicken"], wall="north")
+        # outside ladder (north face) up to the roof hatch, so the top lever is reachable
+        W.fill(x0 + 4, GY + 1, z0 - 1, x0 + 4, GY + 29, z0 - 1, "minecraft:ladder[facing=north]")
+        W.set(x0 + 4, GY + 31, z0, "minecraft:oak_trapdoor[facing=north,half=bottom,open=true]")
         # entry hatch (iron door) on the north side for loading chickens
         W.fill(x0 + 4, GY, z0, x0 + 4, GY + 1, z0, AIR)
         W.set(x0 + 4, GY, z0, "minecraft:iron_door[facing=south,half=lower,hinge=left,open=false,powered=false]")

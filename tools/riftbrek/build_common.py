@@ -198,3 +198,30 @@ def tree(W, x, z, kind="cherry", h=7):
                 if dx * dx + dz * dz <= rr * rr + 1 and not (dx == 0 and dz == 0 and dy < 2):
                     if W.a[GY + h - 2 + dy, z + dz, x + dx] == 0:
                         W.set(x + dx, GY + h - 2 + dy, z + dz, leaf)
+
+
+def fix_dust(W, cells):
+    """give every listed redstone dust cell the connection state vanilla would compute (region files are not block-updated on load).
+    A dust cell connects to adjacent dust and to repeaters whose facing axis points at it; a lone connection also extends to the opposite side."""
+    D = {"north": (0, -1), "south": (0, 1), "west": (-1, 0), "east": (1, 0)}
+    opp = {"north": "south", "south": "north", "west": "east", "east": "west"}
+    dust = set(cells)
+    def kind(x, y, z):
+        return W.get(x, y, z) if 0 <= x < W.sx and 0 <= z < W.sz else "minecraft:air"
+    for (x, y, z) in cells:
+        con = {}
+        for d, (dx, dz) in D.items():
+            nx, nz = x + dx, z + dz
+            k = kind(nx, y, nz)
+            c = False
+            if (nx, y, nz) in dust:
+                c = True
+            elif k == "minecraft:repeater":
+                st = W.palette[W.a[y, nz, nx]][1]
+                c = st.get("facing") in (d, opp[d])
+            con[d] = c
+        n = [d for d in D if con[d]]
+        if len(n) == 1:
+            con[opp[n[0]]] = True
+        props = {d: ("side" if con[d] else "none") for d in D}
+        W.set(x, y, z, "minecraft:redstone_wire[east=%s,north=%s,power=0,south=%s,west=%s]" % (props["east"], props["north"], props["south"], props["west"]))

@@ -112,7 +112,7 @@ def main():
         return pal[int(arr[wy & 15, z & 15, x & 15])][0]
     ok = 0
     for ln in vlines:
-        m = re.match(r"\$execute positioned \$\(x\) (-?\d+) \$\(z\) if block ~(-?\d+) ~ ~(-?\d+) (\S+) run", ln)
+        m = re.match(r"\$execute (?:in minecraft:overworld )?positioned \$\(x\) (-?\d+) \$\(z\) if block ~(-?\d+) ~ ~(-?\d+) (\S+) run", ln)
         wy, dx, dz, nm = int(m.group(1)), int(m.group(2)), int(m.group(3)), m.group(4)
         got = region_block(dx, wy, dz)
         label = re.search(r'"text":"PASS  ([^"]+)"', ln).group(1)

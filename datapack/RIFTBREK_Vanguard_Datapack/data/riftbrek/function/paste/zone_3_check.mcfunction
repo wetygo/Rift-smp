@@ -349,12 +349,12 @@ execute unless score #c rb_p matches 3 run data modify storage riftbrek:paste mi
 scoreboard players set #c rb_p 0
 $execute positioned $(x) 31 $(z) if block ~584 ~ ~56 minecraft:grass_block run scoreboard players add #c rb_p 1
 $execute positioned $(x) -44 $(z) if block ~584 ~ ~56 minecraft:deepslate run scoreboard players add #c rb_p 1
-$execute positioned $(x) 63 $(z) if block ~578 ~ ~60 minecraft:iron_bars run scoreboard players add #c rb_p 1
+$execute positioned $(x) 63 $(z) if block ~576 ~ ~59 minecraft:iron_bars run scoreboard players add #c rb_p 1
 scoreboard players add #TOT rb_p 1
 execute if score #c rb_p matches 3 run scoreboard players add #OK rb_p 1
 execute unless score #c rb_p matches 3 run data modify storage riftbrek:paste miss append value {c:"36,3"}
 scoreboard players set #c rb_p 0
-$execute positioned $(x) 31 $(z) if block ~600 ~ ~56 minecraft:deepslate_tiles run scoreboard players add #c rb_p 1
+$execute positioned $(x) 31 $(z) if block ~600 ~ ~56 minecraft:deepslate_bricks run scoreboard players add #c rb_p 1
 $execute positioned $(x) -44 $(z) if block ~600 ~ ~56 minecraft:deepslate run scoreboard players add #c rb_p 1
 $execute positioned $(x) 63 $(z) if block ~604 ~ ~60 minecraft:iron_bars run scoreboard players add #c rb_p 1
 scoreboard players add #TOT rb_p 1
@@ -375,7 +375,7 @@ scoreboard players add #TOT rb_p 1
 execute if score #c rb_p matches 3 run scoreboard players add #OK rb_p 1
 execute unless score #c rb_p matches 3 run data modify storage riftbrek:paste miss append value {c:"39,3"}
 scoreboard players set #c rb_p 0
-$execute positioned $(x) 31 $(z) if block ~648 ~ ~56 minecraft:deepslate_tiles run scoreboard players add #c rb_p 1
+$execute positioned $(x) 31 $(z) if block ~648 ~ ~56 minecraft:deepslate_bricks run scoreboard players add #c rb_p 1
 $execute positioned $(x) -44 $(z) if block ~648 ~ ~56 minecraft:deepslate run scoreboard players add #c rb_p 1
 $execute positioned $(x) 63 $(z) if block ~655 ~ ~60 minecraft:iron_bars run scoreboard players add #c rb_p 1
 scoreboard players add #TOT rb_p 1
