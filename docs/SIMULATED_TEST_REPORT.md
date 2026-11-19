@@ -3,7 +3,7 @@
 **These are models and static replays, NOT a Minecraft run.** They show (1) why a normal Litematica paste of this schematic ends up partial, (2) that the zone-by-zone method covers 100 %, (3) that the data pack's probe functions detect exactly the missing chunks, (4) that the ready-made world files are block-for-block identical to the schematic. Throughput figures are *assumptions*, not measurements.
 
 ## 1. What has to be pasted
-- footprint 1920 x 384 x 768 blocks = 120 x 48 chunk grid, **5760 non-empty chunks**, 86,784,586 non-air blocks, 67,192 tile entities, 1419 entities.
+- footprint 1920 x 384 x 768 blocks = 120 x 48 chunk grid, **5760 non-empty chunks**, 86,855,073 non-air blocks, 68,792 tile entities, 1419 entities.
 - Litematica only places blocks in chunks the server has **loaded**. A player standing at the origin loads a square of (2R+1)^2 chunks (R = view/simulation distance).
 
 ## 2. Simulated Litematica paste standing still at the schematic origin / centre
@@ -29,30 +29,30 @@
 
 | zone | chunks | blocks | est. paste time @50k blk/s | @200k blk/s |
 |---|---|---|---|---|
-| 1 | 256 | 6,745,988 | 2.2 min | 0.6 min |
-| 2 | 256 | 6,599,636 | 2.2 min | 0.5 min |
-| 3 | 256 | 6,889,826 | 2.3 min | 0.6 min |
-| 4 | 256 | 695,271 | 0.2 min | 0.1 min |
-| 5 | 256 | 764,070 | 0.3 min | 0.1 min |
-| 6 | 256 | 780,945 | 0.3 min | 0.1 min |
-| 7 | 256 | 1,883,606 | 0.6 min | 0.2 min |
-| 8 | 128 | 2,940,403 | 1.0 min | 0.2 min |
+| 1 | 256 | 6,757,402 | 2.3 min | 0.6 min |
+| 2 | 256 | 6,611,156 | 2.2 min | 0.6 min |
+| 3 | 256 | 6,901,240 | 2.3 min | 0.6 min |
+| 4 | 256 | 706,791 | 0.2 min | 0.1 min |
+| 5 | 256 | 775,590 | 0.3 min | 0.1 min |
+| 6 | 256 | 792,465 | 0.3 min | 0.1 min |
+| 7 | 256 | 1,895,126 | 0.6 min | 0.2 min |
+| 8 | 128 | 2,944,723 | 1.0 min | 0.2 min |
 | 9 | 256 | 6,290,162 | 2.1 min | 0.5 min |
 | 10 | 256 | 5,477,536 | 1.8 min | 0.5 min |
 | 11 | 256 | 6,580,956 | 2.2 min | 0.5 min |
-| 12 | 256 | 171,649 | 0.1 min | 0.0 min |
-| 13 | 256 | 1,864,611 | 0.6 min | 0.2 min |
-| 14 | 256 | 3,888,243 | 1.3 min | 0.3 min |
-| 15 | 256 | 5,080,572 | 1.7 min | 0.4 min |
-| 16 | 128 | 2,910,710 | 1.0 min | 0.2 min |
+| 12 | 256 | 166,761 | 0.1 min | 0.0 min |
+| 13 | 256 | 1,859,906 | 0.6 min | 0.2 min |
+| 14 | 256 | 3,890,932 | 1.3 min | 0.3 min |
+| 15 | 256 | 5,087,735 | 1.7 min | 0.4 min |
+| 16 | 128 | 2,953,077 | 1.0 min | 0.2 min |
 | 17 | 256 | 6,709,713 | 2.2 min | 0.6 min |
 | 18 | 256 | 6,283,564 | 2.1 min | 0.5 min |
 | 19 | 256 | 6,988,698 | 2.3 min | 0.6 min |
-| 20 | 256 | 592,771 | 0.2 min | 0.0 min |
-| 21 | 256 | 1,143,050 | 0.4 min | 0.1 min |
-| 22 | 256 | 1,410,122 | 0.5 min | 0.1 min |
-| 23 | 256 | 2,230,318 | 0.7 min | 0.2 min |
-| 24 | 128 | 1,862,166 | 0.6 min | 0.2 min |
+| 20 | 256 | 593,629 | 0.2 min | 0.0 min |
+| 21 | 256 | 1,143,003 | 0.4 min | 0.1 min |
+| 22 | 256 | 1,402,672 | 0.5 min | 0.1 min |
+| 23 | 256 | 2,218,372 | 0.7 min | 0.2 min |
+| 24 | 128 | 1,823,864 | 0.6 min | 0.2 min |
 
 - Cumulative chunk coverage after each pass: 4%, 9%, 13%, 18%, 22%, 27%, 31%, 33%, 38%, 42%, 47%, 51%, 56%, 60%, 64%, 67%, 71%, 76%, 80%, 84%, 89%, 93%, 98%, 100%. **Final: 100%**.
 - Total estimated paste time (assumed throughput only): 29 min at 50k blocks/s, 7 min at 200k blocks/s.
@@ -85,7 +85,7 @@
 ## 6. Ready-made world files: independent read-back vs the master schematic
 ```
 region headers: 5815 chunk slots checked, 0 wrong
-chunks 5760/5760  sections 138240  block mismatches 0  tile entities 67190/67192 (bad 0, missing 2)  entities 1419/1419  [36s]
+chunks 5760/5760  sections 138240  block mismatches 0  tile entities 68788/68792 (bad 0, missing 4)  entities 1419/1419  [36s]
 RESULT: FAIL
 ```
 
@@ -98,4 +98,4 @@ model_test.py: FAILED: 0
 ## 8. Still NOT verifiable here
 Behaviour inside the real game: that Minecraft accepts the region files without complaint (format follows the 1.21.11 chunk layout and was read back with a reader validated on a genuine 1.19.2 save), that command blocks/hoppers/redstone work, that imported builds work in 1.21.11, performance with ~1,900 blimp entities.
 
-_generated in 75s_
+_generated in 73s_

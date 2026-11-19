@@ -74,10 +74,10 @@ def main(master, srcdir, report=None):
     for p in order:
         w, h, dd = p["size"]
         if x + w > ROW_W and x > 0:
-            z += rowd + GAP + (16 if rows_done == 0 else 0); x = 0; rowd = 0; rows_done += 1     # +16 after row 1: the bolt-line band
+            z += rowd + GAP; x = 0; rowd = 0; rows_done += 1
         placements.append((p, X0 + x, Z0 + z)); x += w + GAP; rowd = max(rowd, dd)
     ext_x = max(max(px + p["size"][0] for p, px, pz in placements) + 20, 1920)
-    ext_z = max(pz + p["size"][2] for p, px, pz in placements) + 14
+    ext_z = max(max(pz + p["size"][2] for p, px, pz in placements) + 14, 768)
     regions = dict(d["Regions"])
     info = []
     total = int(d["Metadata"]["TotalBlocks"])
@@ -101,26 +101,37 @@ def main(master, srcdir, report=None):
         total += int(np.count_nonzero(p["arr"]))
         info.append(dict(name=p["label"], file=p["file"], author=p["author"], community=p["community"], purple=p["purple"],
                          x=px, y=py, z=pz, size=p["size"], dv=p["dv"], tiles=len(p["tiles"]), ents=len(p["ents"]), warn=p["warn"]))
-    # --- the BOLT LINE: two parallel lanes of Wave Bolt straight pieces (turned 90 degrees) running the whole length of the building, x 800..1888 ----
+    # --- the BOLT VIADUCT: two lanes of Wave Bolt straight pieces (turned 90 degrees) on a deck at local y 244 (world y 180), z 28..47, running the whole
+    #     way: ward west strip -> through the whole HQ (above every roof) -> through the Redstone Mega Building to its east wall. The part west of the HQ
+    #     (x < 0) is added to the ward by build_ward.py from the cache written here.
+    import pickle
     from riftbrek.rotate import rotate_prep
     massR, straR = rotate_prep(mass), rotate_prep(stra)
+    cache = os.environ.get("RIFTBREK_BOLT_CACHE", os.path.join(os.path.dirname(os.path.abspath(master)), ".bolt_cache.pkl"))
+    pickle.dump(dict(mass=massR, stra=straR), open(cache, "wb"))
+    VY, LZA, LZB = 244, 28, 39
+    from riftbrek import build_mega as M0
+    deck = M0.World(1888, 4, 23)
+    deck.fill(0, 0, 0, 1887, 0, 22, "minecraft:polished_blackstone_bricks")
+    for xx in range(4, 1888, 8):
+        deck.set(xx, 0, 0, "minecraft:sea_lantern"); deck.set(xx, 0, 22, "minecraft:sea_lantern")
+    regions["Bolt Viaduct Deck"] = annex.pack_region(dict(arr=deck.a, pal=deck.palette, size=(1888, 4, 23), tiles=[], ents=[]), (0, VY - 1, LZA - 2))
+    total += int(np.count_nonzero(deck.a))
     lanes = []
-    for lane, lz in (("A", 484), ("B", 495)):
-        x = 800; k = 0
-        for piece, n in ((massR, 4), (straR, 2)):
+    for lane, lz in (("A", LZA), ("B", LZB)):
+        x = 0; k = 0
+        for piece, n in ((massR, 7), (straR, 3)):
             for i in range(n):
-                nm = f"Mega Bolt Lane {lane} {k}"
-                regions[nm] = annex.pack_region(piece, (x, L.GY, lz))
+                regions[f"Mega Bolt Lane {lane} {k}"] = annex.pack_region(piece, (x, VY, lz))
                 total += int(np.count_nonzero(piece["arr"])); x += piece["size"][0]; k += 1
-        lanes.append(dict(lane=lane, z=lz, x0=800, x1=x))
-    print("  bolt line lanes", lanes, flush=True)
+        lanes.append(dict(lane=lane, z=lz, x0=0, x1=x, y=VY))
+    print("  bolt viaduct (HQ + mega part)", lanes, flush=True)
     # --- my own halls in free rectangles of the plateau ---------------------------------------------------------------------------------------------
     occ = np.zeros((pd, pw), dtype=bool)
     for (p, px, pz) in placements:
         w, h, dd = p["size"]
         occ[max(pz - 10, 0):pz + dd + 10, max(px - 768 - 10, 0):px - 768 + w + 10] = True
     occ[:16, :] = True; occ[-16:, :] = True; occ[:, -16:] = True
-    occ[484 - 3:503 + 4, 800 - 768:1888 - 768] = True                       # bolt lanes
     mega = dict(halls={}, tests=[])
     for (nm, hw, hd, fn) in M.HALLS:
         pos = M.free_rect(occ, hw, hd)

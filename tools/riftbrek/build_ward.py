@@ -125,6 +125,27 @@ def building(W, strip, label, kind, x0, z0, x1, z1, floors, fh, face, tier, line
     return top
 
 
+def bolt_viaduct_west(W):
+    """the west end of the BOLT VIADUCT: x 32..383 of the west strip (HQ-local x -352..-1), same z / y as the HQ part (see assemble.py)"""
+    import pickle
+    from .rotate import paste
+    cache = os.environ.get("RIFTBREK_BOLT_CACHE", os.path.join(os.path.dirname(__file__), "..", "..", "dist", ".bolt_cache.pkl"))
+    if not os.path.exists(cache):
+        print("   (no bolt cache: viaduct west part skipped)"); return
+    c = pickle.load(open(cache, "rb"))
+    VY, LZA, LZB = 244, 28, 39
+    W.fill(32, VY - 1, LZA - 2, 383, VY - 1, LZA + 20, BRK)
+    W.fill(32, VY, LZA - 2, 383, VY + 3, LZA + 20, AIR)
+    for xx in range(36, 384, 8):
+        W.set(xx, VY - 1, LZA - 2, SEA); W.set(xx, VY - 1, LZA + 20, SEA)
+    for lz in (LZA, LZB):
+        x = 32
+        for piece, n in ((c["mass"], 1), (c["stra"], 3)):
+            for i in range(n):
+                paste(W, piece, x, VY, lz); x += piece["size"][0]
+    WARD_TESTS.append(dict(strip="W", name="bolt viaduct west", kind="bolt_west", x0=32, x1=384, y=VY, z=[LZA, LZB]))
+
+
 def build_strip(strip, rng, specs, extra):
     px, pz, sx, sz = STRIPS[strip]
     W = World(sx, SY, sz)
@@ -152,6 +173,8 @@ def build_strip(strip, rng, specs, extra):
             sign(W, x0 + 6, GY, z1 - 4 if face == "south" else z0 + 4, ["REDSTONE WORKS", "ward " + strip, "real redstone", "no command blocks"], rot=0, color="red")
             WARD_TESTS.append(dict(strip=strip, name=label + " haven", kind="haven", tests=json.loads(json.dumps(HV.HAVEN_TESTS, default=list))))
             haven_sh.append((x0, z0))
+    if strip == "W":
+        bolt_viaduct_west(W)
     from . import build_wardunder as WU
     links = list(range(507, sx - 40, 250)) if strip in "NS" else []
     WARD_UNDER[strip] = WU.strip_underground(W, strip, specs, links, (684, 854))

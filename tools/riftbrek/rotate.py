@@ -41,3 +41,17 @@ def rotate_prep(p):
         tiles.append(t)
     q = dict(p); q.update(arr=new, pal=pal, tiles=tiles, size=(sz, sy, sx))
     return q
+
+
+def state_str(name, props):
+    return name + ("[" + ",".join(f"{k}={v}" for k, v in sorted(props.items())) + "]" if props else "")
+
+
+def paste(W, p, x0, y0, z0):
+    """write a prepared build into a World at (x0, y0, z0); air cells are written too"""
+    sy, sz, sx = p["arr"].shape
+    remap = np.array([W.B(state_str(n, pr)) for (n, pr) in p["pal"]], dtype=np.uint16)
+    W.a[y0:y0 + sy, z0:z0 + sz, x0:x0 + sx] = remap[p["arr"]]
+    for t in p["tiles"]:
+        t = dict(t)
+        W.tile(t["x"] + x0, t["y"] + y0, t["z"] + z0, {k: v for k, v in t.items() if k not in ("x", "y", "z")})

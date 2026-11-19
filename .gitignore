@@ -3,3 +3,4 @@ __pycache__/
 mod/build/
 mod/.gradle/
 mod/.loom-cache/
+dist/.bolt_cache.pkl
