@@ -97,3 +97,6 @@ New 768 x 768 circular walled capital (`docs/ITHACA_CITY.md`): Royal Palace, Cap
 - Mod v1.0.5: `/rift verify city`, `/rift city <x> <z>`, `cityX/cityZ/autoCity` config, Ithaca sorter chunks force-loaded (tracked, same safe removal rules).
 - The wind-charged chicken launcher (`build_launcher.py`, not written in this conversation) had every repeater backwards; fixed and verified on a live server (a zombie launched ~14 blocks). See `docs/LAUNCHER.md`.
 - The older HQ "chicken chamber" (my earlier wind-charge-item + Harming II two-lever design) is NOT the proper launcher; the HQ still has that version.
+
+## J. Redstone Haven (2026-11-19, later)
+Ground floor of Ithaca's industrial district is now a hall of real redstone (`docs/REDSTONE_HAVEN.md`): 5 logic gates, hopper clock, 3 comparator fill meters, piston curtain. `tools/haven_livetest.py` flips every lever combination on a real 1.21.11 server and reads the lamps back: all 29 checks pass, after fixing four real design errors found by the test (dust on pistons pops off; lamps touching a strongly powered lamp light up; lever one block above its dust line; stale initial states). Interpreted "redstone city" as Ithaca's industrial redstone district: say so if you meant something else. Not built: flying machines, automatic crop/mob farms, XOR/adders/memory cells.

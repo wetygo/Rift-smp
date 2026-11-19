@@ -38,7 +38,7 @@ pts = {
     "market ring": (384 + 190, GY, 384), "trading hall NE": (I.polar(187, 315)[0], GY, I.polar(187, 315)[1] + 2),
     "customs lobby": (423, GY, 604 - 8 if False else 596),
     "library": (I.polar(256, 345)[0], GY, I.polar(256, 345)[1]), "barracks": (251, GY, 588),
-    "industrial hall": (125, GY, 342), "arena one": (190, GY, 562),
+    "industrial hall": (125, GY, 342), "redstone haven logic lab": (120, GY, 353), "redstone haven clock": (98, GY, 344), "redstone haven meters": (130, GY, 345), "redstone haven piston curtain": (150, GY, 345), "arena one": (190, GY, 562),
     "maintenance ring": (I.polar(294, 10)[0], 84, I.polar(294, 10)[1]), "maintenance tunnel N": (384, 85, 200),
     "hatch kiosk NE": (I.polar(284, 315)[0], GY, I.polar(284, 315)[1]),
     "rail loop north station": (384 + 5, 71, 384 - 190 + 2), "rail loop south station": (384 + 5, 71, 384 + 190 - 2),

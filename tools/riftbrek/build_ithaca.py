@@ -542,6 +542,8 @@ def industrial(W, rng):
     WINGS["ith_industry"] = (x0, z0, x1, z1, 3, 11, "north")
     d = wing(W, "ith_industry", ["INDUSTRIAL", "REDSTONE DISTRICT", "farms - sorting"], "member", glass=BG, wall=DB, trim="minecraft:blue_ice")
     claim((x0 + x1) // 2, (z0 + z1) // 2, 44, 32)
+    from .build_haven import haven
+    haven(W, x0 + 4, z0 + 19, x1 - 4, z1 - 4)           # ground-floor REDSTONE HAVEN (real redstone, self-tested)
     # crop farm plots with a hopper drain that feeds the sorter intake shaft
     px0, pz0 = 96, 290
     for i, crop in enumerate(("wheat", "carrots", "potatoes", "beetroot")):
@@ -866,6 +868,9 @@ def main(out_dir):
     import os
     W = build_world()
     write_mod_data(W)
+    from .build_haven import HAVEN_TESTS
+    import json as _j
+    _j.dump(HAVEN_TESTS, open(os.path.join(out_dir, 'haven_tests.json'), 'w'), indent=1)
     os.makedirs(out_dir, exist_ok=True)
     path = os.path.join(out_dir, "RIFTBREK_ITHACA_CITY.litematic")
     bits, total = W.save(path, "Ithaca City", "RIFTBREK Design", "768x768 circular walled capital: Royal Palace, Capitol, 6 faction HQs, market, harbour, industrial redstone district, underground rail + vaults",
