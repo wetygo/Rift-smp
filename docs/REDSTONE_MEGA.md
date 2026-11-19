@@ -11,8 +11,13 @@ The annex plateau (world **X 8960..10111, Z 8192..8959**) is now ONE roofed mega
 
 **Tested on a real 1.21.11 server:** melon placed in the fruit cell -> piston fired -> 3 melon slices in the chest; pumpkin -> 1 pumpkin in the chest; each furnace row filled its output chest (117 iron ingots / copper ingots / stone in ~50 s from 20 smelters). The fill meters use the module that passed the Haven tests; not re-run here. Stems growing by themselves (random ticks) was not waited for - the test places the fruit by command.
 
+## Farms everywhere (added)
+Every free rectangle of the plateau between the imported builds is filled with strips of the same observer + piston melon / pumpkin farm: **4,009 farm units in 60 strips** (rows alternate melon and pumpkin), plus the 24 in the Farm Hall. Each unit = farmland + stem + water + a lantern for the stem, a fruit cell with a hopper + chest below, an observer and a piston. One unit was re-tested after the rebuild (fruit placed -> 3 melon slices in its chest). Each strip is a separate region; a unit's chest is at `(stem x + 1, y 30, stem z)`.
+Heads-up: 4,000 hoppers is a lot - a server with players inside the building will tick all of them; if the building lags, remove strips.
+
+## The Wave Bolt line
+Two parallel lanes of the supplied Wave Bolt straight pieces (Straight Bolt Massive x4 + Straight Bolt x2 per lane, turned 90 degrees so they run east-west) run the whole length of the building: **X 8992..10080, Z 8676..8684 (lane A) and 8687..8695 (lane B), y 32..34**. They sit in a reserved band between the first and second rows of builds, and end-to-end like the original N-S pieces. **Not verified**: I rotated the pieces (block states, rails, dust connections, tile positions) but I cannot test a Wave Bolt here, and I do not know where its stations / pushers are supposed to attach - the loose pieces (stations, lanes, block pushers, intersections) are still where they were on the shelf rows. It runs through the Redstone Mega Building only; it does **not** continue into the HQ, the ward or Ithaca.
+
 ## NOT done / be honest
-- **"Piston bolt through the base"**: not extended. The Wave Bolt pieces (straight bolts, intersections, transitions, stations by SandCaribou1890 / Pando_UwU / Kvil) are inside the building exactly as supplied, but I did **not** run a bolt line through the HQ or the ward: they only run along one axis, need matching end stations, and I cannot test a Wave Bolt here. Ask if you want a specific line.
-- The community builds' function is untested (the Furnace Array, Main Storage, magma farms ...); only my three halls were run.
-- No automatic sugar-cane / crop-with-villager / mob farms. The furnace array is fed by hand (chests), not by a shared line.
-- The furnace/storage/farm halls are not connected to each other or to the HQ sorters.
+- The community builds' function is untested (the Furnace Array, Main Storage, magma farms ...); only my three halls and the farm units were run.
+- No automatic sugar-cane / villager / mob farms. The furnace array is fed by hand (chests), not by a shared line. The halls are not connected to each other or to the HQ sorters.

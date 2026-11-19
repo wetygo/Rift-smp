@@ -128,6 +128,8 @@ def hq(core, ward, ward_info):
     for nm, h in mi["halls"].items():
         d.rectangle([h["x"] + O, h["z"] + O, h["x"] + h["w"] + O, h["z"] + h["d"] + O], outline=(255, 120, 80, 255), width=3)
         label(d, h["x"] + O + h["w"] // 2, h["z"] + O + h["d"] // 2, nm + "\n(my own, live-tested)", 14, fill=(255, 190, 150))
+    d.rectangle([800 + O, 484 + O, 1888 + O, 503 + O], fill=(255, 255, 80, 120), outline=(255, 255, 0, 255), width=2)
+    label(d, 1344 + O, 494 + O, "WAVE BOLT LINE - 2 lanes, X 8992..10080, Z 8676..8695 - runs the whole building", 15, fill=(255, 255, 120))
     d.rectangle([768 + O, O, 1919 + O, 767 + O], outline=(255, 90, 90, 255), width=5)
     label(d, 1344 + O, O + 25, "REDSTONE MEGA BUILDING (roofed, 160 high) - walls X 8960..10111, Z 8192..8959", 20, fill=(255, 150, 150))
     # ward buildings

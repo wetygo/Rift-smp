@@ -1,20 +1,20 @@
 {
  "halls": {
   "FURNACE ARRAY": {
-   "x": 1818,
+   "x": 1778,
    "z": 18,
    "w": 72,
    "d": 42
   },
   "FARM HALL": {
-   "x": 1630,
-   "z": 206,
+   "x": 1778,
+   "z": 66,
    "w": 80,
    "d": 42
   },
   "STORAGE VAULT": {
-   "x": 1714,
-   "z": 206,
+   "x": 1778,
+   "z": 114,
    "w": 104,
    "d": 46
   }
@@ -23,7 +23,7 @@
   {
    "hall": "FURNACE ARRAY",
    "off": [
-    1818,
+    1778,
     0,
     18
    ],
@@ -49,7 +49,7 @@
   {
    "hall": "FURNACE ARRAY",
    "off": [
-    1818,
+    1778,
     0,
     18
    ],
@@ -75,7 +75,7 @@
   {
    "hall": "FURNACE ARRAY",
    "off": [
-    1818,
+    1778,
     0,
     18
    ],
@@ -101,7 +101,7 @@
   {
    "hall": "FURNACE ARRAY",
    "off": [
-    1818,
+    1778,
     0,
     18
    ],
@@ -127,9 +127,9 @@
   {
    "hall": "FARM HALL",
    "off": [
-    1630,
+    1778,
     0,
-    206
+    66
    ],
    "kind": "farm",
    "name": "AUTO MELON FARM",
@@ -158,9 +158,9 @@
   {
    "hall": "FARM HALL",
    "off": [
-    1630,
+    1778,
     0,
-    206
+    66
    ],
    "kind": "farm",
    "name": "AUTO PUMPKIN FARM",
@@ -189,9 +189,9 @@
   {
    "hall": "STORAGE VAULT",
    "off": [
-    1714,
+    1778,
     0,
-    206
+    114
    ],
    "kind": "haven_meters",
    "tests": [
@@ -403,6 +403,22 @@
      "expect": 13
     }
    ]
+  }
+ ],
+ "farm_units": 4009,
+ "farm_strips": 60,
+ "lanes": [
+  {
+   "lane": "A",
+   "z": 484,
+   "x0": 800,
+   "x1": 1888
+  },
+  {
+   "lane": "B",
+   "z": 495,
+   "x0": 800,
+   "x1": 1888
   }
  ]
 }
