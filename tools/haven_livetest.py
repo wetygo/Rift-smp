@@ -73,7 +73,9 @@ import os
 for f in ("world/datapacks",):
     pass
 # center spawn on the haven so the chunks tick
-hx, hy, hz = W(125, GY, 350)
+xs = [p[0] for t in tests for p in (t.get("levers") or [t.get("chest") or t.get("lever") or (0, 0)])] or [125]
+zs = [p[1] for t in tests for p in (t.get("levers") or [t.get("chest") or t.get("lever") or (0, 0)])] or [350]
+hx, hy, hz = W(sum(xs) // len(xs), GY, sum(zs) // len(zs))
 stdin = [f"forceload add {hx-60} {hz-30} {hx+60} {hz+30}"]
 feed = open(os.path.join(srv, "feed.txt"), "w")
 feed.write("\n".join(f"{c}|{d}" for c, d in [(stdin[0], 5.0)] + cmds)); feed.close()

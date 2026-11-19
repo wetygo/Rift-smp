@@ -95,7 +95,7 @@ You sent a new concept render and a zip of litematics, and asked to remake the w
 ## I. Ithaca City (2026-11-19, later)
 New 768 x 768 circular walled capital (`docs/ITHACA_CITY.md`): Royal Palace, Capitol, six faction HQs, market, library, barracks + arenas, industrial district, harbour + river, underground rail/vault/sorters/Veil tunnels. 35 command-block gates on the existing door functions, two sorter halls on a hopper intake shaft, minecart loop. Verified: 0 registry/support/gate errors, 37/37 key places reachable, region files read back identical, loads on a real Fabric server, `/rift verify city` 9/9. **Not built:** flying machines, automatic farms (farms are manual), villagers, any hand-designed interiors. **Not tested with a player.**
 - Mod v1.0.5: `/rift verify city`, `/rift city <x> <z>`, `cityX/cityZ/autoCity` config, Ithaca sorter chunks force-loaded (tracked, same safe removal rules).
-- The wind-charged chicken launcher (`build_launcher.py`, not written in this conversation) had every repeater backwards; fixed and verified on a live server (a zombie launched ~14 blocks). See `docs/LAUNCHER.md`.
+- The wind-charged chicken launcher (`build_launcher.py`, not written in this conversation) had every repeater backwards; fixed and verified on a live server (a zombie launched ~3.5 blocks; a glass roof had been blocking the burst, so the roof was removed). See `docs/LAUNCHER.md`.
 - The older HQ "chicken chamber" (my earlier wind-charge-item + Harming II two-lever design) is NOT the proper launcher; the HQ still has that version.
 
 ## J. Redstone Haven (2026-11-19, later)
@@ -103,3 +103,8 @@ Ground floor of Ithaca's industrial district is now a hall of real redstone (`do
 
 ## K. The Pipeline (2026-11-19)
 Barrier wall named "The Pipeline" (`docs/THE_PIPELINE.md`): ring 1 around the HQ + Ithaca (5392 x 1296, 28 region files, none shared with them), ring 2 around the user's main base (256 x 304, region files r.-4.0/r.-4.1 which also hold their house, so merge-only). Rail line on top (13,308 + 1,052 rails), 4 gatehouses each, towers, lettering. Verified: read-back identical, mod `/rift verify pipeline|mainwall` 7/7, minecarts run both rails, merge tool keeps house chunks. NOT verified: walking it, a full lap, how it meets real terrain, the y 77 ground-line assumption for the main-base ring. Interpretation: "my main base" = the house box given earlier.
+
+## L. HQ redo (Redstone Haven in the HQ, 6-floor Auto Storage, launchers, security control, blimps)
+- HQ now contains a Redstone Haven (nexus wing, local x70 z565, 29/29 live circuit tests: `dist/haven_tests_hq.json`), a security control room with a real lockdown lamp monitor, 4 wind-chicken launchers beside the blimp chambers, the 6-floor nexus, and the old base content unchanged.
+- **Found and fixed while testing:** (1) every previously exported region file had *dormant command blocks* (a repeating command block needs a scheduled tick; the exporter wrote none), so doors, sorters, the blimp controller and kit pads did nothing until re-triggered. Exporter now writes `block_ticks`; all shipped region files were regenerated. (2) Launchers: glass roof blocked the wind burst (see LAUNCHER.md); fixed and re-tested live in the HQ and Ithaca.
+- Blimps: live-tested earlier (spawn, move along the lane through all phases, passenger carried, ~5 ms/tick).

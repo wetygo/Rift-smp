@@ -1,10 +1,10 @@
-== build: 2026-11-19T01:55Z   (static analysis / model tests only - NOT run in Minecraft)
+== build: 2026-11-19T10:32Z   (static analysis / model tests only - NOT run in Minecraft)
 == validate
-shape/palette/tiles: ((384, 768, 768), 185, 572)
+shape/palette/tiles: ((384, 768, 768), 238, 652)
 datapack lint errors: 0
-schematic errors: 0  gate rows: 130
-{'ladder': 4195, 'iron_door': 268, 'hopper': 586, 'chest': 3245, 'dispenser': 30, 'furnace': 4, 'crafter': 6, 'command_blocks_ok': 197}
-consistency errors: 0 {'sorters': 2, 'doors': 22, 'farms': 4, 'pulses': 6}
+schematic errors: 0  gate rows: 136
+{'ladder': 4243, 'iron_door': 280, 'hopper': 600, 'chest': 3265, 'dispenser': 42, 'furnace': 4, 'crafter': 6, 'command_blocks_ok': 203}
+consistency errors: 0 {'sorters': 2, 'doors': 23, 'farms': 4, 'pulses': 6}
 annex regions checked: 35  errors: 1
   OK   Annex - Ghast Hydration Facility (Wildezz) {'size': (352, 58, 464), 'palette': 955, 'tiles': 4773, 'entities': 0}
   OK   Annex - Full Dam (Wildezz) {'size': (419, 145, 294), 'palette': 715, 'tiles': 154, 'entities': 0}
@@ -71,7 +71,7 @@ OK   B9 veil HQ (100, 25, 340) comp 1
 OK   B9 veil tunnel N (101, 25, 285) comp 1
 OK   B10 royal hall (380, 17, 300) comp 1
 OK   B10 vault 1 interior (321, 17, 205) comp 1
-OK   B12 reserve (300, 4, 300) comp 1
+OK   B12 reserve (300, 1, 300) comp 1
 OK   archivist basement (B1) (47, 89, 140) comp 1
 OK   B1 tunnel under road R1 (150, 89, 285) comp 1
 OK   B1 N-S tunnel x=300 (300, 89, 200) comp 1

@@ -4,9 +4,9 @@ How it works (every step verified on a real 1.21.11 server, see docs/LAUNCHER.md
   * a sealed 1x1x1 CELL holds one chicken. West dispenser = chicken spawn egg, north dispenser = splash potion of WIND CHARGING
     (effect "Wind Charged"), south dispenser = splash potion of HARMING II (strong_harming = Instant Damage II).
   * one stone BUTTON starts three repeater delay lines: egg at once -> wind-charging potion 0.8 s later -> harming II potion 1.2 s after that.
-    The chicken dies while wind-charged; its wind burst throws whoever stands on the PLATFORM (the cell's roof) high into the air.
+    The chicken dies while wind-charged; its wind burst throws whoever stands in the open cell (no roof: any block, even glass, blocks the burst).
   * every dispenser is fed by a hopper from a chest (27 potions / 27 stacks of eggs). Refill the chests, nothing else.
-Layout (local, cell centre = (cx, cz), floor row y, dispenser row y+1, circuit row y+2, platform = y+2 above the cell):
+Layout (local, cell centre = (cx, cz), floor row y, dispenser row y+1, circuit row y+2, rider stands in the open cell column):
 """
 from .build_common import *
 from .nbt import Byte
@@ -28,7 +28,7 @@ def _items(item, count, comp=None, n=27):
 
 
 def launcher(W, cx, cz, y=GROUND_TOP, label="LAUNCHER"):
-    """cx,cz = chicken cell. y = ground-top row (floor). Returns the world position (x, y, z) of the launch platform surface."""
+    """cx,cz = chicken cell. y = ground-top row (floor). Returns the world position (x, y, z) where the rider stands (inside the open cell)."""
     dy = y + 1                                   # dispenser / chicken row
     cy = y + 2                                   # circuit row (platform level)
     # pad: solid foundation + a block of body so every circuit cell has support
@@ -51,8 +51,11 @@ def launcher(W, cx, cz, y=GROUND_TOP, label="LAUNCHER"):
         W.tile(hx, dy, hz, {"id": "minecraft:hopper", "Items": [], "TransferCooldown": 0})
         W.set(hx, cy, hz, "minecraft:chest[facing=south,type=single,waterlogged=false]")
         W.tile(hx, cy, hz, {"id": "minecraft:chest", "Items": _items(item, cnt, comp)})
-    # platform over the cell (glass: you see the chicken)
-    W.set(cx, cy, cz, TG)
+    # NO roof over the cell and an open walk-in corridor on the east side: a wind burst is an explosion, and any block between the
+    # chicken and the rider (even glass) blocks it completely (tested on a real 1.21.11 server). The rider stands IN the cell column.
+    W.set(cx, cy, cz, AIR)
+    for ex in (1, 2, 3):
+        W.set(cx + ex, dy, cz, AIR); W.set(cx + ex, cy, cz, AIR)
     # ---- circuit on the circuit row (dust sits on the dispensers = powers them) ----
     X = lambda dx, dz: (cx + dx, cy, cz + dz)
     def put(dx, dz, b): W.set(*X(dx, dz), b)
@@ -69,8 +72,8 @@ def launcher(W, cx, cz, y=GROUND_TOP, label="LAUNCHER"):
     put(-2, 1, SLOW % "north"); put(-2, 2, SLOW % "north"); put(-2, 3, DUST); put(-1, 3, SLOW % "west"); put(0, 3, DUST); put(0, 2, DUST); put(0, 1, DUST)
     W.fill(cx - 2, dy, cz + 2, cx, dy, cz + 3, BRK)
     fix_dust(W, [p for p in [(cx + dx, cy, cz + dz) for dx in range(-8, 3) for dz in range(-6, 7)] if W.get(*p) == "minecraft:redstone_wire"])
-    sign(W, cx - 3, cy, cz - 2, [label, "stand on the", "glass block", "press button"], rot=4)
-    return (cx, cy + 1, cz)
+    sign(W, cx - 3, cy, cz - 2, [label, "step into the", "open cell", "press button"], rot=4)
+    return (cx, dy, cz)
 
 
 def tube(W, cx, cz, y=GROUND_TOP, height=24):

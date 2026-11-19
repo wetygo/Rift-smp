@@ -25,7 +25,7 @@ World placement (default): **origin X 12288, Z 8192** (local 0,0), Y -64..319. R
 | Farms | 4 crop plots (wheat, carrots, potatoes, beetroot) with water and a chest each. **Manual**: you harvest and replant; there is no automatic harvester |
 | Lighting controls | street lamps on the avenues switch on after dark via inverted daylight sensors |
 | **Redstone Haven** | ground floor of the industrial district: logic-gate lab, hopper clock, chest-fill meters, piston curtain, all real redstone; **self-tested on a live server** (`docs/REDSTONE_HAVEN.md`) |
-| Wind-charged chicken launcher | real redstone, see `docs/LAUNCHER.md` (tested: launches ~14 blocks) |
+| Wind-charged chicken launcher | real redstone, see `docs/LAUNCHER.md` (tested: a rider in the open cell is thrown ~3.5 blocks) |
 | Hidden passages | Veil tier bookshelf-framed gate, a Veil tunnel out through the wall (iron trapdoor exit) |
 | Secure vault | royal vault under the throne hall behind a royal-tier gate, 27 loot chests |
 | Maintenance access | ring tunnel + radial tunnels, member-gated hatches |

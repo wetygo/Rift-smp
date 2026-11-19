@@ -10,7 +10,7 @@ WINGS = {
     "veil":       (40, 300, 167, 427, 3, 10, "north"),
     "abstracters": (560, 300, 703, 427, 4, 11, "north"),
     "wildcards":  (40, 470, 183, 597, 3, 12, "north"),
-    "nexus":      (540, 450, 731, 609, 4, 12, "north"),
+    "nexus":      (540, 450, 731, 609, 6, 12, "north"),    # 6 floors, as in the concept render ("Auto Storage 6 floors")
 }
 
 
@@ -134,6 +134,8 @@ def veil(W):
 
 def wildcards(W):
     d = wing(W, "wildcards", ["WILDCARDS", "Engineering Wing"], "wildcards", glass=LG, pad_key="wildcards")
+    from .build_haven import haven
+    haven(W, 70, 565, 132, 590)            # REDSTONE HAVEN: ground-floor hall of real, live-tested redstone inside the Engineering wing
     for (cx, cz) in ((d["x0"] + 12, d["z0"] + 12), (d["x1"] - 12, d["z0"] + 12), (d["x0"] + 12, d["z1"] - 12), (d["x1"] - 12, d["z1"] - 12)):
         W.fill(cx - 3, d["top"] + 1, cz - 3, cx + 3, d["top"] + 40, cz + 3, "minecraft:cut_copper")
         W.fill(cx - 2, d["top"] + 1, cz - 2, cx + 2, d["top"] + 40, cz + 2, AIR)

@@ -20,6 +20,22 @@ def build_world():
     S.citadel(W); log("citadel")
     WG.archive(W); WG.unstables(W); WG.abstracters(W); WG.veil(W); WG.wildcards(W); WG.nexus(W); log("wings")
     WG.blimp(W); WG.chicken_chambers(W); log("blimp terminal + chambers")
+    # real wind-charged chicken launchers (chicken egg + Wind Charging potion + Harming II, real redstone) beside the chambers
+    from . import build_launcher as LA
+    for k in range(4):
+        LA.launcher(W, 580 + k * 26, 100, y=C.GROUND_TOP, label="WIND LAUNCHER %d" % (k + 1))
+        LA.tube(W, 580 + k * 26, 100, y=C.GROUND_TOP, height=30)
+    # security control room at the main gate: lockdown / alarm buttons + lockdown indicator lamps
+    from .build_ithaca import security_control
+    C.shell(W, 426, 662, 452, 678, 1, fh=8, wall=C.BRK, thick=2)
+    security_control(W, 429, 665)
+    C.gate(W, "leader", 436, C.GY, 678, 6, facing="north", frame=C.BRK, clear_z=[677, 676])
+    C.sign(W, 430, C.GY, 681, ["SECURITY CONTROL", "leader tier", "lockdown - alarms", "indicator inside"], rot=0)
+    C.cmdblock(W, 449, C.GY, 672, "function riftbrek:monitor/lockdown_lamp")
+    for (lx, ly, lz) in ((448, C.GY + 1, 672), (450, C.GY + 1, 672), (449, C.GY + 2, 672)):
+        W.set(lx, ly, lz, "minecraft:redstone_lamp[lit=false]")                 # all three touch the indicator slot (449, GY+1, 672)
+    C.sign(W, 447, C.GY, 676, ["LOCKDOWN", "lamps lit =", "lockdown ON", ""], rot=0)
+    log("launchers, security control")
     Q.build_quarters(W); Q.launch_pads(W); log("member quarters + launch pads, %d intrusion sensors" % Q.intrusion_sensors(W))
     n = WG.landscaping(W, rng); log("trees %d" % n)
     log("furnished quadrants %d" % FU.furnish(W)); log("light blocks %d" % FU.lights(W))
@@ -46,6 +62,12 @@ def main(out_dir):
                          "RIFTBREK Design",
                          "768x768x224 megabase: wall, citadel, 6 faction wings, plaza, B1-B12, command-block doors, sorter halls, "
                          "smelters, crafters, crop plots, rail+ice transit, wind-charge chambers. Moving blimp NOT implemented (static display).")
+    try:
+        import json
+        from .build_haven import HAVEN_TESTS
+        json.dump(HAVEN_TESTS, open(os.path.join(out_dir, "haven_tests_hq.json"), "w"), indent=1)
+    except Exception as e:
+        print("haven tests not written:", e)
     print("palette", len(W.palette), "bits", bits, "solid blocks", total, "tiles", len(W.tiles), "gates", len(C.GATES))
     return W, path
 

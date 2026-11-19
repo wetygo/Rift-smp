@@ -1005,6 +1005,7 @@ Macro functions take a compound argument. Use exact Minecraft names; the player 
 | `riftbrek:mail/room_9_slot_6` | command-block only |
 | `riftbrek:mail/room_9_slot_7` | command-block only |
 | `riftbrek:mail/room_9_slot_8` | command-block only |
+| `riftbrek:monitor/lockdown_lamp` | internal - do not call by hand |
 | `riftbrek:msg/_hist_faction` | public (player/OP) |
 | `riftbrek:msg/_hist_iter` | public (player/OP) |
 | `riftbrek:msg/announce` | public (player/OP) |

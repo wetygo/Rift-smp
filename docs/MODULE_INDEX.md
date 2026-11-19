@@ -20,15 +20,18 @@ Ground surface (first walkable layer) is local y = 96 = world y 32.
 | B11 | y 8 (world -56) |
 | B12 | y 0 (world -64) |
 
-## command blocks: `admin/` (2)
+## command blocks: `admin/` (4)
 | function | local x,y,z | world offset (y-64) |
 |---|---|---|
+| `admin/lockdown_off` | 436, 97, 666 | +436, 33, +666 |
 | `admin/lockdown_off` | 520, 99, 583 | +520, 35, +583 |
+| `admin/lockdown_on` | 432, 97, 666 | +432, 33, +666 |
 | `admin/lockdown_on` | 519, 99, 583 | +519, 35, +583 |
 
-## command blocks: `alarm/` (62)
+## command blocks: `alarm/` (64)
 | function | local x,y,z | world offset (y-64) |
 |---|---|---|
+| `alarm/all` | 440, 97, 666 | +440, 33, +666 |
 | `alarm/all` | 517, 99, 583 | +517, 35, +583 |
 | `alarm/emergency_1 with storage cfg origin` | 489, 97, 576 | +489, 33, +576 |
 | `alarm/emergency_10 with storage cfg origin` | 525, 103, 576 | +525, 39, +576 |
@@ -68,6 +71,7 @@ Ground surface (first walkable layer) is local y = 96 = world y 32.
 | `alarm/intrusion` | 749, 96, 250 | +749, 32, +250 |
 | `alarm/intrusion` | 749, 96, 520 | +749, 32, +520 |
 | `alarm/intrusion` | 749, 96, 690 | +749, 32, +690 |
+| `alarm/reset` | 444, 97, 666 | +444, 33, +666 |
 | `alarm/reset` | 518, 99, 583 | +518, 35, +583 |
 | `alarm/room_1 with storage cfg origin` | 515, 97, 583 | +515, 33, +583 |
 | `alarm/room_10 with storage cfg origin` | 524, 97, 583 | +524, 33, +583 |
@@ -98,13 +102,14 @@ Ground surface (first walkable layer) is local y = 96 = world y 32.
 | `blimp/fleet_tick_all` | 250, 275, 480 | +250, 211, +480 |
 | `blimp/tick` | 250, 275, 110 | +250, 211, +110 |
 
-## command blocks: `door/` (22)
+## command blocks: `door/` (23)
 | function | local x,y,z | world offset (y-64) |
 |---|---|---|
 | `door/abstracters_w12` | 625, 99, 300 | +625, 35, +300 |
 | `door/archivist_w12` | 121, 99, 273 | +121, 35, +273 |
 | `door/leader` | 514, 99, 583 | +514, 35, +583 |
 | `door/leader_w6` | 381, 92, 450 | +381, 28, +450 |
+| `door/leader_w6` | 436, 99, 678 | +436, 35, +678 |
 | `door/member` | 34, 99, 381 | +34, 35, +381 |
 | `door/member` | 519, 99, 569 | +519, 35, +569 |
 | `door/member` | 733, 99, 381 | +733, 35, +381 |
@@ -196,6 +201,11 @@ Ground surface (first walkable layer) is local y = 96 = world y 32.
 | `mail/room_7` | 488, 102, 573 | +488, 38, +573 |
 | `mail/room_8` | 500, 102, 573 | +500, 38, +573 |
 | `mail/room_9` | 512, 102, 573 | +512, 38, +573 |
+
+## command blocks: `monitor/` (1)
+| function | local x,y,z | world offset (y-64) |
+|---|---|---|
+| `monitor/lockdown_lamp` | 449, 96, 672 | +449, 32, +672 |
 
 ## command blocks: `msg/` (17)
 | function | local x,y,z | world offset (y-64) |

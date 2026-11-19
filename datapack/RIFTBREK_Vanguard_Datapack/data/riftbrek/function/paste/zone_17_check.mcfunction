@@ -357,37 +357,37 @@ scoreboard players add #TOT rb_p 1
 execute if score #c rb_p matches 3 run scoreboard players add #OK rb_p 1
 execute unless score #c rb_p matches 3 run data modify storage riftbrek:paste miss append value {c:"3,35"}
 scoreboard players set #c rb_p 0
-$execute positioned $(x) 31 $(z) if block ~72 ~ ~568 minecraft:deepslate_tiles run scoreboard players add #c rb_p 1
+$execute positioned $(x) 31 $(z) if block ~72 ~ ~568 minecraft:redstone_lamp run scoreboard players add #c rb_p 1
 $execute positioned $(x) -44 $(z) if block ~72 ~ ~568 minecraft:deepslate run scoreboard players add #c rb_p 1
-$execute positioned $(x) 67 $(z) if block ~67 ~ ~561 minecraft:deepslate_tiles run scoreboard players add #c rb_p 1
+$execute positioned $(x) 67 $(z) if block ~76 ~ ~560 minecraft:deepslate_tiles run scoreboard players add #c rb_p 1
 scoreboard players add #TOT rb_p 1
 execute if score #c rb_p matches 3 run scoreboard players add #OK rb_p 1
 execute unless score #c rb_p matches 3 run data modify storage riftbrek:paste miss append value {c:"4,35"}
 scoreboard players set #c rb_p 0
 $execute positioned $(x) 31 $(z) if block ~88 ~ ~568 minecraft:deepslate_tiles run scoreboard players add #c rb_p 1
 $execute positioned $(x) -44 $(z) if block ~88 ~ ~568 minecraft:deepslate run scoreboard players add #c rb_p 1
-$execute positioned $(x) 67 $(z) if block ~90 ~ ~571 minecraft:deepslate_tiles run scoreboard players add #c rb_p 1
+$execute positioned $(x) 67 $(z) if block ~90 ~ ~560 minecraft:deepslate_tiles run scoreboard players add #c rb_p 1
 scoreboard players add #TOT rb_p 1
 execute if score #c rb_p matches 3 run scoreboard players add #OK rb_p 1
 execute unless score #c rb_p matches 3 run data modify storage riftbrek:paste miss append value {c:"5,35"}
 scoreboard players set #c rb_p 0
 $execute positioned $(x) 31 $(z) if block ~104 ~ ~568 minecraft:deepslate_tiles run scoreboard players add #c rb_p 1
 $execute positioned $(x) -44 $(z) if block ~104 ~ ~568 minecraft:deepslate run scoreboard players add #c rb_p 1
-$execute positioned $(x) 67 $(z) if block ~111 ~ ~575 minecraft:deepslate_tiles run scoreboard players add #c rb_p 1
+$execute positioned $(x) 67 $(z) if block ~108 ~ ~573 minecraft:deepslate_tiles run scoreboard players add #c rb_p 1
 scoreboard players add #TOT rb_p 1
 execute if score #c rb_p matches 3 run scoreboard players add #OK rb_p 1
 execute unless score #c rb_p matches 3 run data modify storage riftbrek:paste miss append value {c:"6,35"}
 scoreboard players set #c rb_p 0
 $execute positioned $(x) 31 $(z) if block ~120 ~ ~568 minecraft:deepslate_tiles run scoreboard players add #c rb_p 1
 $execute positioned $(x) -44 $(z) if block ~120 ~ ~568 minecraft:deepslate run scoreboard players add #c rb_p 1
-$execute positioned $(x) 67 $(z) if block ~115 ~ ~561 minecraft:deepslate_tiles run scoreboard players add #c rb_p 1
+$execute positioned $(x) 67 $(z) if block ~115 ~ ~560 minecraft:deepslate_tiles run scoreboard players add #c rb_p 1
 scoreboard players add #TOT rb_p 1
 execute if score #c rb_p matches 3 run scoreboard players add #OK rb_p 1
 execute unless score #c rb_p matches 3 run data modify storage riftbrek:paste miss append value {c:"7,35"}
 scoreboard players set #c rb_p 0
 $execute positioned $(x) 31 $(z) if block ~136 ~ ~568 minecraft:deepslate_tiles run scoreboard players add #c rb_p 1
 $execute positioned $(x) -44 $(z) if block ~136 ~ ~568 minecraft:deepslate run scoreboard players add #c rb_p 1
-$execute positioned $(x) 67 $(z) if block ~138 ~ ~571 minecraft:deepslate_tiles run scoreboard players add #c rb_p 1
+$execute positioned $(x) 67 $(z) if block ~143 ~ ~575 minecraft:deepslate_tiles run scoreboard players add #c rb_p 1
 scoreboard players add #TOT rb_p 1
 execute if score #c rb_p matches 3 run scoreboard players add #OK rb_p 1
 execute unless score #c rb_p matches 3 run data modify storage riftbrek:paste miss append value {c:"8,35"}
@@ -467,14 +467,14 @@ execute unless score #c rb_p matches 3 run data modify storage riftbrek:paste mi
 scoreboard players set #c rb_p 0
 $execute positioned $(x) 31 $(z) if block ~72 ~ ~584 minecraft:deepslate_tiles run scoreboard players add #c rb_p 1
 $execute positioned $(x) -44 $(z) if block ~72 ~ ~584 minecraft:deepslate run scoreboard players add #c rb_p 1
-$execute positioned $(x) 67 $(z) if block ~66 ~ ~576 minecraft:deepslate_tiles run scoreboard players add #c rb_p 1
+$execute positioned $(x) 67 $(z) if block ~65 ~ ~576 minecraft:deepslate_tiles run scoreboard players add #c rb_p 1
 scoreboard players add #TOT rb_p 1
 execute if score #c rb_p matches 3 run scoreboard players add #OK rb_p 1
 execute unless score #c rb_p matches 3 run data modify storage riftbrek:paste miss append value {c:"4,36"}
 scoreboard players set #c rb_p 0
 $execute positioned $(x) 31 $(z) if block ~88 ~ ~584 minecraft:deepslate_tiles run scoreboard players add #c rb_p 1
 $execute positioned $(x) -44 $(z) if block ~88 ~ ~584 minecraft:deepslate run scoreboard players add #c rb_p 1
-$execute positioned $(x) 67 $(z) if block ~82 ~ ~576 minecraft:deepslate_tiles run scoreboard players add #c rb_p 1
+$execute positioned $(x) 67 $(z) if block ~80 ~ ~586 minecraft:deepslate_tiles run scoreboard players add #c rb_p 1
 scoreboard players add #TOT rb_p 1
 execute if score #c rb_p matches 3 run scoreboard players add #OK rb_p 1
 execute unless score #c rb_p matches 3 run data modify storage riftbrek:paste miss append value {c:"5,36"}
@@ -488,14 +488,14 @@ execute unless score #c rb_p matches 3 run data modify storage riftbrek:paste mi
 scoreboard players set #c rb_p 0
 $execute positioned $(x) 31 $(z) if block ~120 ~ ~584 minecraft:deepslate_tiles run scoreboard players add #c rb_p 1
 $execute positioned $(x) -44 $(z) if block ~120 ~ ~584 minecraft:deepslate run scoreboard players add #c rb_p 1
-$execute positioned $(x) 67 $(z) if block ~114 ~ ~576 minecraft:deepslate_tiles run scoreboard players add #c rb_p 1
+$execute positioned $(x) 67 $(z) if block ~124 ~ ~589 minecraft:deepslate_tiles run scoreboard players add #c rb_p 1
 scoreboard players add #TOT rb_p 1
 execute if score #c rb_p matches 3 run scoreboard players add #OK rb_p 1
 execute unless score #c rb_p matches 3 run data modify storage riftbrek:paste miss append value {c:"7,36"}
 scoreboard players set #c rb_p 0
 $execute positioned $(x) 31 $(z) if block ~136 ~ ~584 minecraft:deepslate_tiles run scoreboard players add #c rb_p 1
 $execute positioned $(x) -44 $(z) if block ~136 ~ ~584 minecraft:deepslate run scoreboard players add #c rb_p 1
-$execute positioned $(x) 67 $(z) if block ~130 ~ ~576 minecraft:deepslate_tiles run scoreboard players add #c rb_p 1
+$execute positioned $(x) 67 $(z) if block ~143 ~ ~591 minecraft:deepslate_tiles run scoreboard players add #c rb_p 1
 scoreboard players add #TOT rb_p 1
 execute if score #c rb_p matches 3 run scoreboard players add #OK rb_p 1
 execute unless score #c rb_p matches 3 run data modify storage riftbrek:paste miss append value {c:"8,36"}
@@ -636,9 +636,10 @@ execute unless score #c rb_p matches 2 run data modify storage riftbrek:paste mi
 scoreboard players set #c rb_p 0
 $execute positioned $(x) 31 $(z) if block ~216 ~ ~600 minecraft:grass_block run scoreboard players add #c rb_p 1
 $execute positioned $(x) -44 $(z) if block ~216 ~ ~600 minecraft:deepslate run scoreboard players add #c rb_p 1
+$execute positioned $(x) 38 $(z) if block ~213 ~ ~598 minecraft:spruce_log run scoreboard players add #c rb_p 1
 scoreboard players add #TOT rb_p 1
-execute if score #c rb_p matches 2 run scoreboard players add #OK rb_p 1
-execute unless score #c rb_p matches 2 run data modify storage riftbrek:paste miss append value {c:"13,37"}
+execute if score #c rb_p matches 3 run scoreboard players add #OK rb_p 1
+execute unless score #c rb_p matches 3 run data modify storage riftbrek:paste miss append value {c:"13,37"}
 scoreboard players set #c rb_p 0
 $execute positioned $(x) 31 $(z) if block ~232 ~ ~600 minecraft:grass_block run scoreboard players add #c rb_p 1
 $execute positioned $(x) -44 $(z) if block ~232 ~ ~600 minecraft:deepslate run scoreboard players add #c rb_p 1
@@ -674,7 +675,7 @@ execute unless score #c rb_p matches 2 run data modify storage riftbrek:paste mi
 scoreboard players set #c rb_p 0
 $execute positioned $(x) 31 $(z) if block ~56 ~ ~616 minecraft:grass_block run scoreboard players add #c rb_p 1
 $execute positioned $(x) -44 $(z) if block ~56 ~ ~616 minecraft:deepslate run scoreboard players add #c rb_p 1
-$execute positioned $(x) 37 $(z) if block ~54 ~ ~608 minecraft:spruce_log run scoreboard players add #c rb_p 1
+$execute positioned $(x) 37 $(z) if block ~54 ~ ~608 minecraft:cherry_log run scoreboard players add #c rb_p 1
 scoreboard players add #TOT rb_p 1
 execute if score #c rb_p matches 3 run scoreboard players add #OK rb_p 1
 execute unless score #c rb_p matches 3 run data modify storage riftbrek:paste miss append value {c:"3,38"}
@@ -827,7 +828,7 @@ execute unless score #c rb_p matches 2 run data modify storage riftbrek:paste mi
 scoreboard players set #c rb_p 0
 $execute positioned $(x) 31 $(z) if block ~200 ~ ~632 minecraft:grass_block run scoreboard players add #c rb_p 1
 $execute positioned $(x) -44 $(z) if block ~200 ~ ~632 minecraft:deepslate run scoreboard players add #c rb_p 1
-$execute positioned $(x) 39 $(z) if block ~194 ~ ~633 minecraft:spruce_log run scoreboard players add #c rb_p 1
+$execute positioned $(x) 39 $(z) if block ~194 ~ ~633 minecraft:cherry_log run scoreboard players add #c rb_p 1
 scoreboard players add #TOT rb_p 1
 execute if score #c rb_p matches 3 run scoreboard players add #OK rb_p 1
 execute unless score #c rb_p matches 3 run data modify storage riftbrek:paste miss append value {c:"12,39"}
@@ -1100,7 +1101,7 @@ execute unless score #c rb_p matches 2 run data modify storage riftbrek:paste mi
 scoreboard players set #c rb_p 0
 $execute positioned $(x) 31 $(z) if block ~136 ~ ~680 minecraft:grass_block run scoreboard players add #c rb_p 1
 $execute positioned $(x) -44 $(z) if block ~136 ~ ~680 minecraft:deepslate run scoreboard players add #c rb_p 1
-$execute positioned $(x) 40 $(z) if block ~128 ~ ~675 minecraft:spruce_log run scoreboard players add #c rb_p 1
+$execute positioned $(x) 40 $(z) if block ~128 ~ ~675 minecraft:cherry_log run scoreboard players add #c rb_p 1
 scoreboard players add #TOT rb_p 1
 execute if score #c rb_p matches 3 run scoreboard players add #OK rb_p 1
 execute unless score #c rb_p matches 3 run data modify storage riftbrek:paste miss append value {c:"8,42"}
@@ -1227,7 +1228,7 @@ execute unless score #c rb_p matches 2 run data modify storage riftbrek:paste mi
 scoreboard players set #c rb_p 0
 $execute positioned $(x) 31 $(z) if block ~200 ~ ~696 minecraft:grass_block run scoreboard players add #c rb_p 1
 $execute positioned $(x) -44 $(z) if block ~200 ~ ~696 minecraft:deepslate run scoreboard players add #c rb_p 1
-$execute positioned $(x) 39 $(z) if block ~207 ~ ~693 minecraft:spruce_log run scoreboard players add #c rb_p 1
+$execute positioned $(x) 39 $(z) if block ~207 ~ ~693 minecraft:cherry_log run scoreboard players add #c rb_p 1
 scoreboard players add #TOT rb_p 1
 execute if score #c rb_p matches 3 run scoreboard players add #OK rb_p 1
 execute unless score #c rb_p matches 3 run data modify storage riftbrek:paste miss append value {c:"12,43"}
@@ -1280,7 +1281,7 @@ execute unless score #c rb_p matches 2 run data modify storage riftbrek:paste mi
 scoreboard players set #c rb_p 0
 $execute positioned $(x) 31 $(z) if block ~72 ~ ~712 minecraft:grass_block run scoreboard players add #c rb_p 1
 $execute positioned $(x) -44 $(z) if block ~72 ~ ~712 minecraft:deepslate run scoreboard players add #c rb_p 1
-$execute positioned $(x) 40 $(z) if block ~78 ~ ~718 minecraft:spruce_log run scoreboard players add #c rb_p 1
+$execute positioned $(x) 40 $(z) if block ~78 ~ ~718 minecraft:cherry_log run scoreboard players add #c rb_p 1
 scoreboard players add #TOT rb_p 1
 execute if score #c rb_p matches 3 run scoreboard players add #OK rb_p 1
 execute unless score #c rb_p matches 3 run data modify storage riftbrek:paste miss append value {c:"4,44"}

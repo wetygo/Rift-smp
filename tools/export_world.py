@@ -88,9 +88,20 @@ def chunk_nbt(cx, cz, world, gpal, tiles_by_chunk, acx=None, acz=None):
         if data is not None:
             bs["data"] = data
         secs.append({"Y": Byte(sy - 4), "block_states": bs, "biomes": {"palette": ["minecraft:plains"]}})
+    tes = tiles_by_chunk.get((acx, acz), [])
+    # a repeating command block only runs after a scheduled tick exists; a pasted/exported chunk has none, so every always-on command block
+    # (doors, sorters, blimp, kit pads ...) would stay dormant until something re-places it. Save the tick the game itself would have saved.
+    ticks = []
+    for t in tes:
+        if t.get("id") == "minecraft:command_block" and int(t.get("auto", 0)):
+            lx, lz, ly = t["x"] - acx * 16, t["z"] - acz * 16, t["y"] - WORLD_Y0
+            if 0 <= ly < world.shape[0]:
+                nm = gpal[int(world[ly, cz * 16 + lz, cx * 16 + lx])][0]
+                if nm == "minecraft:repeating_command_block":
+                    ticks.append({"i": nm, "p": 0, "t": 1, "x": t["x"], "y": t["y"], "z": t["z"]})
     return {"DataVersion": DV, "xPos": acx, "zPos": acz, "yPos": -4, "Status": "minecraft:full", "LastUpdate": Long(0),
-            "InhabitedTime": Long(0), "isLightOn": Byte(0), "sections": secs, "block_entities": tiles_by_chunk.get((acx, acz), []),
-            "structures": {"References": {}, "starts": {}}, "fluid_ticks": [], "block_ticks": [],
+            "InhabitedTime": Long(0), "isLightOn": Byte(0), "sections": secs, "block_entities": tes,
+            "structures": {"References": {}, "starts": {}}, "fluid_ticks": [], "block_ticks": ticks,
             "PostProcessing": [[] for _ in range(24)]}
 
 
