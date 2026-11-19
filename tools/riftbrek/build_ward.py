@@ -23,7 +23,7 @@ STRIPS = {"N": (0, 0, 2304, 384), "S": (0, 1152, 2304, 384), "W": (0, 384, 384, 
 WARD_TESTS = []
 BUILDINGS = []        # (strip, label, kind, x0, z0, x1, z1, floors) for docs
 ROAD = "minecraft:gray_concrete"
-STYLE = {"barracks": "barracks", "academy": "office", "armory": "noble", "infirmary": "lounge", "courts": "office", "guest": "lounge",
+STYLE = {"center": "office", "barracks": "barracks", "academy": "office", "armory": "noble", "infirmary": "lounge", "courts": "office", "guest": "lounge",
          "mess": "noble", "stables": "barracks", "workshop": "noble", "market": "noble", "archive": "office", "dorm": "barracks", "haven": "office",
          "granary": "noble", "embassy": "lounge", "observatory": "office"}
 
@@ -87,7 +87,7 @@ def building(W, strip, label, kind, x0, z0, x1, z1, floors, fh, face, tier, line
     gx = cx - 3
     for f in range(floors):
         y = GY + f * fh
-        if kind != "haven" or f > 0:
+        if kind not in ("haven", "center") or (kind == "haven" and f > 0) or (kind == "center" and f > 1):
             partitions(W, x0 + 3, z0 + 3, x1 - 3, z1 - 3, y, h=fh - 1, pitch=12, wall=BRK, gap=4, gh=4)
         lattice_lights(W, x0 + 3, z0 + 3, x1 - 3, z1 - 3, y + fh - 1, step=6, off=3)
         windows_ring(W, x0, z0, x1, z1, y + 3, h=4, glass=PG, step=6, wd=3, skip=[(gx - 2, gx + 8, z0 if face == "north" else z1)] if f == 0 else [])
@@ -117,7 +117,7 @@ def building(W, strip, label, kind, x0, z0, x1, z1, floors, fh, face, tier, line
     yy = GY
     lz = (z1 - 8) if face == "south" else (z0 + 8)
     for f in range(min(floors, 3)):
-        if kind == "haven" and f == 0:
+        if kind in ("haven", "center") and f <= (1 if kind == "center" else 0):
             continue
         t = lamp_line(W, x0 + 6, lz + (0 if f == 0 else 2), GY + f * fh, n=12, name="%s L%d" % (label[:10], f + 1))
         WARD_TESTS.append(dict(strip=strip, name=f"{label} lamp line floor {f + 1}", **t))
@@ -136,7 +136,17 @@ def build_strip(strip, rng, specs, extra):
         (label, kind, x0, z0, x1, z1, floors, fh, face, tier) = sp
         lines = [label.upper()[:15], kind.title(), tier + " tier", "ward " + strip]
         building(W, strip, label, kind, x0, z0, x1, z1, floors, fh, face, tier, lines)
-        if kind == "haven":
+        if kind == "center":
+            from . import build_redcenter as RC
+            HV.HAVEN_TESTS.clear()
+            HV.haven(W, x0 + 6, z0 + 6, x1 - 6, z1 - 6)
+            sign(W, x0 + 6, GY, z1 - 4, ["REDSTONE CENTER", "floor 1: Haven", "floor 2: builds", "no command blocks"], rot=0, color="red")
+            WARD_TESTS.append(dict(strip=strip, name=label + " haven", kind="haven", tests=json.loads(json.dumps(HV.HAVEN_TESTS, default=list))))
+            RC.RC_TESTS.clear()
+            RC.redcenter(W, x0 + 4, z0 + 4, x1 - 4, z1 - 4, GY + fh, GY + floors * fh)
+            WARD_TESTS.append(dict(strip=strip, name=label + " builds", kind="redcenter", tests=json.loads(json.dumps(RC.RC_TESTS, default=list))))
+            haven_sh.append((x0, z0))
+        elif kind == "haven":
             HV.HAVEN_TESTS.clear()
             HV.haven(W, x0 + 6, z0 + 6, x1 - 6, z1 - 6)
             sign(W, x0 + 6, GY, z1 - 4 if face == "south" else z0 + 4, ["REDSTONE WORKS", "ward " + strip, "real redstone", "no command blocks"], rot=0, color="red")
@@ -165,7 +175,7 @@ STYLE_BY_POS = {}
 def specs_for(strip):
     out = []
     kinds_n = [("Grand Barracks", "barracks", 4, 11, "member"), ("Academy of Arms", "academy", 5, 11, "public"), ("Armory and Forge", "armory", 3, 12, "leader"),
-               ("Infirmary and Alchemy", "infirmary", 4, 11, "public"), ("Redstone Works N", "haven", 2, 12, "public"), ("Courts and Records", "courts", 5, 11, "member"),
+               ("Infirmary and Alchemy", "infirmary", 4, 11, "public"), ("REDSTONE CENTER", "center", 3, 12, "public"), ("Courts and Records", "courts", 5, 11, "member"),
                ("Embassy and Guest Hall", "guest", 4, 11, "public"), ("Mess Hall and Kitchens", "mess", 3, 11, "public"), ("Great Workshops", "workshop", 4, 11, "member")]
     kinds_s = [("Market Hall", "market", 3, 11, "public"), ("Granary and Stores", "granary", 4, 11, "member"), ("Stables", "stables", 2, 12, "public"),
                ("Redstone Works S", "haven", 2, 12, "public"), ("Observatory", "observatory", 6, 11, "member"), ("Guild Hall", "courts", 4, 11, "public"),
