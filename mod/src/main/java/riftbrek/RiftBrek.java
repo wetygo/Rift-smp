@@ -35,6 +35,8 @@ public class RiftBrek implements ModInitializer {
     private static boolean autoForceload = true;
     private static int cityX = 12288, cityZ = 8192;      // Ithaca City origin (world X/Z of its local 0,0)
     private static boolean autoCity = true;
+    private static int pipeX = 7936, pipeZ = 7936;          // The Pipeline (wall around HQ + Ithaca)
+    private static int mainX = -1824, mainZ = 288;          // The Pipeline around your main base
 
     private static Path cfgPath() { return FabricLoader.getInstance().getConfigDir().resolve("riftbrek.properties"); }
 
@@ -46,6 +48,10 @@ public class RiftBrek implements ModInitializer {
         pr.setProperty("cityX", Integer.toString(cityX));
         pr.setProperty("cityZ", Integer.toString(cityZ));
         pr.setProperty("autoCity", Boolean.toString(autoCity));
+        pr.setProperty("pipeX", Integer.toString(pipeX));
+        pr.setProperty("pipeZ", Integer.toString(pipeZ));
+        pr.setProperty("mainX", Integer.toString(mainX));
+        pr.setProperty("mainZ", Integer.toString(mainZ));
         try (var out = Files.newOutputStream(cfgPath())) {
             pr.store(out, "RIFTBREK: world X/Z where the base was pasted (schematic local 0,0). Must match the region files you installed.");
         } catch (Exception e) {
@@ -65,6 +71,10 @@ public class RiftBrek implements ModInitializer {
                 cityX = Integer.parseInt(pr.getProperty("cityX", "12288").trim());
                 cityZ = Integer.parseInt(pr.getProperty("cityZ", "8192").trim());
                 autoCity = Boolean.parseBoolean(pr.getProperty("autoCity", "true").trim());
+                pipeX = Integer.parseInt(pr.getProperty("pipeX", "7936").trim());
+                pipeZ = Integer.parseInt(pr.getProperty("pipeZ", "7936").trim());
+                mainX = Integer.parseInt(pr.getProperty("mainX", "-1824").trim());
+                mainZ = Integer.parseInt(pr.getProperty("mainZ", "288").trim());
             } else {
                 saveConfig();
             }
@@ -203,6 +213,8 @@ public class RiftBrek implements ModInitializer {
                         }))))
                 .then(Commands.literal("verify")
                     .executes(ctx -> verify(ctx.getSource(), "/riftbrek_probes.json", originX, originZ, "RIFTBREK HQ"))
-                    .then(Commands.literal("city").executes(ctx -> verify(ctx.getSource(), "/riftbrek_city_probes.json", cityX, cityZ, "Ithaca City"))))));
+                    .then(Commands.literal("city").executes(ctx -> verify(ctx.getSource(), "/riftbrek_city_probes.json", cityX, cityZ, "Ithaca City")))
+                    .then(Commands.literal("pipeline").executes(ctx -> verify(ctx.getSource(), "/riftbrek_pipeline_probes.json", pipeX, pipeZ, "The Pipeline (HQ + Ithaca)")))
+                    .then(Commands.literal("mainwall").executes(ctx -> verify(ctx.getSource(), "/riftbrek_mainwall_probes.json", mainX, mainZ, "The Pipeline (main base)"))))));
     }
 }

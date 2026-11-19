@@ -1,0 +1,51 @@
+[
+ {
+  "label": "north gate outer checkpoint",
+  "x": 122,
+  "y": 80,
+  "z": 3,
+  "block": "minecraft:repeating_command_block"
+ },
+ {
+  "label": "south gate outer checkpoint",
+  "x": 122,
+  "y": 80,
+  "z": 300,
+  "block": "minecraft:repeating_command_block"
+ },
+ {
+  "label": "west gate outer checkpoint",
+  "x": 3,
+  "y": 80,
+  "z": 146,
+  "block": "minecraft:repeating_command_block"
+ },
+ {
+  "label": "east gate outer checkpoint",
+  "x": 252,
+  "y": 80,
+  "z": 146,
+  "block": "minecraft:repeating_command_block"
+ },
+ {
+  "label": "rail corner north-west",
+  "x": 8,
+  "y": 149,
+  "z": 8,
+  "block": "minecraft:rail"
+ },
+ {
+  "label": "powered rail on the north wall",
+  "x": 30,
+  "y": 149,
+  "z": 8,
+  "block": "minecraft:powered_rail"
+ },
+ {
+  "label": "north tower spire lamp",
+  "x": 8,
+  "y": 195,
+  "z": 7,
+  "block": "minecraft:sea_lantern"
+ }
+]
