@@ -562,6 +562,14 @@ Macro functions take a compound argument. Use exact Minecraft names; the player 
 | `riftbrek:admin/blimp_off` | public (player/OP) |
 | `riftbrek:admin/blimp_on` | public (player/OP) |
 | `riftbrek:admin/board_refresh` | public (player/OP) |
+| `riftbrek:admin/fleet_off` | internal - do not call by hand |
+| `riftbrek:admin/fleet_off_a` | internal - do not call by hand |
+| `riftbrek:admin/fleet_off_b` | internal - do not call by hand |
+| `riftbrek:admin/fleet_off_c` | internal - do not call by hand |
+| `riftbrek:admin/fleet_on` | internal - do not call by hand |
+| `riftbrek:admin/fleet_on_a` | internal - do not call by hand |
+| `riftbrek:admin/fleet_on_b` | internal - do not call by hand |
+| `riftbrek:admin/fleet_on_c` | internal - do not call by hand |
 | `riftbrek:admin/forceload` | public (player/OP) |
 | `riftbrek:admin/forceload_do` | internal - do not call by hand |
 | `riftbrek:admin/forceload_off` | public (player/OP) |
@@ -645,6 +653,28 @@ Macro functions take a compound argument. Use exact Minecraft names; the player 
 | `riftbrek:alarm/room_8` | command-block only |
 | `riftbrek:alarm/room_9` | command-block only |
 | `riftbrek:blimp/board` | internal - do not call by hand |
+| `riftbrek:blimp/fleet_a0_tick` | internal - do not call by hand |
+| `riftbrek:blimp/fleet_a1_tick` | internal - do not call by hand |
+| `riftbrek:blimp/fleet_a2_tick` | internal - do not call by hand |
+| `riftbrek:blimp/fleet_a3_tick` | internal - do not call by hand |
+| `riftbrek:blimp/fleet_a_off` | internal - do not call by hand |
+| `riftbrek:blimp/fleet_a_on` | internal - do not call by hand |
+| `riftbrek:blimp/fleet_a_tick` | internal - do not call by hand |
+| `riftbrek:blimp/fleet_b0_tick` | internal - do not call by hand |
+| `riftbrek:blimp/fleet_b1_tick` | internal - do not call by hand |
+| `riftbrek:blimp/fleet_b2_tick` | internal - do not call by hand |
+| `riftbrek:blimp/fleet_b3_tick` | internal - do not call by hand |
+| `riftbrek:blimp/fleet_b_off` | internal - do not call by hand |
+| `riftbrek:blimp/fleet_b_on` | internal - do not call by hand |
+| `riftbrek:blimp/fleet_b_tick` | internal - do not call by hand |
+| `riftbrek:blimp/fleet_c0_tick` | internal - do not call by hand |
+| `riftbrek:blimp/fleet_c1_tick` | internal - do not call by hand |
+| `riftbrek:blimp/fleet_c2_tick` | internal - do not call by hand |
+| `riftbrek:blimp/fleet_c3_tick` | internal - do not call by hand |
+| `riftbrek:blimp/fleet_c_off` | internal - do not call by hand |
+| `riftbrek:blimp/fleet_c_on` | internal - do not call by hand |
+| `riftbrek:blimp/fleet_c_tick` | internal - do not call by hand |
+| `riftbrek:blimp/fleet_tick_all` | internal - do not call by hand |
 | `riftbrek:blimp/left` | internal - do not call by hand |
 | `riftbrek:blimp/mount` | internal - do not call by hand |
 | `riftbrek:blimp/move_n` | internal - do not call by hand |

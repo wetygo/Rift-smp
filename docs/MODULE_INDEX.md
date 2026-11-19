@@ -92,9 +92,10 @@ Ground surface (first walkable layer) is local y = 96 = world y 32.
 | `alarm/room_8 with storage cfg origin` | 522, 97, 583 | +522, 33, +583 |
 | `alarm/room_9 with storage cfg origin` | 523, 97, 583 | +523, 33, +583 |
 
-## command blocks: `blimp/` (1)
+## command blocks: `blimp/` (2)
 | function | local x,y,z | world offset (y-64) |
 |---|---|---|
+| `blimp/fleet_tick_all` | 250, 275, 480 | +250, 211, +480 |
 | `blimp/tick` | 250, 275, 110 | +250, 211, +110 |
 
 ## command blocks: `door/` (22)

@@ -3,7 +3,7 @@
 **These are models and static replays, NOT a Minecraft run.** They show (1) why a normal Litematica paste of this schematic ends up partial, (2) that the zone-by-zone method covers 100 %, (3) that the data pack's probe functions detect exactly the missing chunks, (4) that the ready-made world files are block-for-block identical to the schematic. Throughput figures are *assumptions*, not measurements.
 
 ## 1. What has to be pasted
-- footprint 1920 x 384 x 768 blocks = 120 x 48 chunk grid, **5688 non-empty chunks**, 142,183,388 non-air blocks, 56,107 tile entities, 1419 entities.
+- footprint 1920 x 384 x 768 blocks = 120 x 48 chunk grid, **5688 non-empty chunks**, 142,183,389 non-air blocks, 56,108 tile entities, 1419 entities.
 - Litematica only places blocks in chunks the server has **loaded**. A player standing at the origin loads a square of (2R+1)^2 chunks (R = view/simulation distance).
 
 ## 2. Simulated Litematica paste standing still at the schematic origin / centre
@@ -37,7 +37,7 @@
 | 6 | 256 | 6,496,880 | 2.2 min | 0.5 min |
 | 7 | 256 | 6,486,251 | 2.2 min | 0.5 min |
 | 8 | 128 | 2,973,944 | 1.0 min | 0.2 min |
-| 9 | 256 | 6,290,308 | 2.1 min | 0.5 min |
+| 9 | 256 | 6,290,309 | 2.1 min | 0.5 min |
 | 10 | 256 | 5,478,157 | 1.8 min | 0.5 min |
 | 11 | 256 | 6,517,796 | 2.2 min | 0.5 min |
 | 12 | 256 | 6,384,655 | 2.1 min | 0.5 min |
@@ -85,17 +85,17 @@
 ## 6. Ready-made world files: independent read-back vs the master schematic
 ```
 region headers: 5738 chunk slots checked, 0 wrong
-chunks 5688/5688  sections 136512  block mismatches 0  tile entities 56107/56107 (bad 0, missing 0)  entities 1419/1419  [26s]
+chunks 5688/5688  sections 136512  block mismatches 0  tile entities 56108/56108 (bad 0, missing 0)  entities 1419/1419  [27s]
 RESULT: PASS - exported world is block-for-block identical to the master schematic
 ```
 
 ## 7. Data pack suites re-run now
 ```
-validate.py: functions: 763 lint errors: 0
+validate.py: functions: 793 lint errors: 0
 model_test.py: FAILED: 0
 ```
 
 ## 8. Still NOT verifiable here
 Behaviour inside the real game: that Minecraft accepts the region files without complaint (format follows the 1.21.11 chunk layout and was read back with a reader validated on a genuine 1.19.2 save), that command blocks/hoppers/redstone work, that imported builds work in 1.21.11, performance with ~1,900 blimp entities.
 
-_generated in 53s_
+_generated in 54s_

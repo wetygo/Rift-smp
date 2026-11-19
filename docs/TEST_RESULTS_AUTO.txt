@@ -1,9 +1,9 @@
-== build: 2026-11-19T01:17Z   (static analysis / model tests only - NOT run in Minecraft)
+== build: 2026-11-19T01:30Z   (static analysis / model tests only - NOT run in Minecraft)
 == validate
-shape/palette/tiles: ((384, 768, 768), 185, 571)
+shape/palette/tiles: ((384, 768, 768), 185, 572)
 datapack lint errors: 0
 schematic errors: 0  gate rows: 130
-{'ladder': 4195, 'iron_door': 268, 'hopper': 586, 'chest': 3245, 'dispenser': 30, 'furnace': 4, 'crafter': 6, 'command_blocks_ok': 196}
+{'ladder': 4195, 'iron_door': 268, 'hopper': 586, 'chest': 3245, 'dispenser': 30, 'furnace': 4, 'crafter': 6, 'command_blocks_ok': 197}
 consistency errors: 0 {'sorters': 2, 'doors': 22, 'farms': 4, 'pulses': 6}
 annex regions checked: 35  errors: 1
   OK   Annex - Ghast Hydration Facility (Wildezz) {'size': (352, 58, 464), 'palette': 955, 'tiles': 4773, 'entities': 0}

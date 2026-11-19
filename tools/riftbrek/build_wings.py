@@ -254,6 +254,8 @@ def blimp(W):
         sign(W, BLIMP_LANE_X + 3, my, mast_cz + 15, ["AERIAL DOCK " + nm, label, "4 berths: 2 parked", "+ 2 ship sockets"], rot=8, color="purple")
     # blimp controller (always-active command block) hidden under dock A's platform
     cmdblock(W, BLIMP_LANE_X, BLIMP_DOCK_Y - 1, BLIMP_DOCKS[0][1], "function riftbrek:blimp/tick")
+    # fleet controller (12 extra orbiting ships, admin/fleet_on*) - hidden under dock B's platform
+    cmdblock(W, BLIMP_LANE_X, BLIMP_DOCK_Y - 1, BLIMP_DOCKS[1][1], "function riftbrek:blimp/fleet_tick_all")
 
 
 

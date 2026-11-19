@@ -1,6 +1,7 @@
 """Command-driven machinery: sorter halls, crop plots, crafter pulses.
 Geometry constants are shared with the schematic builder so offsets always match."""
 from . import layout as L
+from . import build_wings as BW
 
 # ---- crop plots (B7 industrial level) ---------------------------------------------------------
 FARM_CROPS = {
@@ -177,6 +178,56 @@ def _blimp_summons():
     return out
 
 
+def blimp_fleet(P):
+    """12 extra Airlander-10 hulls, 4 per aerial dock, genuinely flying (not static): each continuously orbits its
+    own dock in a 16-point circle (no trig in commands, so the circle is precomputed here and baked into a lookup
+    of per-tick move deltas). Pure scenery ships - no boarding/seats, to keep 12x the complexity in check; the ONE
+    original dock-to-dock ship (blimp/*) is still the only rideable one. ~1,900 display entities x 12 = ~23,000
+    entities total if every ship is spawned: that WILL lag most servers (you asked for all 12, so this is built,
+    but start with just 1-2 docks' worth via admin/fleet_on_<dock> and watch your TPS before turning more on)."""
+    import math
+    R, STEPS = 50, 16
+    way = []
+    for i in range(STEPS):
+        a0 = 2 * math.pi * i / STEPS
+        a1 = 2 * math.pi * (i + 1) / STEPS
+        way.append((R * math.cos(a1) - R * math.cos(a0), R * math.sin(a1) - R * math.sin(a0)))
+    on_lines, off_lines = [], []
+    for (NM, dz, label) in BW.BLIMP_DOCKS:
+        nm = NM.lower()   # Minecraft resource paths must be lowercase; NM (A/B/C) stays only in player-facing text
+        on_lines.append(f"function riftbrek:blimp/fleet_{nm}_on")
+        off_lines.append(f"function riftbrek:blimp/fleet_{nm}_off")
+        fon, foff = [], []
+        for b in range(4):
+            tag = f"rb_fleet_{nm}{b}"
+            scb = f"#T_{nm}{b}"
+            phase = b * STEPS // 4
+            cx, cz = BW.BLIMP_LANE_X + int(round(R * math.cos(2 * math.pi * phase / STEPS))), dz + int(round(R * math.sin(2 * math.pi * phase / STEPS)))
+            fon.append(f"scoreboard players set {scb} rb_bl {phase}")
+            fon += [ln.replace('~ ~4.5 ~', f'{cx} ~{BW.BLIMP_DOCK_Y + 40}.5 {cz}').replace('"rb_blimp","rb_hull"', f'"rb_blimp","rb_fleet","{tag}"')
+                    for ln in _blimp_summons() if "rb_seat" not in ln]   # scenery only: hull boxes, no seats
+            foff.append(f"kill @e[tag={tag}]")
+            # per-step branches: every 4 ticks, advance one waypoint (slow, steady orbit - ~6.4s per lap)
+            branch = [f"execute if score {scb} rb_bl matches {4*(i+1)} as @e[tag={tag}] at @s run tp @s ~{dx:.3f} ~ ~{dz:.3f}"
+                      for i, (dx, dz) in enumerate(way)]
+            P.fn(f"blimp/fleet_{nm}{b}_tick", [f"scoreboard players add {scb} rb_bl 1"] + branch +
+                 [f"execute if score {scb} rb_bl matches {4*STEPS}.. run scoreboard players set {scb} rb_bl 0"])
+        P.fn(f"blimp/fleet_{nm}_on", ["# OP ONLY. Spawns 4 orbiting Airlander hulls at dock " + NM + " (~7,600 entities). Scenery only, not rideable."] + fon +
+             [f"scoreboard players set #FLEET_{nm} rb_bl 1"])
+        P.fn(f"blimp/fleet_{nm}_off", foff + [f"scoreboard players set #FLEET_{nm} rb_bl 0"])
+        P.fn(f"blimp/fleet_{nm}_tick", [f"execute if score #FLEET_{nm} rb_bl matches 1 run function riftbrek:blimp/fleet_{nm}0_tick",
+                                         f"execute if score #FLEET_{nm} rb_bl matches 1 run function riftbrek:blimp/fleet_{nm}1_tick",
+                                         f"execute if score #FLEET_{nm} rb_bl matches 1 run function riftbrek:blimp/fleet_{nm}2_tick",
+                                         f"execute if score #FLEET_{nm} rb_bl matches 1 run function riftbrek:blimp/fleet_{nm}3_tick"])
+    P.fn("admin/fleet_on", ["# OP ONLY. Spawns all 12 extra orbiting ships (all 3 docks) - ~23,000 entities on top of the 1 rideable ship. Watch your TPS."] + on_lines)
+    P.fn("admin/fleet_off", off_lines)
+    for (NM, dz, label) in BW.BLIMP_DOCKS:
+        nm = NM.lower()
+        P.fn(f"admin/fleet_on_{nm}", [f"function riftbrek:blimp/fleet_{nm}_on"])
+        P.fn(f"admin/fleet_off_{nm}", [f"function riftbrek:blimp/fleet_{nm}_off"])
+    P.fn("blimp/fleet_tick_all", [f"function riftbrek:blimp/fleet_{nm.lower()}_tick" for (nm, dz, label) in BW.BLIMP_DOCKS])
+
+
 def forceload(P):
     P.fn("admin/origin", ["# OP ONLY. Tell the pack where you pasted the schematic (world X/Z of local 0,0).  /function riftbrek:admin/origin {x:1000,z:-500}",
                            "$data modify storage riftbrek:cfg origin set value {x:$(x),z:$(z)}"])
@@ -230,6 +281,7 @@ def add(P):
     pulses(P)
     synth(P)
     blimp(P)
+    blimp_fleet(P)
     forceload(P)
     verify(P)
     from . import quarters_dp
