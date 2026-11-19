@@ -108,3 +108,10 @@ Barrier wall named "The Pipeline" (`docs/THE_PIPELINE.md`): ring 1 around the HQ
 - HQ now contains a Redstone Haven (nexus wing, local x70 z565, 29/29 live circuit tests: `dist/haven_tests_hq.json`), a security control room with a real lockdown lamp monitor, 4 wind-chicken launchers beside the blimp chambers, the 6-floor nexus, and the old base content unchanged.
 - **Found and fixed while testing:** (1) every previously exported region file had *dormant command blocks* (a repeating command block needs a scheduled tick; the exporter wrote none), so doors, sorters, the blimp controller and kit pads did nothing until re-triggered. Exporter now writes `block_ticks`; all shipped region files were regenerated. (2) Launchers: glass roof blocked the wind burst (see LAUNCHER.md); fixed and re-tested live in the HQ and Ithaca.
 - Blimps: live-tested earlier (spawn, move along the lane through all phases, passenger carried, ~5 ms/tick).
+
+## M. Enlarged HQ (2304 x 1536) - Outer Ward
+- 48 new multi-floor buildings in three strips around the original base (see docs/OUTER_WARD.md), each with command-block doors and real-redstone lamp lines; 3 full Redstone Works (Haven) halls. Region files exported block-for-block verified (8,064 chunks, 0 mismatches), merged with the original base and the Pipeline ring into ONE file set (tools/merge_regions.py, no chunk collisions).
+- Live test (real 1.21.11 server): ward gate command block runs; lamp line lights when its lever is flipped.
+- The Pipeline was enlarged (origin 7680, 5648 x 1808) to enclose the ward; mod 1.0.7 default pipeX/pipeZ = 7680.
+- Not live-tested: the three ward Haven halls (same module as the verified ones), walkability of the ward (no reach.py run), the annex is absent from the top-view render (render script limitation, the files contain it).
+- Not built: ward basements, farms, arena; ward buildings are plain boxes compared to the concept art.

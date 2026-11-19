@@ -35,7 +35,7 @@ public class RiftBrek implements ModInitializer {
     private static boolean autoForceload = true;
     private static int cityX = 12288, cityZ = 8192;      // Ithaca City origin (world X/Z of its local 0,0)
     private static boolean autoCity = true;
-    private static int pipeX = 7936, pipeZ = 7936;          // The Pipeline (wall around HQ + Ithaca)
+    private static int pipeX = 7680, pipeZ = 7680;          // The Pipeline (wall around HQ + Ithaca)
     private static int mainX = -1824, mainZ = 288;          // The Pipeline around your main base
 
     private static Path cfgPath() { return FabricLoader.getInstance().getConfigDir().resolve("riftbrek.properties"); }
@@ -71,8 +71,8 @@ public class RiftBrek implements ModInitializer {
                 cityX = Integer.parseInt(pr.getProperty("cityX", "12288").trim());
                 cityZ = Integer.parseInt(pr.getProperty("cityZ", "8192").trim());
                 autoCity = Boolean.parseBoolean(pr.getProperty("autoCity", "true").trim());
-                pipeX = Integer.parseInt(pr.getProperty("pipeX", "7936").trim());
-                pipeZ = Integer.parseInt(pr.getProperty("pipeZ", "7936").trim());
+                pipeX = Integer.parseInt(pr.getProperty("pipeX", "7680").trim());
+                pipeZ = Integer.parseInt(pr.getProperty("pipeZ", "7680").trim());
                 mainX = Integer.parseInt(pr.getProperty("mainX", "-1824").trim());
                 mainZ = Integer.parseInt(pr.getProperty("mainZ", "288").trim());
             } else {

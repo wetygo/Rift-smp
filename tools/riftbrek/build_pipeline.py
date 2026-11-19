@@ -1,6 +1,6 @@
 """THE PIPELINE - one continuous barrier wall around everything (the RIFTBREK HQ base and Ithaca City).
 
-Local frame: local (0,0) = world (PX, PZ) = (7936, 7936); y as in every other build (world y = local y - 64).
+Local frame: local (0,0) = world (PX, PZ) = (7680, 7680); y as in every other build (world y = local y - 64).
 The ring is LX x LZ blocks (outer faces), 16 thick, 71 high above the ground line, with
   * a walkway on top with a powered-rail minecart line running all the way round ("the Pipeline" itself)
   * a pipe-shaped band along the outer face (polished basalt with glowing flanges and lamps)
@@ -16,8 +16,8 @@ from . import build_common as C
 from .world import World
 from .build_ithaca import tower_round, gate_x, mixed
 
-PX = PZ = 7936
-LX, LZ, T = 5392, 1296, 16
+PX = PZ = 7680
+LX, LZ, T = 5648, 1808, 16
 SY = 384
 TOP = GY + 71                      # top of the solid wall / deck level
 PBAS = "minecraft:polished_basalt[axis=y]"
@@ -276,7 +276,7 @@ def save(R, path):
         regions["Pipeline " + {"N": "North", "S": "South", "W": "West", "E": "East"}[k]] = annex.pack_region(prep, position=(px, 0, pz))
         total += int(np.count_nonzero(W.a))
     annex.write_litematic(path, regions, "The Pipeline", "RIFTBREK Design",
-                          "5392x1296 ring wall (16 thick, 71 high) around the RIFTBREK HQ and Ithaca City, with a minecart rail line on top, 4 gatehouses and 78 towers. Origin: world X 7936, Z 7936.",
+                          "5648x1808 ring wall (16 thick, 71 high) around the RIFTBREK HQ and Ithaca City, with a minecart rail line on top, 4 gatehouses and 78 towers. Origin: world X 7680, Z 7680.",
                           total=total, enclosing=(LX, SY, LZ))
     return total
 
