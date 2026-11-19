@@ -33,6 +33,8 @@ public class RiftBrek implements ModInitializer {
     public static final Logger LOG = LoggerFactory.getLogger("riftbrek");
     private static int originX = 8192, originZ = 8192;
     private static boolean autoForceload = true;
+    private static int cityX = 12288, cityZ = 8192;      // Ithaca City origin (world X/Z of its local 0,0)
+    private static boolean autoCity = true;
 
     private static Path cfgPath() { return FabricLoader.getInstance().getConfigDir().resolve("riftbrek.properties"); }
 
@@ -41,6 +43,9 @@ public class RiftBrek implements ModInitializer {
         pr.setProperty("originX", Integer.toString(originX));
         pr.setProperty("originZ", Integer.toString(originZ));
         pr.setProperty("autoForceload", Boolean.toString(autoForceload));
+        pr.setProperty("cityX", Integer.toString(cityX));
+        pr.setProperty("cityZ", Integer.toString(cityZ));
+        pr.setProperty("autoCity", Boolean.toString(autoCity));
         try (var out = Files.newOutputStream(cfgPath())) {
             pr.store(out, "RIFTBREK: world X/Z where the base was pasted (schematic local 0,0). Must match the region files you installed.");
         } catch (Exception e) {
@@ -57,6 +62,9 @@ public class RiftBrek implements ModInitializer {
                 originX = Integer.parseInt(pr.getProperty("originX", "8192").trim());
                 originZ = Integer.parseInt(pr.getProperty("originZ", "8192").trim());
                 autoForceload = Boolean.parseBoolean(pr.getProperty("autoForceload", "true").trim());
+                cityX = Integer.parseInt(pr.getProperty("cityX", "12288").trim());
+                cityZ = Integer.parseInt(pr.getProperty("cityZ", "8192").trim());
+                autoCity = Boolean.parseBoolean(pr.getProperty("autoCity", "true").trim());
             } else {
                 saveConfig();
             }
@@ -95,17 +103,23 @@ public class RiftBrek implements ModInitializer {
         } catch (Exception e) { LOG.warn("could not write riftbrek_forceloads.json: {}", e.toString()); }
     }
 
-    private static LongOpenHashSet wantedChunks() throws Exception {
-        LongOpenHashSet want = new LongOpenHashSet();
-        try (var in = RiftBrek.class.getResourceAsStream("/riftbrek_forceload.json")) {
+    private static void addRects(LongOpenHashSet want, String resource, int ox, int oz) throws Exception {
+        try (var in = RiftBrek.class.getResourceAsStream(resource)) {
+            if (in == null) return;
             for (JsonElement e : JsonParser.parseReader(new InputStreamReader(in, StandardCharsets.UTF_8)).getAsJsonArray()) {
                 var o = e.getAsJsonObject();
-                int x0 = originX + o.get("x0").getAsInt(), x1 = originX + o.get("x1").getAsInt();
-                int z0 = originZ + o.get("z0").getAsInt(), z1 = originZ + o.get("z1").getAsInt();
+                int x0 = ox + o.get("x0").getAsInt(), x1 = ox + o.get("x1").getAsInt();
+                int z0 = oz + o.get("z0").getAsInt(), z1 = oz + o.get("z1").getAsInt();
                 for (int cx = x0 >> 4; cx <= x1 >> 4; cx++)
                     for (int cz = z0 >> 4; cz <= z1 >> 4; cz++) want.add(ChunkPos.asLong(cx, cz));
             }
         }
+    }
+
+    private static LongOpenHashSet wantedChunks() throws Exception {
+        LongOpenHashSet want = new LongOpenHashSet();
+        addRects(want, "/riftbrek_forceload.json", originX, originZ);
+        if (autoCity) addRects(want, "/riftbrek_city_forceload.json", cityX, cityZ);
         return want;
     }
 
@@ -131,15 +145,15 @@ public class RiftBrek implements ModInitializer {
     }
 
     /** Own paste check: loads each probe chunk itself, so the result does not depend on where the player stands. */
-    private static int verify(CommandSourceStack src) {
+    private static int verify(CommandSourceStack src, String probes, int ox, int oz, String title) {
         ServerLevel level = src.getServer().overworld();
         int pass = 0, total = 0;
-        try (var in = RiftBrek.class.getResourceAsStream("/riftbrek_probes.json")) {
+        try (var in = RiftBrek.class.getResourceAsStream(probes)) {
             JsonArray arr = JsonParser.parseReader(new InputStreamReader(in, StandardCharsets.UTF_8)).getAsJsonArray();
-            src.sendSuccess(() -> Component.literal("[RIFTBREK] paste check at origin " + originX + ", " + originZ + " (PASS = expected block found):").withStyle(ChatFormatting.LIGHT_PURPLE), false);
+            src.sendSuccess(() -> Component.literal("[RIFTBREK] " + title + " paste check at origin " + ox + ", " + oz + " (PASS = expected block found):").withStyle(ChatFormatting.LIGHT_PURPLE), false);
             for (JsonElement e : arr) {
                 var o = e.getAsJsonObject();
-                BlockPos pos = new BlockPos(originX + o.get("x").getAsInt(), o.get("y").getAsInt(), originZ + o.get("z").getAsInt());
+                BlockPos pos = new BlockPos(ox + o.get("x").getAsInt(), o.get("y").getAsInt(), oz + o.get("z").getAsInt());
                 String want = o.get("block").getAsString();
                 level.getChunk(pos.getX() >> 4, pos.getZ() >> 4);   // loads (and generates nothing: chunk exists in the region files)
                 String got = BuiltInRegistries.BLOCK.getKey(level.getBlockState(pos).getBlock()).toString();
@@ -177,6 +191,18 @@ public class RiftBrek implements ModInitializer {
                             ctx.getSource().sendSuccess(() -> Component.literal("RIFTBREK origin set to " + originX + ", " + originZ + " (saved to config/riftbrek.properties; old force-loads removed)"), true);
                             return 1;
                         }))))
-                .then(Commands.literal("verify").executes(ctx -> verify(ctx.getSource())))));
+                .then(Commands.literal("city")
+                    .then(Commands.argument("x", IntegerArgumentType.integer())
+                        .then(Commands.argument("z", IntegerArgumentType.integer()).executes(ctx -> {
+                            cityX = IntegerArgumentType.getInteger(ctx, "x");
+                            cityZ = IntegerArgumentType.getInteger(ctx, "z");
+                            saveConfig();
+                            applyOrigin(ctx.getSource().getServer());
+                            ctx.getSource().sendSuccess(() -> Component.literal("Ithaca City origin set to " + cityX + ", " + cityZ + " (saved)"), true);
+                            return 1;
+                        }))))
+                .then(Commands.literal("verify")
+                    .executes(ctx -> verify(ctx.getSource(), "/riftbrek_probes.json", originX, originZ, "RIFTBREK HQ"))
+                    .then(Commands.literal("city").executes(ctx -> verify(ctx.getSource(), "/riftbrek_city_probes.json", cityX, cityZ, "Ithaca City"))))));
     }
 }

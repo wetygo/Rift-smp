@@ -1,4 +1,4 @@
-RIFTBREK Vanguard - MOD package v1.0.4  (Minecraft Java 1.21.11, Fabric)
+RIFTBREK Vanguard - MOD package v1.0.5  (Minecraft Java 1.21.11, Fabric)
 =========================================================================
 The mod CONTAINS the data pack. Do NOT also install the separate data pack zip.
 
@@ -9,9 +9,11 @@ WHAT YOU STILL NEED (not in this zip)
 
 IN THIS ZIP
   fabric-installer.jar                         installs Fabric Loader for Minecraft 1.21.11
-  mods/fabric-api.jar, mods/riftbrek-vanguard-1.0.4.jar    put both in .minecraft/mods
+  mods/fabric-api.jar, mods/riftbrek-vanguard-1.0.5.jar    put both in .minecraft/mods
   standalone_world/RIFTBREK_Vanguard_World/    a ready world (void) with the base - option A
-  base_files/region + base_files/entities      only the base's chunks (placed at X 8192, Z 8192) - options B / C
+  base_files/region + base_files/entities      only the HQ base's chunks (placed at X 8192, Z 8192) - options B / C
+  ithaca_files/region                          ITHACA CITY (placed at X 12288, Z 8192; files r.24.16 r.24.17 r.25.16 r.25.17) - same options
+  docs/ITHACA_CITY.md, docs/LAUNCHER.md        what Ithaca contains, what is NOT built, coordinates; the chicken launcher
   MergeBase.java                               adds the base into an EXISTING world without losing other chunks - option C
 
 1) INSTALL FABRIC + THE MOD (always)
@@ -47,5 +49,9 @@ IN THIS ZIP
    /function riftbrek:admin/royal {mc:"YOURNAME"}
    Players: /trigger rb_req set 1 (ID book), 2 (kit), 9 (help).  Unknown faction names are rejected before anything changes.
 
-CONFIG:  config/riftbrek.properties (originX, originZ, autoForceload).  /rift origin <x> <z> saves it and moves the force-loads. The mod only removes force-loads it added itself (recorded in <world>/riftbrek_forceloads.json); chunks an admin or another mod force-loaded are never touched. (The data pack's own admin/forceload_off command removes everything in the base's areas - use it only deliberately.)
+ITHACA CITY: install ithaca_files/region exactly like the HQ files (option B: check r.24.16 r.24.17 r.25.16 r.25.17 do not exist; option C: java MergeBase.java "<world>" ithaca_files --dry-run).
+   The standalone world already contains BOTH the HQ and Ithaca. Then:  /tp @s 12672 33 8917   /rift verify city   (expect 9 / 9 PASS)
+   Ithaca sorter chunks are force-loaded by the mod (autoCity=true). Different place: /rift city <x> <z> only tells the mod where the files are.
+
+CONFIG:  config/riftbrek.properties (originX, originZ, autoForceload, cityX, cityZ, autoCity).  /rift origin <x> <z> saves it and moves the force-loads. The mod only removes force-loads it added itself (recorded in <world>/riftbrek_forceloads.json); chunks an admin or another mod force-loaded are never touched. (The data pack's own admin/forceload_off command removes everything in the base's areas - use it only deliberately.)
 Credits: Airlander 10 by Krodo; Storage Tech Discord builders; Wildezz.

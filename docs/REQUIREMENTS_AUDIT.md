@@ -91,3 +91,9 @@ You sent a new concept render and a zip of litematics, and asked to remake the w
 - **Purple recolour created blocks that do not exist** (`purple_sand`, `purple_mushroom_block`): recolour now only applies to real dyed families.
 - Result: `/rift verify` 9/9 on a live server loading the full world (5,688 chunks, 56,108 tile entities, 1,419 entities); data pack loads 793 functions with no errors; registry check 0 block-state problems. Still NOT tested with a real player in game.
 - Mod is now v1.0.4 (delete older riftbrek jars first).
+
+## I. Ithaca City (2026-11-19, later)
+New 768 x 768 circular walled capital (`docs/ITHACA_CITY.md`): Royal Palace, Capitol, six faction HQs, market, library, barracks + arenas, industrial district, harbour + river, underground rail/vault/sorters/Veil tunnels. 35 command-block gates on the existing door functions, two sorter halls on a hopper intake shaft, minecart loop. Verified: 0 registry/support/gate errors, 37/37 key places reachable, region files read back identical, loads on a real Fabric server, `/rift verify city` 9/9. **Not built:** flying machines, automatic farms (farms are manual), villagers, any hand-designed interiors. **Not tested with a player.**
+- Mod v1.0.5: `/rift verify city`, `/rift city <x> <z>`, `cityX/cityZ/autoCity` config, Ithaca sorter chunks force-loaded (tracked, same safe removal rules).
+- The wind-charged chicken launcher (`build_launcher.py`, not written in this conversation) had every repeater backwards; fixed and verified on a live server (a zombie launched ~14 blocks). See `docs/LAUNCHER.md`.
+- The older HQ "chicken chamber" (my earlier wind-charge-item + Harming II two-lever design) is NOT the proper launcher; the HQ still has that version.

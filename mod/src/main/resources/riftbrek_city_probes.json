@@ -1,0 +1,65 @@
+[
+ {
+  "label": "south gate outer checkpoint (public)",
+  "x": 378,
+  "y": 35,
+  "z": 717,
+  "block": "minecraft:repeating_command_block"
+ },
+ {
+  "label": "royal district north gate (leader)",
+  "x": 378,
+  "y": 35,
+  "z": 231,
+  "block": "minecraft:repeating_command_block"
+ },
+ {
+  "label": "monument crystal",
+  "x": 384,
+  "y": 128,
+  "z": 384,
+  "block": "minecraft:amethyst_block"
+ },
+ {
+  "label": "sorter A controller",
+  "x": 96,
+  "y": -4,
+  "z": 326,
+  "block": "minecraft:repeating_command_block"
+ },
+ {
+  "label": "sorter B controller",
+  "x": 96,
+  "y": -12,
+  "z": 350,
+  "block": "minecraft:repeating_command_block"
+ },
+ {
+  "label": "royal vault gate (royal)",
+  "x": 380,
+  "y": -3,
+  "z": 268,
+  "block": "minecraft:repeating_command_block"
+ },
+ {
+  "label": "wind launcher button",
+  "x": 634,
+  "y": 33,
+  "z": 430,
+  "block": "minecraft:stone_button"
+ },
+ {
+  "label": "harbour lighthouse lamp",
+  "x": 538,
+  "y": 93,
+  "z": 626,
+  "block": "minecraft:sea_lantern"
+ },
+ {
+  "label": "outer wall north-east tower",
+  "x": 710,
+  "y": 72,
+  "z": 299,
+  "block": "minecraft:crying_obsidian"
+ }
+]

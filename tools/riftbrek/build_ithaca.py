@@ -828,12 +828,44 @@ def build_world():
     underground(W, rng); log("underground")
     n = residential(W, rng); log("houses %d" % n)
     t = gardens(W, rng); log("trees %d" % t)
+    from . import build_furnish2 as F2, build_furnish as FU
+    log("furnished shells %d" % F2.furnish_shells(W, []))
+    log("light blocks %d" % FU.lights(W))
     return W
+
+
+def landmark_probes(W):
+    """9 landmark blocks (read back from the finished build) for the mod's /rift verify city"""
+    zc = river_zc(467)
+    pts = [("south gate outer checkpoint (public)", CX - 6, GY + 3, CZ + R_OUT1 - 1),
+           ("royal district north gate (leader)", CX - 6, GY + 3, CZ - (R_IN0 + R_IN1) // 2),
+           ("monument crystal", CX, GY + 96, CZ),
+           ("sorter A controller", 96, L.level_floor(5) + 4, 326),
+           ("sorter B controller", 96, L.level_floor(6) + 4, 350),
+           ("royal vault gate (royal)", CX - 20 + 16, 58 + 3, 256 + 8 + 4),
+           ("wind launcher button", 634, GROUND_TOP + 2, 430),
+           ("harbour lighthouse lamp", 538, GY + 61, zc - 24 - 10),
+           ("outer wall north-east tower", polar(328, 345)[0] + 9, GY + 40, polar(328, 345)[1])]
+    out = []
+    for (label, x, y, z) in pts:
+        blk = W.palette[W.a[y, z, x]][0]
+        assert blk != "minecraft:air", (label, x, y, z)
+        out.append(dict(label=label, x=x, y=y + W.y_origin, z=z, block=blk))
+    return out
+
+
+def write_mod_data(W):
+    import json, os
+    res = os.path.join(os.path.dirname(__file__), "..", "..", "mod", "src", "main", "resources")
+    os.makedirs(res, exist_ok=True)
+    json.dump(landmark_probes(W), open(os.path.join(res, "riftbrek_city_probes.json"), "w"), indent=1)
+    json.dump([dict(name="sorter halls", x0=88, z0=318, x1=150, z1=370)], open(os.path.join(res, "riftbrek_city_forceload.json"), "w"), indent=1)
 
 
 def main(out_dir):
     import os
     W = build_world()
+    write_mod_data(W)
     os.makedirs(out_dir, exist_ok=True)
     path = os.path.join(out_dir, "RIFTBREK_ITHACA_CITY.litematic")
     bits, total = W.save(path, "Ithaca City", "RIFTBREK Design", "768x768 circular walled capital: Royal Palace, Capitol, 6 faction HQs, market, harbour, industrial redstone district, underground rail + vaults",
