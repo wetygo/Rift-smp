@@ -108,7 +108,7 @@ def hq(core, ward, ward_info):
             d.rectangle([(v[0] + O), (v[1] + O), (v[2] + O), (v[3] + O)], outline=(120, 255, 255, 230), width=3)
             label(d, (v[0] + v[2]) // 2 + O, (v[1] + v[3]) // 2 + O, names[k] + f"\n{8192 + v[0]}..{8192 + v[2]} / {8192 + v[1]}..{8192 + v[3]}", 14)
     pts = [("ROYAL CITADEL (Biggest Birds)\nthrone room 8575 144 8442", 383, 265), ("CENTRAL PLAZA\nassembly / trade / events", 383, 480), ("SECURITY & CHECKPOINT\nmain gate 8575 32 8956", 383, 740),
-           ("SECURITY CONTROL ROOM\nlockdown lamps 8641 33 8864", 440, 670), ("BLIMP TERMINAL (dock A)\nlane x 8442, docks aerial y 276", 250, 110), ("BLIMP DOCK B (plaza)", 250, 480), ("BLIMP DOCK C (checkpoint)", 250, 700),
+           ("SECURITY CONTROL ROOM\nlockdown lamps 8641 33 8864", 440, 670), ("TRANSIT TERMINAL\n(3-floor hall)", 383, 75),
            ("WIND LAUNCHERS x4\n8772 32 8292 (+26 each)", 632, 100), ("SORTER A (B5)\ncontroller 8752 -4 8664", 560, 470), ("CHICKEN CHAMBERS", 440, 150)]
     for t, x, z in pts:
         label(d, x + O, z + O, t, 14, fill=(255, 235, 150))

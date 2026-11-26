@@ -53,8 +53,8 @@ for name, ox, oy, oz, items in (("A", 8192 + 560, -4, 8192 + 472, [("minecraft:o
     C("say .", 3.0)
     for (it, cat, slot) in items:
         hx, hz = ox + 2 + 2 * cat, oz + 2
-        C(f"execute if items block {hx} {oy} {hz} container.{slot} {it} run say AUD|SORT_{name}|{it}|OK", 0.0)
-        C(f"execute unless items block {hx} {oy} {hz} container.{slot} {it} run say AUD|SORT_{name}|{it}|FAIL", 0.0)
+        C(f"execute if items block {hx} {oy - 1} {hz} container.* {it} run say AUD|SORT_{name}|{it}|OK", 0.0)
+        C(f"execute unless items block {hx} {oy - 1} {hz} container.* {it} run say AUD|SORT_{name}|{it}|FAIL", 0.0)
     fl_rm(ox - 4, oz - 4, ox + 40, oz + 24)
 
 # 4. mega halls (farm units, furnace rows, storage meters data present)

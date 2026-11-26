@@ -25,6 +25,8 @@ def sgn(W, x, z, lines):
 
 
 def strip_underground(W, strip, specs, links_x, core_tx):
+    all_specs = specs
+    specs = [sp for sp in specs if sp[1] not in ("haven", "center")]      # no basements under the Haven / Redstone Center halls (their circuits use the ground layer)
     lv = Level(W, 1)
     sx, sz = W.sx, W.sz
     hatches = []; gates = []

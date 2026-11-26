@@ -136,14 +136,17 @@ def building(W, strip, label, kind, x0, z0, x1, z1, floors, fh, face, tier, line
     # roof spire / dome over big buildings
     if (x1 - x0) >= 140:
         spire(W, cx, (z0 + z1) // 2, 10, top + 2, 26)
-    cmdblock(W, cx, GROUND_TOP - 1, (z0 + z1) // 2, "function riftbrek:zone/visible_wide")
+    PENDING_CMD.append((cx, (z0 + z1) // 2))                                   # placed after the basements are carved (they would overwrite it)
     # lamp lines in the lobby (ground) and one room per upper floor
     yy = GY
     lz = (z1 - 8) if face == "south" else (z0 + 8)
     for f in range(min(floors, 3)):
         if kind in ("haven", "center") and f <= (1 if kind == "center" else 0):
             continue
-        t = lamp_line(W, x0 + 6, lz + (0 if f == 0 else 2), GY + f * fh, n=12, name="%s L%d" % (label[:10], f + 1))
+        if f == 0:                                    # ground-floor lamps sit in the basement ceiling layer: place them after the basements are carved
+            PENDING_LINES.append((label, strip, x0 + 6, lz, GY, floors))
+            continue
+        t = lamp_line(W, x0 + 6, lz + 2, GY + f * fh, n=12, name="%s L%d" % (label[:10], f + 1))
         WARD_TESTS.append(dict(strip=strip, name=f"{label} lamp line floor {f + 1}", **t))
     BUILDINGS.append((strip, label, kind, x0, z0, x1, z1, floors))
     return top
@@ -193,6 +196,13 @@ def build_strip(strip, rng, specs, extra):
     from . import build_wardunder as WU
     links = list(range(507, sx - 40, 250)) if strip in "NS" else []
     WARD_UNDER[strip] = WU.strip_underground(W, strip, specs, links, (684, 854))
+    for (cx_, cz_) in PENDING_CMD:
+        cmdblock(W, cx_, GROUND_TOP, cz_, "function riftbrek:zone/visible_wide")
+    PENDING_CMD.clear()
+    for (label_, strip_, lx_, lz_, y_, fl_) in PENDING_LINES:
+        t = lamp_line(W, lx_, lz_, y_, n=12, name="%s L1" % label_[:10])
+        WARD_TESTS.append(dict(strip=strip_, name=f"{label_} lamp line floor 1", **t))
+    PENDING_LINES.clear()
     n, big, lab = WU.connectivity(W, strip)
     WARD_UNDER[strip]["components"] = n; WARD_UNDER[strip]["largest"] = big
     print("   underground", strip, "components", n, "largest", big, flush=True)
@@ -217,6 +227,8 @@ def build_strip(strip, rng, specs, extra):
 
 STYLE_BY_POS = {}
 WARD_UNDER = {}
+PENDING_CMD = []
+PENDING_LINES = []
 
 
 def specs_for(strip):

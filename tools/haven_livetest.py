@@ -72,11 +72,18 @@ for t in tests:
 import os
 for f in ("world/datapacks",):
     pass
-# center spawn on the haven so the chunks tick
-xs = [p[0] for t in tests for p in (t.get("levers") or [t.get("chest") or t.get("lever") or (0, 0)])] or [125]
-zs = [p[1] for t in tests for p in (t.get("levers") or [t.get("chest") or t.get("lever") or (0, 0)])] or [350]
-hx, hy, hz = W(sum(xs) // len(xs), GY, sum(zs) // len(zs))
-stdin = [f"forceload add {hx-60} {hz-30} {hx+60} {hz+30}"]
+# force-load the whole bounding box of every coordinate used by the tests
+pts = []
+for t in tests:
+    for k in ("levers", "lamps", "pistons", "pushed"):
+        pts += [tuple(p[:2]) for p in (t.get(k) or [])]
+    for k in ("lamp", "chest", "lever"):
+        if t.get(k):
+            pts.append(tuple(t[k][:2]))
+x0_, x1_ = min(p[0] for p in pts) - 6, max(p[0] for p in pts) + 6
+z0_, z1_ = min(p[1] for p in pts) - 6, max(p[1] for p in pts) + 6
+a_, b_ = W(x0_, GY, z0_), W(x1_, GY, z1_)
+stdin = [f"forceload add {a_[0]} {a_[2]} {b_[0]} {b_[2]}"]
 feed = open(os.path.join(srv, "feed.txt"), "w")
 feed.write("\n".join(f"{c}|{d}" for c, d in [(stdin[0], 5.0)] + cmds)); feed.close()
 # run
