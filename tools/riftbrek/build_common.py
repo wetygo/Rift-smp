@@ -141,6 +141,8 @@ def windows_ring(W, x0, z0, x1, z1, y, h=3, glass=PG, step=5, wd=2, skip=()):
 
 
 SHELLS = []     # every hollow multi-storey shell, for the furnishing pass
+NO_DECOR = []   # (x0, z0, x1, z1, y0, y1) boxes the room decoration pass must not touch (redstone halls)
+PARTS = []      # every partition grid (x0, z0, x1, z1, floor y, pitch, kind) for the room decoration pass
 
 
 def shell(W, x0, z0, x1, z1, floors, fh=10, wall=BRK, floor_b=DT, roof=BRK, thick=2, y0=None):
@@ -162,8 +164,9 @@ def lattice_lights(W, x0, z0, x1, z1, y, step=8, off=4, b=SEA):
             W.set(x, y, z, b)
 
 
-def partitions(W, x0, z0, x1, z1, y, h=8, pitch=24, wall=BRK, gap=5, gh=5):
+def partitions(W, x0, z0, x1, z1, y, h=8, pitch=24, wall=BRK, gap=5, gh=5, kind=None):
     """internal partition walls on a grid with arch gaps (single storey at y..y+h-1)."""
+    PARTS.append((x0, z0, x1, z1, y, pitch, kind, h))
     xs = list(range(x0 + pitch, x1 - 4, pitch))
     zs = list(range(z0 + pitch, z1 - 4, pitch))
     for x in xs:

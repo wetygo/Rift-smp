@@ -2,7 +2,7 @@
 
 ## Before you publish - read this
 1. **Upload only `riftbrek-vanguard-1.0.4.jar`.** Do NOT upload the base's region files, the standalone world or `RIFTBREK_MOD_PACKAGE.zip`: they contain other people's builds (Wildezz, the Storage Tech Discord builders, SandCaribou1890 / Pando_UwU / Kvil, Nyx_9841, hykn55) that you have no permission to redistribute. Ask each builder before sharing those anywhere public.
-2. **Krodo's Airlander 10:** the jar's data pack contains the hull of Krodo's Airlander 10 as ~1,900 display-entity definitions (`blimp/spawn`, the orbiting fleet). Get Krodo's OK (or remove the blimp functions) before publishing, and credit them on the page.
+2. **The Airlander 10 / blimp was removed** (docks, ship and `blimp/*` functions are no longer in the data pack), so there is nothing of Krodo's in the jar any more.
 3. **The mod does nothing visible without the base**, which isn't distributed with it. State that clearly (see description) so people don't think it's broken. Consider describing it as "for the RIFTBREK server/world".
 4. **Real-name references:** the "creator-inspired kits" use real players' names (FlameFrags, Wemmbu, TheobaldTheBird, ParrotX2, ManePear, SpokeIsHere). Check they are fine with that, or rename the kits.
 5. It has never been played with a real player; mark the first release **Beta** (not Release).
@@ -46,7 +46,7 @@ The mod carries its own data pack (always enabled) and sets itself up: it stores
 Not yet tested with real players. Veil anonymity is partial (vanilla `/msg`, the tab list and join messages still show names). Doors use proximity (radius 3, or 9 for wide gates), so people standing next to an authorised player can pass. OPs bypass everything. The 12-ship blimp fleet is about 23,000 entities: enable one dock at a time.
 
 ### Credits
-Airlander 10 by **Krodo**. Base builds by **Wildezz**, the **Storage Tech Discord** builders (hykn55, Nyx_9841), and **SandCaribou1890 / Pando_UwU / Kvil** (Wave Bolt). Mod and data pack by the RIFTBREK team.
+Base builds by **Wildezz**, the **Storage Tech Discord** builders (hykn55, Nyx_9841), and **SandCaribou1890 / Pando_UwU / Kvil** (Wave Bolt). Mod and data pack by the RIFTBREK team.
 
 ## Changelog for 1.0.4
 - Data pack and base re-checked against Minecraft 1.21.11 data (0 block-state problems).

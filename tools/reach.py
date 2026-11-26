@@ -44,7 +44,7 @@ pts = {
     "wildcards lobby": (111, GY, 478),
     "nexus lobby": (635, GY, 458),
     "nexus intake A": (562, GY, 475),
-    "blimp terminal hall": (383, GY, 110),
+    "transit terminal hall": (383, GY, 110),
     "west ring B1 (ladder)": (36, L.level_floor(1) + 1, 384),
     "B3 archive": (120, L.level_floor(3) + 1, 200),
     "B5 sorter A": (561, L.level_floor(5) + 1, 474),

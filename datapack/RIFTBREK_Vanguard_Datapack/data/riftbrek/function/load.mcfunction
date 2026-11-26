@@ -14,7 +14,6 @@ scoreboard objectives add rb_tmp dummy
 scoreboard objectives add rb_const dummy
 scoreboard objectives add rb_msgcd dummy
 scoreboard objectives add rb_cbs dummy
-scoreboard objectives add rb_bl dummy
 scoreboard objectives add rb_p dummy
 scoreboard objectives add rb_msg dummy
 scoreboard objectives add rb_seen dummy
@@ -29,10 +28,6 @@ execute unless data storage riftbrek:msg history run data modify storage riftbre
 execute unless data storage riftbrek:msg lines run data modify storage riftbrek:msg lines set value [{"text":"BULLETIN"},{"text":"no messages"},{"text":""},{"text":""}]
 scoreboard players set #100 rb_const 100
 scoreboard players set #2 rb_const 2
-execute unless score #ON rb_bl = #ON rb_bl run scoreboard players set #ON rb_bl 0
-execute unless score #SPAWNED rb_bl = #SPAWNED rb_bl run scoreboard players set #SPAWNED rb_bl 0
-execute unless score #PH rb_bl = #PH rb_bl run scoreboard players set #PH rb_bl 0
-execute unless score #T rb_bl = #T rb_bl run scoreboard players set #T rb_bl 0
 scoreboard players set #600 rb_const 600
 execute unless data storage riftbrek:registry roster run data modify storage riftbrek:registry roster set value []
 data modify storage riftbrek:const factions set value {birds:1b,unstables:1b,abstracters:1b,veil:1b,archivist:1b,wildcards:1b}

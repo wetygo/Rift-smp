@@ -133,125 +133,6 @@ def synth(P):
             f"execute if score #t rb_tmp matches 0 run loot insert ~ ~1 ~ loot {table}"])
 
 
-def blimp(P):
-    """Moving airship = display entities + armor-stand seats driven by this function set. Experimental / untested."""
-    import math
-    ph = "#PH rb_bl"; tt = "#T rb_bl"
-    P.fn("blimp/spawn", ["# runs at the dock-A controller: builds the Airlander 10 with its cabin floor 4.5 blocks above the block (hull sits on the pad)",
-        "scoreboard players set #SPAWNED rb_bl 1", "scoreboard players set #PH rb_bl 0", "scoreboard players set #T rb_bl 0"] + _blimp_summons())
-    P.fn("blimp/tick", [
-        "# controller (repeating command block under dock A). The ship only exists after: /function riftbrek:admin/blimp_on",
-        "execute unless score #SPAWNED rb_bl matches 1 if score #ON rb_bl matches 1 run function riftbrek:blimp/spawn",
-        "execute if score #SPAWNED rb_bl matches 1 run function riftbrek:blimp/run"])
-    run = ["scoreboard players add #T rb_bl 1",
-           "# bookkeeping: riders who left, seats that emptied",
-           "execute as @a[tag=rb_riding] unless data entity @s RootVehicle run function riftbrek:blimp/left",
-           "execute as @e[tag=rb_seat,tag=rb_taken] unless data entity @s Passengers run tag @s remove rb_taken",
-           "execute as @a[tag=rb_nob] at @s unless entity @e[tag=rb_seat,distance=..12] run tag @s remove rb_nob"]
-    for p_ in (0, 2, 4, 6):
-        run.append(f"execute if score #PH rb_bl matches {p_} if score #T rb_bl matches 1..100 run function riftbrek:blimp/board")
-        run.append(f"execute if score #PH rb_bl matches {p_} if score #T rb_bl matches 600.. run function riftbrek:blimp/next")
-    for p_, d, n in ((1, "s", 740), (3, "s", 440), (5, "n", 440), (7, "n", 740)):
-        run.append(f"execute if score #PH rb_bl matches {p_} run function riftbrek:blimp/move_{d}")
-        run.append(f"execute if score #PH rb_bl matches {p_} if score #T rb_bl matches {n}.. run function riftbrek:blimp/next")
-    P.fn("blimp/run", run)
-    P.fn("blimp/next", ["scoreboard players set #T rb_bl 0", "scoreboard players add #PH rb_bl 1",
-                        "execute if score #PH rb_bl matches 8.. run scoreboard players set #PH rb_bl 0"])
-    P.fn("blimp/move_s", ["# 0.5 block/tick south (+z) along the lane x=250. Seats every tick; the ~1900 hull boxes every 2 ticks (1 block, interpolated by teleport_duration:2)",
-                          "execute as @e[tag=rb_seat] at @s run tp @s ~ ~ ~0.5",
-                          "scoreboard players operation #M rb_bl = #T rb_bl",
-                          "scoreboard players operation #M rb_bl %= #2 rb_const",
-                          "execute if score #M rb_bl matches 0 as @e[tag=rb_hull] at @s run tp @s ~ ~ ~1"])
-    P.fn("blimp/move_n", ["execute as @e[tag=rb_seat] at @s run tp @s ~ ~ ~-0.5",
-                          "scoreboard players operation #M rb_bl = #T rb_bl",
-                          "scoreboard players operation #M rb_bl %= #2 rb_const",
-                          "execute if score #M rb_bl matches 0 as @e[tag=rb_hull] at @s run tp @s ~ ~ ~-1"])
-    P.fn("blimp/board", [
-        "# during the first 5 s of every stop: authorised players within 8 blocks of the ship are seated (6 seats). Lockdown = no boarding.",
-        "execute unless score #GLOBAL rb_lock matches 1 as @e[tag=rb_seat,limit=1] at @s as @a[distance=..8,tag=!rb_riding,tag=!rb_nob,tag=!rb_revoked,scores={rb_cred=1..,rb_clear=1..}] run function riftbrek:blimp/mount"])
-    P.fn("blimp/mount", [
-        "execute if entity @e[tag=rb_seat,tag=!rb_taken] run tag @e[tag=rb_seat,tag=!rb_taken,limit=1,sort=nearest] add rb_pending",
-        "ride @s mount @e[tag=rb_pending,limit=1]",
-        "execute if entity @e[tag=rb_pending] run tag @s add rb_riding",
-        "tag @e[tag=rb_pending] add rb_taken",
-        "tag @e[tag=rb_pending] remove rb_pending"])
-    P.fn("blimp/left", ["tag @s remove rb_riding", "tag @s add rb_nob"])
-    P.fn("admin/blimp_on", ["# OP ONLY. Spawns the airship at dock A (needs the dock-A chunk loaded) and starts the A-B-C-B-A cycle.",
-                            "scoreboard players set #ON rb_bl 1"])
-    P.fn("admin/blimp_off", ["# OP ONLY. Removes the airship and stops the cycle.",
-                             "scoreboard players set #ON rb_bl 0", "scoreboard players set #SPAWNED rb_bl 0",
-                             "execute as @a[tag=rb_riding] run ride @s dismount",
-                             "kill @e[tag=rb_blimp]"])
-
-
-def _blimp_summons():
-    """Airlander 10 (user supplied world) as ~1900 block_display boxes + 6 armor-stand seats, relative to the cabin floor."""
-    import json, os
-    boxes = json.load(open(os.path.join(os.path.dirname(__file__), "airlander_boxes.json")))
-    out = []
-    for (nm, props, x, y, z, sx, sy, sz) in boxes:
-        st = 'block_state:{Name:"%s"' % nm
-        if props:
-            st += ",Properties:{%s}" % ",".join('%s:"%s"' % (k, v) for k, v in sorted(props.items()))
-        st += "}"
-        out.append('summon minecraft:block_display ~ ~4.5 ~ {Tags:["rb_blimp","rb_hull"],teleport_duration:2,%s,'
-                   'transformation:{left_rotation:[0f,0f,0f,1f],right_rotation:[0f,0f,0f,1f],translation:[%df,%df,%df],scale:[%df,%df,%df]}}'
-                   % (st, x, y, z, sx, sy, sz))
-    for (sx, sz) in ((-1.0, -2.0), (1.0, -2.0), (-1.0, 0.0), (1.0, 0.0), (-1.0, 2.0), (1.0, 2.0)):
-        out.append('summon minecraft:armor_stand ~%.1f ~4.5 ~%.1f {Invisible:1b,NoGravity:1b,Invulnerable:1b,Silent:1b,Tags:["rb_blimp","rb_seat"],DisabledSlots:4144959}' % (sx, sz))
-    return out
-
-
-def blimp_fleet(P):
-    """12 extra Airlander-10 hulls, 4 per aerial dock, genuinely flying (not static): each continuously orbits its
-    own dock in a 16-point circle (no trig in commands, so the circle is precomputed here and baked into a lookup
-    of per-tick move deltas). Pure scenery ships - no boarding/seats, to keep 12x the complexity in check; the ONE
-    original dock-to-dock ship (blimp/*) is still the only rideable one. ~1,900 display entities x 12 = ~23,000
-    entities total if every ship is spawned: that WILL lag most servers (you asked for all 12, so this is built,
-    but start with just 1-2 docks' worth via admin/fleet_on_<dock> and watch your TPS before turning more on)."""
-    import math
-    R, STEPS = 50, 16
-    way = []
-    for i in range(STEPS):
-        a0 = 2 * math.pi * i / STEPS
-        a1 = 2 * math.pi * (i + 1) / STEPS
-        way.append((R * math.cos(a1) - R * math.cos(a0), R * math.sin(a1) - R * math.sin(a0)))
-    on_lines, off_lines = [], []
-    for (NM, dz, label) in BW.BLIMP_DOCKS:
-        nm = NM.lower()   # Minecraft resource paths must be lowercase; NM (A/B/C) stays only in player-facing text
-        on_lines.append(f"function riftbrek:blimp/fleet_{nm}_on")
-        off_lines.append(f"function riftbrek:blimp/fleet_{nm}_off")
-        fon, foff = [], []
-        for b in range(4):
-            tag = f"rb_fleet_{nm}{b}"
-            scb = f"#T_{nm}{b}"
-            phase = b * STEPS // 4
-            cx, cz = BW.BLIMP_LANE_X + int(round(R * math.cos(2 * math.pi * phase / STEPS))), dz + int(round(R * math.sin(2 * math.pi * phase / STEPS)))
-            fon.append(f"scoreboard players set {scb} rb_bl {phase}")
-            fon += [ln.replace('~ ~4.5 ~', f'{cx} ~{BW.BLIMP_DOCK_Y + 40}.5 {cz}').replace('"rb_blimp","rb_hull"', f'"rb_blimp","rb_fleet","{tag}"')
-                    for ln in _blimp_summons() if "rb_seat" not in ln]   # scenery only: hull boxes, no seats
-            foff.append(f"kill @e[tag={tag}]")
-            # per-step branches: every 4 ticks, advance one waypoint (slow, steady orbit - ~6.4s per lap)
-            branch = [f"execute if score {scb} rb_bl matches {4*(i+1)} as @e[tag={tag}] at @s run tp @s ~{dx:.3f} ~ ~{dz:.3f}"
-                      for i, (dx, dz) in enumerate(way)]
-            P.fn(f"blimp/fleet_{nm}{b}_tick", [f"scoreboard players add {scb} rb_bl 1"] + branch +
-                 [f"execute if score {scb} rb_bl matches {4*STEPS}.. run scoreboard players set {scb} rb_bl 0"])
-        P.fn(f"blimp/fleet_{nm}_on", ["# OP ONLY. Spawns 4 orbiting Airlander hulls at dock " + NM + " (~7,600 entities). Scenery only, not rideable."] + fon +
-             [f"scoreboard players set #FLEET_{nm} rb_bl 1"])
-        P.fn(f"blimp/fleet_{nm}_off", foff + [f"scoreboard players set #FLEET_{nm} rb_bl 0"])
-        P.fn(f"blimp/fleet_{nm}_tick", [f"execute if score #FLEET_{nm} rb_bl matches 1 run function riftbrek:blimp/fleet_{nm}0_tick",
-                                         f"execute if score #FLEET_{nm} rb_bl matches 1 run function riftbrek:blimp/fleet_{nm}1_tick",
-                                         f"execute if score #FLEET_{nm} rb_bl matches 1 run function riftbrek:blimp/fleet_{nm}2_tick",
-                                         f"execute if score #FLEET_{nm} rb_bl matches 1 run function riftbrek:blimp/fleet_{nm}3_tick"])
-    P.fn("admin/fleet_on", ["# OP ONLY. Spawns all 12 extra orbiting ships (all 3 docks) - ~23,000 entities on top of the 1 rideable ship. Watch your TPS."] + on_lines)
-    P.fn("admin/fleet_off", off_lines)
-    for (NM, dz, label) in BW.BLIMP_DOCKS:
-        nm = NM.lower()
-        P.fn(f"admin/fleet_on_{nm}", [f"function riftbrek:blimp/fleet_{nm}_on"])
-        P.fn(f"admin/fleet_off_{nm}", [f"function riftbrek:blimp/fleet_{nm}_off"])
-    P.fn("blimp/fleet_tick_all", [f"function riftbrek:blimp/fleet_{nm.lower()}_tick" for (nm, dz, label) in BW.BLIMP_DOCKS])
-
-
 def forceload(P):
     P.fn("admin/origin", ["# OP ONLY. Tell the pack where you pasted the schematic (world X/Z of local 0,0).  /function riftbrek:admin/origin {x:1000,z:-500}",
                            "$data modify storage riftbrek:cfg origin set value {x:$(x),z:$(z)}"])
@@ -262,7 +143,7 @@ def forceload(P):
         rm_lines.append(f"$execute positioned $(x) 0 $(z) run forceload remove ~{x0} ~{z0} ~{x1} ~{z1}")
     P.fn("admin/forceload_do", add_lines)
     P.fn("admin/forceload_remove_do", rm_lines)
-    P.fn("admin/forceload", ["# OP ONLY. Keeps sorters, industry, synthesis hall, blimp lane and the checkpoint loaded. Run admin/origin first.",
+    P.fn("admin/forceload", ["# OP ONLY. Keeps sorters, industry, synthesis hall and the checkpoint loaded. Run admin/origin first.",
                               "function riftbrek:admin/forceload_do with storage riftbrek:cfg origin"])
     P.fn("admin/forceload_off", ["function riftbrek:admin/forceload_remove_do with storage riftbrek:cfg origin"])
 
@@ -274,7 +155,6 @@ def verify(P):
         ("ground (grass) at local 100,95,100", 100, 95, 100, "minecraft:grass_block"),
         ("gatehouse door controller", 378, GY + 3, 760, "minecraft:repeating_command_block"),
         ("citadel entrance controller", 378, GY + 3, 366, "minecraft:repeating_command_block"),
-        ("blimp controller (dock A)", 250, BW.BLIMP_DOCK_Y - 1, 110, "minecraft:repeating_command_block"),
         ("sorter A controller (B5)", 560, L.level_floor(5) + 4, 472, "minecraft:repeating_command_block"),
         ("sorter B controller (B6)", 560, L.level_floor(6) + 4, 520, "minecraft:repeating_command_block"),
         ("synthesis unit (B11)", L.SYNTH_ORIGIN[0], L.level_floor(11) + 1, L.SYNTH_ORIGIN[1], "minecraft:repeating_command_block"),
@@ -304,8 +184,6 @@ def add(P):
     farms(P)
     pulses(P)
     synth(P)
-    blimp(P)
-    blimp_fleet(P)
     P.fn("monitor/lockdown_lamp", ["# runs AT the monitor command block in the security control room: a redstone block above it while lockdown is ON lights the indicator lamps",
         "execute if score #GLOBAL rb_lock matches 1 run setblock ~ ~1 ~ minecraft:redstone_block",
         "execute unless score #GLOBAL rb_lock matches 1 run setblock ~ ~1 ~ minecraft:air"])

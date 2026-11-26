@@ -13,11 +13,7 @@ RULES = [
     (r"1728.Furnace.Array|2D.*Furnace", "2D 1728 Furnace Array", "Wildezz", "Wildezz", True),
     (r"Carrot.*Firework", "Carrot & Firework Crafters", "Wildezz", "Wildezz", True),
     (r"Stone.?Factory", "The Stone Factory", "Wildezz", "Wildezz", True),
-    (r"Full.?Dam", "Full Dam", "Wildezz", "Wildezz", True),
     (r"Ghast.?Hydration", "Ghast Hydration Facility", "Wildezz", "Wildezz", True),
-    (r"CLM.*Large", "CLM Large", "Wildezz", "Wildezz", True),
-    (r"CLM.*Medium", "CLM Medium", "Wildezz", "Wildezz", True),
-    (r"CLM.*Small", "CLM Small", "Wildezz", "Wildezz", True),
     (r"Wildez.*Main.?Storage|Wildezz.*Main.?Storage", "Wildez Main Storage", "Wildezz", "Wildezz", True),
     (r"Mob.?Switch.?Spire.*Overworld", "Mob Switch Spire (Overworld)", "Wildezz", "Wildezz", True),
     (r"Mob.?Switch.?Spire.*Nether", "Mob Switch Spire (Nether)", "Wildezz", "Wildezz", True),
@@ -161,7 +157,7 @@ def main(master, srcdir, report=None):
     mega["lanes"] = lanes
     json.dump(mega, open(os.path.join(os.path.dirname(os.path.abspath(master)), "..", "docs", "mega_info.json"), "w"), indent=1, default=list)
     annex.write_litematic(master, regions, "RIFTBREK Vanguard Headquarters - MASTER (+ annex quarter)",
-                          "RIFTBREK Design; annex builds by Wildezz, Storage Tech community (hykn55, Nyx_9841, SandCaribou1890, Pando_UwU, Kvil), Airlander 10 by Krodo",
+                          "RIFTBREK Design; annex builds by Wildezz, Storage Tech community (hykn55, Nyx_9841, SandCaribou1890, Pando_UwU, Kvil)",
                           "768x384x768 HQ + east annex quarter with imported farms/storage/chunk-loading/Wave-Bolt builds on a grass plateau. Untested in-game.",
                           total=total)
     if report:

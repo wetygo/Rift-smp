@@ -50,7 +50,7 @@ def shell(pw, pd):
     for gx in (pw // 4 - 6, 3 * pw // 4 - 6):
         for (gz, face) in ((0, "north"), (pd - t, "north")):
             gate(W, "member", gx, GY, gz + t // 2, 12, facing=face, frame=BRK, clear_z=list(range(gz, gz + t)), clear_h=8)
-            sign(W, gx + 4, GY, gz - 1 if gz == 0 else gz + t, ["REDSTONE MEGA", "BUILDING", "member tier", ""], rot=0 if gz else 8)
+            sign(W, gx + 4, GY, (t + 1) if gz == 0 else (pd - t - 2), ["REDSTONE MEGA", "BUILDING", "member tier", ""], rot=0 if gz else 8)
     # invisible light grid (no hostile spawns inside); imported builds that overlap simply overwrite it
     for z in range(4, pd - t, 7):
         for x in range(4, pw - t, 7):

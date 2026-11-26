@@ -8,6 +8,7 @@ when it is pasted, so every circuit is written in its settled all-levers-off sta
 """
 import re
 from .build_common import *
+from .build_common import NO_DECOR as C_NO
 
 Y = GY                      # working layer (dust, levers, torches, lamps)
 STONE = "minecraft:stone"
@@ -178,6 +179,7 @@ def piston_curtain(W, x, z0):
 # ------------------------------------------------------------------------------------------------ the hall
 def haven(W, x0, z0, x1, z1):
     """clear the ground floor of the industrial wing interior (x0..x1, z0..z1) and fill it with the circuits"""
+    C_NO.append((x0 - 2, z0 - 2, x1 + 2, z1 + 2, GY, GY + 9))
     W.fill(x0, GY, z0, x1, GY + 9, z1, AIR)
     W.fill(x0, GROUND_TOP, z0, x1, GROUND_TOP, z1, "minecraft:deepslate_tiles")
     for xx in range(x0 + 4, x1, 8):

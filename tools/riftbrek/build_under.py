@@ -361,14 +361,12 @@ def board(W, x, y, z, rot=0):
 
 
 def boards(W):
-    from .build_wings import BLIMP_DOCKS, BLIMP_LANE_X
     GYb = GY
     spots = [(376, GYb, 740, 0), (383 + 22, GYb, 470, 0), (352, GYb, 350, 0)]          # gatehouse court, plaza, citadel hall
     for key, (wx0, wz0, wx1, wz1, floors, fh, face) in WINGS.items():                  # every wing lobby
         gx = (wx0 + wx1) // 2 - 6
         spots.append((gx - 4, GYb, (wz0 + 6) if face == "north" else (wz1 - 6), 0))
-    for (nm, dz, label) in BLIMP_DOCKS:
-        spots.append((BLIMP_LANE_X - 6, GYb, dz + 6, 0))
+    spots.append((383 - 8, GYb, 150, 0))                                               # transit terminal lobby
     y2 = L.level_floor(2) + 1
     for k in range(4):
         spots.append((340 + k * 20, y2, 430, 0))                                       # comms room under the plaza (B2)

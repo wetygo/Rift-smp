@@ -1,6 +1,6 @@
 # Redstone Mega Building (replaces the open annex plateau)
 
-The annex plateau (world **X 8960..10111, Z 8192..8959**) is now ONE roofed megastructure: 12-thick walls 160 blocks high with a purple band and glowing strips, a deck roof with tinted-glass skylights and a crenellated parapet, pilasters along the inside, four 12-wide **member-tier** gatehouses (two in the north wall, two in the south wall), and an invisible light grid so nothing spawns inside. Its west side is the HQ's own east wall. Every imported build (Wildezz / Storage Tech / Wave Bolt - Full Dam, Ghast Hydration, Wildez Main Storage, Mob Switch Spires, 72k Magma/Gold Farms, Carrot & Firework Crafters, 2D Furnace Array, CLMs, Wave Bolt line pieces ...) is inside it, unchanged (`docs/ANNEX_MAP.md`).
+The annex plateau (world **X 8960..10111, Z 8192..8959**) is now ONE roofed megastructure: 12-thick walls 160 blocks high with a purple band and glowing strips, a deck roof with tinted-glass skylights and a crenellated parapet, pilasters along the inside, four 12-wide **member-tier** gatehouses (two in the north wall, two in the south wall), and an invisible light grid so nothing spawns inside. Its west side is the HQ's own east wall. Every imported build (Wildezz / Storage Tech / Wave Bolt - Ghast Hydration, Wildez Main Storage, Mob Switch Spires, 72k Magma/Gold Farms, Carrot & Firework Crafters, 2D Furnace Array, CLMs, Wave Bolt line pieces ...) is inside it, unchanged (`docs/ANNEX_MAP.md`).
 
 ## Three halls of my own (plain vanilla redstone, each live-tested)
 | hall | what | where (world) |

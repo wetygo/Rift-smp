@@ -94,6 +94,8 @@ def night_lamp(W, x, z, y):
 
 def redcenter(W, x0, z0, x1, z1, y, roof_y):
     """floor-2 hall: a row of stalls (each ~24 wide) in two rows"""
+    from .build_common import NO_DECOR
+    NO_DECOR.append((x0 - 2, z0 - 2, x1 + 2, z1 + 2, y, y + 9))
     W.fill(x0, y, z0, x1, y + 9, z1, AIR)
     for xx in range(x0 + 4, x1, 8):
         for zz in range(z0 + 3, z1, 8):

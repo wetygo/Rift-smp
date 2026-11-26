@@ -21,13 +21,6 @@
   "block": "minecraft:repeating_command_block"
  },
  {
-  "label": "blimp controller (dock A)",
-  "x": 250,
-  "y": 211,
-  "z": 110,
-  "block": "minecraft:repeating_command_block"
- },
- {
   "label": "sorter A controller (B5)",
   "x": 560,
   "y": -4,

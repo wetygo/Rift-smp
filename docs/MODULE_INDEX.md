@@ -96,12 +96,6 @@ Ground surface (first walkable layer) is local y = 96 = world y 32.
 | `alarm/room_8 with storage cfg origin` | 522, 97, 583 | +522, 33, +583 |
 | `alarm/room_9 with storage cfg origin` | 523, 97, 583 | +523, 33, +583 |
 
-## command blocks: `blimp/` (2)
-| function | local x,y,z | world offset (y-64) |
-|---|---|---|
-| `blimp/fleet_tick_all` | 250, 275, 480 | +250, 211, +480 |
-| `blimp/tick` | 250, 275, 110 | +250, 211, +110 |
-
 ## command blocks: `door/` (23)
 | function | local x,y,z | world offset (y-64) |
 |---|---|---|
@@ -207,18 +201,16 @@ Ground surface (first walkable layer) is local y = 96 = world y 32.
 |---|---|---|
 | `monitor/lockdown_lamp` | 449, 96, 672 | +449, 32, +672 |
 
-## command blocks: `msg/` (17)
+## command blocks: `msg/` (15)
 | function | local x,y,z | world offset (y-64) |
 |---|---|---|
 | `msg/board` | 93, 95, 306 | +93, 31, +306 |
 | `msg/board` | 101, 95, 476 | +101, 31, +476 |
 | `msg/board` | 117, 95, 267 | +117, 31, +267 |
-| `msg/board` | 244, 95, 116 | +244, 31, +116 |
-| `msg/board` | 244, 95, 486 | +244, 31, +486 |
-| `msg/board` | 244, 95, 706 | +244, 31, +706 |
 | `msg/board` | 340, 80, 430 | +340, 16, +430 |
 | `msg/board` | 352, 95, 350 | +352, 31, +350 |
 | `msg/board` | 360, 80, 430 | +360, 16, +430 |
+| `msg/board` | 375, 95, 150 | +375, 31, +150 |
 | `msg/board` | 376, 95, 740 | +376, 31, +740 |
 | `msg/board` | 380, 80, 430 | +380, 16, +430 |
 | `msg/board` | 383, 88, 600 | +383, 24, +600 |

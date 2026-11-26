@@ -28,13 +28,6 @@
   "z1": 330
  },
  {
-  "name": "blimp lane x=250",
-  "x0": 218,
-  "z0": 30,
-  "x1": 284,
-  "z1": 740
- },
- {
   "name": "checkpoint / chunk-ban square",
   "x0": 352,
   "z0": 652,

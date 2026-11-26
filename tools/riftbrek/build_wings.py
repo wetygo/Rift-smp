@@ -32,7 +32,7 @@ def wing(W, key, label, tier, glass=PG, wall=BRK, trim=GLOW, pad_key=None):
     gx = cx - 6
     for f in range(floors):
         y = GY + f * fh
-        partitions(W, x0 + 3, z0 + 3, x1 - 3, z1 - 3, y, h=fh - 1, pitch=24, wall=wall)
+        partitions(W, x0 + 3, z0 + 3, x1 - 3, z1 - 3, y, h=fh - 1, pitch=24, wall=wall, kind=key)
         lattice_lights(W, x0 + 3, z0 + 3, x1 - 3, z1 - 3, y + fh - 1, step=8, off=4)
         if f < floors - 1 or True:
             windows_ring(W, x0, z0, x1, z1, y + 3, h=4, glass=glass, step=6, wd=3,
@@ -165,58 +165,11 @@ def intake(W, x, z, y_bottom, label):
     sign(W, x + 3, GY, z, ["AUTO-STORAGE", "INTAKE " + label, "drop items in", "the chests"], rot=12)
 
 
-BLIMP_LANE_X = 250
-BLIMP_DOCKS = [("A", 110, "TERMINAL"), ("B", 480, "PLAZA"), ("C", 700, "CHECKPOINT")]
-BLIMP_DOCK_Y = GY + 180        # aerial docks: platforms this far above ground, reached by mast ladders
-BERTH_OFFSETS = [(-26, 0), (-9, 0), (9, 0), (26, 0)]   # 4 berths per dock, spaced along the lane (dx, dz) from the dock centre
 
 
-def parked_airship(W, cx, cy, cz, label="RESERVE"):
-    """Cheap REAL-BLOCK silhouette of a docked Airlander-10 (no entities, permanent part of the schematic): a 27-long
-    purple/white envelope on a lattice keel with a small gondola underneath.  ~340 blocks; baked in, costs nothing at runtime."""
-    half = 13
-    for dx in range(-half, half + 1):
-        t = 1 - (abs(dx) / half) ** 2        # ellipse profile along the hull
-        rad = max(1, int(round(4 * t ** 0.5)))
-        for dz in range(-rad, rad + 1):
-            for dy in range(-rad, rad + 1):
-                if dz * dz + dy * dy <= rad * rad:
-                    shell = dz * dz + dy * dy >= (rad - 1) * (rad - 1)
-                    mat = PU if shell and (dy >= 0) else (WH if shell else AIR)
-                    if mat != AIR:
-                        W.set(cx + dx, cy + dy, cz + dz, mat)
-    # fin at the tail, nose cone light
-    for dz in (-2, -1, 0, 1, 2):
-        W.set(cx - half, cy + 4, cz + dz, PU)
-    W.set(cx + half + 1, cy, cz, GLOW)
-    # gondola (small cabin) slung under the hull centre
-    W.fill(cx - 3, cy - 7, cz - 2, cx + 3, cy - 5, cz + 2, BRK)
-    W.fill(cx - 2, cy - 6, cz - 1, cx + 2, cy - 6, cz + 1, LG)
-    for dx in (-3, 3):
-        W.fill(cx + dx, cy - 7, cz, cx + dx, cy - 3, cz, "minecraft:iron_chain")
-    sign(W, cx, cy - 8, cz, [label, "Airlander 10", "(parked)", "real blocks, 0 entities"], rot=0)
-
-
-def blimp(W):
-    """Terminal hall + mast (scenery), and THREE AERIAL docks high above the base: each is a landing platform at
-    y = BLIMP_DOCK_Y reached by a tower + ladder, with 4 marked berths. 2 of the 4 berths at every dock are filled
-    with a real-block (0 entity) parked Airlander-10 silhouette, baked permanently into the schematic. The other 2
-    berths are entity sockets: the data pack's single moving Airlander (riftbrek:blimp/*, ~1,900 display entities)
-    cycles through dock A/B/C's free berth, and an operator can spawn extra STATIC ships into the remaining sockets
-    with admin/blimp_park_<dock> - each one costs ~1,900 more display entities, so do that only after confirming
-    your server handles the first one smoothly (see docs/BLIMP_DOCKS.md)."""
+def terminal(W):
+    """TRANSIT TERMINAL hall (3 floors, lit, ladder, bulletin board). The Airlander / blimp docks were removed."""
     cx, mz = 383, 78
-    mx = 296
-    W.fill(mx - 6, GY, mz - 6, mx + 6, GY + 100, mz + 6, BRK)
-    W.fill(mx - 4, GY, mz - 4, mx + 4, GY + 100, mz + 4, AIR)
-    for y in range(GY + 10, GY + 100, 12):
-        W.fill(mx - 4, y, mz - 4, mx + 4, y, mz + 4, DT)
-    ladder_shaft(W, mx - 4, mz - 4, GY, GY + 99, "east")
-    W.fill(mx - 8, GY + 96, mz - 8, mx + 8, GY + 97, mz + 8, DT)
-    for y in range(GY + 98, GY + 101):
-        W.fill(mx - 8, y, mz - 8, mx + 8, y, mz + 8, IB); W.fill(mx - 8, y, mz + 8, mx + 8, y, mz + 8, IB)
-        W.fill(mx - 8, y, mz - 8, mx - 8, y, mz + 8, IB); W.fill(mx + 8, y, mz - 8, mx + 8, y, mz + 8, IB)
-    spire(W, mx, mz, 6, GY + 101, 12)
     tx0, tz0, tx1, tz1 = 330, 24, 437, 124
     top = shell(W, tx0, tz0, tx1, tz1, 3, 14, thick=3, roof=DT)
     for f in range(3):
@@ -224,40 +177,9 @@ def blimp(W):
         lattice_lights(W, tx0 + 3, tz0 + 3, tx1 - 3, tz1 - 3, GY + f * 14 + 13, step=8, off=4)
     W.fill(372, GY, tz1 - 2, 395, GY + 12, tz1, AIR)
     ladder_shaft(W, tx0 + 3, tz0 + 3, GY, top - 1, "east")
-    sign(W, 383, GY, tz1 + 3, ["BLIMP TERMINAL", "Airlander 10", "3 aerial docks", "ladder up the mast"], rot=0)
+    sign(W, 383, GY, tz1 + 3, ["TRANSIT TERMINAL", "rail - ice - ports", "bulletin board", "open to members"], rot=0)
     road(W, 372, tz1 + 1, 395, 175, "z")
     cmdblock(W, 383, GROUND_TOP - 1, 70, "function riftbrek:zone/visible")
-    # ---- three aerial docks, each a ring platform at BLIMP_DOCK_Y with 4 marked berths ----
-    for (nm, dz, label) in BLIMP_DOCKS:
-        my, mast_cz = BLIMP_DOCK_Y, dz
-        W.fill(BLIMP_LANE_X - 2, GY, mast_cz - 2, BLIMP_LANE_X + 2, my - 1, mast_cz + 2, BRK)
-        W.fill(BLIMP_LANE_X - 1, GY, mast_cz - 1, BLIMP_LANE_X + 1, my - 1, mast_cz + 1, AIR)
-        ladder_shaft(W, BLIMP_LANE_X - 1, mast_cz - 1, GY, my - 2, "east")
-        for y in range(GY + 12, my - 1, 16):
-            W.fill(BLIMP_LANE_X - 2, y, mast_cz - 2, BLIMP_LANE_X + 2, y, mast_cz + 2, DT)
-        disk(W, BLIMP_LANE_X, mast_cz, 34, my, my, DT)
-        disk(W, BLIMP_LANE_X, mast_cz, 31, my, my, PU)
-        disk(W, BLIMP_LANE_X, mast_cz, 28, my, my, DT)
-        disk(W, BLIMP_LANE_X, mast_cz, 34, my, my, GLOW, hollow=True)
-        disk(W, BLIMP_LANE_X, mast_cz, 34, my + 1, my + 4, IB, hollow=True)         # safety rail
-        for k in range(8):
-            a = 2 * np.pi * k / 8
-            x, z = int(round(BLIMP_LANE_X + 35 * np.cos(a))), int(round(mast_cz + 35 * np.sin(a)))
-            W.fill(x, my + 1, z, x, my + 6, z, BRK); W.set(x, my + 7, z, SEA)
-        for i, (bdx, bdz) in enumerate(BERTH_OFFSETS):
-            bx, bz = BLIMP_LANE_X + bdx, mast_cz + bdz
-            disk(W, bx, bz, 7, my, my, LG)
-            W.set(bx, my - 1, bz - 8, DT)                  # the berth sign sits past the 7-radius floor disk - give it its own tile
-            sign(W, bx, my, bz - 8, ["BERTH %d" % (i + 1), ("PARKED" if i < 2 else "SOCKET (empty)")], rot=0, color="light_purple" if i < 2 else "gray")
-            if i < 2:
-                parked_airship(W, bx, my + 9, bz, label="DOCK %s BERTH %d" % (nm, i + 1))
-        # dock label sign LAST, and well clear of every berth disk (radius 7 at dz=0) so nothing overwrites it afterwards
-        W.set(BLIMP_LANE_X + 3, my - 1, mast_cz + 15, DT)
-        sign(W, BLIMP_LANE_X + 3, my, mast_cz + 15, ["AERIAL DOCK " + nm, label, "4 berths: 2 parked", "+ 2 ship sockets"], rot=8, color="purple")
-    # blimp controller (always-active command block) hidden under dock A's platform
-    cmdblock(W, BLIMP_LANE_X, BLIMP_DOCK_Y - 1, BLIMP_DOCKS[0][1], "function riftbrek:blimp/tick")
-    # fleet controller (12 extra orbiting ships, admin/fleet_on*) - hidden under dock B's platform
-    cmdblock(W, BLIMP_LANE_X, BLIMP_DOCK_Y - 1, BLIMP_DOCKS[1][1], "function riftbrek:blimp/fleet_tick_all")
 
 
 

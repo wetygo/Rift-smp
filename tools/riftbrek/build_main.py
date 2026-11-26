@@ -19,7 +19,7 @@ def build_world():
     S.plaza(W); log("plaza")
     S.citadel(W); log("citadel")
     WG.archive(W); WG.unstables(W); WG.abstracters(W); WG.veil(W); WG.wildcards(W); WG.nexus(W); log("wings")
-    WG.blimp(W); WG.chicken_chambers(W); log("blimp terminal + chambers")
+    WG.terminal(W); WG.chicken_chambers(W); log("transit terminal + chambers")
     # real wind-charged chicken launchers (chicken egg + Wind Charging potion + Harming II, real redstone) beside the chambers
     from . import build_launcher as LA
     for k in range(4):
@@ -42,6 +42,8 @@ def build_world():
     U.machines(W, lv); log("machinery")
     log("ruined vault: %d chests" % Q.ruined_vault(W, rng))
     from .build_wings import WINGS
+    from . import decorate as DEC
+    log("decorated rooms: %d items in %d rooms" % (DEC.decorate_parts(W, rng) or DEC.COUNT["items"], DEC.COUNT["rooms"]))
     log("furnished perimeter items (shells) %d, underground %d" % (F2.furnish_shells(W, [(v[0], v[1], v[2], v[3]) for v in WINGS.values()]), F2.furnish_underground(W)))
     # tunnel / room ceilings sit at ground level: repaint the visible ones back to grass (not under buildings)
     gi = {W.B("minecraft:deepslate_tiles"), W.B("minecraft:deepslate_bricks")}
@@ -61,7 +63,7 @@ def main(out_dir):
     bits, total = W.save(path, "RIFTBREK Vanguard Headquarters - MASTER",
                          "RIFTBREK Design",
                          "768x768x224 megabase: wall, citadel, 6 faction wings, plaza, B1-B12, command-block doors, sorter halls, "
-                         "smelters, crafters, crop plots, rail+ice transit, wind-charge chambers. Moving blimp NOT implemented (static display).")
+                         "smelters, crafters, crop plots, rail+ice transit, wind-charge chambers.")
     try:
         import json
         from .build_haven import HAVEN_TESTS

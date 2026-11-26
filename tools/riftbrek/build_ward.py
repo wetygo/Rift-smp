@@ -50,6 +50,30 @@ def road(W, x0, z0, x1, z1):
                 W.set(x, GY + 4, z, SEA)
 
 
+def street_furniture(W, z_edge, side, step=22):
+    """benches (stairs back to back) and flower planters on the lawn strip beside an avenue edge"""
+    from .build_common import GY as _GY
+    flowers = ["minecraft:poppy", "minecraft:cornflower", "minecraft:allium", "minecraft:azure_bluet", "minecraft:oxeye_daisy", "minecraft:pink_tulip"]
+    for k, x in enumerate(range(12, W.sx - 12, step)):
+        z = z_edge + side * 2
+        if W.a[_GY, z, x] != 0:
+            continue
+        if k % 2 == 0:
+            f = "north" if side > 0 else "south"
+            W.set(x, _GY, z, f"minecraft:spruce_stairs[facing={f},half=bottom,shape=straight,waterlogged=false]")
+            W.set(x + 1, _GY, z, f"minecraft:spruce_stairs[facing={f},half=bottom,shape=straight,waterlogged=false]")
+            W.set(x, _GY, z + side, "minecraft:spruce_slab[type=bottom,waterlogged=false]"); W.set(x + 1, _GY, z + side, "minecraft:spruce_slab[type=bottom,waterlogged=false]")
+        else:
+            W.fill(x, _GROUND_TOP_(), z, x + 2, _GROUND_TOP_(), z + 1, "minecraft:polished_blackstone")
+            W.fill(x, _GY, z, x + 2, _GY, z + 1, "minecraft:rooted_dirt")
+            for i in range(3):
+                W.set(x + i, _GY + 1, z, flowers[(k + i) % len(flowers)])
+
+
+def _GROUND_TOP_():
+    return GROUND_TOP
+
+
 def lamp_line(W, x, z, y, n=12, name="LAMP LINE"):
     """lever + dust line + a lamp under every dust cell (settled all-off state); flipping the lever lights the room"""
     W.set(x, y, z, "minecraft:lever[face=floor,facing=north,powered=false]")
@@ -88,7 +112,7 @@ def building(W, strip, label, kind, x0, z0, x1, z1, floors, fh, face, tier, line
     for f in range(floors):
         y = GY + f * fh
         if kind not in ("haven", "center") or (kind == "haven" and f > 0) or (kind == "center" and f > 1):
-            partitions(W, x0 + 3, z0 + 3, x1 - 3, z1 - 3, y, h=fh - 1, pitch=12, wall=BRK, gap=4, gh=4)
+            partitions(W, x0 + 3, z0 + 3, x1 - 3, z1 - 3, y, h=fh - 1, pitch=12, wall=BRK, gap=4, gh=4, kind=kind)
         lattice_lights(W, x0 + 3, z0 + 3, x1 - 3, z1 - 3, y + fh - 1, step=6, off=3)
         windows_ring(W, x0, z0, x1, z1, y + 3, h=4, glass=PG, step=6, wd=3, skip=[(gx - 2, gx + 8, z0 if face == "north" else z1)] if f == 0 else [])
     ladder_shaft(W, x0 + 3, z0 + 3, GY, top - 1, "east")
@@ -140,7 +164,7 @@ def bolt_viaduct_west(W):
 def build_strip(strip, rng, specs, extra):
     px, pz, sx, sz = STRIPS[strip]
     W = World(sx, SY, sz)
-    C.SHELLS.clear(); C.GATES.clear()
+    C.SHELLS.clear(); C.GATES.clear(); C.PARTS.clear(); C.NO_DECOR.clear()
     ground(W)
     extra(W)
     haven_sh = []
@@ -180,6 +204,8 @@ def build_strip(strip, rng, specs, extra):
     for s in shells:
         furnish_rooms(W, s, STYLE_BY_POS.get((strip, s["x0"], s["z0"]), "office"))
     C.SHELLS[:] = keep
+    from . import decorate as DEC
+    DEC.decorate_parts(W, rng)
     # trees on the lawns
     for _ in range(sx // 14):
         x = int(rng.integers(8, sx - 8)); z = int(rng.integers(8, sz - 8))
@@ -234,6 +260,8 @@ def extras(strip):
             # connector avenues to the HQ gates
             for x in range(40 + 250 + 210, W.sx - 40, 250):
                 road(W, x, 0, x + 14, W.sz - 1)
+            for (ze, sd) in (((296, -1), (314, 1)) if strip == "N" else ((70, -1), (88, 1))):
+                street_furniture(W, ze, sd)
         else:
             road(W, 4, 0, 14, W.sz - 1); road(W, 190, 0, 200, W.sz - 1); road(W, 372, 0, 380, W.sz - 1)
         # glow plaza discs + fountains between buildings
