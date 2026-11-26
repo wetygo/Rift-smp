@@ -12,6 +12,7 @@ SX = SZ = 768
 SY = 384
 CX = CZ = 384
 TOTAL_PADS = []
+UNDER = {}
 PROBES = []
 
 LOG = "minecraft:jungle_log[axis=y]"
@@ -388,6 +389,11 @@ def build_world(seed=2024):
     ms = mountains(W, rng); log("hallelujah mountains %d" % len(ms))
     rs = roosts(W, H, rng); log("ikran roosts %d" % len(rs))
     nb = bridges(W, rng); log("rope bridges %d" % nb)
+    from . import build_cityunder as CU
+    global UNDER
+    UNDER = CU.city_underground(W, CX, CZ, 230, lambda x, z: int(H[z, x]), label="PANDORA", extra_hatches=[(CX + 12, CZ + 12 + 0)] if False else [])
+    n, big = CU.connectivity(W); UNDER["components"], UNDER["largest"] = n, big
+    log("underground (root tunnels): components %d largest %d" % (n, big))
     bond_pad(W, CX + 31, GROUND_TOP + 1, CZ, "HOMETREE")
     bond_pad(W, CX + 128, int(H[CZ, CX + 128]) + 1, CZ - 3, "VILLAGE")
     sign(W, CX + 31, GROUND_TOP + 1, CZ + 6, ["PANDORA", "Welcome, Na'vi", "bond pad ->", ""], rot=0, color="cyan")
@@ -401,7 +407,7 @@ def main(out_dir):
     os.makedirs(out_dir, exist_ok=True)
     path = os.path.join(out_dir, "RIFTBREK_PANDORA.litematic")
     bits, total = W.save(path, "Pandora", "RIFTBREK Design", "768x768 Na'vi homeland: Hometree, Tree of Souls, village, Ikran roosts, floating Hallelujah mountains, bioluminescent forest. Origin X 10240 Z 8192.", region_name="Pandora")
-    json.dump(dict(pads=TOTAL_PADS), open(os.path.join(out_dir, "pandora_info.json"), "w"), indent=1)
+    json.dump(dict(pads=TOTAL_PADS, under=UNDER), open(os.path.join(out_dir, "pandora_info.json"), "w"), indent=1)
     print("palette", len(W.palette), "bits", bits, "solid", total, "tiles", len(W.tiles), "pads", len(TOTAL_PADS))
     return W, path
 

@@ -57,3 +57,5 @@ ITHACA CITY: install ithaca_files/region exactly like the HQ files (option B: ch
 
 CONFIG:  config/riftbrek.properties (originX, originZ, autoForceload, cityX, cityZ, autoCity).  /rift origin <x> <z> saves it and moves the force-loads. The mod only removes force-loads it added itself (recorded in <world>/riftbrek_forceloads.json); chunks an admin or another mod force-loaded are never touched. (The data pack's own admin/forceload_off command removes everything in the base's areas - use it only deliberately.)
 Credits: Airlander 10 by Krodo; Storage Tech Discord builders; Wildezz.
+
+MORE CITIES (all with underground systems, docs/CITIES_AND_UNDERGROUND.md): frostholm_files/region (X 8192 Z 9728), sandspire_files/region (X 9216 Z 9728), emberforge_files/region (X 10240 Z 9728); pandora_files, redstone_city_files, ithaca_files as before. Install each like the HQ files (check the region names do not exist, or use MergeBase.java). The standalone world has them all.

@@ -18,6 +18,7 @@ from . import build_ward as BW
 SX = SZ = 768
 SY = 384
 TESTS = []
+UNDER = {}
 
 
 def ground(W):
@@ -145,6 +146,12 @@ def build_world(seed=11):
         BW.building(W, "R", label, kd, a, b, c, d, fl, fh, face, tier, [label.upper(), kd.title(), "public tier", "redstone city"])
     log("lofts %d" % len(sp))
     express_line(W); log("express line")
+    from . import build_cityunder as CU
+    global UNDER
+    UNDER = CU.city_underground(W, 384, 384, 230, lambda x, z: GROUND_TOP, label="REDSTONE CITY", extra_hatches=[(60, 60), (700, 60), (60, 700), (700, 700), (384, 60), (384, 700)])
+    n, big = CU.connectivity(W)
+    UNDER["components"], UNDER["largest"] = n, big
+    log("underground: components %d largest %d" % (n, big))
     shells = [s for s in C.SHELLS if not any(abs(s["x0"] - cell(i, 0)[0]) < 12 and abs(s["z0"] - cell(i, 0)[1]) < 12 for i in (0, 1))]
     keep = C.SHELLS[:]; C.SHELLS[:] = shells
     F2.furnish_shells(W, [])
@@ -165,7 +172,7 @@ def main(out_dir):
     os.makedirs(out_dir, exist_ok=True)
     path = os.path.join(out_dir, "RIFTBREK_REDSTONE_CITY.litematic")
     bits, total = W.save(path, "Redstone City", "RIFTBREK Design", "768x768 redstone city: plaza + core tower, Haven, Redstone Center, furnace array, farm yard, storage vault, 26 lofts, express minecart line. Origin X 11264 Z 8192.", region_name="Redstone City")
-    json.dump(dict(origin=[11264, 8192], tests=tests, express=TESTS), open(os.path.join(out_dir, "rcity_info.json"), "w"), default=list)
+    json.dump(dict(origin=[11264, 8192], tests=tests, express=TESTS, under=UNDER), open(os.path.join(out_dir, "rcity_info.json"), "w"), default=list)
     print("palette", len(W.palette), "bits", bits, "solid", total, "tiles", len(W.tiles), "gates", len(C.GATES))
     return W, path
 
