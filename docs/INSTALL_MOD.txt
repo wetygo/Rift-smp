@@ -1,4 +1,4 @@
-RIFTBREK Vanguard - MOD package v1.0.7  (Minecraft Java 1.21.11, Fabric)
+RIFTBREK Vanguard - MOD package v1.0.8  (Minecraft Java 1.21.11, Fabric)
 =========================================================================
 The mod CONTAINS the data pack. Do NOT also install the separate data pack zip.
 
@@ -9,9 +9,10 @@ WHAT YOU STILL NEED (not in this zip)
 
 IN THIS ZIP
   fabric-installer.jar                         installs Fabric Loader for Minecraft 1.21.11
-  mods/fabric-api.jar, mods/riftbrek-vanguard-1.0.7.jar    put both in .minecraft/mods
+  mods/fabric-api.jar, mods/riftbrek-vanguard-1.0.8.jar    put both in .minecraft/mods
   standalone_world/RIFTBREK_Vanguard_World/    a ready world (void) with the base - option A
   base_files/region + base_files/entities      the WHOLE HQ: original base + annex + OUTER WARD + the Pipeline ring (X 7680..13327, see docs/OUTER_WARD.md) - options B / C
+  pandora_files/region  PANDORA (X 10240, Z 8192; r.20.16 r.20.17 r.21.16 r.21.17) and redstone_city_files/region  THE REDSTONE CITY (X 11264, Z 8192; r.22.16 r.22.17 r.23.16 r.23.17) - install like the HQ files (docs/PANDORA.md, docs/REDSTONE_CITY.md)
   ithaca_files/region                          ITHACA CITY (placed at X 12288, Z 8192; files r.24.16 r.24.17 r.25.16 r.25.17) - same options
   docs/ITHACA_CITY.md, docs/LAUNCHER.md        what Ithaca contains, what is NOT built, coordinates; the chicken launcher
   MergeBase.java                               adds the base into an EXISTING world without losing other chunks - option C

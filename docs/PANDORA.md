@@ -15,8 +15,6 @@ Stand on any **bond pad** (glowing light-blue disc). The data pack (`riftbrek:pa
 
 | bond pad | coordinates |
 |---|---|
-| HOMETREE | `10655 32 8576` |
-| VILLAGE | `10752 36 8573` |
 | IKRAN ROOST 1 | `10901 108 8693` |
 | IKRAN ROOST 2 | `10661 103 8874` |
 | IKRAN ROOST 3 | `10385 105 8757` |
