@@ -19,6 +19,30 @@ FARM_PLOTS = [
 ]
 
 
+def pandora(P):
+    """PANDORA: bond pads turn the player into a Na'vi (kit, effects, team colour); `pandora/leave` undoes it"""
+    P.fn("pandora/setup", ["# run once: the Na'vi team", "team add rb_navi", "team modify rb_navi color aqua", "team modify rb_navi friendlyFire false"])
+    P.fn("pandora/pad", ["# runs AT a bond pad command block (repeating): a player standing within 1.6 blocks who is not Na'vi yet becomes one",
+                         "execute as @a[distance=..1.6,tag=!rb_navi] run function riftbrek:pandora/become_navi"])
+    P.fn("pandora/become_navi", [
+        "tag @s add rb_navi",
+        "team add rb_navi",
+        "team join rb_navi @s",
+        "effect give @s minecraft:night_vision infinite 0 true",
+        "effect give @s minecraft:jump_boost infinite 1 true",
+        "effect give @s minecraft:speed infinite 0 true",
+        "give @s minecraft:bow[minecraft:custom_name={text:\"Na'vi bow\",color:\"aqua\",italic:false}]",
+        "give @s minecraft:arrow 64",
+        "give @s minecraft:elytra[minecraft:custom_name={text:\"Ikran wings\",color:\"aqua\",italic:false}]",
+        "give @s minecraft:firework_rocket 64",
+        "give @s minecraft:leather_chestplate[minecraft:dyed_color=2977750,minecraft:custom_name={text:\"Na'vi sash\",color:\"aqua\",italic:false}]",
+        "give @s minecraft:leather_leggings[minecraft:dyed_color=2977750]",
+        "tellraw @s {text:\"You are Na'vi. Eywa is with you. Jump off a roost and glide on your Ikran wings.\",color:\"aqua\"}",
+        "playsound minecraft:block.amethyst_block.chime master @s ~ ~ ~ 1 1.2"])
+    P.fn("pandora/leave", ["tag @s remove rb_navi", "team leave @s", "effect clear @s minecraft:night_vision", "effect clear @s minecraft:jump_boost", "effect clear @s minecraft:speed",
+                           "tellraw @s {text:\"You are no longer Na'vi.\",color:\"gray\"}"])
+
+
 def move_fn(P):
     P.fn("storage/move", [
         "# macro: dx,dy,dz = offset of destination hopper from controller; s = slot. Source tray = controller + (0,0,1)",
@@ -285,6 +309,7 @@ def add(P):
     P.fn("monitor/lockdown_lamp", ["# runs AT the monitor command block in the security control room: a redstone block above it while lockdown is ON lights the indicator lamps",
         "execute if score #GLOBAL rb_lock matches 1 run setblock ~ ~1 ~ minecraft:redstone_block",
         "execute unless score #GLOBAL rb_lock matches 1 run setblock ~ ~1 ~ minecraft:air"])
+    pandora(P)
     forceload(P)
     verify(P)
     from . import quarters_dp

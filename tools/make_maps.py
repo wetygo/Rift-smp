@@ -4,8 +4,9 @@ import numpy as np
 sys.path.insert(0, os.path.dirname(__file__))
 from PIL import Image, ImageDraw, ImageFont
 import preview
-out = sys.argv[1]
-os.makedirs(out, exist_ok=True)
+out = sys.argv[1] if __name__ == "__main__" else "."
+if __name__ == "__main__":
+    os.makedirs(out, exist_ok=True)
 F = lambda s: ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", s)
 GY = 96
 
