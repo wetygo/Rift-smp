@@ -164,3 +164,35 @@ def free_rect(occ, w, d, margin=10, step=4):
             if not occ[z:z + d, x:x + w].any():
                 return x, z
     return None
+
+
+# ---------------------------------------------------------------------------------------------- the working minecart BOLT LINE
+RAIL_PWR = "minecraft:powered_rail[powered=true,shape=%s,waterlogged=false]"
+RAIL = "minecraft:rail[shape=%s,waterlogged=false]"
+
+
+def bolt_rails(W, x0, x1, yd, zA, zB, station_west=True, loop_east=True):
+    """ONE-WAY BOLT LINE with a return lane. Lane zA runs east, curves round at x1 (when loop_east) and comes back west on lane zB.
+    The west end is a STATION: a powered rail with a solid block behind it (that is what gives a stationary cart its first push), a dispenser of
+    chest minecarts above it and a button; lane zB ends against a stop block just west of the station (carts arrive and stop there).
+    Every second rail is a powered rail on a redstone block (always powered), so carts hold top speed."""
+    y = yd + 1
+    for z in (zA, zB):
+        for x in range(x0, x1 + 1):
+            pw = (x % 2 == 0)
+            if pw:
+                W.set(x, yd, z, "minecraft:redstone_block")
+            W.set(x, y, z, (RAIL_PWR if pw else RAIL) % "east_west")
+    if loop_east:
+        W.set(x1, yd, zA, BRK); W.set(x1, yd, zB, BRK)
+        W.set(x1, y, zA, RAIL % "south_west"); W.set(x1, y, zB, RAIL % "north_west")
+        for z in range(zA + 1, zB):
+            W.set(x1, yd, z, "minecraft:redstone_block" if z % 2 == 0 else BRK)
+            W.set(x1, y, z, (RAIL_PWR if z % 2 == 0 else RAIL) % "north_south")
+    if station_west:
+        W.set(x0 - 1, y, zA, BRK); W.set(x0 - 1, y, zB, BRK); W.set(x0 - 1, yd, zA, BRK); W.set(x0 - 1, yd, zB, BRK)   # solid block behind the start / stop block
+        carts = [{"Slot": Byte(i), "id": "minecraft:chest_minecart", "count": 1} for i in range(8)]
+        W.set(x0, y + 1, zA, "minecraft:dispenser[facing=down,triggered=false]"); W.tile(x0, y + 1, zA, {"id": "minecraft:dispenser", "Items": carts})
+        W.set(x0 + 1, y + 1, zA, BRK)
+        W.set(x0 + 2, y + 1, zA, "minecraft:stone_button[face=wall,facing=east,powered=false]")
+        sign(W, x0 + 3, y, zA - 2, ["BOLT STATION", "button = send a", "chest minecart", "to the far end"], rot=8, color="light_blue")

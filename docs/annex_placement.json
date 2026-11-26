@@ -38,12 +38,50 @@
   "warn": {}
  },
  {
+  "name": "Wave Bolt - Straight Bolt Massive",
+  "file": "Straight Bolt Massive.litematic",
+  "author": "SandCaribou1890 / Pando_UwU / Kvil",
+  "community": "Wave Bolt (Storage Tech)",
+  "purple": false,
+  "x": 1591,
+  "y": 96,
+  "z": 16,
+  "size": [
+   9,
+   3,
+   256
+  ],
+  "dv": 3953,
+  "tiles": 256,
+  "ents": 0,
+  "warn": {}
+ },
+ {
+  "name": "Wave Bolt - Straight Bolt Massive",
+  "file": "Straight Bolt Massive.litematic",
+  "author": "SandCaribou1890 / Pando_UwU / Kvil",
+  "community": "Wave Bolt (Storage Tech)",
+  "purple": false,
+  "x": 1610,
+  "y": 96,
+  "z": 16,
+  "size": [
+   9,
+   3,
+   256
+  ],
+  "dv": 3953,
+  "tiles": 256,
+  "ents": 0,
+  "warn": {}
+ },
+ {
   "name": "Wildez Main Storage",
   "file": "Wildez Main Storage.litematic",
   "author": "Wildezz",
   "community": "Wildezz",
   "purple": true,
-  "x": 1591,
+  "x": 1629,
   "y": 96,
   "z": 16,
   "size": [
@@ -403,12 +441,50 @@
   }
  },
  {
+  "name": "Wave Bolt - Straight Bolt",
+  "file": "Straight Bolt.litematic",
+  "author": "SandCaribou1890 / Pando_UwU / Kvil",
+  "community": "Wave Bolt (Storage Tech)",
+  "purple": false,
+  "x": 1224,
+  "y": 96,
+  "z": 657,
+  "size": [
+   9,
+   3,
+   32
+  ],
+  "dv": 3953,
+  "tiles": 32,
+  "ents": 0,
+  "warn": {}
+ },
+ {
+  "name": "Wave Bolt - Straight Bolt",
+  "file": "Straight Bolt.litematic",
+  "author": "SandCaribou1890 / Pando_UwU / Kvil",
+  "community": "Wave Bolt (Storage Tech)",
+  "purple": false,
+  "x": 1243,
+  "y": 96,
+  "z": 657,
+  "size": [
+   9,
+   3,
+   32
+  ],
+  "dv": 3953,
+  "tiles": 32,
+  "ents": 0,
+  "warn": {}
+ },
+ {
   "name": "Wave Bolt - 4 Hexit Left Diagonal Transition v1.0.4",
   "file": "4 Hexit Left Diagonal Transition v1.0.4.litematic",
   "author": "SandCaribou1890 / Pando_UwU / Kvil",
   "community": "Wave Bolt (Storage Tech)",
   "purple": false,
-  "x": 1224,
+  "x": 1262,
   "y": 96,
   "z": 657,
   "size": [
@@ -427,7 +503,7 @@
   "author": "SandCaribou1890 / Pando_UwU / Kvil",
   "community": "Wave Bolt (Storage Tech)",
   "purple": false,
-  "x": 1264,
+  "x": 1302,
   "y": 96,
   "z": 657,
   "size": [
@@ -446,7 +522,7 @@
   "author": "hykn55",
   "community": "Storage Tech",
   "purple": false,
-  "x": 1304,
+  "x": 1342,
   "y": 96,
   "z": 657,
   "size": [
@@ -465,7 +541,7 @@
   "author": "SandCaribou1890 / Pando_UwU / Kvil",
   "community": "Wave Bolt (Storage Tech)",
   "purple": false,
-  "x": 1337,
+  "x": 1375,
   "y": 96,
   "z": 657,
   "size": [
@@ -484,7 +560,7 @@
   "author": "SandCaribou1890 / Pando_UwU / Kvil",
   "community": "Wave Bolt (Storage Tech)",
   "purple": false,
-  "x": 1382,
+  "x": 1420,
   "y": 96,
   "z": 657,
   "size": [
@@ -503,7 +579,7 @@
   "author": "Wildezz",
   "community": "Wildezz",
   "purple": true,
-  "x": 1427,
+  "x": 1465,
   "y": 96,
   "z": 657,
   "size": [
@@ -522,7 +598,7 @@
   "author": "Wildezz",
   "community": "Wildezz",
   "purple": true,
-  "x": 1490,
+  "x": 1528,
   "y": 96,
   "z": 657,
   "size": [
@@ -541,7 +617,7 @@
   "author": "Wildezz",
   "community": "Wildezz",
   "purple": true,
-  "x": 1541,
+  "x": 1579,
   "y": 96,
   "z": 657,
   "size": [
@@ -560,7 +636,7 @@
   "author": "Wildezz",
   "community": "Wildezz",
   "purple": true,
-  "x": 1580,
+  "x": 1618,
   "y": 96,
   "z": 657,
   "size": [
@@ -579,7 +655,7 @@
   "author": "SandCaribou1890 / Pando_UwU / Kvil",
   "community": "Wave Bolt (Storage Tech)",
   "purple": false,
-  "x": 1606,
+  "x": 1644,
   "y": 96,
   "z": 657,
   "size": [
@@ -598,7 +674,7 @@
   "author": "SandCaribou1890 / Pando_UwU / Kvil",
   "community": "Wave Bolt (Storage Tech)",
   "purple": false,
-  "x": 1654,
+  "x": 1692,
   "y": 96,
   "z": 657,
   "size": [
@@ -617,7 +693,7 @@
   "author": "SandCaribou1890 / Pando_UwU / Kvil",
   "community": "Wave Bolt (Storage Tech)",
   "purple": false,
-  "x": 1702,
+  "x": 1740,
   "y": 96,
   "z": 657,
   "size": [
@@ -636,7 +712,7 @@
   "author": "SandCaribou1890 / Pando_UwU / Kvil",
   "community": "Wave Bolt (Storage Tech)",
   "purple": false,
-  "x": 1720,
+  "x": 1758,
   "y": 96,
   "z": 657,
   "size": [
@@ -655,7 +731,7 @@
   "author": "SandCaribou1890 / Pando_UwU / Kvil",
   "community": "Wave Bolt (Storage Tech)",
   "purple": false,
-  "x": 1742,
+  "x": 1780,
   "y": 96,
   "z": 657,
   "size": [
@@ -674,7 +750,7 @@
   "author": "SandCaribou1890 / Pando_UwU / Kvil",
   "community": "Wave Bolt (Storage Tech)",
   "purple": false,
-  "x": 1760,
+  "x": 1798,
   "y": 96,
   "z": 657,
   "size": [
@@ -693,7 +769,7 @@
   "author": "SandCaribou1890 / Pando_UwU / Kvil",
   "community": "Wave Bolt (Storage Tech)",
   "purple": false,
-  "x": 1782,
+  "x": 1820,
   "y": 96,
   "z": 657,
   "size": [
@@ -712,7 +788,7 @@
   "author": "SandCaribou1890 / Pando_UwU / Kvil",
   "community": "Wave Bolt (Storage Tech)",
   "purple": false,
-  "x": 1803,
+  "x": 1841,
   "y": 96,
   "z": 657,
   "size": [
@@ -731,7 +807,7 @@
   "author": "SandCaribou1890 / Pando_UwU / Kvil",
   "community": "Wave Bolt (Storage Tech)",
   "purple": false,
-  "x": 1824,
+  "x": 1862,
   "y": 96,
   "z": 657,
   "size": [
@@ -750,7 +826,7 @@
   "author": "SandCaribou1890 / Pando_UwU / Kvil",
   "community": "Wave Bolt (Storage Tech)",
   "purple": false,
-  "x": 1843,
+  "x": 1881,
   "y": 96,
   "z": 657,
   "size": [
@@ -769,9 +845,9 @@
   "author": "SandCaribou1890 / Pando_UwU / Kvil",
   "community": "Wave Bolt (Storage Tech)",
   "purple": false,
-  "x": 1862,
+  "x": 800,
   "y": 96,
-  "z": 657,
+  "z": 730,
   "size": [
    10,
    2,
@@ -788,9 +864,9 @@
   "author": "SandCaribou1890 / Pando_UwU / Kvil",
   "community": "Wave Bolt (Storage Tech)",
   "purple": false,
-  "x": 1882,
+  "x": 820,
   "y": 96,
-  "z": 657,
+  "z": 730,
   "size": [
    9,
    3,
@@ -807,7 +883,7 @@
   "author": "SandCaribou1890 / Pando_UwU / Kvil",
   "community": "Wave Bolt (Storage Tech)",
   "purple": false,
-  "x": 800,
+  "x": 839,
   "y": 96,
   "z": 730,
   "size": [
@@ -826,7 +902,7 @@
   "author": "SandCaribou1890 / Pando_UwU / Kvil",
   "community": "Wave Bolt (Storage Tech)",
   "purple": false,
-  "x": 815,
+  "x": 854,
   "y": 96,
   "z": 730,
   "size": [
@@ -845,7 +921,7 @@
   "author": "SandCaribou1890 / Pando_UwU / Kvil",
   "community": "Wave Bolt (Storage Tech)",
   "purple": false,
-  "x": 831,
+  "x": 870,
   "y": 96,
   "z": 730,
   "size": [
@@ -864,7 +940,7 @@
   "author": "SandCaribou1890 / Pando_UwU / Kvil",
   "community": "Wave Bolt (Storage Tech)",
   "purple": false,
-  "x": 850,
+  "x": 889,
   "y": 96,
   "z": 730,
   "size": [
@@ -883,7 +959,7 @@
   "author": "SandCaribou1890 / Pando_UwU / Kvil",
   "community": "Wave Bolt (Storage Tech)",
   "purple": false,
-  "x": 869,
+  "x": 908,
   "y": 96,
   "z": 730,
   "size": [
@@ -902,7 +978,7 @@
   "author": "SandCaribou1890 / Pando_UwU / Kvil",
   "community": "Wave Bolt (Storage Tech)",
   "purple": false,
-  "x": 889,
+  "x": 928,
   "y": 96,
   "z": 730,
   "size": [
@@ -921,7 +997,7 @@
   "author": "SandCaribou1890 / Pando_UwU / Kvil",
   "community": "Wave Bolt (Storage Tech)",
   "purple": false,
-  "x": 908,
+  "x": 947,
   "y": 96,
   "z": 730,
   "size": [
@@ -940,7 +1016,7 @@
   "author": "SandCaribou1890 / Pando_UwU / Kvil",
   "community": "Wave Bolt (Storage Tech)",
   "purple": false,
-  "x": 923,
+  "x": 962,
   "y": 96,
   "z": 730,
   "size": [
